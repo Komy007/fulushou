@@ -256,7 +256,7 @@ const History: React.FC<HistoryProps> = ({ lang }) => {
             {/* Bottom Close Button */}
             <button
               onClick={() => setShowMobileDetail(false)}
-              className="w-full py-4 bg-stone-200 text-stone-600 rounded-xl mt-8 font-bold text-lg hover:bg-stone-300 transition"
+              className="w-full py-4 bg-stone-200 border-2 border-stone-300 text-stone-700 rounded-xl mt-8 font-black text-lg hover:bg-stone-300 transition shadow-sm"
             >
               {lang === Language.KO ? '닫기' : 'Close'}
             </button>

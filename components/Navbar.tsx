@@ -119,6 +119,13 @@ const Navbar: React.FC<NavbarProps> = ({ lang, toggleLang, scrollToSection }) =>
           >
             {lang === Language.KO ? '미디어' : 'Media'}
           </button>
+
+          <button
+            onClick={() => setIsMenuOpen(false)}
+            className="w-full py-3 bg-stone-100 text-stone-500 rounded-lg mt-4 font-bold hover:bg-stone-200 flex items-center justify-center"
+          >
+            {lang === Language.KO ? '메뉴 닫기' : 'Close Menu'}
+          </button>
         </div>
       )}
     </nav>
