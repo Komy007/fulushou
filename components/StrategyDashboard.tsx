@@ -216,6 +216,14 @@ const StrategyDashboard: React.FC<StrategyDashboardProps> = ({ lang }) => {
             </button>
             <div className="mt-8">
               {renderDetailContent()}
+
+              {/* Bottom Close Button */}
+              <button
+                onClick={() => setShowMobileDetail(false)}
+                className="w-full py-4 bg-stone-800 text-stone-400 rounded-xl mt-8 font-bold text-lg hover:bg-stone-700 hover:text-white transition-colors"
+              >
+                {lang === Language.KO ? '닫기' : 'Close'}
+              </button>
             </div>
           </div>
         </div>

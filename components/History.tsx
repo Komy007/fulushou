@@ -37,7 +37,7 @@ const History: React.FC<HistoryProps> = ({ lang }) => {
         ko: "2000년대 후반, 캄보디아 시장은 글로벌 거대 브랜드들이 장악하고 있었습니다. 하지만 Fu Lu Shou는 캄보디아의 폭발적인 성장 잠재력과 한국의 7080 개발 연대 사이의 평행이론을 발견했습니다. '박카스'라는 한국의 국민 음료를 들고 CEO가 직접 24개 주 전역을 누비며, 길바닥의 흙먼지 속에서 현지 상인들과 형제애를 쌓았습니다. 이것이 오늘날 95% 커버리지 유통망의 전설적인 시작이었습니다.",
         en: "In the late 2000s, the Cambodian market was dominated by global giants. However, Fu Lu Shou discovered a parallel between Cambodia's potential and Korea's rapid growth era. Our CEO traversed all 24 provinces with Bacchus, building brotherhood with local merchants in the dust of the streets. This was the legendary beginning of a distribution network that now covers 95% of the nation."
       },
-      image: "https://images.unsplash.com/photo-1542601039-29adde52414d?auto=format&fit=crop&w=800&q=80",
+      image: "https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=800&q=80",
       stats: { ko: "전국 거점망 확보 100%", en: "100% Core Hub Secured" }
     },
     growth: {
@@ -188,8 +188,8 @@ const History: React.FC<HistoryProps> = ({ lang }) => {
                     setShowMobileDetail(true);
                   }}
                   className={`w-full group relative flex items-center p-6 rounded-[1.8rem] transition-all duration-500 transform ${activeTab === m.id
-                      ? 'bg-stone-900 shadow-[0_20px_40px_rgba(0,0,0,0.3)] ring-2 ring-amber-500 -translate-y-2 scale-[1.03]'
-                      : 'bg-white border border-stone-100 hover:border-amber-400 hover:shadow-lg hover:-translate-y-1'
+                    ? 'bg-stone-900 shadow-[0_20px_40px_rgba(0,0,0,0.3)] ring-2 ring-amber-500 -translate-y-2 scale-[1.03]'
+                    : 'bg-white border border-stone-100 hover:border-amber-400 hover:shadow-lg hover:-translate-y-1'
                     }`}
                 >
                   <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mr-5 shrink-0 transition-all duration-500 ${activeTab === m.id ? 'bg-amber-600 text-white rotate-3' : 'bg-stone-100 text-stone-400'
@@ -252,6 +252,14 @@ const History: React.FC<HistoryProps> = ({ lang }) => {
               <X size={24} />
             </button>
             <DetailContent />
+
+            {/* Bottom Close Button */}
+            <button
+              onClick={() => setShowMobileDetail(false)}
+              className="w-full py-4 bg-stone-200 text-stone-600 rounded-xl mt-8 font-bold text-lg hover:bg-stone-300 transition"
+            >
+              {lang === Language.KO ? '닫기' : 'Close'}
+            </button>
           </div>
         </div>
       )}
