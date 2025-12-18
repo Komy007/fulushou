@@ -14,9 +14,12 @@ const Philosophy: React.FC<PhilosophyProps> = ({ lang }) => {
       id: 'fu',
       icon: Heart,
       bg: 'bg-gradient-to-br from-amber-500 to-amber-600',
-      text: 'text-white',
+      titleColor: 'text-white',
+      bodyColor: 'text-white',
+      footerColor: 'text-amber-100',
+      bgCharColor: 'text-white/20',
+      iconBoxClass: 'bg-white/20 text-white',
       border: 'border-amber-400',
-      iconColor: 'text-white',
       ko: "비즈니스의 근본은 기술이나 자본이 아닌 '사람의 마음'에 있습니다. 우리는 파트너사의 제품이 캄보디아 가정마다 행복(福)을 전달하는 메신저가 되기를 바랍니다.",
       en: "The foundation of business lies not in capital, but in the 'Hearts of People'. We want our partners' products to be messengers of happiness (Fu) for every Cambodian home."
     },
@@ -25,10 +28,13 @@ const Philosophy: React.FC<PhilosophyProps> = ({ lang }) => {
       label: 'Lu (Status)',
       id: 'lu',
       icon: Award,
-      bg: 'bg-stone-100', // Cleaner light bg for contrast
-      text: 'text-stone-800',
-      border: 'border-stone-300',
-      iconColor: 'text-amber-700',
+      bg: 'bg-stone-50', // Lighter for contrast
+      titleColor: 'text-stone-900',
+      bodyColor: 'text-stone-800', // Darker for readability
+      footerColor: 'text-stone-400',
+      bgCharColor: 'text-stone-900/10',
+      iconBoxClass: 'bg-white shadow-sm text-amber-700',
+      border: 'border-stone-200',
       ko: "번영(祿)은 치밀한 전략과 실행력의 정직한 보상입니다. 우리는 입점 브랜드가 단순한 상품을 넘어 시장의 '기준'이자 '명예(Status)'가 되도록 격상시킵니다.",
       en: "Prosperity (Lu) is the honest reward of strategy. We elevate your brand from a 'Product' to a 'Market Standard' and 'Status' in Cambodia."
     },
@@ -37,10 +43,13 @@ const Philosophy: React.FC<PhilosophyProps> = ({ lang }) => {
       label: 'Shou (Longevity)',
       id: 'shou',
       icon: ShieldCheck,
-      bg: 'bg-stone-900', // Dark premium look
-      text: 'text-stone-300',
+      bg: 'bg-stone-900',
+      titleColor: 'text-white',
+      bodyColor: 'text-stone-200', // Brighter than 300
+      footerColor: 'text-stone-500',
+      bgCharColor: 'text-white/10',
+      iconBoxClass: 'bg-white/10 text-emerald-400',
       border: 'border-stone-700',
-      iconColor: 'text-emerald-400',
       ko: "영속성(壽)은 변하지 않는 정직함에서 탄생합니다. 귀사의 브랜드가 캄보디아에서 대를 이어 사랑받는 '롱런 레전드'가 되도록 신뢰의 동반자가 되겠습니다.",
       en: "Longevity (Shou) is born from unchanging honesty. We will be the partner of trust that ensures your brand becomes a 'Long-run Legend' for generations."
     }
@@ -74,32 +83,32 @@ const Philosophy: React.FC<PhilosophyProps> = ({ lang }) => {
 
         <div className="flex flex-col gap-6 lg:grid lg:grid-cols-3 lg:gap-8">
           {CARDS.map((item, idx) => (
-            <div key={idx} className={`relative group overflow-hidden rounded-[2.5rem] transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl ${item.bg === 'bg-stone-100' ? 'border-2 border-stone-200' : 'shadow-xl'}`}>
+            <div key={idx} className={`relative group overflow-hidden rounded-[2.5rem] transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl ${item.id === 'lu' ? 'border-2 border-stone-200' : 'shadow-xl'}`}>
 
               {/* Card Background Logic */}
               <div className={`absolute inset-0 ${item.bg} transition-all duration-500`}></div>
 
               <div className="relative p-8 lg:p-10 h-full flex flex-col items-start">
                 <div className="flex justify-between items-start w-full mb-8">
-                  <span className={`text-6xl font-serif font-black ${item.text === 'text-white' ? 'text-white/20' : 'text-stone-900/10'}`}>
+                  <span className={`text-6xl font-serif font-black ${item.bgCharColor}`}>
                     {item.char}
                   </span>
-                  <div className={`w-12 h-12 rounded-2xl flex items-center justify-center ${item.text === 'text-white' ? 'bg-white/20' : 'bg-white shadow-sm'}`}>
-                    <item.icon className={`w-6 h-6 ${item.iconColor}`} />
+                  <div className={`w-12 h-12 rounded-2xl flex items-center justify-center ${item.iconBoxClass}`}>
+                    <item.icon className="w-6 h-6" />
                   </div>
                 </div>
 
-                <h4 className={`text-2xl lg:text-3xl font-black mb-4 ${item.bg === 'bg-stone-100' ? 'text-stone-900' : 'text-white'}`}>
+                <h4 className={`text-2xl lg:text-3xl font-black mb-4 ${item.titleColor}`}>
                   {item.label}
                 </h4>
 
-                <div className={`h-1 w-12 mb-6 rounded-full ${item.bg === 'bg-stone-100' ? 'bg-amber-600' : 'bg-white/30'}`}></div>
+                <div className={`h-1 w-12 mb-6 rounded-full ${item.id === 'lu' ? 'bg-amber-600' : 'bg-white/30'}`}></div>
 
-                <p className={`text-base lg:text-lg leading-relaxed font-medium text-justify ${item.bg === 'bg-stone-100' ? 'text-stone-600' : 'text-stone-100/90'}`}>
+                <p className={`text-base lg:text-lg leading-relaxed font-medium text-justify ${item.bodyColor}`}>
                   {lang === Language.KO ? item.ko : item.en}
                 </p>
 
-                <div className={`mt-auto pt-8 w-full flex items-center gap-2 text-[10px] font-black uppercase tracking-widest ${item.bg === 'bg-stone-100' ? 'text-stone-400' : 'text-white/40'}`}>
+                <div className={`mt-auto pt-8 w-full flex items-center gap-2 text-[10px] font-black uppercase tracking-widest ${item.footerColor}`}>
                   <Sparkles className="w-3 h-3" /> Core Value {idx + 1}
                 </div>
               </div>
