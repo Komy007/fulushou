@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Language, HistoryMilestone } from '../types';
-import { TrendingUp, Award, Map, Rocket, ChevronRight, Star, MousePointer2, ArrowLeft } from 'lucide-react';
+import { TrendingUp, Award, Map, Rocket, ChevronRight, Star, MousePointer2, X } from 'lucide-react';
 import {
   AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
 } from 'recharts';
@@ -12,6 +12,16 @@ interface HistoryProps {
 const History: React.FC<HistoryProps> = ({ lang }) => {
   const [activeTab, setActiveTab] = useState<HistoryMilestone>('leader');
   const [showMobileDetail, setShowMobileDetail] = useState(false);
+
+  // Prevent background scrolling when modal is open
+  useEffect(() => {
+    if (showMobileDetail) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => { document.body.style.overflow = 'unset'; };
+  }, [showMobileDetail]);
 
   const GROWTH_DATA = [
     { year: '1Yr', value: 10 },
@@ -69,6 +79,75 @@ const History: React.FC<HistoryProps> = ({ lang }) => {
   const current = CONTENT[activeTab];
   const activeMilestone = milestones.find(m => m.id === activeTab);
 
+  const DetailContent = () => (
+    <div key={activeTab} className="relative z-10 animate-fade-in-up h-full flex flex-col">
+      <div className="flex justify-between items-end mb-8 lg:mb-12">
+        <div className="max-w-xl">
+          <div className="flex items-center gap-3 mb-4 text-amber-700">
+            <div className="w-12 h-[2px] bg-amber-600"></div>
+            <span className="text-[11px] font-black uppercase tracking-[0.3em]">Milestone Details</span>
+          </div>
+          <h4 className="text-3xl lg:text-5xl font-black text-stone-900 font-serif leading-tight">
+            {current.title[lang]}
+          </h4>
+        </div>
+        <div className="text-stone-200 font-black text-6xl lg:text-7xl leading-none opacity-50 font-serif">
+          {activeMilestone?.year.split(' ')[1] || ''}
+        </div>
+      </div>
+
+      <p className="text-stone-700 text-lg lg:text-2xl leading-[1.6] mb-12 lg:mb-16 text-justify font-light">
+        {current.desc[lang]}
+      </p>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-10 mb-8 lg:mb-16">
+        <div className="rounded-[2.5rem] overflow-hidden shadow-2xl h-64 lg:h-72 border-8 border-white">
+          <img src={current.image} alt="History" className="w-full h-full object-cover" />
+        </div>
+        <div className="bg-white p-8 lg:p-10 rounded-[2.5rem] shadow-xl border border-stone-100 flex flex-col justify-center">
+          <div className="text-amber-700/60 text-[10px] font-black uppercase tracking-[0.3em] mb-4">Achievement</div>
+          <div className="text-stone-900 text-3xl lg:text-4xl font-black mb-6">
+            {current.stats[lang]}
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {['BACCHUS', 'SHIN RAMYUN', 'POCARI', 'OLATTE'].map(brand => (
+              <span key={brand} className="px-4 py-1.5 bg-stone-900 text-white text-[9px] font-black rounded-full border border-amber-500/20">
+                {brand}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="bg-white rounded-[3rem] p-8 lg:p-10 shadow-xl border border-stone-100 mt-auto">
+        <div className="flex justify-between items-end mb-10">
+          <h5 className="text-stone-900 font-black text-xl lg:text-2xl flex items-center gap-3">
+            <TrendingUp size={28} className="text-amber-600" />
+            {lang === Language.KO ? '시장 영향력 지표' : 'Market Index'}
+          </h5>
+          <span className="text-3xl lg:text-4xl font-black text-amber-600 font-serif">TOP 1</span>
+        </div>
+        <div className="h-[200px] lg:h-[240px] w-full" style={{ minWidth: 0 }}>
+          <ResponsiveContainer width="100%" height="100%" minHeight={200}>
+            <AreaChart data={GROWTH_DATA}>
+              <defs>
+                <linearGradient id="colorGold" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor="#B45309" stopOpacity={0.4} />
+                  <stop offset="95%" stopColor="#B45309" stopOpacity={0} />
+                </linearGradient>
+              </defs>
+              <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#F1F0EC" />
+              <XAxis dataKey="year" axisLine={false} tickLine={false} tick={{ fill: '#A8A29E', fontSize: 13, fontWeight: '900' }} />
+              <YAxis hide />
+              <Tooltip contentStyle={{ borderRadius: '20px', border: 'none', boxShadow: '0 20px 40px rgba(0,0,0,0.1)', backgroundColor: '#1C1917', color: '#fff' }} />
+              <Area type="monotone" dataKey="value" stroke="#B45309" strokeWidth={5} fill="url(#colorGold)" animationDuration={2000} />
+            </AreaChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <section id="history" className="py-24 bg-[#F9F6F0] relative overflow-hidden">
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-amber-100/30 rounded-full blur-[120px] -mr-48 -mt-48 opacity-60"></div>
@@ -98,8 +177,8 @@ const History: React.FC<HistoryProps> = ({ lang }) => {
         </div>
 
         <div className="flex flex-col lg:flex-row gap-12 items-stretch">
-          {/* List/Menu Column: Hidden on mobile when detail is shown */}
-          <div className={`lg:w-[400px] w-full flex-col gap-6 ${showMobileDetail ? 'hidden lg:flex' : 'flex'}`}>
+          {/* List/Menu Column: ALWAYS Visible */}
+          <div className="lg:w-[400px] w-full flex flex-col gap-6">
             <div className="bg-[#EAE4D9] p-5 rounded-[2.5rem] border border-stone-200 shadow-xl space-y-4">
               {milestones.map((m) => (
                 <button
@@ -129,8 +208,8 @@ const History: React.FC<HistoryProps> = ({ lang }) => {
                 </button>
               ))}
             </div>
-
-            <div className="p-10 bg-gradient-to-br from-stone-900 to-[#1A1816] rounded-[2.5rem] text-white shadow-2xl relative overflow-hidden flex flex-col justify-between h-full min-h-[300px]">
+            {/* Left Column Decor - Desktop Only */}
+            <div className="hidden lg:flex p-10 bg-gradient-to-br from-stone-900 to-[#1A1816] rounded-[2.5rem] text-white shadow-2xl relative overflow-hidden flex-col justify-between h-full min-h-[300px]">
               <div className="relative z-10">
                 <span className="inline-block px-4 py-1.5 bg-amber-600 rounded-full text-[10px] font-black tracking-widest uppercase mb-6">
                   Verified Heritage
@@ -152,90 +231,30 @@ const History: React.FC<HistoryProps> = ({ lang }) => {
             </div>
           </div>
 
-          {/* Detail Content Column: Hidden on mobile when NOT showMobileDetail */}
-          <div className={`lg:flex-1 w-full ${!showMobileDetail ? 'hidden lg:block' : 'block'}`}>
-            <div className="bg-[#FAF8F3] rounded-[3.5rem] p-8 lg:p-16 border border-stone-200 shadow-2xl min-h-[850px] flex flex-col relative overflow-hidden">
+          {/* Desktop Detail Content: Hidden on mobile */}
+          <div className="hidden lg:block lg:flex-1 w-full">
+            <div className="bg-[#FAF8F3] rounded-[3.5rem] p-16 border border-stone-200 shadow-2xl min-h-[850px] flex flex-col relative overflow-hidden">
               <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-bl from-amber-100/20 to-transparent rounded-full blur-[120px] -mr-48 -mt-48"></div>
-
-              {/* Mobile Back Button */}
-              <button
-                onClick={() => setShowMobileDetail(false)}
-                className="lg:hidden mb-6 flex items-center text-stone-500 hover:text-amber-600 font-bold transition-colors animate-fade-in-down"
-              >
-                <ArrowLeft className="w-5 h-5 mr-2" />
-                {lang === Language.KO ? '목록으로 돌아가기' : 'Back to List'}
-              </button>
-
-              <div key={activeTab} className="relative z-10 animate-fade-in-up h-full flex flex-col">
-                <div className="flex justify-between items-end mb-12">
-                  <div className="max-w-xl">
-                    <div className="flex items-center gap-3 mb-4 text-amber-700">
-                      <div className="w-12 h-[2px] bg-amber-600"></div>
-                      <span className="text-[11px] font-black uppercase tracking-[0.3em]">Milestone Details</span>
-                    </div>
-                    <h4 className="text-4xl lg:text-5xl font-black text-stone-900 font-serif leading-tight">
-                      {current.title[lang]}
-                    </h4>
-                  </div>
-                  <div className="text-stone-200 font-black text-7xl leading-none opacity-50 font-serif">
-                    {activeMilestone?.year.split(' ')[1] || ''}
-                  </div>
-                </div>
-
-                <p className="text-stone-700 text-2xl leading-[1.6] mb-16 text-justify font-light">
-                  {current.desc[lang]}
-                </p>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-16">
-                  <div className="rounded-[2.5rem] overflow-hidden shadow-2xl h-72 border-8 border-white">
-                    <img src={current.image} alt="History" className="w-full h-full object-cover" />
-                  </div>
-                  <div className="bg-white p-10 rounded-[2.5rem] shadow-xl border border-stone-100 flex flex-col justify-center">
-                    <div className="text-amber-700/60 text-[10px] font-black uppercase tracking-[0.3em] mb-4">Achievement</div>
-                    <div className="text-stone-900 text-4xl font-black mb-6">
-                      {current.stats[lang]}
-                    </div>
-                    <div className="flex flex-wrap gap-2">
-                      {['BACCHUS', 'SHIN RAMYUN', 'POCARI', 'OLATTE'].map(brand => (
-                        <span key={brand} className="px-4 py-1.5 bg-stone-900 text-white text-[9px] font-black rounded-full border border-amber-500/20">
-                          {brand}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="bg-white rounded-[3rem] p-10 shadow-xl border border-stone-100 mt-auto">
-                  <div className="flex justify-between items-end mb-10">
-                    <h5 className="text-stone-900 font-black text-2xl flex items-center gap-3">
-                      <TrendingUp size={28} className="text-amber-600" />
-                      {lang === Language.KO ? '시장 영향력 지표' : 'Market Index'}
-                    </h5>
-                    <span className="text-4xl font-black text-amber-600 font-serif">TOP 1</span>
-                  </div>
-                  <div className="h-[240px] w-full" style={{ minWidth: 0 }}>
-                    <ResponsiveContainer width="100%" height="100%" minHeight={240}>
-                      <AreaChart data={GROWTH_DATA}>
-                        <defs>
-                          <linearGradient id="colorGold" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="5%" stopColor="#B45309" stopOpacity={0.4} />
-                            <stop offset="95%" stopColor="#B45309" stopOpacity={0} />
-                          </linearGradient>
-                        </defs>
-                        <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#F1F0EC" />
-                        <XAxis dataKey="year" axisLine={false} tickLine={false} tick={{ fill: '#A8A29E', fontSize: 13, fontWeight: '900' }} />
-                        <YAxis hide />
-                        <Tooltip contentStyle={{ borderRadius: '20px', border: 'none', boxShadow: '0 20px 40px rgba(0,0,0,0.1)', backgroundColor: '#1C1917', color: '#fff' }} />
-                        <Area type="monotone" dataKey="value" stroke="#B45309" strokeWidth={5} fill="url(#colorGold)" animationDuration={2000} />
-                      </AreaChart>
-                    </ResponsiveContainer>
-                  </div>
-                </div>
-              </div>
+              <DetailContent />
             </div>
           </div>
         </div>
       </div>
+
+      {/* MOBILE MODAL POPUP */}
+      {showMobileDetail && (
+        <div className="fixed inset-0 z-50 lg:hidden flex items-end sm:items-center justify-center bg-black/60 backdrop-blur-sm p-0 sm:p-4 animate-fade-in">
+          <div className="bg-[#FAF8F3] w-full h-[90vh] sm:h-auto sm:max-h-[90vh] rounded-t-[2.5rem] sm:rounded-[2.5rem] p-6 sm:p-8 overflow-y-auto relative shadow-2xl animate-slide-up">
+            <button
+              onClick={() => setShowMobileDetail(false)}
+              className="absolute top-6 right-6 p-2 bg-stone-900 rounded-full text-white shadow-lg hover:bg-stone-700 transition z-50"
+            >
+              <X size={24} />
+            </button>
+            <DetailContent />
+          </div>
+        </div>
+      )}
     </section>
   );
 };

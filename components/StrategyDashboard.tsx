@@ -79,6 +79,59 @@ const StrategyDashboard: React.FC<StrategyDashboardProps> = ({ lang }) => {
     });
   };
 
+  const renderDetailContent = () => (
+    <>
+      <div className="mb-6 animate-fade-in-up">
+        <span className="inline-block px-3 py-1 bg-amber-900/50 text-amber-500 text-xs font-bold rounded mb-4 border border-amber-700/50">STRATEGIC ANALYSIS</span>
+        <h3 className="text-2xl font-bold text-white mb-4">{currentData.title[lang]}</h3>
+        <div className="text-stone-300 mb-6 leading-relaxed text-sm lg:text-base">
+          {renderDescription(currentData.desc[lang])}
+        </div>
+      </div>
+
+      <div className="w-full h-[320px] bg-stone-800 rounded-lg p-4 relative" style={{ minWidth: 0 }}>
+        <ResponsiveContainer width="100%" height="100%" minHeight={320}>
+          {(activeTab === 'market' || activeTab === 'place') ? (
+            <BarChart data={currentData.chartData} key={`bar-${activeTab}`}>
+              <XAxis dataKey="name" stroke="#A8A29E" fontSize={12} tickLine={false} axisLine={false} />
+              <YAxis stroke="#A8A29E" fontSize={12} tickLine={false} axisLine={false} />
+              <RechartsTooltip
+                contentStyle={{ backgroundColor: '#292524', borderColor: '#44403C', color: '#fff' }}
+                itemStyle={{ color: '#FCD34D' }}
+              />
+              <Bar dataKey="value" radius={[4, 4, 0, 0]}>
+                {currentData.chartData.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={currentData.colors[index % currentData.colors.length]} />
+                ))}
+              </Bar>
+            </BarChart>
+          ) : (
+            <PieChart key={`pie-${activeTab}`}>
+              <RechartsTooltip
+                contentStyle={{ backgroundColor: '#292524', borderColor: '#44403C', color: '#fff' }}
+                itemStyle={{ color: '#FCD34D' }}
+              />
+              <Pie
+                data={currentData.chartData}
+                dataKey="value"
+                nameKey="name"
+                cx="50%"
+                cy="50%"
+                innerRadius={60}
+                outerRadius={80}
+                paddingAngle={5}
+              >
+                {currentData.chartData.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={currentData.colors[index % currentData.colors.length]} />
+                ))}
+              </Pie>
+            </PieChart>
+          )}
+        </ResponsiveContainer>
+      </div>
+    </>
+  );
+
   return (
     <section id="strategy" className="py-20 bg-stone-900 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -96,8 +149,8 @@ const StrategyDashboard: React.FC<StrategyDashboardProps> = ({ lang }) => {
 
         <div className="bg-stone-800 rounded-2xl p-6 lg:p-10 border border-stone-700 shadow-2xl">
           <div className="flex flex-col lg:flex-row gap-8">
-            {/* List Column: Hidden on mobile if detail is shown */}
-            <div className={`w-full lg:w-1/3 flex-col gap-3 ${showMobileDetail ? 'hidden lg:flex' : 'flex'}`}>
+            {/* List Column: Always visible */}
+            <div className="w-full lg:w-1/3 flex flex-col gap-3">
               <button
                 onClick={() => { setActiveTab('market'); setShowMobileDetail(true); }}
                 className={`text-left p-5 rounded-xl border transition flex items-center justify-between group ${activeTab === 'market' ? 'bg-stone-700 border-amber-600 ring-1 ring-amber-600' : 'border-stone-600 hover:bg-stone-700'}`}
@@ -143,70 +196,30 @@ const StrategyDashboard: React.FC<StrategyDashboardProps> = ({ lang }) => {
               </button>
             </div>
 
-            {/* Detail Content: Hidden on mobile if not active */}
-            <div className={`w-full lg:w-2/3 bg-stone-900 rounded-xl p-6 border border-stone-700 relative flex-col ${!showMobileDetail ? 'hidden lg:flex' : 'flex'}`}>
-
-              {/* Mobile Back Button */}
-              <button
-                onClick={() => setShowMobileDetail(false)}
-                className="lg:hidden mb-6 flex items-center text-stone-400 hover:text-amber-400 font-bold transition-colors animate-fade-in-down"
-              >
-                <ArrowLeft className="w-5 h-5 mr-2" />
-                {lang === Language.KO ? '목록으로 돌아가기' : 'Back to Strategy List'}
-              </button>
-
-              <div className="mb-6 animate-fade-in-up">
-                <span className="inline-block px-3 py-1 bg-amber-900/50 text-amber-500 text-xs font-bold rounded mb-4 border border-amber-700/50">STRATEGIC ANALYSIS</span>
-                <h3 className="text-2xl font-bold text-white mb-4">{currentData.title[lang]}</h3>
-                <div className="text-stone-300 mb-6 leading-relaxed text-sm lg:text-base">
-                  {renderDescription(currentData.desc[lang])}
-                </div>
-              </div>
-
-              <div className="w-full h-[320px] bg-stone-800 rounded-lg p-4 relative" style={{ minWidth: 0 }}>
-                <ResponsiveContainer width="100%" height="100%" minHeight={320}>
-                  {(activeTab === 'market' || activeTab === 'place') ? (
-                    <BarChart data={currentData.chartData} key={`bar-${activeTab}`}>
-                      <XAxis dataKey="name" stroke="#A8A29E" fontSize={12} tickLine={false} axisLine={false} />
-                      <YAxis stroke="#A8A29E" fontSize={12} tickLine={false} axisLine={false} />
-                      <RechartsTooltip
-                        contentStyle={{ backgroundColor: '#292524', borderColor: '#44403C', color: '#fff' }}
-                        itemStyle={{ color: '#FCD34D' }}
-                      />
-                      <Bar dataKey="value" radius={[4, 4, 0, 0]}>
-                        {currentData.chartData.map((entry, index) => (
-                          <Cell key={`cell-${index}`} fill={currentData.colors[index % currentData.colors.length]} />
-                        ))}
-                      </Bar>
-                    </BarChart>
-                  ) : (
-                    <PieChart key={`pie-${activeTab}`}>
-                      <RechartsTooltip
-                        contentStyle={{ backgroundColor: '#292524', borderColor: '#44403C', color: '#fff' }}
-                        itemStyle={{ color: '#FCD34D' }}
-                      />
-                      <Pie
-                        data={currentData.chartData}
-                        dataKey="value"
-                        nameKey="name"
-                        cx="50%"
-                        cy="50%"
-                        innerRadius={60}
-                        outerRadius={80}
-                        paddingAngle={5}
-                      >
-                        {currentData.chartData.map((entry, index) => (
-                          <Cell key={`cell-${index}`} fill={currentData.colors[index % currentData.colors.length]} />
-                        ))}
-                      </Pie>
-                    </PieChart>
-                  )}
-                </ResponsiveContainer>
-              </div>
+            {/* Desktop Detail Content: Hidden on mobile */}
+            <div className="hidden lg:flex w-full lg:w-2/3 bg-stone-900 rounded-xl p-6 border border-stone-700 relative flex-col">
+              {renderDetailContent()}
             </div>
           </div>
         </div>
       </div>
+
+      {/* MOBILE MODAL */}
+      {showMobileDetail && (
+        <div className="fixed inset-0 z-50 lg:hidden flex items-end sm:items-center justify-center bg-black/80 backdrop-blur-sm p-0 sm:p-4 animate-fade-in">
+          <div className="bg-stone-900 w-full h-[85vh] sm:h-auto sm:max-h-[90vh] rounded-t-2xl sm:rounded-2xl p-6 overflow-y-auto relative border border-stone-700 animate-slide-up">
+            <button
+              onClick={() => setShowMobileDetail(false)}
+              className="absolute top-4 right-4 p-2 bg-stone-800 rounded-full text-stone-400 hover:text-white transition"
+            >
+              <ArrowLeft className="w-6 h-6" /> {/* Using ArrowLeft as 'Back' semantics, or X */}
+            </button>
+            <div className="mt-8">
+              {renderDetailContent()}
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };
