@@ -15,9 +15,9 @@ const Philosophy: React.FC<PhilosophyProps> = ({ lang }) => {
       icon: Heart,
       bg: 'bg-amber-700', // Solid Amber
       titleColor: 'text-white',
-      bodyColor: 'text-white font-bold leading-relaxed',
+      bodyColor: 'text-white font-medium leading-relaxed',
       footerColor: 'text-amber-200',
-      bgCharColor: 'text-white/10',
+      bgCharColor: 'text-amber-100/20',
       iconBoxClass: 'bg-white/20 text-white backdrop-blur-sm border border-white/20',
       border: 'border-amber-500',
       ko: "비즈니스의 근본은 기술이나 자본이 아닌 '사람의 마음'에 있습니다. 우리는 파트너사의 제품이 캄보디아 가정마다 행복(福)을 전달하는 메신저가 되기를 바랍니다.",
@@ -30,11 +30,11 @@ const Philosophy: React.FC<PhilosophyProps> = ({ lang }) => {
       icon: Award,
       bg: 'bg-white', // Pure White
       titleColor: 'text-stone-900',
-      bodyColor: 'text-stone-900 font-bold leading-relaxed',
-      footerColor: 'text-stone-400',
-      bgCharColor: 'text-stone-100',
-      iconBoxClass: 'bg-stone-50 shadow-lg text-amber-700 border border-stone-100',
-      border: 'border-stone-200',
+      bodyColor: 'text-stone-600 font-medium leading-relaxed',
+      footerColor: 'text-amber-700',
+      bgCharColor: 'text-stone-100', // Still subtle but visible against white
+      iconBoxClass: 'bg-slate-50 shadow-lg text-amber-700 border border-slate-100',
+      border: 'border-slate-200',
       ko: "번영(祿)은 치밀한 전략과 실행력의 정직한 보상입니다. 우리는 입점 브랜드가 단순한 상품을 넘어 시장의 '기준'이자 '명예(Status)'가 되도록 격상시킵니다.",
       en: "Prosperity (Lu) is the honest reward of strategy. We elevate your brand from a 'Product' to a 'Market Standard' and 'Status' in Cambodia."
     },
@@ -43,12 +43,12 @@ const Philosophy: React.FC<PhilosophyProps> = ({ lang }) => {
       label: 'Shou (Longevity)',
       id: 'shou',
       icon: ShieldCheck,
-      bg: 'bg-black', // Pure Black
+      bg: 'bg-stone-950', // Deep Black
       titleColor: 'text-white',
-      bodyColor: 'text-stone-100 font-bold leading-relaxed',
+      bodyColor: 'text-stone-300 font-medium leading-relaxed',
       footerColor: 'text-stone-500',
-      bgCharColor: 'text-stone-800/50',
-      iconBoxClass: 'bg-stone-900 text-emerald-400 border border-stone-800',
+      bgCharColor: 'text-stone-800',
+      iconBoxClass: 'bg-stone-900 text-teal-400 border border-stone-800',
       border: 'border-stone-800',
       ko: "영속성(壽)은 변하지 않는 정직함에서 탄생합니다. 귀사의 브랜드가 캄보디아에서 대를 이어 사랑받는 '롱런 레전드'가 되도록 신뢰의 동반자가 되겠습니다.",
       en: "Longevity (Shou) is born from unchanging honesty. We will be the partner of trust that ensures your brand becomes a 'Long-run Legend' for generations."
