@@ -39,6 +39,16 @@ const COMPANY_CONTEXT = `
   - **Core Identity**: Based on the concept of Fu (Fortune), Lu (Prosperity), and Shou (Longevity).
   - **Business**: Leading distribution partner connecting global brands to the Cambodian market.
   - **Key Products**: Bacchus (Energy Drink), Olatte, Pocari Sweat, Shin Ramyun (Nongshim).
+
+  [CORE SUCCESS STORY: BACCHUS LEGEND]
+  1. **Hyper-Localization**: Shifted from Glass Bottle (KR) to Can (Cambodia) to survive rough logistics and ice-bucket cooling compatibility.
+  2. **Targeting**: Primary target was Blue-collar workers (construction/drivers) with "Fatigue Recovery". Sub-target was Youth (Trendy Energy Drink).
+  3. **Price Strategy**: Massstige (Premium but accessible). $0.7/can. A symbol of "Small Luxury" for workers.
+  4. **Distribution**: Direct Sales (Phnom Penh) + Wholesale/Distributors (Provinces) to cover the whole country.
+  5. **Marketing**: 
+     - "Media Blocking" (Bought all prime time TV slots to block competitors).
+     - Concert Tours (Entertainment for rural areas) + CSR (Sports sponsorship).
+  6. **Partnership**: Full trust & empowerment to local partner (Cam Gold/Fu Lu Shou) who knew the market best. No forcing of KR standards.
 `;
 
 export const generateStrategyInsight = async (
