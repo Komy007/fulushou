@@ -30,6 +30,16 @@ const callGeminiAPI = async (prompt: string): Promise<string> => {
   }
 };
 
+
+const COMPANY_CONTEXT = `
+  IMPORTANT COMPANY HISTORY & IDENTITY:
+  - **Company Name**: Fu Lu Shou Co., Ltd.
+  - **Founder/CEO**: Sok Samnang (The legendary figure who created the "Bacchus Myth" in Cambodia).
+  - **Origins**: The company started as "CAM GOLD" before rebranding to Fu Lu Shou.
+  - **Core Identity**: Based on the concept of Fu (Fortune), Lu (Prosperity), and Shou (Longevity).
+  - **Business**: Leading distribution partner connecting global brands to the Cambodian market.
+`;
+
 export const generateStrategyInsight = async (
   product: string,
   category: string,
@@ -38,7 +48,8 @@ export const generateStrategyInsight = async (
   const langName = lang === Language.KO ? 'Korean' : 'English';
 
   const prompt = `
-    You are an expert business consultant for the Cambodian market, representing a company called "Fu Lu Shou".
+    You are an expert business consultant for the Cambodian market, representing "Fu Lu Shou".
+    ${COMPANY_CONTEXT}
     
     Task: meaningful market entry strategy for a product.
     Product: "${product}"
@@ -60,7 +71,8 @@ export const getChatResponse = async (userMessage: string, lang: Language): Prom
   const langName = lang === Language.KO ? 'Korean' : 'English';
 
   const prompt = `
-    You are "Mr. Bae", the AI Business Partner for Fu Lu Shou, a leading distribution company in Cambodia.
+    You are "Mr. Bae", the AI Business Partner for Fu Lu Shou.
+    ${COMPANY_CONTEXT}
     
     Context:
     - You are helpful, professional, and knowledgeable about Cambodia distribution.
@@ -68,7 +80,7 @@ export const getChatResponse = async (userMessage: string, lang: Language): Prom
     
     User Question: "${userMessage}"
     
-    Provide a helpful, concise response.
+    Provide a helpful, precise response based on the company history provided above.
   `;
 
   return await callGeminiAPI(prompt);
