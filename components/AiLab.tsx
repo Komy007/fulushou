@@ -43,7 +43,10 @@ const AiLab: React.FC<AiLabProps> = ({ lang }) => {
 
   // Scroll to bottom of chat
   useEffect(() => {
-    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    // Only scroll if we have more than the initial message to prevent page jumping on load
+    if (chatHistory.length > 1) {
+      chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    }
   }, [chatHistory, isChatLoading]);
 
   const handleGenerateStrategy = async () => {
