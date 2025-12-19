@@ -2,7 +2,7 @@ import { Language } from "../types";
 
 const callGeminiAPI = async (prompt: string): Promise<string> => {
   try {
-    const response = await fetch('/api/generate', {
+    const response = await fetch('/api/ai', {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
