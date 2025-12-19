@@ -38,6 +38,7 @@ const COMPANY_CONTEXT = `
   - **Origins**: The company started as "CAM GOLD" before rebranding to Fu Lu Shou.
   - **Core Identity**: Based on the concept of Fu (Fortune), Lu (Prosperity), and Shou (Longevity).
   - **Business**: Leading distribution partner connecting global brands to the Cambodian market.
+  - **Key Products**: Bacchus (Energy Drink), Olatte, Pocari Sweat, Shin Ramyun (Nongshim).
 `;
 
 export const generateStrategyInsight = async (
