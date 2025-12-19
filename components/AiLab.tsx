@@ -210,22 +210,29 @@ const AiLab: React.FC<AiLabProps> = ({ lang }) => {
             </div>
 
             {/* Input Area - DARK THEME WITH WHITE TEXT */}
+            {/* Input Area - DARK THEME WITH WHITE TEXT */}
             <div className="p-4 lg:p-6 bg-stone-800 border-t border-stone-700">
-              <div className="flex gap-3 relative">
-                <input
-                  type="text"
+              <div className="flex flex-col lg:flex-row gap-3 relative">
+                <textarea
                   value={chatInput}
                   onChange={(e) => setChatInput(e.target.value)}
-                  onKeyDown={handleKeyDown}
-                  className="flex-1 p-5 bg-stone-900 border-2 border-stone-700 rounded-2xl focus:ring-4 focus:ring-amber-600/30 focus:border-amber-600 transition-all font-bold text-white placeholder-stone-500 text-lg shadow-inner"
-                  placeholder={lang === Language.KO ? "질문을 입력하세요 (글씨가 흰색으로 보입니다)" : "Ask your question (White text)..."}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                      e.preventDefault();
+                      handleSendMessage();
+                    }
+                  }}
+                  className="flex-1 p-4 bg-stone-900 border-2 border-stone-700 rounded-2xl focus:ring-4 focus:ring-amber-600/30 focus:border-amber-600 transition-all font-bold text-white placeholder-stone-500 text-lg shadow-inner resize-none"
+                  placeholder={lang === Language.KO ? "질문을 입력하세요..." : "Ask your question..."}
                   disabled={isChatLoading}
+                  rows={3}
                 />
                 <button
                   onClick={handleSendMessage}
                   disabled={isChatLoading || !chatInput.trim()}
-                  className="px-6 py-2 bg-amber-600 text-white rounded-2xl hover:bg-amber-500 transition-all shadow-xl shadow-amber-900/40 disabled:opacity-30 disabled:grayscale flex items-center justify-center"
+                  className="w-full lg:w-auto px-8 py-4 lg:py-2 bg-amber-600 text-white rounded-2xl hover:bg-amber-500 transition-all shadow-xl shadow-amber-900/40 disabled:opacity-30 disabled:grayscale flex items-center justify-center"
                 >
+                  <span className="lg:hidden mr-2 font-bold uppercase">{lang === Language.KO ? '전송' : 'Send'}</span>
                   <Send className="w-6 h-6" />
                 </button>
               </div>
