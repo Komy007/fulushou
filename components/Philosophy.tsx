@@ -17,7 +17,7 @@ const Philosophy: React.FC<PhilosophyProps> = ({ lang }) => {
       titleColor: 'text-white',
       bodyColor: 'text-white font-medium leading-relaxed',
       footerColor: 'text-amber-200',
-      bgCharColor: 'text-amber-100/20',
+      bgCharColor: 'text-amber-100', // High visibility
       iconBoxClass: 'bg-white/20 text-white backdrop-blur-sm border border-white/20',
       border: 'border-amber-500',
       ko: "비즈니스의 근본은 기술이나 자본이 아닌 '사람의 마음'에 있습니다. 우리는 파트너사의 제품이 캄보디아 가정마다 행복(福)을 전달하는 메신저가 되기를 바랍니다.",
@@ -32,7 +32,7 @@ const Philosophy: React.FC<PhilosophyProps> = ({ lang }) => {
       titleColor: 'text-stone-900',
       bodyColor: 'text-stone-600 font-medium leading-relaxed',
       footerColor: 'text-amber-700',
-      bgCharColor: 'text-stone-100', // Still subtle but visible against white
+      bgCharColor: 'text-stone-600', // Dark Gray as requested
       iconBoxClass: 'bg-slate-50 shadow-lg text-amber-700 border border-slate-100',
       border: 'border-slate-200',
       ko: "번영(祿)은 치밀한 전략과 실행력의 정직한 보상입니다. 우리는 입점 브랜드가 단순한 상품을 넘어 시장의 '기준'이자 '명예(Status)'가 되도록 격상시킵니다.",
@@ -47,7 +47,7 @@ const Philosophy: React.FC<PhilosophyProps> = ({ lang }) => {
       titleColor: 'text-white',
       bodyColor: 'text-stone-300 font-medium leading-relaxed',
       footerColor: 'text-stone-500',
-      bgCharColor: 'text-stone-800',
+      bgCharColor: 'text-white', // White as requested
       iconBoxClass: 'bg-stone-900 text-teal-400 border border-stone-800',
       border: 'border-stone-800',
       ko: "영속성(壽)은 변하지 않는 정직함에서 탄생합니다. 귀사의 브랜드가 캄보디아에서 대를 이어 사랑받는 '롱런 레전드'가 되도록 신뢰의 동반자가 되겠습니다.",
@@ -88,9 +88,9 @@ const Philosophy: React.FC<PhilosophyProps> = ({ lang }) => {
               {/* Card Background Logic */}
               <div className={`absolute inset-0 ${item.bg} transition-all duration-500`}></div>
 
-              <div className="relative p-8 lg:p-10 h-full flex flex-col items-start">
+              <div className="relative p-6 lg:p-10 h-full flex flex-col items-start">
                 <div className="flex justify-between items-start w-full mb-8">
-                  <span className={`text-6xl font-serif font-black ${item.bgCharColor}`}>
+                  <span className={`text-5xl lg:text-6xl font-serif font-black ${item.bgCharColor}`}>
                     {item.char}
                   </span>
                   <div className={`w-12 h-12 rounded-2xl flex items-center justify-center ${item.iconBoxClass}`}>

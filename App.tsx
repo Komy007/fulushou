@@ -15,6 +15,27 @@ import { Language } from './types';
 function App() {
   const [lang, setLang] = useState<Language>(Language.KO);
 
+  React.useEffect(() => {
+    // Force scroll to top on load with a slight delay to ensure it overrides browser restoration
+    // and gives a visual "scroll to top" cue if the user was lower down.
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+
+    // Immediate scroll
+    window.scrollTo(0, 0);
+
+    // Verified scroll after layout
+    const timer = setTimeout(() => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   const toggleLang = () => {
     setLang(prev => (prev === Language.KO ? Language.EN : Language.KO));
   };
