@@ -19,7 +19,7 @@ const callGeminiAPI = async (prompt: string): Promise<string> => {
     return data.text || "No response generated.";
   } catch (error) {
     console.error("Failed to call Backend API:", error);
-    return "The AI service is temporarily unavailable. Please make sure the backend server (port 3001) is running.";
+    return "The AI service is temporarily unavailable. Please make sure the backend server is running.";
   }
 };
 
