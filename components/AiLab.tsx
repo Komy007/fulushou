@@ -97,7 +97,7 @@ const AiLab: React.FC<AiLabProps> = ({ lang }) => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Feature 1: Strategy Simulator */}
-          <div className="bg-white rounded-[2.5rem] shadow-2xl border border-stone-200 overflow-hidden flex flex-col h-[700px]">
+          <div className="bg-white rounded-[2.5rem] shadow-2xl border border-stone-200 overflow-hidden flex flex-col h-[600px] lg:h-[700px]">
             <div className="p-8 bg-stone-900 text-white flex justify-between items-center border-b border-amber-500/30">
               <div>
                 <h3 className="font-bold text-xl flex items-center gap-2">
@@ -165,7 +165,7 @@ const AiLab: React.FC<AiLabProps> = ({ lang }) => {
           </div>
 
           {/* Feature 2: AI Consultant Chat */}
-          <div className="bg-stone-900 rounded-[2.5rem] shadow-2xl border border-stone-800 overflow-hidden flex flex-col h-[700px]">
+          <div className="bg-stone-900 rounded-[2.5rem] shadow-2xl border border-stone-800 overflow-hidden flex flex-col h-[500px] lg:h-[700px]">
             <div className="p-8 bg-amber-700 text-white flex justify-between items-center">
               <div>
                 <h3 className="font-bold text-xl flex items-center gap-2">
@@ -182,8 +182,8 @@ const AiLab: React.FC<AiLabProps> = ({ lang }) => {
                 <div
                   key={msg.id}
                   className={`max-w-[88%] p-5 rounded-2xl leading-relaxed text-[15px] shadow-lg ${msg.role === 'user'
-                      ? 'bg-amber-600 text-white font-bold ml-auto rounded-tr-none border border-amber-500/50'
-                      : 'bg-stone-800 text-stone-100 font-medium mr-auto rounded-tl-none border border-stone-700 prose prose-invert prose-sm max-w-none'
+                    ? 'bg-amber-600 text-white font-bold ml-auto rounded-tr-none border border-amber-500/50'
+                    : 'bg-stone-800 text-stone-100 font-medium mr-auto rounded-tl-none border border-stone-700 prose prose-invert prose-sm max-w-none'
                     }`}
                 >
                   {msg.role === 'model' ? (
