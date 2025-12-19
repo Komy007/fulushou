@@ -168,7 +168,7 @@ const AiLab: React.FC<AiLabProps> = ({ lang }) => {
           </div>
 
           {/* Feature 2: AI Consultant Chat */}
-          <div className="bg-stone-900 rounded-[2.5rem] shadow-2xl border border-stone-800 overflow-hidden flex flex-col h-[500px] lg:h-[700px]">
+          <div className="bg-stone-900 rounded-[2.5rem] shadow-2xl border border-stone-800 overflow-hidden flex flex-col h-[600px] lg:h-[700px]">
             <div className="p-8 bg-amber-700 text-white flex justify-between items-center">
               <div>
                 <h3 className="font-bold text-xl flex items-center gap-2">
@@ -209,7 +209,7 @@ const AiLab: React.FC<AiLabProps> = ({ lang }) => {
             </div>
 
             {/* Input Area - DARK THEME WITH WHITE TEXT */}
-            <div className="p-6 bg-stone-800 border-t border-stone-700">
+            <div className="p-4 lg:p-6 bg-stone-800 border-t border-stone-700">
               <div className="flex gap-3 relative">
                 <input
                   type="text"
