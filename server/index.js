@@ -43,7 +43,7 @@ const callGemini = async (prompt) => {
     return data.candidates?.[0]?.content?.parts?.[0]?.text || "No response.";
 };
 
-app.post('/api/ai', async (req, res) => {
+app.post('/api/proxy', async (req, res) => {
     try {
         const { prompt } = req.body;
         if (!prompt) {

@@ -2,7 +2,7 @@ import { Language } from "../types";
 
 const callGeminiAPI = async (prompt: string): Promise<string> => {
   try {
-    const response = await fetch('/api/ai', {
+    const response = await fetch('/api/proxy', {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -11,15 +11,22 @@ const callGeminiAPI = async (prompt: string): Promise<string> => {
     });
 
     if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.error || `Server Error: ${response.status}`);
+      let errorMsg = `Server Error: ${response.status} ${response.statusText}`;
+      try {
+        const errorData = await response.json();
+        if (errorData.error) errorMsg = errorData.error;
+      } catch (e) {
+        // Ignore JSON parse error if response is not JSON
+      }
+      throw new Error(errorMsg);
     }
 
     const data = await response.json();
     return data.text || "No response generated.";
-  } catch (error) {
+  } catch (error: any) {
     console.error("Failed to call Backend API:", error);
-    return "The AI service is temporarily unavailable. Please make sure the backend server is running.";
+    // Return the actual error message so the user can see if it's 404, 500, etc.
+    return `Error: ${error.message || "Unknown error"}. Please check backend connection.`;
   }
 };
 
