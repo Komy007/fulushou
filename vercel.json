@@ -1,0 +1,13 @@
+{
+    "api": {
+        "bodyParser": {
+            "sizeLimit": "1mb"
+        }
+    },
+    "rewrites": [
+        {
+            "source": "/api/(.*)",
+            "destination": "/api/$1"
+        }
+    ]
+}
