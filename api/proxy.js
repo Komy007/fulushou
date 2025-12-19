@@ -44,6 +44,12 @@ export default async function handler(req, res) {
                             parts: [{ text: prompt }],
                         },
                     ],
+                    generationConfig: {
+                        temperature: 0.2,
+                        topK: 40,
+                        topP: 0.95,
+                        maxOutputTokens: 1024,
+                    }
                 }),
             }
         );

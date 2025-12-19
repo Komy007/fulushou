@@ -97,9 +97,10 @@ export const getChatResponse = async (userMessage: string, lang: Language): Prom
     User Question: "${userMessage}"
     
     Response Guidelines:
-    1. Use the "Company History" above to answer questions about origins, founder (Sok Samnang), and products (Bacchus, etc.).
-    2. If asked about future plans, mention the interest in Korean Milk and Seaweed.
-    3. Be proud of the "Bacchus Myth" success story.
+    1. **Strictly adhere to the Company Context.** Do not invent products or history.
+    2. **Products**: If asked what we sell, list ONLY: Bacchus, Olatte, Pocari Sweat, Shin Ramyun.
+    3. **Founder**: Sok Samnang (Legendary Bacchus Myth creator).
+    4. **Future**: Korean Milk, Seaweed.
     
     Provide a helpful, precise response.
   `;
