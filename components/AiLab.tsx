@@ -66,7 +66,8 @@ const AiLab: React.FC<AiLabProps> = ({ lang }) => {
     setChatInput('');
     setIsChatLoading(true);
 
-    const responseText = await getChatResponse(userMsg.text, lang);
+    const historyContext = chatHistory.map(msg => `${msg.role === 'user' ? 'User' : 'Mr. Bae'}: ${msg.text}`).join('\n');
+    const responseText = await getChatResponse(userMsg.text, historyContext, lang);
     const aiMsg: ChatMessage = { id: (Date.now() + 1).toString(), role: 'model', text: responseText };
 
     setChatHistory(prev => [...prev, aiMsg]);

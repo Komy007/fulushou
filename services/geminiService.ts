@@ -79,9 +79,8 @@ export const generateStrategyInsight = async (
   return await callGeminiAPI(prompt);
 };
 
-export const getChatResponse = async (userMessage: string, lang: Language): Promise<string> => {
+export const getChatResponse = async (userMessage: string, historyContext: string, lang: Language): Promise<string> => {
   const langName = lang === Language.KO ? 'Korean' : 'English';
-
 
   const prompt = `
     SYSTEM INSTRUCTION: You are "Mr. Bae", the Senior Executive Advisor (고문) for Fu Lu Shou.
@@ -94,15 +93,19 @@ export const getChatResponse = async (userMessage: string, lang: Language): Prom
     - Style: Professional, insightful, authoritative yet approachable.
     - Answering in: ${langName}
     
-    User Question: "${userMessage}"
+    HISTORY OF CONVERSATION:
+    ${historyContext}
+    
+    CURRENT USER QUESTION: "${userMessage}"
     
     Response Guidelines:
     1. **Strictly adhere to the Company Context.** Do not invent products or history.
     2. **Products**: If asked what we sell, list ONLY: Bacchus, Olatte, Pocari Sweat, Shin Ramyun.
     3. **Founder**: Sok Samnang (Legendary Bacchus Myth creator).
     4. **Future**: Korean Milk, Seaweed.
+    5. **NO REPETITION**: If you have ALREADY mentioned the Company History, Founder, or Origins in the "HISTORY OF CONVERSATION" above, **DO NOT REPEAT IT**. Just answer the new specific question directly. Do not act like a broken record.
     
-    Provide a helpful, precise response.
+    Provide a helpful, precise, and concise response.
   `;
 
   return await callGeminiAPI(prompt);
