@@ -45,7 +45,7 @@ const AiLab: React.FC<AiLabProps> = ({ lang }) => {
   useEffect(() => {
     // Only scroll if we have more than the initial message to prevent page jumping on load
     if (chatHistory.length > 1) {
-      chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+      chatEndRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
     }
   }, [chatHistory, isChatLoading]);
 
