@@ -109,41 +109,58 @@ const AiLab: React.FC<AiLabProps> = ({ lang }) => {
 
       {/* Result Modal - Global Overlay */}
       {isModalOpen && strategyResult && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-0 lg:p-4 bg-stone-900/60 backdrop-blur-sm animate-fade-in-up">
-          <div className="bg-white w-full h-full lg:h-auto lg:max-h-[90vh] lg:max-w-4xl lg:rounded-[2rem] shadow-2xl flex flex-col overflow-hidden">
-            {/* Modal Header */}
-            <div className="p-4 lg:p-6 bg-stone-900 text-white flex justify-between items-center shadow-md z-10">
-              <div className="flex items-center gap-3">
-                <Sparkles className="text-amber-400 w-5 h-5 lg:w-6 lg:h-6" />
-                <h3 className="font-bold text-lg lg:text-xl">
-                  {lang === Language.KO ? '전략 시뮬레이션 결과' : 'Strategy Simulation Result'}
-                </h3>
+        <div className="fixed inset-0 z-50">
+          {/* Desktop Overlay Background (Hidden on Mobile) */}
+          <div className="hidden lg:block absolute inset-0 bg-stone-900/60 backdrop-blur-sm" onClick={() => setIsModalOpen(false)}></div>
+
+          {/* 
+             MOBILE: fixed inset-0 overflow-y-auto bg-white z-50 (Behaves like a new page)
+             DESKTOP: fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none
+          */}
+          <div className="fixed inset-0 z-50 lg:flex lg:items-center lg:justify-center overflow-y-auto lg:overflow-visible bg-white lg:bg-transparent">
+
+            {/* Card Container - Mobile: min-h-full, Desktop: Card */}
+            <div className="min-h-full lg:min-h-0 w-full lg:w-auto lg:max-w-4xl lg:h-auto lg:max-h-[90vh] bg-white lg:rounded-[2rem] shadow-none lg:shadow-2xl flex flex-col relative pointer-events-auto">
+
+              {/* Header - Sticky on Mobile */}
+              <div className="sticky top-0 left-0 right-0 z-10 p-4 lg:p-6 bg-white/95 backdrop-blur border-b border-stone-100 flex justify-between items-center shadow-sm lg:shadow-none lg:bg-stone-900 lg:text-white lg:rounded-t-[2rem]">
+                <div className="flex items-center gap-3">
+                  <Sparkles className="text-amber-500 lg:text-amber-400 w-5 h-5 lg:w-6 lg:h-6" />
+                  <h3 className="font-bold text-lg lg:text-xl text-stone-900 lg:text-white">
+                    {lang === Language.KO ? '전략 시뮬레이션 결과' : 'Strategy Simulation Result'}
+                  </h3>
+                </div>
+                <button
+                  onClick={() => setIsModalOpen(false)}
+                  className="p-2 bg-stone-100 hover:bg-stone-200 lg:bg-stone-800 lg:hover:bg-stone-700 rounded-full transition-colors"
+                >
+                  {/* Close Icon (X) */}
+                  <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-stone-500 lg:text-stone-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                  </svg>
+                </button>
               </div>
-              <button
-                onClick={() => setIsModalOpen(false)}
-                className="p-2 bg-stone-800 hover:bg-stone-700 rounded-full transition-colors"
-                aria-label="Close"
-              >
-                <ArrowRight className="w-5 h-5 text-stone-400 rotate-180" /> {/* Using ArrowRight rotated as Back/Close for now, or X if available */}
-              </button>
-            </div>
 
-            {/* Modal Body - Independent Scroll */}
-            <div className="flex-1 overflow-y-auto overflow-x-hidden p-6 lg:p-10 bg-stone-50 prose prose-amber prose-sm lg:prose-base max-w-none break-words w-full">
-              <ReactMarkdown components={{
-                p: ({ node, ...props }) => <p className="break-words whitespace-pre-wrap" {...props} />,
-                li: ({ node, ...props }) => <li className="break-words" {...props} />
-              }}>{strategyResult}</ReactMarkdown>
-            </div>
+              {/* Content - Flows naturally on mobile, scrolls internally on desktop */}
+              <div className="flex-1 p-6 lg:p-10 lg:overflow-y-auto bg-stone-50/50 lg:bg-stone-50 w-full">
+                <div className="prose prose-amber prose-sm lg:prose-base max-w-none break-words w-full">
+                  <ReactMarkdown components={{
+                    p: ({ node, ...props }) => <p className="break-words whitespace-pre-wrap" {...props} />,
+                    li: ({ node, ...props }) => <li className="break-words" {...props} />
+                  }}>{strategyResult}</ReactMarkdown>
+                </div>
+              </div>
 
-            {/* Modal Footer (Mobile Only Convenience) */}
-            <div className="p-4 bg-white border-t border-stone-200 lg:hidden text-center">
-              <button
-                onClick={() => setIsModalOpen(false)}
-                className="w-full py-3 bg-stone-900 text-white font-bold rounded-xl"
-              >
-                {lang === Language.KO ? '닫기' : 'Close'}
-              </button>
+              {/* Mobile Bottom Spacer/Button */}
+              <div className="p-4 bg-white border-t border-stone-200 lg:hidden sticky bottom-0 z-10 safe-area-bottom">
+                <button
+                  onClick={() => setIsModalOpen(false)}
+                  className="w-full py-4 bg-stone-900 text-white font-bold rounded-xl shadow-lg"
+                >
+                  {lang === Language.KO ? '닫기' : 'Close'}
+                </button>
+              </div>
             </div>
           </div>
         </div>
