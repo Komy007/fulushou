@@ -30,8 +30,7 @@ const AiLab: React.FC<AiLabProps> = ({ lang }) => {
   ]);
   const [isChatLoading, setIsChatLoading] = useState(false);
   const chatEndRef = useRef<HTMLDivElement>(null);
-  // resultRef is no longer needed for auto-scroll since we use a modal
-  // const resultRef = useRef<HTMLDivElement>(null); 
+
 
   // Reset chat on language change
   useEffect(() => {
@@ -144,7 +143,7 @@ const AiLab: React.FC<AiLabProps> = ({ lang }) => {
 
               {/* Content - Flows naturally on mobile, scrolls internally on desktop */}
               <div className="flex-1 p-6 lg:p-10 lg:overflow-y-auto bg-stone-50/50 lg:bg-stone-50 w-full">
-                <div className="prose prose-amber prose-sm lg:prose-base max-w-none break-words w-full">
+                <div className="prose prose-amber prose-sm lg:prose-base max-w-none w-full break-words prose-headings:break-words prose-p:break-words prose-li:break-words">
                   <ReactMarkdown components={{
                     p: ({ node, ...props }) => <p className="break-words whitespace-pre-wrap" {...props} />,
                     li: ({ node, ...props }) => <li className="break-words" {...props} />
