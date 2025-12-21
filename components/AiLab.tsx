@@ -29,6 +29,7 @@ const AiLab: React.FC<AiLabProps> = ({ lang }) => {
   ]);
   const [isChatLoading, setIsChatLoading] = useState(false);
   const chatEndRef = useRef<HTMLDivElement>(null);
+  const resultRef = useRef<HTMLDivElement>(null);
 
   // Reset chat on language change
   useEffect(() => {
@@ -60,6 +61,11 @@ const AiLab: React.FC<AiLabProps> = ({ lang }) => {
     const result = await generateStrategyInsight(product, finalCategory, lang);
     setStrategyResult(result);
     setIsSimLoading(false);
+
+    // Auto-scroll to result on mobile/desktop
+    setTimeout(() => {
+      resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
   };
 
   const handleSendMessage = async () => {
@@ -105,7 +111,7 @@ const AiLab: React.FC<AiLabProps> = ({ lang }) => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Feature 1: Strategy Simulator */}
-          <div className="bg-white rounded-[2.5rem] shadow-2xl border border-stone-200 overflow-hidden flex flex-col h-auto min-h-[600px] lg:h-[700px]">
+          <div className="bg-white rounded-[2.5rem] shadow-2xl border border-stone-200 overflow-hidden flex flex-col h-auto min-h-0 lg:h-[700px]">
             <div className="p-6 lg:p-8 bg-stone-900 text-white flex justify-between items-center border-b border-amber-500/30">
               <div>
                 <h3 className="font-bold text-xl flex items-center gap-2">
@@ -115,7 +121,7 @@ const AiLab: React.FC<AiLabProps> = ({ lang }) => {
                 <p className="text-xs text-stone-400 mt-1 uppercase tracking-widest font-bold">Strategic Forecasting</p>
               </div>
             </div>
-            <div className="p-5 lg:p-8 flex-1 overflow-y-auto bg-stone-50/50">
+            <div className="p-5 lg:p-8 bg-stone-50/50 lg:flex-1 lg:overflow-y-auto">
               <div className="space-y-6">
                 <div>
                   <label className="block text-sm font-black text-stone-700 mb-2 uppercase tracking-tight">Product Name (제품명)</label>
@@ -169,7 +175,7 @@ const AiLab: React.FC<AiLabProps> = ({ lang }) => {
 
               {/* Output Area */}
               {(strategyResult || isSimLoading) && (
-                <div className="mt-8 p-6 bg-white rounded-[2rem] border border-stone-200 shadow-inner prose prose-amber prose-sm max-w-none animate-fade-in-up">
+                <div ref={resultRef} className="mt-8 p-6 bg-white rounded-[2rem] border border-stone-200 shadow-inner prose prose-amber prose-sm max-w-none animate-fade-in-up break-words break-all">
                   {isSimLoading ? (
                     <div className="flex flex-col items-center justify-center p-12 text-stone-400">
                       <div className="w-12 h-12 border-4 border-amber-500/30 border-t-amber-600 rounded-full animate-spin mb-4"></div>
