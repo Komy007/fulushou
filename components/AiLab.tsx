@@ -146,7 +146,25 @@ const AiLab: React.FC<AiLabProps> = ({ lang }) => {
                 <div className="prose prose-amber prose-sm lg:prose-base max-w-none w-full break-words prose-headings:break-words prose-p:break-words prose-li:break-words">
                   <ReactMarkdown components={{
                     p: ({ node, ...props }) => <p className="break-words whitespace-pre-wrap" {...props} />,
-                    li: ({ node, ...props }) => <li className="break-words" {...props} />
+                    li: ({ node, ...props }) => <li className="break-words" {...props} />,
+                    // Handle Tables: Wrap in scrollable div to prevent layout break
+                    table: ({ node, ...props }) => (
+                      <div className="overflow-x-auto w-full my-4 border border-stone-200 rounded-lg">
+                        <table className="min-w-full text-left divide-y divide-stone-200" {...props} />
+                      </div>
+                    ),
+                    thead: ({ node, ...props }) => <thead className="bg-stone-50" {...props} />,
+                    th: ({ node, ...props }) => <th className="px-4 py-3 text-xs font-bold text-stone-500 uppercase tracking-wider whitespace-nowrap" {...props} />,
+                    td: ({ node, ...props }) => <td className="px-4 py-3 text-sm text-stone-700 whitespace-nowrap" {...props} />,
+                    // Handle Code Blocks
+                    pre: ({ node, ...props }) => (
+                      <div className="overflow-x-auto w-full bg-stone-900 rounded-xl p-4 my-4">
+                        <pre className="text-stone-100 text-sm font-mono whitespace-pre" {...props} />
+                      </div>
+                    ),
+                    code: ({ node, ...props }) => <code className="bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded text-sm font-mono break-all" {...props} />,
+                    // Handle Images
+                    img: ({ node, ...props }) => <img className="max-w-full h-auto rounded-xl shadow-md my-4" {...props} />
                   }}>{strategyResult}</ReactMarkdown>
                 </div>
               </div>
