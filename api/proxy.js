@@ -49,6 +49,7 @@ export default async function handler(req, res) {
                         topK: 40,
                         topP: 0.95,
                         maxOutputTokens: 1024,
+                        ...(req.body.generationConfig || {})
                     }
                 }),
             }

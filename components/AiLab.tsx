@@ -53,7 +53,16 @@ const AiLab: React.FC<AiLabProps> = ({ lang }) => {
     if (!product) return;
     setIsSimLoading(true);
     setStrategyResult(null);
-    const result = await generateStrategyInsight(product, category, lang);
+
+    let finalCategory = category;
+    if (category === 'Other') {
+      const customInput = document.getElementById('custom-category-input') as HTMLInputElement;
+      if (customInput && customInput.value) {
+        finalCategory = customInput.value;
+      }
+    }
+
+    const result = await generateStrategyInsight(product, finalCategory, lang);
     setStrategyResult(result);
     setIsSimLoading(false);
   };
@@ -128,13 +137,23 @@ const AiLab: React.FC<AiLabProps> = ({ lang }) => {
                   <select
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
-                    className="w-full p-4 border-2 border-stone-200 rounded-2xl focus:ring-4 focus:ring-amber-500/20 focus:border-amber-500 transition-all font-medium text-stone-900 appearance-none bg-white"
+                    className="w-full p-4 border-2 border-stone-200 rounded-2xl focus:ring-4 focus:ring-amber-500/20 focus:border-amber-500 transition-all font-medium text-stone-900 appearance-none bg-white mb-3"
                   >
                     <option value="Beverage">Beverage (음료/박카스/오라떼)</option>
                     <option value="Food">Food (식품/신라면)</option>
                     <option value="Cosmetics">Cosmetics (화장품)</option>
                     <option value="Household">Household (생활용품)</option>
+                    <option value="Other">Other (직접 입력)</option>
                   </select>
+
+                  {category === 'Other' && (
+                    <input
+                      type="text"
+                      className="w-full p-4 border-2 border-stone-200 rounded-2xl focus:ring-4 focus:ring-amber-500/20 focus:border-amber-500 transition-all font-medium text-stone-900 animate-fade-in-down"
+                      placeholder={lang === Language.KO ? "카테고리를 입력하세요 (예: 유기농 비누)" : "Enter Category (e.g., Organic Soap)"}
+                      id="custom-category-input"
+                    />
+                  )}
                 </div>
                 <button
                   onClick={handleGenerateStrategy}

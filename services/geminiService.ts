@@ -1,13 +1,13 @@
 import { Language } from "../types";
 
-const callGeminiAPI = async (prompt: string): Promise<string> => {
+const callGeminiAPI = async (prompt: string, config?: any): Promise<string> => {
   try {
     const response = await fetch('/api/proxy', {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ prompt }),
+      body: JSON.stringify({ prompt, generationConfig: config }),
     });
 
     if (!response.ok) {
@@ -63,20 +63,26 @@ export const generateStrategyInsight = async (
     You are an expert business consultant for the Cambodian market, representing "Fu Lu Shou".
     ${COMPANY_CONTEXT}
     
-    Task: meaningful market entry strategy for a product.
+    Task: Create a meaningful, creative, and specific market entry strategy for a product.
     Product: "${product}"
     Category: "${category}"
     Target Audience Language: ${langName}
 
-    Please provide a structured response in Markdown format with the following sections:
-    1. **Target Audience**: Who buys this in Cambodia?
-    2. **Localization Idea**: How to adapt for local culture/climate?
-    3. **Promotion Tactic**: Specific marketing idea.
+    IMPORTANT INSTRUCTIONS:
+    1. **Avoid Repetition**: Do NOT just copy-paste the "Bacchus Legend" or generic advice. Think critically about THIS specific product.
+    2. **Be Creative**: Use the "Hyper-Localization" spirit of Fu Lu Shou but apply it uniquely to "${product}".
+    3. **Language**: The response MUST be in ${langName} ONLY.
     
-    Keep the tone professional, encouraging, and insightful.
+    Please provide a structured response in Markdown format with the following sections:
+    1. **Target Audience**: Who buys this in Cambodia? (Be specific: e.g., students, factory workers, elite, etc.)
+    2. **Localization Idea**: How to adapt for local culture/climate? (e.g., packaging, flavor, size, cooling method)
+    3. **Promotion Tactic**: Specific marketing idea relevant to Cambodia (e.g., TikTok challenge, wedding gifts, pagoda donations, etc.)
+    
+    Keep the tone professional yet innovative.
   `;
 
-  return await callGeminiAPI(prompt);
+  // Higher temperature for more creativity
+  return await callGeminiAPI(prompt, { temperature: 0.7 });
 };
 
 export const getChatResponse = async (userMessage: string, historyContext: string, lang: Language): Promise<string> => {
