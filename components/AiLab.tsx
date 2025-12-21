@@ -64,6 +64,11 @@ const AiLab: React.FC<AiLabProps> = ({ lang }) => {
     };
   }, [isModalOpen]);
 
+  // Utility to strip markdown code fences if the AI wraps the whole response
+  const cleanResponse = (text: string) => {
+    return text.replace(/^```markdown\s*/, '').replace(/^```\s*/, '').replace(/```$/, '');
+  };
+
   const handleGenerateStrategy = async () => {
     if (!product) return;
     setIsSimLoading(true);
@@ -72,7 +77,7 @@ const AiLab: React.FC<AiLabProps> = ({ lang }) => {
     const finalCategory = category === 'Other' ? customCategory : category;
 
     const result = await generateStrategyInsight(product, finalCategory, lang);
-    setStrategyResult(result);
+    setStrategyResult(cleanResponse(result));
     setIsSimLoading(false);
     setIsModalOpen(true);
   };
