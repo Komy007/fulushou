@@ -129,8 +129,11 @@ const AiLab: React.FC<AiLabProps> = ({ lang }) => {
             </div>
 
             {/* Modal Body - Independent Scroll */}
-            <div className="flex-1 overflow-y-auto p-6 lg:p-10 bg-stone-50 prose prose-amber prose-sm lg:prose-base max-w-none break-words">
-              <ReactMarkdown>{strategyResult}</ReactMarkdown>
+            <div className="flex-1 overflow-y-auto overflow-x-hidden p-6 lg:p-10 bg-stone-50 prose prose-amber prose-sm lg:prose-base max-w-none break-words w-full">
+              <ReactMarkdown components={{
+                p: ({ node, ...props }) => <p className="break-words whitespace-pre-wrap" {...props} />,
+                li: ({ node, ...props }) => <li className="break-words" {...props} />
+              }}>{strategyResult}</ReactMarkdown>
             </div>
 
             {/* Modal Footer (Mobile Only Convenience) */}
