@@ -111,7 +111,7 @@ const AiLab: React.FC<AiLabProps> = ({ lang }) => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Feature 1: Strategy Simulator */}
-          <div className="bg-white rounded-[2.5rem] shadow-2xl border border-stone-200 overflow-hidden flex flex-col h-auto min-h-0 lg:h-[700px]">
+          <div className="bg-white rounded-[2.5rem] shadow-2xl border border-stone-200 lg:overflow-hidden flex flex-col h-auto min-h-0 lg:h-[700px]">
             <div className="p-6 lg:p-8 bg-stone-900 text-white flex justify-between items-center border-b border-amber-500/30">
               <div>
                 <h3 className="font-bold text-xl flex items-center gap-2">
