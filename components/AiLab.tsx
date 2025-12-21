@@ -12,6 +12,7 @@ const AiLab: React.FC<AiLabProps> = ({ lang }) => {
   // Strategy Sim State
   const [product, setProduct] = useState('');
   const [category, setCategory] = useState('Beverage');
+  const [customCategory, setCustomCategory] = useState('');
   const [strategyResult, setStrategyResult] = useState<string | null>(null);
   const [isSimLoading, setIsSimLoading] = useState(false);
 
@@ -54,13 +55,7 @@ const AiLab: React.FC<AiLabProps> = ({ lang }) => {
     setIsSimLoading(true);
     setStrategyResult(null);
 
-    let finalCategory = category;
-    if (category === 'Other') {
-      const customInput = document.getElementById('custom-category-input') as HTMLInputElement;
-      if (customInput && customInput.value) {
-        finalCategory = customInput.value;
-      }
-    }
+    const finalCategory = category === 'Other' ? customCategory : category;
 
     const result = await generateStrategyInsight(product, finalCategory, lang);
     setStrategyResult(result);
@@ -149,9 +144,10 @@ const AiLab: React.FC<AiLabProps> = ({ lang }) => {
                   {category === 'Other' && (
                     <input
                       type="text"
+                      value={customCategory}
+                      onChange={(e) => setCustomCategory(e.target.value)}
                       className="w-full p-4 border-2 border-stone-200 rounded-2xl focus:ring-4 focus:ring-amber-500/20 focus:border-amber-500 transition-all font-medium text-stone-900 animate-fade-in-down"
                       placeholder={lang === Language.KO ? "카테고리를 입력하세요 (예: 유기농 비누)" : "Enter Category (e.g., Organic Soap)"}
-                      id="custom-category-input"
                     />
                   )}
                 </div>
