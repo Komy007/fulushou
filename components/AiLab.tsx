@@ -15,6 +15,7 @@ const AiLab: React.FC<AiLabProps> = ({ lang }) => {
   const [customCategory, setCustomCategory] = useState('');
   const [strategyResult, setStrategyResult] = useState<string | null>(null);
   const [isSimLoading, setIsSimLoading] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Chat State
   const [chatInput, setChatInput] = useState('');
@@ -29,7 +30,8 @@ const AiLab: React.FC<AiLabProps> = ({ lang }) => {
   ]);
   const [isChatLoading, setIsChatLoading] = useState(false);
   const chatEndRef = useRef<HTMLDivElement>(null);
-  const resultRef = useRef<HTMLDivElement>(null);
+  // resultRef is no longer needed for auto-scroll since we use a modal
+  // const resultRef = useRef<HTMLDivElement>(null); 
 
   // Reset chat on language change
   useEffect(() => {
@@ -51,6 +53,18 @@ const AiLab: React.FC<AiLabProps> = ({ lang }) => {
     }
   }, [chatHistory, isChatLoading]);
 
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    if (isModalOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isModalOpen]);
+
   const handleGenerateStrategy = async () => {
     if (!product) return;
     setIsSimLoading(true);
@@ -61,11 +75,7 @@ const AiLab: React.FC<AiLabProps> = ({ lang }) => {
     const result = await generateStrategyInsight(product, finalCategory, lang);
     setStrategyResult(result);
     setIsSimLoading(false);
-
-    // Auto-scroll to result on mobile/desktop
-    setTimeout(() => {
-      resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 100);
+    setIsModalOpen(true);
   };
 
   const handleSendMessage = async () => {
@@ -96,6 +106,45 @@ const AiLab: React.FC<AiLabProps> = ({ lang }) => {
           <Sparkles size={400} className="text-amber-500" />
         </div>
       </div>
+
+      {/* Result Modal - Global Overlay */}
+      {isModalOpen && strategyResult && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-0 lg:p-4 bg-stone-900/60 backdrop-blur-sm animate-fade-in-up">
+          <div className="bg-white w-full h-full lg:h-auto lg:max-h-[90vh] lg:max-w-4xl lg:rounded-[2rem] shadow-2xl flex flex-col overflow-hidden">
+            {/* Modal Header */}
+            <div className="p-4 lg:p-6 bg-stone-900 text-white flex justify-between items-center shadow-md z-10">
+              <div className="flex items-center gap-3">
+                <Sparkles className="text-amber-400 w-5 h-5 lg:w-6 lg:h-6" />
+                <h3 className="font-bold text-lg lg:text-xl">
+                  {lang === Language.KO ? '전략 시뮬레이션 결과' : 'Strategy Simulation Result'}
+                </h3>
+              </div>
+              <button
+                onClick={() => setIsModalOpen(false)}
+                className="p-2 bg-stone-800 hover:bg-stone-700 rounded-full transition-colors"
+                aria-label="Close"
+              >
+                <ArrowRight className="w-5 h-5 text-stone-400 rotate-180" /> {/* Using ArrowRight rotated as Back/Close for now, or X if available */}
+              </button>
+            </div>
+
+            {/* Modal Body - Independent Scroll */}
+            <div className="flex-1 overflow-y-auto p-6 lg:p-10 bg-stone-50 prose prose-amber prose-sm lg:prose-base max-w-none break-words">
+              <ReactMarkdown>{strategyResult}</ReactMarkdown>
+            </div>
+
+            {/* Modal Footer (Mobile Only Convenience) */}
+            <div className="p-4 bg-white border-t border-stone-200 lg:hidden text-center">
+              <button
+                onClick={() => setIsModalOpen(false)}
+                className="w-full py-3 bg-stone-900 text-white font-bold rounded-xl"
+              >
+                {lang === Language.KO ? '닫기' : 'Close'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16">
@@ -176,17 +225,14 @@ const AiLab: React.FC<AiLabProps> = ({ lang }) => {
                 </button>
               </div>
 
-              {/* Output Area */}
-              {(strategyResult || isSimLoading) && (
-                <div ref={resultRef} className="mt-8 p-6 bg-white rounded-[2rem] border border-stone-200 shadow-inner prose prose-amber prose-sm max-w-none animate-fade-in-up break-words break-all">
-                  {isSimLoading ? (
-                    <div className="flex flex-col items-center justify-center p-12 text-stone-400">
-                      <div className="w-12 h-12 border-4 border-amber-500/30 border-t-amber-600 rounded-full animate-spin mb-4"></div>
-                      <p className="font-bold text-sm">Analyzing Market Trends...</p>
-                    </div>
-                  ) : (
-                    <ReactMarkdown>{strategyResult || ''}</ReactMarkdown>
-                  )}
+              {/* In-Line Loading indicator ONLY (Result is in Modal) */}
+              {isSimLoading && (
+                <div className="mt-8 flex flex-col items-center justify-center p-12 text-stone-400 border border-stone-200 rounded-2xl bg-white/50">
+                  <div className="w-12 h-12 border-4 border-amber-500/30 border-t-amber-600 rounded-full animate-spin mb-4"></div>
+                  <p className="font-bold text-sm text-center">
+                    AI Mr. Bae is analyzing market data...<br />
+                    <span className="text-xs font-normal opacity-70">Creating Hyper-Localization Strategy</span>
+                  </p>
                 </div>
               )}
             </div>
