@@ -89,9 +89,12 @@ const AiLab: React.FC<AiLabProps> = ({ lang }) => {
   };
 
   return (
-    <section id="ai-lab" className="py-24 bg-stone-50 relative overflow-hidden">
-      <div className="absolute top-0 right-0 opacity-10 pointer-events-none">
-        <Sparkles size={400} className="text-amber-500" />
+    <section id="ai-lab" className="py-24 bg-stone-50 relative">
+      {/* Background Decoration Wrapper - Clips ONLY the bg elements, not the content */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-0 right-0 opacity-10">
+          <Sparkles size={400} className="text-amber-500" />
+        </div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -111,7 +114,7 @@ const AiLab: React.FC<AiLabProps> = ({ lang }) => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Feature 1: Strategy Simulator */}
-          <div className="bg-white rounded-[2.5rem] shadow-2xl border border-stone-200 lg:overflow-hidden block lg:flex lg:flex-col h-auto min-h-0 lg:h-[700px]">
+          <div className="bg-white rounded-[2.5rem] shadow-2xl border border-stone-200 block lg:flex lg:flex-col h-auto lg:h-[700px] lg:overflow-hidden relative">
             <div className="p-6 lg:p-8 bg-stone-900 text-white flex justify-between items-center border-b border-amber-500/30">
               <div>
                 <h3 className="font-bold text-xl flex items-center gap-2">
