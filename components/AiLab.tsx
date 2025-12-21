@@ -111,7 +111,7 @@ const AiLab: React.FC<AiLabProps> = ({ lang }) => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Feature 1: Strategy Simulator */}
-          <div className="bg-white rounded-[2.5rem] shadow-2xl border border-stone-200 lg:overflow-hidden flex flex-col h-auto min-h-0 lg:h-[700px]">
+          <div className="bg-white rounded-[2.5rem] shadow-2xl border border-stone-200 lg:overflow-hidden block lg:flex lg:flex-col h-auto min-h-0 lg:h-[700px]">
             <div className="p-6 lg:p-8 bg-stone-900 text-white flex justify-between items-center border-b border-amber-500/30">
               <div>
                 <h3 className="font-bold text-xl flex items-center gap-2">
@@ -121,7 +121,7 @@ const AiLab: React.FC<AiLabProps> = ({ lang }) => {
                 <p className="text-xs text-stone-400 mt-1 uppercase tracking-widest font-bold">Strategic Forecasting</p>
               </div>
             </div>
-            <div className="p-5 lg:p-8 bg-stone-50/50 lg:flex-1 lg:overflow-y-auto">
+            <div className="p-5 lg:p-8 bg-stone-50/50 block lg:flex-1 lg:overflow-y-auto">
               <div className="space-y-6">
                 <div>
                   <label className="block text-sm font-black text-stone-700 mb-2 uppercase tracking-tight">Product Name (제품명)</label>
