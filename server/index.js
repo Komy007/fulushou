@@ -7,6 +7,10 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// Explicit startup log for Cloud Run diagnostics
+console.log('--- Server initializing ---');
+console.log('Current working directory:', process.cwd());
+
 dotenv.config({ path: '.env.local' });
 // Synchronization for domain deployment: 2026-01-07
 
@@ -16,7 +20,13 @@ const PORT = process.env.PORT || 8080;
 app.use(cors());
 app.use(express.json());
 
+// Health check route for Cloud Run
+app.get('/health', (req, res) => {
+    res.status(200).send('OK');
+});
+
 // Serve static files from the React app
+console.log('Serving static files from:', path.join(__dirname, '../dist'));
 app.use(express.static(path.join(__dirname, '../dist')));
 
 const API_KEY = process.env.GEMINI_API_KEY || process.env.VITE_GEMINI_API_KEY;
@@ -73,6 +83,18 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../dist/index.html'));
 });
 
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+// Robust error handling for diagnostics
+process.on('uncaughtException', (err) => {
+    console.error('UNCAUGHT EXCEPTION:', err);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+    console.error('UNHANDLED REJECTION:', reason);
+});
+
+// Explicit binding to '0.0.0.0' for Cloud Run
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`--- Server successfully started ---`);
+    console.log(`Port: ${PORT}`);
+    console.log(`Host: 0.0.0.0`);
 });
