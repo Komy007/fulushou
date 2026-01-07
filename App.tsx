@@ -48,7 +48,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F9F6F0]">
+    <div className="min-h-screen bg-stone-950">
       <Navbar
         lang={lang}
         toggleLang={toggleLang}

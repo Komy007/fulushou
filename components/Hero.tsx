@@ -9,60 +9,79 @@ interface HeroProps {
 
 const Hero: React.FC<HeroProps> = ({ lang, scrollToSection }) => {
   return (
-    <section id="home" className="relative bg-stone-900 py-32 overflow-hidden min-h-[80vh] flex items-center">
-      {/* Background Image */}
-      <div
-        className="absolute inset-0 opacity-20 bg-cover bg-center"
-        style={{ backgroundImage: "url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')" }}
-      ></div>
-      <div className="absolute inset-0 bg-gradient-to-r from-stone-900 via-stone-900/90 to-amber-900/40"></div>
+    <section id="home" className="relative bg-stone-950 min-h-screen flex items-center overflow-hidden pt-20">
+      {/* Background Spline Container - Desktop Split, Mobile Fill */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 bg-gradient-to-b from-stone-950 via-transparent to-stone-950 z-10 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-r from-stone-950 via-stone-950/40 to-transparent z-10 pointer-events-none hidden lg:block" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center lg:text-left w-full">
-        <div className="lg:w-2/3">
-          <div className="inline-flex items-center px-3 py-1 rounded-full bg-amber-500/20 border border-amber-500/50 text-amber-400 text-sm font-medium mb-6 animate-fade-in-up">
+        {/* Spline Iframe - High Fidelity Integration */}
+        <div className="w-full h-full">
+          <iframe
+            src='https://my.spline.design/prismcoin-AFzzOVTV9iiXLdzd8v4asdt1/'
+            frameBorder='0'
+            width='100%'
+            height='100%'
+            className="w-full h-full lg:translate-x-1/4"
+            title="Spline 3D Prismcoin"
+          ></iframe>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 w-full">
+        <div className="lg:w-3/5">
+          <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-500 text-xs font-bold tracking-widest uppercase mb-8 animate-fade-in-up">
+            <Sparkles className="w-3.5 h-3.5 mr-2" />
             {lang === Language.KO
               ? '캄보디아 시장의 마켓 아키텍트'
               : "Cambodia's Premier Market Architect"}
           </div>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-7xl font-extrabold text-white tracking-tight mb-6 animate-fade-in-up delay-100">
+          <h1 className="text-5xl sm:text-6xl lg:text-8xl font-black text-white tracking-tighter mb-8 animate-fade-in-up delay-100 leading-[0.9]">
             {lang === Language.KO ? (
-              <>불가능을 가능으로,<br />신화를 현실로.</>
+              <>불가능을 가능으로,<br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-500 to-amber-200 animate-gradient-x">신화를 현실로.</span></>
             ) : (
-              <>Turning the Impossible<br />into Legend.</>
+              <>Turning the<br />Impossible<br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-500 to-amber-200 animate-gradient-x">into Legend.</span></>
             )}
           </h1>
 
-          <p className="mt-4 text-xl text-stone-300 max-w-2xl animate-fade-in-up delay-200 leading-relaxed">
+          <p className="mt-6 text-xl lg:text-2xl text-stone-400 max-w-2xl animate-fade-in-up delay-200 leading-relaxed font-light">
             {lang === Language.KO ? (
               <>
-                Fu Lu Shou는 캄보디아 유통 시장의 판도를 바꾼 <strong>'게임 체인저'</strong>입니다.
-                단순한 유통을 넘어, 현지화 전략과 강력한 네트워크로 귀사의 브랜드를 캄보디아의 '국민 브랜드'로 설계합니다.
+                Fu Lu Shou는 단순한 유통을 넘어, 현지화 전략과 강력한 네트워크로 귀사의 브랜드를 캄보디아의 <span className="text-white font-medium">'국민 브랜드'</span>로 설계합니다.
               </>
             ) : (
               <>
-                Fu Lu Shou is the <strong>Game Changer</strong> of Cambodia's distribution market.
-                Beyond simple logistics, we architect your brand into a 'National Brand' through hyper-localization strategies and an unrivaled network.
+                Beyond simple logistics, we architect your brand into a <span className="text-white font-medium">'National Brand'</span> through hyper-localization strategies and an unrivaled network.
               </>
             )}
           </p>
 
-          <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start animate-fade-in-up delay-300">
+          <div className="mt-12 flex flex-col sm:flex-row gap-5 animate-fade-in-up delay-300">
             <button
               onClick={() => scrollToSection('ai-lab')}
-              className="px-8 py-4 border border-transparent text-lg font-bold rounded-lg text-white bg-gradient-to-r from-amber-600 to-amber-800 hover:from-amber-500 hover:to-amber-700 transition shadow-lg shadow-amber-900/50 flex items-center justify-center"
+              className="group relative px-10 py-5 overflow-hidden rounded-full bg-white text-stone-950 text-lg font-black transition-all hover:scale-105 active:scale-95"
             >
-              <Sparkles className="w-5 h-5 mr-2" />
-              {lang === Language.KO ? 'AI 전략 시뮬레이션 ✨' : 'AI Strategy Sim ✨'}
+              <div className="absolute inset-0 bg-gradient-to-r from-amber-400 to-amber-600 opacity-0 group-hover:opacity-100 transition-opacity" />
+              <span className="relative z-10 flex items-center justify-center">
+                {lang === Language.KO ? 'AI 전략 시뮬레이션' : 'AI Strategy Sim'}
+                <Sparkles className="w-5 h-5 ml-2" />
+              </span>
             </button>
             <button
               onClick={() => scrollToSection('strategy')}
-              className="px-8 py-4 border border-stone-600 text-lg font-bold rounded-lg text-stone-300 hover:bg-stone-800 hover:text-white transition"
+              className="px-10 py-5 rounded-full border border-stone-800 text-lg font-bold text-stone-300 hover:bg-stone-900 hover:text-white transition-all hover:border-stone-600"
             >
               {lang === Language.KO ? '성공 사례 분석' : 'View Case Study'}
             </button>
           </div>
         </div>
+      </div>
+
+      {/* Scroll Indicator */}
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 animate-bounce opacity-40">
+        <div className="w-px h-12 bg-gradient-to-b from-transparent via-amber-500 to-transparent" />
+        <span className="text-[10px] uppercase tracking-[0.3em] font-bold text-amber-500">Scroll</span>
       </div>
     </section>
   );

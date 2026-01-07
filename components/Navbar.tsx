@@ -18,6 +18,15 @@ const NAV_ITEMS: NavItem[] = [
 
 const Navbar: React.FC<NavbarProps> = ({ lang, toggleLang, scrollToSection }) => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const [isScrolled, setIsScrolled] = React.useState(false);
+
+  React.useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handleMobileNavClick = (id: string) => {
     scrollToSection(id);
@@ -25,69 +34,67 @@ const Navbar: React.FC<NavbarProps> = ({ lang, toggleLang, scrollToSection }) =>
   };
 
   return (
-    <nav className="bg-white/95 backdrop-blur-sm shadow-sm sticky top-0 z-50 border-b border-stone-100">
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
+        ? 'bg-stone-950/80 backdrop-blur-xl border-b border-stone-800 py-4'
+        : 'bg-transparent py-6'
+      }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-20">
-          <div className="flex items-center cursor-pointer" onClick={() => scrollToSection('home')}>
+        <div className="flex justify-between items-center">
+          <div className="flex items-center cursor-pointer group" onClick={() => scrollToSection('home')}>
             <div className="flex flex-col">
-              <span className="text-2xl font-black text-amber-700 tracking-tight">FU LU SHOU</span>
-              <span className="text-xs text-stone-500 tracking-widest uppercase">Co., Ltd.</span>
+              <span className="text-2xl font-black text-white tracking-widest group-hover:text-amber-500 transition-colors">FU LU SHOU</span>
+              <span className="text-[10px] text-amber-500/80 tracking-[0.4em] uppercase font-bold">The Golden Legacy</span>
             </div>
           </div>
 
           {/* Desktop Menu */}
-          <div className="hidden lg:flex items-center space-x-8">
+          <div className="hidden lg:flex items-center space-x-10">
             {NAV_ITEMS.map((item) => (
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className="text-sm font-medium text-stone-600 hover:text-amber-700 transition"
+                className="text-[13px] font-bold uppercase tracking-wider text-stone-400 hover:text-white transition-all relative group"
               >
                 {item.label[lang]}
+                <span className="absolute -bottom-1 left-0 w-0 h-px bg-amber-500 transition-all group-hover:w-full" />
               </button>
             ))}
 
             <button
               onClick={() => scrollToSection('ai-lab')}
-              className="text-sm font-bold text-amber-600 hover:text-amber-800 transition flex items-center"
+              className="px-5 py-2 rounded-full border border-amber-500/50 text-xs font-black text-amber-500 hover:bg-amber-500 hover:text-stone-950 transition-all flex items-center uppercase tracking-widest shadow-lg shadow-amber-500/10"
             >
-              <Sparkles className="w-4 h-4 mr-1" />
+              <Sparkles className="w-3.5 h-3.5 mr-2" />
               AI Lab
             </button>
 
-            <button
-              onClick={() => scrollToSection('media')}
-              className="text-sm font-medium text-stone-600 hover:text-amber-700 transition"
-            >
-              {lang === Language.KO ? '미디어' : 'Media'}
-            </button>
+            <div className="h-4 w-px bg-stone-800 mx-2" />
 
             <button
               onClick={toggleLang}
-              className="flex items-center space-x-1 px-3 py-1 rounded-full bg-stone-100 hover:bg-stone-200 transition text-xs font-bold text-stone-700 border border-stone-300"
+              className="flex items-center space-x-2 text-stone-400 hover:text-white transition-all"
             >
               <Globe className="w-4 h-4" />
-              <span>{lang === Language.KO ? 'EN' : 'KR'}</span>
+              <span className="text-[11px] font-black uppercase tracking-widest">{lang === Language.KO ? 'EN' : 'KR'}</span>
             </button>
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="flex items-center lg:hidden space-x-4">
+          <div className="flex items-center lg:hidden space-x-6">
             <button
               onClick={toggleLang}
-              className="flex items-center space-x-1 px-3 py-1 rounded-full bg-stone-100 hover:bg-stone-200 transition text-xs font-bold text-stone-700 border border-stone-300"
+              className="text-stone-400 hover:text-white"
             >
-              <Globe className="w-4 h-4" />
-              <span>{lang === Language.KO ? 'EN' : 'KR'}</span>
+              <Globe className="w-5 h-5" />
             </button>
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-stone-600 hover:text-amber-700 p-2"
+              className="text-white p-1"
             >
               {isMenuOpen ? (
-                <X className="w-6 h-6" />
+                <X className="w-7 h-7" />
               ) : (
-                <Menu className="w-6 h-6" />
+                <Menu className="w-7 h-7" />
               )}
             </button>
           </div>
@@ -95,39 +102,37 @@ const Navbar: React.FC<NavbarProps> = ({ lang, toggleLang, scrollToSection }) =>
       </div>
 
       {/* Mobile Menu Dropdown */}
-      {isMenuOpen && (
-        <div className="lg:hidden absolute top-20 left-0 w-full bg-white border-b border-stone-100 shadow-lg py-4 px-4 flex flex-col space-y-4 animate-fade-in-down">
+      <div className={`lg:hidden fixed inset-0 top-20 bg-stone-950/95 backdrop-blur-2xl transition-all duration-500 ${isMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
+        }`}>
+        <div className="flex flex-col items-center justify-center h-full space-y-8 px-8">
           {NAV_ITEMS.map((item) => (
             <button
               key={item.id}
               onClick={() => handleMobileNavClick(item.id)}
-              className="text-left py-2 text-base font-medium text-stone-600 hover:text-amber-700 transition border-b border-stone-50"
+              className="text-2xl font-black text-stone-300 hover:text-amber-500 transition-all uppercase tracking-tighter"
             >
               {item.label[lang]}
             </button>
           ))}
           <button
             onClick={() => handleMobileNavClick('ai-lab')}
-            className="text-left py-2 text-base font-bold text-amber-600 hover:text-amber-800 transition flex items-center"
+            className="text-2xl font-black text-amber-500 hover:text-white transition-all uppercase tracking-tighter flex items-center"
           >
-            <Sparkles className="w-4 h-4 mr-2" />
+            <Sparkles className="w-6 h-6 mr-3" />
             AI Lab
           </button>
-          <button
-            onClick={() => handleMobileNavClick('media')}
-            className="text-left py-2 text-base font-medium text-stone-600 hover:text-amber-700 transition"
-          >
-            {lang === Language.KO ? '미디어' : 'Media'}
-          </button>
 
-          <button
-            onClick={() => setIsMenuOpen(false)}
-            className="w-full py-3 bg-stone-100 text-stone-500 rounded-lg mt-4 font-bold hover:bg-stone-200 flex items-center justify-center"
-          >
-            {lang === Language.KO ? '메뉴 닫기' : 'Close Menu'}
-          </button>
+          <div className="pt-8 flex flex-col items-center gap-4">
+            <div className="w-12 h-px bg-stone-800" />
+            <button
+              onClick={() => setIsMenuOpen(false)}
+              className="text-stone-500 text-sm font-bold uppercase tracking-widest"
+            >
+              {lang === Language.KO ? '닫기' : 'Close'}
+            </button>
+          </div>
         </div>
-      )}
+      </div>
     </nav>
   );
 };
