@@ -8,6 +8,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 dotenv.config({ path: '.env.local' });
+// Synchronization for domain deployment: 2026-01-07
 
 const app = express();
 const PORT = process.env.PORT || 8080;
