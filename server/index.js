@@ -8,10 +8,13 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Explicit startup log for Cloud Run diagnostics
-console.log('--- Server initializing ---');
-console.log('Current working directory:', process.cwd());
+console.log('[DIAGNOSTIC] Server initialization started');
+console.log('[DIAGNOSTIC] Node version:', process.version);
+console.log('[DIAGNOSTIC] Current directory:', process.cwd());
+console.log('[DIAGNOSTIC] Environment:', process.env.NODE_ENV);
 
 dotenv.config({ path: '.env.local' });
+console.log('[DIAGNOSTIC] Dotenv config called');
 // Synchronization for domain deployment: 2026-01-07
 
 const app = express();
