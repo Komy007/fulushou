@@ -29,10 +29,15 @@ const Footer: React.FC<FooterProps> = ({ lang }) => {
             <h5 className="text-white font-bold mb-3 flex items-center"><Phone className="w-4 h-4 mr-2" /> Contact</h5>
             <a href="https://www.facebook.com/BacchusEnergyDrinkCambodia/about" target="_blank" rel="noopener noreferrer" className="mb-4 hover:text-amber-500 transition">facebook bacchus cambodia</a>
 
-            <p className="text-stone-300 font-bold mb-1">Korean / Advisor</p>
-            <p>Mr. Bae</p>
-            <a href="mailto:cambodia.bae@gmail.com" className="text-xs text-stone-500 hover:text-amber-500 transition">cambodia.bae@gmail.com</a>
-            <p className="text-xs text-stone-500">KakaoTalk: komy007</p>
+            <p className="text-stone-300 font-bold mb-1">
+              {lang === Language.KO ? '한국인 어드바이저' : 'Korean Advisor'}
+            </p>
+            <p className="text-white">Mr. Bae</p>
+            <a href="mailto:cambodia.bae@gmail.com" className="hover:text-amber-500 transition mt-1">cambodia.bae@gmail.com</a>
+            <p className="mt-2 flex items-center">
+              <span className="bg-[#FAE100] text-[#3B1E1E] px-2 py-0.5 rounded text-[10px] font-bold mr-2">KakaoTalk</span>
+              <span className="text-stone-300">komy007</span>
+            </p>
           </div>
           <div className="flex flex-col items-center">
             <h5 className="text-white font-bold mb-3">Social</h5>
