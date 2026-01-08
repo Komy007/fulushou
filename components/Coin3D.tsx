@@ -37,10 +37,9 @@ const CoinBody = () => {
                 <mesh rotation={[Math.PI / 2, 0, 0]}>
                     <cylinderGeometry args={[1.75, 1.75, 0.15, 64]} />
                     <meshStandardMaterial
-                        color="#050505"
+                        color="#0a0a0a"
                         metalness={1}
-                        roughness={0.02}
-                        envMapIntensity={2.5}
+                        roughness={0.05}
                     />
                 </mesh>
 
@@ -99,31 +98,26 @@ const CoinBody = () => {
 
 const Coin3D = () => {
     return (
-        <div className="w-full h-full">
-            <Canvas dpr={[1, 2]}>
+        <div className="w-full h-full min-h-[400px]">
+            <Canvas dpr={[1, 2]} fallback={<p>Loading...</p>}>
                 <PerspectiveCamera makeDefault position={[0, 0, 8]} fov={40} />
 
-                {/* Lights */}
-                <ambientLight intensity={0.5} />
-                <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={2} color="#fbbf24" />
-                <pointLight position={[-10, -10, -10]} intensity={1} color="#f59e0b" />
+                <ambientLight intensity={1} />
+                <pointLight position={[5, 5, 5]} intensity={50} color="#fbbf24" />
+                <pointLight position={[-5, -5, 5]} intensity={30} color="#f59e0b" />
+                <pointLight position={[0, 0, -5]} intensity={20} color="#ffffff" />
 
-                <Environment preset="night" />
+                <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
+                    <CoinBody />
+                </Float>
 
-                <Suspense fallback={null}>
-                    <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
-                        <CoinBody />
-                    </Float>
-
-                    <EffectComposer>
-                        <Bloom
-                            intensity={1.5}
-                            luminanceThreshold={0.4}
-                            luminanceSmoothing={0.9}
-                            mipmapBlur
-                        />
-                    </EffectComposer>
-                </Suspense>
+                <EffectComposer>
+                    <Bloom
+                        intensity={1.0}
+                        luminanceThreshold={0.5}
+                        luminanceSmoothing={0.9}
+                    />
+                </EffectComposer>
             </Canvas>
         </div>
     );
