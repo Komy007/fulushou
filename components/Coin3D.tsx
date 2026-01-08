@@ -17,9 +17,10 @@ const CoinBody = () => {
         // Smoother, slightly slower rotation for premium feel
         meshRef.current.rotation.y += delta * 0.8;
 
-        // Switch Hanja when the back is facing the camera (approx every 180 degrees)
+        // Switch Hanja when the coin is edge-on to the camera (PI/2, 3PI/2, etc.)
+        // This ensures the user doesn't see the text "flip" while facing them.
         const currentRotation = meshRef.current.rotation.y;
-        if (Math.floor(currentRotation / Math.PI) > Math.floor(lastRotation.current / Math.PI)) {
+        if (Math.floor((currentRotation + Math.PI / 2) / Math.PI) > Math.floor((lastRotation.current + Math.PI / 2) / Math.PI)) {
             setIndex((prev) => (prev + 1) % HANJA_SEQUENCE.length);
         }
         lastRotation.current = currentRotation;
@@ -38,18 +39,6 @@ const CoinBody = () => {
                 />
             </mesh>
 
-            {/* Outer Rim (Brilliant Gold) - Reduced size */}
-            <mesh rotation={[Math.PI / 2, 0, 0]}>
-                <torusGeometry args={[1.75, 0.06, 16, 100]} />
-                <meshStandardMaterial
-                    color="#ffd700"
-                    metalness={1}
-                    roughness={0.02}
-                    emissive="#b45309"
-                    emissiveIntensity={0.8}
-                    envMapIntensity={2.5}
-                />
-            </mesh>
 
             {/* Front Side Hanja - Reduced size (1.8 -> 1.2) */}
             <Text
