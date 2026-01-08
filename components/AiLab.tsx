@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Language, ChatMessage } from '../types';
 import { generateStrategyInsight, getChatResponse, resetChatSession } from '../services/geminiService';
 import ReactMarkdown from 'react-markdown';
-import { Sparkles, Send, Zap, MessageCircle, ArrowRight, Loader2 } from 'lucide-react';
+import { Sparkles, Send, Zap, MessageCircle, ArrowRight, Loader2, AlertCircle, Clock } from 'lucide-react';
 
 interface AiLabProps {
   lang: Language;
@@ -30,6 +30,64 @@ const AiLab: React.FC<AiLabProps> = ({ lang }) => {
   ]);
   const [isChatLoading, setIsChatLoading] = useState(false);
   const chatEndRef = useRef<HTMLDivElement>(null);
+
+  // Rate Limiting State
+  const [usageCount, setUsageCount] = useState<number>(0);
+  const [blockedUntil, setBlockedUntil] = useState<number | null>(null);
+  const [isHardBlocked, setIsHardBlocked] = useState(false);
+  const [showSoftWarning, setShowSoftWarning] = useState(false);
+
+  // Initialize and check limits
+  useEffect(() => {
+    const savedCount = localStorage.getItem('ai_usage_count');
+    const savedBlock = localStorage.getItem('ai_blocked_until');
+
+    if (savedCount) setUsageCount(parseInt(savedCount));
+    if (savedBlock) {
+      const blockTime = parseInt(savedBlock);
+      if (Date.now() < blockTime) {
+        setBlockedUntil(blockTime);
+        setIsHardBlocked(true);
+      } else {
+        // Block expired
+        localStorage.removeItem('ai_blocked_until');
+        setBlockedUntil(null);
+        setIsHardBlocked(false);
+      }
+    }
+  }, []);
+
+  // Update check every minute for block expiration
+  useEffect(() => {
+    if (!blockedUntil) return;
+
+    const interval = setInterval(() => {
+      if (Date.now() >= blockedUntil) {
+        setBlockedUntil(null);
+        setIsHardBlocked(false);
+        localStorage.removeItem('ai_blocked_until');
+      }
+    }, 60000);
+
+    return () => clearInterval(interval);
+  }, [blockedUntil]);
+
+  // Persist count
+  useEffect(() => {
+    localStorage.setItem('ai_usage_count', usageCount.toString());
+    if (usageCount >= 10 && usageCount < 20) {
+      setShowSoftWarning(true);
+    } else {
+      setShowSoftWarning(false);
+    }
+
+    if (usageCount >= 20 && !isHardBlocked) {
+      const fourHoursLater = Date.now() + (4 * 60 * 60 * 1000);
+      setBlockedUntil(fourHoursLater);
+      setIsHardBlocked(true);
+      localStorage.setItem('ai_blocked_until', fourHoursLater.toString());
+    }
+  }, [usageCount, isHardBlocked]);
 
 
   // Reset chat on language change
@@ -70,32 +128,51 @@ const AiLab: React.FC<AiLabProps> = ({ lang }) => {
   };
 
   const handleGenerateStrategy = async () => {
-    if (!product) return;
+    if (!product || isHardBlocked) return;
     setIsSimLoading(true);
     setStrategyResult(null);
 
     const finalCategory = category === 'Other' ? customCategory : category;
 
-    const result = await generateStrategyInsight(product, finalCategory, lang);
-    setStrategyResult(cleanResponse(result));
-    setIsSimLoading(false);
-    setIsModalOpen(true);
+    try {
+      const result = await generateStrategyInsight(product, finalCategory, lang);
+      setStrategyResult(cleanResponse(result));
+      setUsageCount(prev => prev + 1);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsSimLoading(false);
+      setIsModalOpen(true);
+    }
   };
 
   const handleSendMessage = async () => {
-    if (!chatInput.trim()) return;
+    if (!chatInput.trim() || isHardBlocked || isChatLoading) return;
 
     const userMsg: ChatMessage = { id: Date.now().toString(), role: 'user', text: chatInput };
     setChatHistory(prev => [...prev, userMsg]);
     setChatInput('');
     setIsChatLoading(true);
 
-    const historyContext = chatHistory.map(msg => `${msg.role === 'user' ? 'User' : 'Mr. Bae'}: ${msg.text}`).join('\n');
-    const responseText = await getChatResponse(userMsg.text, historyContext, lang);
-    const aiMsg: ChatMessage = { id: (Date.now() + 1).toString(), role: 'model', text: responseText };
+    try {
+      const historyContext = chatHistory.map(msg => `${msg.role === 'user' ? 'User' : 'Mr. Bae'}: ${msg.text}`).join('\n');
+      const responseText = await getChatResponse(userMsg.text, historyContext, lang);
+      const aiMsg: ChatMessage = { id: (Date.now() + 1).toString(), role: 'model', text: responseText };
 
-    setChatHistory(prev => [...prev, aiMsg]);
-    setIsChatLoading(false);
+      setChatHistory(prev => [...prev, aiMsg]);
+      setUsageCount(prev => prev + 1);
+    } catch (err) {
+      const errorMsg: ChatMessage = {
+        id: (Date.now() + 1).toString(),
+        role: 'model',
+        text: lang === Language.KO
+          ? "죄송합니다. 요청을 처리하는 중에 문제가 발생했습니다."
+          : "Sorry, I'm having trouble processing your request right now."
+      };
+      setChatHistory(prev => [...prev, errorMsg]);
+    } finally {
+      setIsChatLoading(false);
+    }
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -201,6 +278,40 @@ const AiLab: React.FC<AiLabProps> = ({ lang }) => {
               ? "Fu Lu Shou의 15년 데이터와 성공 DNA를 학습한 최첨단 AI가 귀사의 캄보디아 진출 전략을 설계해드립니다. 실시간 비즈니스 파트너와 대화해보세요."
               : "Experience AI trained with Fu Lu Shou's 15-year success DNA. Let our advanced model design your Cambodia strategy and answer your business queries."}
           </p>
+
+          {/* Soft Warning Banner */}
+          {showSoftWarning && !isHardBlocked && (
+            <div className="mt-8 max-w-2xl mx-auto bg-amber-50 border border-amber-200 rounded-2xl p-4 flex items-center gap-4 animate-pulse">
+              <AlertCircle className="text-amber-600 w-6 h-6 shrink-0" />
+              <p className="text-sm text-amber-800 font-medium text-left">
+                {lang === Language.KO
+                  ? "Mr. Bae가 열심히 답변하고 있습니다. AI 자원을 아껴주시면 더 많은 분들이 도움을 받을 수 있습니다. (10회 이상 이용 중)"
+                  : "Mr. Bae is working hard! Please use AI resources mindfully so others can also benefit. (10+ requests in this session)"}
+              </p>
+            </div>
+          )}
+
+          {/* Hard Block Banner */}
+          {isHardBlocked && (
+            <div className="mt-8 max-w-2xl mx-auto bg-red-50 border border-red-200 rounded-2xl p-6 flex flex-col items-center gap-4 animate-in fade-in zoom-in duration-500">
+              <div className="flex items-center gap-3">
+                <Clock className="text-red-600 w-8 h-8" />
+                <h4 className="text-lg font-black text-red-900">
+                  {lang === Language.KO ? "시스템 보호 모드 가동" : "System Protection Active"}
+                </h4>
+              </div>
+              <p className="text-sm text-red-800 font-medium text-center">
+                {lang === Language.KO
+                  ? "과도한 요청이 감지되어 시스템 보호를 위해 잠시 상담을 중단합니다. 약 4시간 후에 다시 이용해 주시기 바랍니다."
+                  : "Excessive requests detected. Consulting is temporarily suspended to protect the system. Please try again in about 4 hours."}
+              </p>
+              {blockedUntil && (
+                <div className="text-xs font-bold text-red-600 px-3 py-1 bg-white border border-red-100 rounded-full">
+                  UNTIL: {new Date(blockedUntil).toLocaleTimeString()}
+                </div>
+              )}
+            </div>
+          )}
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -253,7 +364,7 @@ const AiLab: React.FC<AiLabProps> = ({ lang }) => {
                 </div>
                 <button
                   onClick={handleGenerateStrategy}
-                  disabled={isSimLoading || !product}
+                  disabled={isSimLoading || !product || isHardBlocked}
                   className="w-full py-5 bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-500 hover:to-amber-600 disabled:from-stone-400 disabled:to-stone-500 text-white font-black text-lg rounded-2xl shadow-xl shadow-amber-900/20 transition-all flex items-center justify-center group"
                 >
                   {isSimLoading ? (
@@ -334,14 +445,16 @@ const AiLab: React.FC<AiLabProps> = ({ lang }) => {
                       handleSendMessage();
                     }
                   }}
-                  className="flex-1 p-4 bg-stone-900 border-2 border-stone-700 rounded-2xl focus:ring-4 focus:ring-amber-600/30 focus:border-amber-600 transition-all font-bold text-white placeholder-stone-500 text-lg shadow-inner resize-none"
-                  placeholder={lang === Language.KO ? "질문을 입력하세요..." : "Ask your question..."}
-                  disabled={isChatLoading}
+                  className="flex-1 p-4 bg-stone-900 border-2 border-stone-700 rounded-2xl focus:ring-4 focus:ring-amber-600/30 focus:border-amber-600 transition-all font-bold text-white placeholder-stone-500 text-lg shadow-inner resize-none disabled:opacity-50"
+                  placeholder={isHardBlocked
+                    ? (lang === Language.KO ? "이용이 일시 제한되었습니다." : "Usage temporarily restricted.")
+                    : (lang === Language.KO ? "질문을 입력하세요..." : "Ask your question...")}
+                  disabled={isChatLoading || isHardBlocked}
                   rows={3}
                 />
                 <button
                   onClick={handleSendMessage}
-                  disabled={isChatLoading || !chatInput.trim()}
+                  disabled={isChatLoading || !chatInput.trim() || isHardBlocked}
                   className="w-full lg:w-auto px-8 py-4 lg:py-2 bg-amber-600 text-white rounded-2xl hover:bg-amber-500 transition-all shadow-xl shadow-amber-900/40 disabled:opacity-30 disabled:grayscale flex items-center justify-center"
                 >
                   <span className="lg:hidden mr-2 font-bold uppercase">{lang === Language.KO ? '전송' : 'Send'}</span>

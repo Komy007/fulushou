@@ -3,6 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { rateLimit } from 'express-rate-limit';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -22,6 +23,17 @@ const PORT = process.env.PORT || 8080;
 
 app.use(cors());
 app.use(express.json());
+
+// AI API Rate Limiter: 20 requests per 4 hours per IP
+const aiRateLimiter = rateLimit({
+    windowMs: 4 * 60 * 60 * 1000, // 4 hours
+    limit: 20, // Limit each IP to 20 requests per window
+    standardHeaders: 'draft-7', // draft-6: `RateLimit-*` headers; draft-7: combined `RateLimit` header
+    legacyHeaders: false, // Disable the `X-RateLimit-*` headers.
+    message: {
+        error: 'Too many requests from this IP, please try again after 4 hours.'
+    }
+});
 
 // Health check route for Cloud Run
 app.get('/health', (req, res) => {
@@ -65,7 +77,7 @@ const callGemini = async (prompt) => {
     return data.candidates?.[0]?.content?.parts?.[0]?.text || "No response.";
 };
 
-app.post('/api/proxy', async (req, res) => {
+app.post('/api/proxy', aiRateLimiter, async (req, res) => {
     try {
         const { prompt } = req.body;
         if (!prompt) {
