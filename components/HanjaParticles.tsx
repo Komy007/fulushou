@@ -67,8 +67,8 @@ class Particle {
         this.originX = x;
         this.originY = y;
         this.color = color;
-        this.size = Math.random() * 2.0 + 1.2; // Bolder particles
-        this.ease = 0.04;
+        this.size = Math.random() * 2.5 + 2.0; // EVEN BOLDER for maximum 3D-like presence
+        this.ease = 0.03; // Even slower, majestic motion
     }
 
     draw(ctx: CanvasRenderingContext2D) {
@@ -170,12 +170,15 @@ const HanjaParticles: React.FC = () => {
         };
 
         const cycle = async () => {
-            // Show character for exactly 2 seconds as requested
-            await new Promise(r => setTimeout(r, 2000));
+            // 1. Time for particles to gather and form the character
+            await new Promise(r => setTimeout(r, 4500));
 
-            // Scatter to wide circle
+            // 2. HOLD state: Wait 3 seconds while text is perfectly clear and 'stopped'
+            await new Promise(r => setTimeout(r, 3000));
+
+            // 3. DISPERSE: Scatter to wide circle
             foregroundParticles.current.forEach(p => p.scatter());
-            await new Promise(r => setTimeout(r, 2500));
+            await new Promise(r => setTimeout(r, 3000));
 
             // Load next character
             currentIndex.current = (currentIndex.current + 1) % SEQUENCE.length;
