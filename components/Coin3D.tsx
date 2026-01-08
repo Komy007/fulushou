@@ -1,4 +1,4 @@
-import React, { useRef, useState, useMemo } from 'react';
+import React, { useRef, useState, Suspense } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Text, Float, PerspectiveCamera, Environment } from '@react-three/drei';
 import { EffectComposer, Bloom } from '@react-three/postprocessing';
@@ -57,44 +57,38 @@ const CoinBody = () => {
             */}
             <group position={[0, 0, 0.1]}>
                 {/* Hanja Character - Sharp and upright */}
-                <Text
-                    fontSize={0.84}
+                position={[0, 0.1, 0]}
+                >
+                {SEQUENCE[index].hj}
+                <meshStandardMaterial
                     color="#fbbf24"
-                    anchorX="center"
-                    anchorY="middle"
-                    position={[0, 0.1, 0]}
-                    font="https://fonts.gstatic.com/s/notoserifkr/v32/3q6u9pPC88qIk9L-Sntv_G9u2WfWvWvW.woff"
-                >
-                    {SEQUENCE[index].hj}
-                    <meshStandardMaterial
-                        color="#fbbf24"
-                        emissive="#f59e0b"
-                        emissiveIntensity={4}
-                        metalness={1}
-                        roughness={0}
-                    />
-                </Text>
+                    emissive="#f59e0b"
+                    emissiveIntensity={4}
+                    metalness={1}
+                    roughness={0}
+                />
+            </Text>
 
-                {/* English Name - Below and crisp */}
-                <Text
-                    fontSize={0.25}
+            {/* English Name - Below and crisp */}
+            <Text
+                fontSize={0.25}
+                color="#fcd34d"
+                anchorX="center"
+                anchorY="middle"
+                position={[0, -0.5, 0]}
+                letterSpacing={0.2}
+            >
+                {SEQUENCE[index].en}
+                <meshStandardMaterial
                     color="#fcd34d"
-                    anchorX="center"
-                    anchorY="middle"
-                    position={[0, -0.5, 0]}
-                    letterSpacing={0.2}
-                >
-                    {SEQUENCE[index].en}
-                    <meshStandardMaterial
-                        color="#fcd34d"
-                        emissive="#b45309"
-                        emissiveIntensity={2}
-                        metalness={1}
-                        roughness={0}
-                    />
-                </Text>
-            </group>
+                    emissive="#b45309"
+                    emissiveIntensity={2}
+                    metalness={1}
+                    roughness={0}
+                />
+            </Text>
         </group>
+        </group >
     );
 };
 
@@ -111,19 +105,20 @@ const Coin3D = () => {
 
                 <Environment preset="night" />
 
-                <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
-                    <CoinBody />
-                </Float>
+                <Suspense fallback={null}>
+                    <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
+                        <CoinBody />
+                    </Float>
 
-                {/* Post-processing Bloom for the Premium Glow */}
-                <EffectComposer>
-                    <Bloom
-                        intensity={2.0}
-                        luminanceThreshold={0.3}
-                        luminanceSmoothing={0.9}
-                        mipmapBlur
-                    />
-                </EffectComposer>
+                    <EffectComposer>
+                        <Bloom
+                            intensity={1.5}
+                            luminanceThreshold={0.4}
+                            luminanceSmoothing={0.9}
+                            mipmapBlur
+                        />
+                    </EffectComposer>
+                </Suspense>
             </Canvas>
         </div>
     );
