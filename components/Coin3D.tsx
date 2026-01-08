@@ -99,7 +99,7 @@ const CoinBody = () => {
 const Coin3D = () => {
     return (
         <div className="w-full h-full min-h-[400px]">
-            <Canvas dpr={[1, 2]} fallback={<p>Loading...</p>}>
+            <Canvas dpr={[1, 2]}>
                 <PerspectiveCamera makeDefault position={[0, 0, 8]} fov={40} />
 
                 <ambientLight intensity={1} />
