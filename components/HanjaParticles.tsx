@@ -67,8 +67,8 @@ class Particle {
         this.originX = x;
         this.originY = y;
         this.color = color;
-        this.size = Math.random() * 1.5 + 1; // Sharper particles
-        this.ease = 0.04; // Slower, majestic motion
+        this.size = Math.random() * 2.0 + 1.2; // Bolder particles
+        this.ease = 0.04;
     }
 
     draw(ctx: CanvasRenderingContext2D) {
@@ -170,8 +170,8 @@ const HanjaParticles: React.FC = () => {
         };
 
         const cycle = async () => {
-            // Show character longer (선명함 유지)
-            await new Promise(r => setTimeout(r, 4000));
+            // Show character for exactly 2 seconds as requested
+            await new Promise(r => setTimeout(r, 2000));
 
             // Scatter to wide circle
             foregroundParticles.current.forEach(p => p.scatter());
@@ -212,14 +212,14 @@ const HanjaParticles: React.FC = () => {
         return () => {
             window.removeEventListener('resize', resize);
             if (animationFrame.current !== undefined) {
-                cancelAnimationFrame(animationFrame.current);
+                cancelAnimationFrame(animationFrame.current as number);
             }
         };
     }, []);
 
     return (
         <div className="absolute inset-x-0 inset-y-0 pointer-events-none z-0">
-            <canvas ref={canvasRef} className="w-full h-full opacity-80" />
+            <canvas ref={canvasRef} className="w-full h-full opacity-90" />
         </div>
     );
 };
