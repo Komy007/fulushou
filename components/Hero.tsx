@@ -16,8 +16,10 @@ const Hero: React.FC<HeroProps> = ({ lang, scrollToSection }) => {
         <div className="absolute inset-0 bg-gradient-to-b from-stone-950 via-transparent to-stone-950 z-10 pointer-events-none" />
         <div className="absolute inset-0 bg-gradient-to-r from-stone-950 via-stone-950/40 to-transparent z-10 pointer-events-none hidden lg:block" />
 
-        {/* Custom Premium Hanja Particle Engine */}
-        <HanjaParticles />
+        {/* Custom Premium Hanja Particle Engine - Centered on mobile, shifted right on desktop */}
+        <div className="w-full h-full lg:translate-x-1/3">
+          <HanjaParticles />
+        </div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 w-full">
