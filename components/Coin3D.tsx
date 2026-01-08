@@ -55,7 +55,6 @@ const CoinBody = () => {
                 position={[0, 0, 0.11]}
                 fontSize={1.8}
                 color="#fbbf24"
-                font="https://fonts.gstatic.com/s/notoserifkr/v32/3q6u9pPC88qIk9L-Sntv_G9u2WfWvWvW.woff" // Placeholder for Serif style, will fallback to default if fails
                 anchorX="center"
                 anchorY="middle"
             >
@@ -109,7 +108,7 @@ const Coin3D = () => {
                 </Float>
 
                 {/* Post-processing Bloom for the Premium Glow */}
-                <EffectComposer disableNormalPass>
+                <EffectComposer>
                     <Bloom
                         intensity={1.5}
                         luminanceThreshold={0.5}
