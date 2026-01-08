@@ -11,11 +11,11 @@ const CoinBody = () => {
     const [index, setIndex] = useState(0);
     const lastRotation = useRef(0);
 
-    useFrame((state) => {
+    useFrame((state, delta) => {
         if (!meshRef.current) return;
 
-        // Constant rotation
-        meshRef.current.rotation.y += 0.015;
+        // Smoother, slightly slower rotation for premium feel
+        meshRef.current.rotation.y += delta * 0.8;
 
         // Switch Hanja when the back is facing the camera (approx every 180 degrees)
         const currentRotation = meshRef.current.rotation.y;
@@ -27,33 +27,34 @@ const CoinBody = () => {
 
     return (
         <group ref={meshRef}>
-            {/* Coin Disc */}
+            {/* Coin Disc - Reduced size by 30% (2.5 -> 1.75) */}
             <mesh rotation={[Math.PI / 2, 0, 0]}>
-                <cylinderGeometry args={[2.5, 2.5, 0.2, 64]} />
+                <cylinderGeometry args={[1.75, 1.75, 0.15, 64]} />
                 <meshStandardMaterial
-                    color="#1a1a1a"
-                    metalness={0.9}
-                    roughness={0.15}
-                    envMapIntensity={1}
-                />
-            </mesh>
-
-            {/* Outer Rim (Gold) */}
-            <mesh rotation={[Math.PI / 2, 0, 0]}>
-                <torusGeometry args={[2.5, 0.08, 16, 100]} />
-                <meshStandardMaterial
-                    color="#f59e0b"
+                    color="#0a0a0a"
                     metalness={1}
-                    roughness={0.1}
-                    emissive="#78350f"
-                    emissiveIntensity={0.5}
+                    roughness={0.05}
+                    envMapIntensity={2}
                 />
             </mesh>
 
-            {/* Front Side Hanja */}
+            {/* Outer Rim (Brilliant Gold) - Reduced size */}
+            <mesh rotation={[Math.PI / 2, 0, 0]}>
+                <torusGeometry args={[1.75, 0.06, 16, 100]} />
+                <meshStandardMaterial
+                    color="#ffd700"
+                    metalness={1}
+                    roughness={0.02}
+                    emissive="#b45309"
+                    emissiveIntensity={0.8}
+                    envMapIntensity={2.5}
+                />
+            </mesh>
+
+            {/* Front Side Hanja - Reduced size (1.8 -> 1.2) */}
             <Text
-                position={[0, 0, 0.11]}
-                fontSize={1.8}
+                position={[0, 0, 0.08]}
+                fontSize={1.2}
                 color="#fbbf24"
                 anchorX="center"
                 anchorY="middle"
@@ -62,17 +63,17 @@ const CoinBody = () => {
                 <meshStandardMaterial
                     color="#fbbf24"
                     emissive="#f59e0b"
-                    emissiveIntensity={2}
+                    emissiveIntensity={3}
                     metalness={1}
                     roughness={0}
                 />
             </Text>
 
-            {/* Back Side Hanja (Same or different, we show front usually) */}
+            {/* Back Side Hanja - Reduced size */}
             <Text
-                position={[0, 0, -0.11]}
+                position={[0, 0, -0.08]}
                 rotation={[0, Math.PI, 0]}
-                fontSize={1.8}
+                fontSize={1.2}
                 color="#fbbf24"
                 anchorX="center"
                 anchorY="middle"
@@ -110,8 +111,8 @@ const Coin3D = () => {
                 {/* Post-processing Bloom for the Premium Glow */}
                 <EffectComposer>
                     <Bloom
-                        intensity={1.5}
-                        luminanceThreshold={0.5}
+                        intensity={2.0}
+                        luminanceThreshold={0.3}
                         luminanceSmoothing={0.9}
                         mipmapBlur
                     />
