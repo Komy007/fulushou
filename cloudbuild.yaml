@@ -17,7 +17,7 @@ steps:
       - '--image'
       - 'gcr.io/$PROJECT_ID/fulushou:$COMMIT_SHA'
       - '--region'
-      - 'asia-northeast3' # Replace with your preferred region if needed
+      - 'asia-southeast1' # Singapore region
       - '--platform'
       - 'managed'
       - '--allow-unauthenticated'
