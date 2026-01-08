@@ -1,7 +1,6 @@
 import React from 'react';
 import { Language } from '../types';
 import { Sparkles } from 'lucide-react';
-import HanjaParticles from './HanjaParticles';
 
 interface HeroProps {
   lang: Language;
@@ -16,9 +15,15 @@ const Hero: React.FC<HeroProps> = ({ lang, scrollToSection }) => {
         <div className="absolute inset-0 bg-gradient-to-b from-stone-950 via-transparent to-stone-950 z-10 pointer-events-none" />
         <div className="absolute inset-0 bg-gradient-to-r from-stone-950 via-stone-950/40 to-transparent z-10 pointer-events-none hidden lg:block" />
 
-        {/* Custom Premium Hanja Particle Engine - Top on mobile, right on desktop */}
-        <div className="absolute inset-0 lg:left-1/3 -top-20 lg:top-0 h-1/2 lg:h-full">
-          <HanjaParticles />
+        {/* Premium Spline Particles Integration */}
+        <div className="w-full h-full lg:translate-x-1/4 scale-110">
+          <iframe
+            src='https://my.spline.design/particles-lQ5n5TkYLJU6Bar5npFFMXIP/'
+            frameBorder='0'
+            width='100%'
+            height='100%'
+            title="Ethereal Particles"
+          ></iframe>
         </div>
       </div>
 
