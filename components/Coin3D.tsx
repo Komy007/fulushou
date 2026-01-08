@@ -57,37 +57,42 @@ const CoinBody = () => {
             */}
             <group position={[0, 0, 0.1]}>
                 {/* Hanja Character - Sharp and upright */}
-                position={[0, 0.1, 0]}
-                >
-                {SEQUENCE[index].hj}
-                <meshStandardMaterial
+                <Text
+                    fontSize={0.84}
                     color="#fbbf24"
-                    emissive="#f59e0b"
-                    emissiveIntensity={4}
-                    metalness={1}
-                    roughness={0}
-                />
-            </Text>
+                    anchorX="center"
+                    anchorY="middle"
+                    position={[0, 0.1, 0]}
+                >
+                    {SEQUENCE[index].hj}
+                    <meshStandardMaterial
+                        color="#fbbf24"
+                        emissive="#f59e0b"
+                        emissiveIntensity={4}
+                        metalness={1}
+                        roughness={0}
+                    />
+                </Text>
 
-            {/* English Name - Below and crisp */}
-            <Text
-                fontSize={0.25}
-                color="#fcd34d"
-                anchorX="center"
-                anchorY="middle"
-                position={[0, -0.5, 0]}
-                letterSpacing={0.2}
-            >
-                {SEQUENCE[index].en}
-                <meshStandardMaterial
+                {/* English Name - Below and crisp */}
+                <Text
+                    fontSize={0.25}
                     color="#fcd34d"
-                    emissive="#b45309"
-                    emissiveIntensity={2}
-                    metalness={1}
-                    roughness={0}
-                />
-            </Text>
-        </group>
+                    anchorX="center"
+                    anchorY="middle"
+                    position={[0, -0.5, 0]}
+                    letterSpacing={0.2}
+                >
+                    {SEQUENCE[index].en}
+                    <meshStandardMaterial
+                        color="#fcd34d"
+                        emissive="#b45309"
+                        emissiveIntensity={2}
+                        metalness={1}
+                        roughness={0}
+                    />
+                </Text>
+            </group>
         </group >
     );
 };
