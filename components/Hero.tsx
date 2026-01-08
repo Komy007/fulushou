@@ -1,6 +1,7 @@
 import React from 'react';
 import { Language } from '../types';
 import { Sparkles } from 'lucide-react';
+import Coin3D from './Coin3D';
 
 interface HeroProps {
   lang: Language;
@@ -15,16 +16,9 @@ const Hero: React.FC<HeroProps> = ({ lang, scrollToSection }) => {
         <div className="absolute inset-0 bg-gradient-to-b from-stone-950 via-transparent to-stone-950 z-10 pointer-events-none" />
         <div className="absolute inset-0 bg-gradient-to-r from-stone-950 via-stone-950/40 to-transparent z-10 pointer-events-none hidden lg:block" />
 
-        {/* Spline Iframe - High Fidelity Integration */}
-        <div className="w-full h-full">
-          <iframe
-            src='https://my.spline.design/prismcoin-AFzzOVTV9iiXLdzd8v4asdt1/'
-            frameBorder='0'
-            width='100%'
-            height='100%'
-            className="w-full h-full lg:translate-x-1/4"
-            title="Spline 3D Prismcoin"
-          ></iframe>
+        {/* Native 3D Coin Integration */}
+        <div className="w-full h-full lg:translate-x-1/4">
+          <Coin3D />
         </div>
       </div>
 
