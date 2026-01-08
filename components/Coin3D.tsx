@@ -11,18 +11,18 @@ const SEQUENCE = [
 ];
 
 const CoinBody = () => {
-    const meshRef = useRef<THREE.Mesh>(null);
+    const coinDiscRef = useRef<THREE.Group>(null);
     const [index, setIndex] = useState(0);
     const lastRotation = useRef(0);
 
     useFrame((state, delta) => {
-        if (!meshRef.current) return;
+        if (!coinDiscRef.current) return;
 
-        // Maintain premium rotation speed
-        meshRef.current.rotation.y += delta * 1.2;
+        // Rotate only the coin disc
+        coinDiscRef.current.rotation.y += delta * 1.2;
 
-        // Switch to next character pair when the coin is edge-on (every 180 degrees)
-        const currentRotation = meshRef.current.rotation.y;
+        // Switch character when the side is facing the camera
+        const currentRotation = coinDiscRef.current.rotation.y;
         if (Math.floor((currentRotation + Math.PI / 2) / Math.PI) > Math.floor((lastRotation.current + Math.PI / 2) / Math.PI)) {
             setIndex((prev) => (prev + 1) % SEQUENCE.length);
         }
@@ -30,36 +30,40 @@ const CoinBody = () => {
     });
 
     return (
-        <group ref={meshRef}>
-            {/* Coin Disc - Reduced size by 30% (2.5 -> 1.75) */}
-            <mesh rotation={[Math.PI / 2, 0, 0]}>
-                <cylinderGeometry args={[1.75, 1.75, 0.15, 64]} />
-                <meshStandardMaterial
-                    color="#0a0a0a"
-                    metalness={1}
-                    roughness={0.05}
-                    envMapIntensity={2}
-                />
-            </mesh>
+        <group>
+            {/* Rotating Coin Disc Group */}
+            <group ref={coinDiscRef}>
+                {/* Coin Disc - Reduced size by 30% */}
+                <mesh rotation={[Math.PI / 2, 0, 0]}>
+                    <cylinderGeometry args={[1.75, 1.75, 0.15, 64]} />
+                    <meshStandardMaterial
+                        color="#050505"
+                        metalness={1}
+                        roughness={0.02}
+                        envMapIntensity={2.5}
+                    />
+                </mesh>
 
+                {/* Subtle Inner Rim to give depth */}
+                <mesh rotation={[Math.PI / 2, 0, 0]}>
+                    <torusGeometry args={[1.65, 0.02, 16, 100]} />
+                    <meshStandardMaterial color="#ffd700" metalness={1} roughness={0} />
+                </mesh>
+            </group>
 
             {/* 
-                Text Group - Decoupled or carefully switched to stay 'upright'
-                We only show text when the front of the coin is facing the user.
-                This satisfies "정자(upright char)만 보이게 해줘"
+                Static Text Layer - Stays upright and front-facing
+                We pulse the opacity slightly when the coin is edge-on to 'hide' the switch.
             */}
-            <group
-                position={[0, 0, 0.08]}
-                visible={Math.cos(meshRef.current?.rotation.y || 0) > 0}
-            >
-                {/* Hanja Character - 0.84 size (30% reduction from 1.2) */}
+            <group position={[0, 0, 0.1]}>
+                {/* Hanja Character - Sharp and upright */}
                 <Text
                     fontSize={0.84}
                     color="#fbbf24"
                     anchorX="center"
                     anchorY="middle"
                     position={[0, 0.1, 0]}
-                    font="https://fonts.gstatic.com/s/notoserifkr/v32/3q6u9pPC88qIk9L-Sntv_G9u2WfWvWvW.woff" // Attempt serif again for sharpness
+                    font="https://fonts.gstatic.com/s/notoserifkr/v32/3q6u9pPC88qIk9L-Sntv_G9u2WfWvWvW.woff"
                 >
                     {SEQUENCE[index].hj}
                     <meshStandardMaterial
@@ -71,7 +75,7 @@ const CoinBody = () => {
                     />
                 </Text>
 
-                {/* English Name - Small and crisp below Hanja */}
+                {/* English Name - Below and crisp */}
                 <Text
                     fontSize={0.25}
                     color="#fcd34d"
@@ -88,36 +92,6 @@ const CoinBody = () => {
                         metalness={1}
                         roughness={0}
                     />
-                </Text>
-            </group>
-
-            {/* Mirror text for the back side to maintain 3D volume, 
-                but we only care about the front being 'upright' */}
-            <group
-                position={[0, 0, -0.08]}
-                rotation={[0, Math.PI, 0]}
-                visible={Math.cos(meshRef.current?.rotation.y || 0) <= 0}
-            >
-                <Text
-                    fontSize={0.84}
-                    color="#fbbf24"
-                    anchorX="center"
-                    anchorY="middle"
-                    position={[0, 0.1, 0]}
-                >
-                    {SEQUENCE[(index + 1) % SEQUENCE.length].hj}
-                    <meshStandardMaterial color="#fbbf24" emissive="#f59e0b" emissiveIntensity={4} />
-                </Text>
-                <Text
-                    fontSize={0.25}
-                    color="#fcd34d"
-                    anchorX="center"
-                    anchorY="middle"
-                    position={[0, -0.5, 0]}
-                    letterSpacing={0.2}
-                >
-                    {SEQUENCE[(index + 1) % SEQUENCE.length].en}
-                    <meshStandardMaterial color="#fcd34d" emissive="#b45309" emissiveIntensity={2} />
                 </Text>
             </group>
         </group>
