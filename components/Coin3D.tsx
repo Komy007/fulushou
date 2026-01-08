@@ -4,7 +4,11 @@ import { Text, Float, PerspectiveCamera, Environment } from '@react-three/drei';
 import { EffectComposer, Bloom } from '@react-three/postprocessing';
 import * as THREE from 'three';
 
-const HANJA_SEQUENCE = ['福', '祿', '壽'];
+const SEQUENCE = [
+    { hj: '福', en: 'FU' },
+    { hj: '祿', en: 'LU' },
+    { hj: '壽', en: 'SHOU' }
+];
 
 const CoinBody = () => {
     const meshRef = useRef<THREE.Mesh>(null);
@@ -14,14 +18,13 @@ const CoinBody = () => {
     useFrame((state, delta) => {
         if (!meshRef.current) return;
 
-        // Smoother, slightly slower rotation for premium feel
-        meshRef.current.rotation.y += delta * 0.8;
+        // Maintain premium rotation speed
+        meshRef.current.rotation.y += delta * 1.2;
 
-        // Switch Hanja when the coin is edge-on to the camera (PI/2, 3PI/2, etc.)
-        // This ensures the user doesn't see the text "flip" while facing them.
+        // Switch to next character pair when the coin is edge-on (every 180 degrees)
         const currentRotation = meshRef.current.rotation.y;
         if (Math.floor((currentRotation + Math.PI / 2) / Math.PI) > Math.floor((lastRotation.current + Math.PI / 2) / Math.PI)) {
-            setIndex((prev) => (prev + 1) % HANJA_SEQUENCE.length);
+            setIndex((prev) => (prev + 1) % SEQUENCE.length);
         }
         lastRotation.current = currentRotation;
     });
@@ -40,42 +43,83 @@ const CoinBody = () => {
             </mesh>
 
 
-            {/* Front Side Hanja - Reduced size (1.8 -> 1.2) */}
-            <Text
+            {/* 
+                Text Group - Decoupled or carefully switched to stay 'upright'
+                We only show text when the front of the coin is facing the user.
+                This satisfies "정자(upright char)만 보이게 해줘"
+            */}
+            <group
                 position={[0, 0, 0.08]}
-                fontSize={1.2}
-                color="#fbbf24"
-                anchorX="center"
-                anchorY="middle"
+                visible={Math.cos(meshRef.current?.rotation.y || 0) > 0}
             >
-                {HANJA_SEQUENCE[index]}
-                <meshStandardMaterial
+                {/* Hanja Character - 0.84 size (30% reduction from 1.2) */}
+                <Text
+                    fontSize={0.84}
                     color="#fbbf24"
-                    emissive="#f59e0b"
-                    emissiveIntensity={3}
-                    metalness={1}
-                    roughness={0}
-                />
-            </Text>
+                    anchorX="center"
+                    anchorY="middle"
+                    position={[0, 0.1, 0]}
+                    font="https://fonts.gstatic.com/s/notoserifkr/v32/3q6u9pPC88qIk9L-Sntv_G9u2WfWvWvW.woff" // Attempt serif again for sharpness
+                >
+                    {SEQUENCE[index].hj}
+                    <meshStandardMaterial
+                        color="#fbbf24"
+                        emissive="#f59e0b"
+                        emissiveIntensity={4}
+                        metalness={1}
+                        roughness={0}
+                    />
+                </Text>
 
-            {/* Back Side Hanja - Reduced size */}
-            <Text
+                {/* English Name - Small and crisp below Hanja */}
+                <Text
+                    fontSize={0.25}
+                    color="#fcd34d"
+                    anchorX="center"
+                    anchorY="middle"
+                    position={[0, -0.5, 0]}
+                    letterSpacing={0.2}
+                >
+                    {SEQUENCE[index].en}
+                    <meshStandardMaterial
+                        color="#fcd34d"
+                        emissive="#b45309"
+                        emissiveIntensity={2}
+                        metalness={1}
+                        roughness={0}
+                    />
+                </Text>
+            </group>
+
+            {/* Mirror text for the back side to maintain 3D volume, 
+                but we only care about the front being 'upright' */}
+            <group
                 position={[0, 0, -0.08]}
                 rotation={[0, Math.PI, 0]}
-                fontSize={1.2}
-                color="#fbbf24"
-                anchorX="center"
-                anchorY="middle"
+                visible={Math.cos(meshRef.current?.rotation.y || 0) <= 0}
             >
-                {HANJA_SEQUENCE[(index + 1) % HANJA_SEQUENCE.length]}
-                <meshStandardMaterial
+                <Text
+                    fontSize={0.84}
                     color="#fbbf24"
-                    emissive="#f59e0b"
-                    emissiveIntensity={2}
-                    metalness={1}
-                    roughness={0}
-                />
-            </Text>
+                    anchorX="center"
+                    anchorY="middle"
+                    position={[0, 0.1, 0]}
+                >
+                    {SEQUENCE[(index + 1) % SEQUENCE.length].hj}
+                    <meshStandardMaterial color="#fbbf24" emissive="#f59e0b" emissiveIntensity={4} />
+                </Text>
+                <Text
+                    fontSize={0.25}
+                    color="#fcd34d"
+                    anchorX="center"
+                    anchorY="middle"
+                    position={[0, -0.5, 0]}
+                    letterSpacing={0.2}
+                >
+                    {SEQUENCE[(index + 1) % SEQUENCE.length].en}
+                    <meshStandardMaterial color="#fcd34d" emissive="#b45309" emissiveIntensity={2} />
+                </Text>
+            </group>
         </group>
     );
 };
