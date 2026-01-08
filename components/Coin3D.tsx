@@ -30,32 +30,19 @@ const CoinBody = () => {
     });
 
     return (
-        <group>
-            {/* Rotating Coin Disc Group */}
-            <group ref={coinDiscRef}>
-                {/* Coin Disc - Reduced size by 30% */}
-                <mesh rotation={[Math.PI / 2, 0, 0]}>
-                    <cylinderGeometry args={[1.75, 1.75, 0.15, 64]} />
-                    <meshStandardMaterial
-                        color="#0a0a0a"
-                        metalness={1}
-                        roughness={0.05}
-                    />
-                </mesh>
+        <group ref={coinDiscRef}>
+            {/* Coin Disc - Color matches stone-950, high metalness */}
+            <mesh rotation={[Math.PI / 2, 0, 0]}>
+                <cylinderGeometry args={[1.75, 1.75, 0.15, 64]} />
+                <meshStandardMaterial
+                    color="#0c0a09"
+                    metalness={1}
+                    roughness={0.01}
+                />
+            </mesh>
 
-                {/* Subtle Inner Rim to give depth */}
-                <mesh rotation={[Math.PI / 2, 0, 0]}>
-                    <torusGeometry args={[1.65, 0.02, 16, 100]} />
-                    <meshStandardMaterial color="#ffd700" metalness={1} roughness={0} />
-                </mesh>
-            </group>
-
-            {/* 
-                Static Text Layer - Stays upright and front-facing
-                We pulse the opacity slightly when the coin is edge-on to 'hide' the switch.
-            */}
-            <group position={[0, 0, 0.1]}>
-                {/* Hanja Character - Sharp and upright */}
+            {/* Front Side Bilingual Text */}
+            <group position={[0, 0, 0.08]}>
                 <Text
                     fontSize={0.84}
                     color="#fbbf24"
@@ -67,13 +54,12 @@ const CoinBody = () => {
                     <meshStandardMaterial
                         color="#fbbf24"
                         emissive="#f59e0b"
-                        emissiveIntensity={4}
+                        emissiveIntensity={5}
                         metalness={1}
                         roughness={0}
                     />
                 </Text>
 
-                {/* English Name - Below and crisp */}
                 <Text
                     fontSize={0.25}
                     color="#fcd34d"
@@ -86,13 +72,51 @@ const CoinBody = () => {
                     <meshStandardMaterial
                         color="#fcd34d"
                         emissive="#b45309"
-                        emissiveIntensity={2}
+                        emissiveIntensity={3}
                         metalness={1}
                         roughness={0}
                     />
                 </Text>
             </group>
-        </group >
+
+            {/* Back Side Bilingual Text (Showing next in sequence) */}
+            <group position={[0, 0, -0.08]} rotation={[0, Math.PI, 0]}>
+                <Text
+                    fontSize={0.84}
+                    color="#fbbf24"
+                    anchorX="center"
+                    anchorY="middle"
+                    position={[0, 0.1, 0]}
+                >
+                    {SEQUENCE[(index + 1) % SEQUENCE.length].hj}
+                    <meshStandardMaterial
+                        color="#fbbf24"
+                        emissive="#f59e0b"
+                        emissiveIntensity={5}
+                        metalness={1}
+                        roughness={0}
+                    />
+                </Text>
+
+                <Text
+                    fontSize={0.25}
+                    color="#fcd34d"
+                    anchorX="center"
+                    anchorY="middle"
+                    position={[0, -0.5, 0]}
+                    letterSpacing={0.2}
+                >
+                    {SEQUENCE[(index + 1) % SEQUENCE.length].en}
+                    <meshStandardMaterial
+                        color="#fcd34d"
+                        emissive="#b45309"
+                        emissiveIntensity={3}
+                        metalness={1}
+                        roughness={0}
+                    />
+                </Text>
+            </group>
+        </group>
     );
 };
 
@@ -113,8 +137,8 @@ const Coin3D = () => {
 
                 <EffectComposer>
                     <Bloom
-                        intensity={1.0}
-                        luminanceThreshold={0.5}
+                        intensity={1.5}
+                        luminanceThreshold={0.4}
                         luminanceSmoothing={0.9}
                     />
                 </EffectComposer>
