@@ -47,7 +47,7 @@ const MediaCenter: React.FC<MediaCenterProps> = ({ lang }) => {
     <section id="media" className="py-20 bg-stone-50 relative overflow-hidden">
       {/* Turtle Background Integration - Low Opacity */}
       <div
-        className="absolute inset-0 pointer-events-none opacity-[0.15] mix-blend-multiply"
+        className="absolute inset-0 pointer-events-none opacity-[0.30] mix-blend-multiply"
         style={{
           backgroundImage: 'url(/img/backgrounds/turtles.jpg)',
           backgroundSize: 'cover',

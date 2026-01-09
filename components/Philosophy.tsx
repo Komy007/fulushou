@@ -19,9 +19,12 @@ const Philosophy: React.FC<PhilosophyProps> = ({ lang }) => {
 
     const observerCallback = (entries: IntersectionObserverEntry[]) => {
       entries.forEach((entry) => {
+        const cardId = entry.target.getAttribute('data-card-id');
         if (entry.isIntersecting) {
-          const cardId = entry.target.getAttribute('data-card-id');
           setActiveCard(cardId);
+        } else if (activeCard === cardId) {
+          // If the card leaving is the active one, shrink it back
+          setActiveCard(null);
         }
       });
     };
