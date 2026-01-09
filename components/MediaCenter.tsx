@@ -89,7 +89,7 @@ const MediaCenter: React.FC<MediaCenterProps> = ({ lang }) => {
                 <h4 className="font-bold text-stone-900 mb-1">
                   {video.title[lang]}
                 </h4>
-                <p className="text-xs text-stone-500">{video.desc}</p>
+                <p className="text-xs text-stone-700 font-bold">{video.desc}</p>
               </div>
             </div>
           ))}

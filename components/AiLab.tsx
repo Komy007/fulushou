@@ -283,7 +283,7 @@ const AiLab: React.FC<AiLabProps> = ({ lang }) => {
           <h2 className="text-4xl lg:text-5xl font-black text-stone-900 mb-6 font-serif italic">
             {lang === Language.KO ? 'AI Business Insight Lab' : 'AI Business Insight Lab'}
           </h2>
-          <p className="text-lg text-stone-600 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg text-stone-950 max-w-2xl mx-auto leading-relaxed font-bold">
             {lang === Language.KO
               ? "Fu Lu Shou의 15년 데이터와 성공 DNA를 학습한 최첨단 AI가 귀사의 캄보디아 진출 전략을 설계해드립니다. 실시간 비즈니스 파트너와 대화해보세요."
               : "Experience AI trained with Fu Lu Shou's 15-year success DNA. Let our advanced model design your Cambodia strategy and answer your business queries."}
