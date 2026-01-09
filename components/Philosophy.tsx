@@ -99,20 +99,21 @@ const Philosophy: React.FC<PhilosophyProps> = ({ lang }) => {
           </p>
         </div>
 
-        <div className="flex flex-col gap-12 lg:grid lg:grid-cols-3 lg:gap-8">
+        <div ref={containerRef} className="flex flex-col gap-12 lg:grid lg:grid-cols-3 lg:gap-8">
           {CARDS.map((item, idx) => (
             <div
               key={idx}
+              data-card-id={item.id}
               onClick={() => setActiveCard(activeCard === item.id ? null : item.id)}
               className={`relative group overflow-hidden rounded-[4rem] transition-all duration-700 hover:-translate-y-4 border ${item.border} bg-stone-900 shadow-2xl flex flex-col min-h-[580px] cursor-pointer`}
             >
 
-              {/* Deity Image - Floating Background (can move to foreground on click) */}
+              {/* Deity Image - Floating Background (Auto-pops on scroll or click) */}
               <div
-                className={`absolute bottom-4 right-4 w-64 h-64 lg:w-80 lg:h-80 transition-all duration-1000 ease-out pointer-events-none mix-blend-screen
+                className={`absolute -bottom-10 -right-10 w-80 h-80 lg:w-[32rem] lg:h-[32rem] transition-all duration-1000 ease-out pointer-events-none mix-blend-screen
                   ${activeCard === item.id
-                    ? 'z-40 scale-125 -translate-x-12 -translate-y-12 opacity-100 brightness-110'
-                    : 'z-0 opacity-70 group-hover:opacity-100 scale-100'
+                    ? 'z-40 scale-125 -translate-x-4 -translate-y-8 opacity-100 brightness-150 filter drop-shadow-[0_0_50px_rgba(255,255,255,0.4)]'
+                    : 'z-0 opacity-80 group-hover:opacity-100 scale-100'
                   }`}
               >
                 <img
