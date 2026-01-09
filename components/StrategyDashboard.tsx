@@ -152,7 +152,7 @@ const StrategyDashboard: React.FC<StrategyDashboardProps> = ({ lang }) => {
             {/* List Column: Always visible */}
             <div className="w-full lg:w-1/3 flex flex-col gap-3">
               <button
-                onClick={() => { setActiveTab('market'); setShowMobileDetail(true); }}
+                onClick={() => { setActiveTab('market'); if (window.innerWidth < 1024) setShowMobileDetail(true); }}
                 className={`text-left p-5 rounded-xl border transition flex items-center justify-between group relative overflow-hidden ${activeTab === 'market' ? 'bg-stone-700 border-amber-600 ring-1 ring-amber-600' : 'border-stone-600 hover:bg-stone-700'}`}
               >
                 {/* Persistent Shimmer Effect */}
@@ -173,7 +173,7 @@ const StrategyDashboard: React.FC<StrategyDashboardProps> = ({ lang }) => {
               </button>
 
               <button
-                onClick={() => { setActiveTab('product'); setShowMobileDetail(true); }}
+                onClick={() => { setActiveTab('product'); if (window.innerWidth < 1024) setShowMobileDetail(true); }}
                 className={`text-left p-5 rounded-xl border transition flex items-center justify-between group relative overflow-hidden ${activeTab === 'product' ? 'bg-stone-700 border-amber-600 ring-1 ring-amber-600' : 'border-stone-600 hover:bg-stone-700'}`}
               >
                 {/* Persistent Shimmer Effect */}
@@ -194,7 +194,7 @@ const StrategyDashboard: React.FC<StrategyDashboardProps> = ({ lang }) => {
               </button>
 
               <button
-                onClick={() => { setActiveTab('promotion'); setShowMobileDetail(true); }}
+                onClick={() => { setActiveTab('promotion'); if (window.innerWidth < 1024) setShowMobileDetail(true); }}
                 className={`text-left p-5 rounded-xl border transition flex items-center justify-between group relative overflow-hidden ${activeTab === 'promotion' ? 'bg-stone-700 border-amber-600 ring-1 ring-amber-600' : 'border-stone-600 hover:bg-stone-700'}`}
               >
                 {/* Persistent Shimmer Effect */}
@@ -215,7 +215,7 @@ const StrategyDashboard: React.FC<StrategyDashboardProps> = ({ lang }) => {
               </button>
 
               <button
-                onClick={() => { setActiveTab('place'); setShowMobileDetail(true); }}
+                onClick={() => { setActiveTab('place'); if (window.innerWidth < 1024) setShowMobileDetail(true); }}
                 className={`text-left p-5 rounded-xl border transition flex items-center justify-between group relative overflow-hidden ${activeTab === 'place' ? 'bg-stone-700 border-amber-600 ring-1 ring-amber-600' : 'border-stone-600 hover:bg-stone-700'}`}
               >
                 {/* Persistent Shimmer Effect */}

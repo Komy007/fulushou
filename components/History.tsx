@@ -195,7 +195,9 @@ const History: React.FC<HistoryProps> = ({ lang }) => {
                   key={m.id}
                   onClick={() => {
                     setActiveTab(m.id);
-                    setShowMobileDetail(true);
+                    if (window.innerWidth < 1024) {
+                      setShowMobileDetail(true);
+                    }
                   }}
                   className={`w-full group relative flex items-center p-6 rounded-[1.8rem] transition-all duration-500 transform overflow-hidden ${activeTab === m.id
                     ? 'bg-stone-900 shadow-[0_20px_40px_rgba(0,0,0,0.3)] ring-2 ring-amber-500 -translate-y-2 scale-[1.03]'
