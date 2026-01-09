@@ -27,19 +27,25 @@ const MediaCenter: React.FC<MediaCenterProps> = ({ lang }) => {
 
   const PRESS_LINKS = [
     {
-      url: 'http://www.sciencemd.com/news/view.asp?idx=101801',
-      title: 'ScienceMD News Coverage',
-      desc: 'Detailed report on Bacchus\'s market dominance and strategy.'
+      url: 'https://biz.heraldcorp.com/article/10478687',
+      title: {
+        ko: '레드불까지 제쳤다…캄보디아 ‘바까 열풍’',
+        en: 'Overcoming Red Bull: The Bacchus Craze in Cambodia'
+      },
+      desc: 'HeraldCorp coverage on market leadership.'
     },
     {
       url: 'https://aseanexpress.co.kr/news/article.html?no=2608',
-      title: 'ASEAN Express Interview',
+      title: { ko: 'ASEAN Express Interview', en: 'ASEAN Express Interview' },
       desc: 'Focus on Sok Samnang\'s localization leadership.'
     },
     {
-      url: 'https://kofice.or.kr/c30correspondent/c30_correspondent_02_view.asp?seq=16994',
-      title: 'KOFICE Cultural Report',
-      desc: 'Korean Foundation for International Cultural Exchange report.'
+      url: 'https://www.hkn24.com/news/articleView.html?idxno=305083',
+      title: {
+        ko: '‘바까 주세요!’ 식지 않는 박카스 열풍',
+        en: "Can't Stop the Heat: Bacchus Fever in Cambodia"
+      },
+      desc: 'HKN24 deep dive into the local distribution success.'
     }
   ];
 
@@ -47,7 +53,7 @@ const MediaCenter: React.FC<MediaCenterProps> = ({ lang }) => {
     <section id="media" className="py-20 bg-stone-50 relative overflow-hidden">
       {/* Turtle Background Integration - Low Opacity */}
       <div
-        className="absolute inset-0 pointer-events-none opacity-[0.30] mix-blend-multiply"
+        className="absolute inset-0 pointer-events-none opacity-[0.45] mix-blend-multiply"
         style={{
           backgroundImage: 'url(/img/backgrounds/turtles.jpg)',
           backgroundSize: 'cover',
@@ -106,7 +112,9 @@ const MediaCenter: React.FC<MediaCenterProps> = ({ lang }) => {
               >
                 <div className="flex justify-between items-center">
                   <div>
-                    <h5 className="font-bold text-stone-800 group-hover:text-amber-800">{link.title}</h5>
+                    <h5 className="font-bold text-stone-800 group-hover:text-amber-800">
+                      {typeof link.title === 'string' ? link.title : link.title[lang]}
+                    </h5>
                     <p className="text-sm text-stone-500 mt-1">{link.desc}</p>
                   </div>
                   <ArrowRight className="text-stone-400 group-hover:text-amber-600" />

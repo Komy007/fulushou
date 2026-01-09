@@ -22,7 +22,7 @@ const ProductScroller: React.FC<ProductScrollerProps> = ({ lang }) => {
         <div className="py-16 bg-white overflow-hidden border-y border-stone-100 relative">
             {/* Turtle Background Integration - Extremely Low Opacity for scroller */}
             <div
-                className="absolute inset-0 pointer-events-none opacity-[0.25] mix-blend-multiply"
+                className="absolute inset-0 pointer-events-none opacity-[0.35] mix-blend-multiply"
                 style={{
                     backgroundImage: 'url(/img/backgrounds/turtles.jpg)',
                     backgroundSize: 'cover',

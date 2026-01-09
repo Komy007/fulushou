@@ -22,8 +22,8 @@ const Philosophy: React.FC<PhilosophyProps> = ({ lang }) => {
         const cardId = entry.target.getAttribute('data-card-id');
         if (entry.isIntersecting) {
           setActiveCard(cardId);
-        } else if (activeCard === cardId) {
-          // If the card leaving is the active one, shrink it back
+        } else if (!entry.isIntersecting && activeCard === cardId) {
+          // Robust shrink check: if it's leaving, set null
           setActiveCard(null);
         }
       });

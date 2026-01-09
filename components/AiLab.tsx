@@ -183,7 +183,7 @@ const AiLab: React.FC<AiLabProps> = ({ lang }) => {
     <section id="ai-lab" className="py-24 bg-stone-50 relative overflow-hidden">
       {/* Turtle Background Integration - Low Opacity */}
       <div
-        className="absolute inset-0 pointer-events-none opacity-[0.30] mix-blend-multiply"
+        className="absolute inset-0 pointer-events-none opacity-[0.45] mix-blend-multiply"
         style={{
           backgroundImage: 'url(/img/backgrounds/turtles.jpg)',
           backgroundSize: 'cover',
