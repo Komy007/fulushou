@@ -171,7 +171,7 @@ const History: React.FC<HistoryProps> = ({ lang }) => {
             <h3 className="text-5xl lg:text-8xl font-black text-stone-900 mb-8 font-serif leading-none tracking-tighter">
               {lang === Language.KO ? '발자취' : 'History'}
             </h3>
-            <p className="text-2xl text-stone-600 leading-relaxed font-light max-w-2xl border-l-4 border-amber-600/30 pl-8">
+            <p className="text-2xl text-stone-900 leading-relaxed font-bold max-w-2xl border-l-4 border-amber-600/30 pl-8">
               {lang === Language.KO
                 ? "단순한 유통을 넘어, 우리는 캄보디아 유통 시장의 신화를 썼습니다."
                 : "Beyond logistics, we wrote the legend of the Cambodian market."}

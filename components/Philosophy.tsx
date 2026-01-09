@@ -22,9 +22,10 @@ const Philosophy: React.FC<PhilosophyProps> = ({ lang }) => {
         const cardId = entry.target.getAttribute('data-card-id');
         if (entry.isIntersecting) {
           setActiveCard(cardId);
-        } else if (!entry.isIntersecting && activeCard === cardId) {
-          // Robust shrink check: if it's leaving, set null
-          setActiveCard(null);
+          // Auto-shrink after 2 seconds to create a "Pulse" effect
+          setTimeout(() => {
+            setActiveCard(prev => prev === cardId ? null : prev);
+          }, 2000);
         }
       });
     };
@@ -110,6 +111,10 @@ const Philosophy: React.FC<PhilosophyProps> = ({ lang }) => {
               onClick={() => setActiveCard(activeCard === item.id ? null : item.id)}
               className={`relative group overflow-hidden rounded-[4rem] transition-all duration-700 hover:-translate-y-4 border ${item.border} bg-stone-900 shadow-2xl flex flex-col min-h-[580px] cursor-pointer`}
             >
+              {/* Shimmer Effect - Visual Cue for Interactivity */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 pointer-events-none z-20">
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-[shimmer_2s_infinite] skew-x-12" />
+              </div>
 
               {/* Deity Image - Floating Background (Auto-pops on scroll or click) */}
               <div
@@ -158,7 +163,7 @@ const Philosophy: React.FC<PhilosophyProps> = ({ lang }) => {
           ))}
         </div>
       </div>
-    </section>
+    </section >
   );
 };
 

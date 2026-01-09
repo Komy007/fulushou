@@ -31,7 +31,7 @@ const ProductScroller: React.FC<ProductScrollerProps> = ({ lang }) => {
                 }}
             />
             <div className="max-w-7xl mx-auto px-4 mb-10 text-center">
-                <h3 className="text-xl font-bold text-stone-400 uppercase tracking-widest">
+                <h3 className="text-xl font-bold text-stone-600 uppercase tracking-widest">
                     {lang === Language.KO ? '주요 유통 제품' : 'Our Major Products'}
                 </h3>
             </div>
