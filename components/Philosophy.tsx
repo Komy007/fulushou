@@ -7,6 +7,8 @@ interface PhilosophyProps {
 }
 
 const Philosophy: React.FC<PhilosophyProps> = ({ lang }) => {
+  const [activeCard, setActiveCard] = React.useState<string | null>(null);
+
   const CARDS = [
     {
       char: '福',
@@ -72,16 +74,24 @@ const Philosophy: React.FC<PhilosophyProps> = ({ lang }) => {
 
         <div className="flex flex-col gap-12 lg:grid lg:grid-cols-3 lg:gap-8">
           {CARDS.map((item, idx) => (
-            <div key={idx} className={`relative group overflow-hidden rounded-[4rem] transition-all duration-700 hover:-translate-y-4 border ${item.border} bg-stone-900 shadow-2xl flex flex-col min-h-[580px]`}>
+            <div
+              key={idx}
+              onClick={() => setActiveCard(activeCard === item.id ? null : item.id)}
+              className={`relative group overflow-hidden rounded-[4rem] transition-all duration-700 hover:-translate-y-4 border ${item.border} bg-stone-900 shadow-2xl flex flex-col min-h-[580px] cursor-pointer`}
+            >
 
-              {/* Deity Image - Floating Background (nu-kki style) */}
+              {/* Deity Image - Floating Background (can move to foreground on click) */}
               <div
-                className="absolute bottom-4 right-4 w-60 h-60 opacity-60 group-hover:opacity-100 transition-all duration-700 pointer-events-none z-0 mix-blend-screen"
+                className={`absolute bottom-4 right-4 w-64 h-64 lg:w-80 lg:h-80 transition-all duration-1000 ease-out pointer-events-none mix-blend-screen
+                  ${activeCard === item.id
+                    ? 'z-40 scale-125 -translate-x-12 -translate-y-12 opacity-100 brightness-110'
+                    : 'z-0 opacity-70 group-hover:opacity-100 scale-100'
+                  }`}
               >
                 <img
                   src={item.img}
                   alt={item.label}
-                  className="w-full h-full object-contain scale-100 group-hover:scale-110 transition-transform duration-1000"
+                  className="w-full h-full object-contain"
                 />
               </div>
 

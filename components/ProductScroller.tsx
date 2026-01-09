@@ -19,7 +19,17 @@ const ProductScroller: React.FC<ProductScrollerProps> = ({ lang }) => {
     ];
 
     return (
-        <div className="py-16 bg-white overflow-hidden border-y border-stone-100">
+        <div className="py-16 bg-white overflow-hidden border-y border-stone-100 relative">
+            {/* Turtle Background Integration - Extremely Low Opacity for scroller */}
+            <div
+                className="absolute inset-0 pointer-events-none opacity-[0.03] mix-blend-multiply"
+                style={{
+                    backgroundImage: 'url(/img/backgrounds/turtles.jpg)',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    backgroundAttachment: 'fixed'
+                }}
+            />
             <div className="max-w-7xl mx-auto px-4 mb-10 text-center">
                 <h3 className="text-xl font-bold text-stone-400 uppercase tracking-widest">
                     {lang === Language.KO ? '주요 유통 제품' : 'Our Major Products'}

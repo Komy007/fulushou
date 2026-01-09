@@ -150,6 +150,16 @@ const History: React.FC<HistoryProps> = ({ lang }) => {
 
   return (
     <section id="history" className="py-24 bg-[#F9F6F0] relative overflow-hidden">
+      {/* Turtle Background Integration - Low Opacity */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.07] mix-blend-multiply"
+        style={{
+          backgroundImage: 'url(/img/backgrounds/turtles.jpg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundAttachment: 'fixed'
+        }}
+      />
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-amber-100/30 rounded-full blur-[120px] -mr-48 -mt-48 opacity-60"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">

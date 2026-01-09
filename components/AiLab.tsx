@@ -180,7 +180,17 @@ const AiLab: React.FC<AiLabProps> = ({ lang }) => {
   };
 
   return (
-    <section id="ai-lab" className="py-24 bg-stone-50 relative">
+    <section id="ai-lab" className="py-24 bg-stone-50 relative overflow-hidden">
+      {/* Turtle Background Integration - Low Opacity */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.05] mix-blend-multiply"
+        style={{
+          backgroundImage: 'url(/img/backgrounds/turtles.jpg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundAttachment: 'fixed'
+        }}
+      />
       {/* Background Decoration Wrapper - Clips ONLY the bg elements, not the content */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 right-0 opacity-10">

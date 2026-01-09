@@ -44,7 +44,17 @@ const MediaCenter: React.FC<MediaCenterProps> = ({ lang }) => {
   ];
 
   return (
-    <section id="media" className="py-20 bg-stone-50">
+    <section id="media" className="py-20 bg-stone-50 relative overflow-hidden">
+      {/* Turtle Background Integration - Low Opacity */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.05] mix-blend-multiply"
+        style={{
+          backgroundImage: 'url(/img/backgrounds/turtles.jpg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundAttachment: 'fixed'
+        }}
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-end mb-12">
           <div>
@@ -60,12 +70,12 @@ const MediaCenter: React.FC<MediaCenterProps> = ({ lang }) => {
           {VIDEOS.map((video, idx) => (
             <div key={idx} className="bg-white rounded-xl overflow-hidden shadow-lg border border-stone-200 hover:shadow-xl transition duration-300">
               <div className="relative pb-[56.25%] h-0 overflow-hidden bg-black">
-                <iframe 
-                  src={`https://www.youtube.com/embed/${video.id}`} 
+                <iframe
+                  src={`https://www.youtube.com/embed/${video.id}`}
                   title={`Video ${idx}`}
                   className="absolute top-0 left-0 w-full h-full"
-                  frameBorder="0" 
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                 ></iframe>
               </div>
@@ -87,10 +97,10 @@ const MediaCenter: React.FC<MediaCenterProps> = ({ lang }) => {
           </h4>
           <div className="space-y-4">
             {PRESS_LINKS.map((link, idx) => (
-              <a 
+              <a
                 key={idx}
-                href={link.url} 
-                target="_blank" 
+                href={link.url}
+                target="_blank"
                 rel="noreferrer"
                 className="block p-4 rounded-lg bg-stone-50 hover:bg-amber-50 border border-stone-100 hover:border-amber-200 transition group"
               >

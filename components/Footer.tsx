@@ -27,8 +27,9 @@ const Footer: React.FC<FooterProps> = ({ lang }) => {
           </div>
           <div className="flex flex-col items-center">
             <h5 className="text-white font-bold mb-3 flex items-center"><Phone className="w-4 h-4 mr-2" /> Contact</h5>
+            <a href="https://www.facebook.com/BacchusEnergyDrinkCambodia/about" target="_blank" rel="noopener noreferrer" className="mb-4 hover:text-amber-500 transition">facebook bacchus cambodia</a>
             <p>Phnom Penh, Cambodia</p>
-            <p className="mt-2">contact@fulushou.net</p>
+            <p className="mt-2 text-xs opacity-50">info@fulushou.net</p>
           </div>
           <div className="flex flex-col items-center">
             <h5 className="text-white font-bold mb-3">Social</h5>
