@@ -8,6 +8,33 @@ interface PhilosophyProps {
 
 const Philosophy: React.FC<PhilosophyProps> = ({ lang }) => {
   const [activeCard, setActiveCard] = React.useState<string | null>(null);
+  const containerRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    const observerOptions = {
+      root: null,
+      rootMargin: '-20% 0px -20% 0px', // Trigger when card is near center
+      threshold: 0.6
+    };
+
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const cardId = entry.target.getAttribute('data-card-id');
+          setActiveCard(cardId);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    if (containerRef.current) {
+      const cards = containerRef.current.querySelectorAll('[data-card-id]');
+      cards.forEach(card => observer.observe(card));
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   const CARDS = [
     {
