@@ -197,16 +197,21 @@ const History: React.FC<HistoryProps> = ({ lang }) => {
                     setActiveTab(m.id);
                     setShowMobileDetail(true);
                   }}
-                  className={`w-full group relative flex items-center p-6 rounded-[1.8rem] transition-all duration-500 transform ${activeTab === m.id
+                  className={`w-full group relative flex items-center p-6 rounded-[1.8rem] transition-all duration-500 transform overflow-hidden ${activeTab === m.id
                     ? 'bg-stone-900 shadow-[0_20px_40px_rgba(0,0,0,0.3)] ring-2 ring-amber-500 -translate-y-2 scale-[1.03]'
                     : 'bg-white border border-stone-100 hover:border-amber-400 hover:shadow-lg hover:-translate-y-1'
                     }`}
                 >
-                  <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mr-5 shrink-0 transition-all duration-500 ${activeTab === m.id ? 'bg-amber-600 text-white rotate-3' : 'bg-stone-100 text-stone-400'
+                  {/* Persistent Shimmer Effect to hint clickability */}
+                  <div className="absolute inset-0 pointer-events-none z-0">
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-500/5 to-transparent -translate-x-full animate-shimmer" />
+                  </div>
+
+                  <div className={`relative z-10 w-14 h-14 rounded-2xl flex items-center justify-center mr-5 shrink-0 transition-all duration-500 ${activeTab === m.id ? 'bg-amber-600 text-white rotate-3' : 'bg-stone-100 text-stone-400'
                     }`}>
                     <m.icon size={28} />
                   </div>
-                  <div className="flex-1 text-left">
+                  <div className="relative z-10 flex-1 text-left">
                     <div className={`text-[9px] font-black uppercase tracking-widest mb-1.5 ${activeTab === m.id ? 'text-amber-400' : 'text-stone-400'}`}>
                       {m.label}
                     </div>
@@ -214,7 +219,14 @@ const History: React.FC<HistoryProps> = ({ lang }) => {
                       {m.sub}
                     </div>
                   </div>
-                  <ChevronRight size={24} className={activeTab === m.id ? 'text-amber-500' : 'text-stone-300'} />
+
+                  {/* Click/Tap Icon Cue */}
+                  <div className="relative z-10 flex flex-col items-center ml-2 border-l border-stone-100 pl-4 py-1">
+                    <MousePointer2 className={`w-4 h-4 mb-1 animate-pulse ${activeTab === m.id ? 'text-amber-400' : 'text-stone-300'}`} />
+                    <span className={`text-[8px] font-black uppercase tracking-tighter ${activeTab === m.id ? 'text-amber-400' : 'text-stone-400'}`}>
+                      {lang === Language.KO ? '클릭' : 'READ'}
+                    </span>
+                  </div>
                 </button>
               ))}
             </div>

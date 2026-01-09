@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Language, StrategyType } from '../types';
-import { Clock, Package, Megaphone, Truck, ArrowLeft } from 'lucide-react';
+import { Clock, Package, Megaphone, Truck, ArrowLeft, Zap } from 'lucide-react';
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip as RechartsTooltip, ResponsiveContainer, Cell,
   PieChart, Pie
@@ -153,46 +153,86 @@ const StrategyDashboard: React.FC<StrategyDashboardProps> = ({ lang }) => {
             <div className="w-full lg:w-1/3 flex flex-col gap-3">
               <button
                 onClick={() => { setActiveTab('market'); setShowMobileDetail(true); }}
-                className={`text-left p-5 rounded-xl border transition flex items-center justify-between group ${activeTab === 'market' ? 'bg-stone-700 border-amber-600 ring-1 ring-amber-600' : 'border-stone-600 hover:bg-stone-700'}`}
+                className={`text-left p-5 rounded-xl border transition flex items-center justify-between group relative overflow-hidden ${activeTab === 'market' ? 'bg-stone-700 border-amber-600 ring-1 ring-amber-600' : 'border-stone-600 hover:bg-stone-700'}`}
               >
-                <div>
-                  <div className={`font-bold transition ${activeTab === 'market' ? 'text-amber-400' : 'text-stone-300 group-hover:text-amber-400'}`}>1. Market Insight</div>
-                  <div className="text-xs text-stone-500 mt-1">Time-Machine Strategy</div>
+                {/* Persistent Shimmer Effect */}
+                <div className="absolute inset-0 pointer-events-none z-0">
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-500/5 to-transparent -translate-x-full animate-shimmer" />
                 </div>
-                <Clock className={`w-6 h-6 ${activeTab === 'market' ? 'text-amber-400' : 'text-stone-500 group-hover:text-amber-400'}`} />
+                <div className="relative z-10">
+                  <div className={`font-bold transition ${activeTab === 'market' ? 'text-amber-400' : 'text-stone-300 group-hover:text-amber-400'}`}>1. Market Insight</div>
+                  <div className="text-xs text-stone-500 mt-1 uppercase tracking-tighter">Time-Machine Strategy</div>
+                </div>
+                <div className="relative z-10 flex items-center gap-4">
+                  <Clock className={`w-6 h-6 ${activeTab === 'market' ? 'text-amber-400' : 'text-stone-500 group-hover:text-amber-400'}`} />
+                  <div className="flex flex-col items-center border-l border-stone-600 pl-4">
+                    <Zap className={`w-4 h-4 mb-0.5 animate-pulse ${activeTab === 'market' ? 'text-amber-400' : 'text-stone-500'}`} />
+                    <span className="text-[8px] font-black text-amber-500/60 tracking-tight">ANALYSIS</span>
+                  </div>
+                </div>
               </button>
 
               <button
                 onClick={() => { setActiveTab('product'); setShowMobileDetail(true); }}
-                className={`text-left p-5 rounded-xl border transition flex items-center justify-between group ${activeTab === 'product' ? 'bg-stone-700 border-amber-600 ring-1 ring-amber-600' : 'border-stone-600 hover:bg-stone-700'}`}
+                className={`text-left p-5 rounded-xl border transition flex items-center justify-between group relative overflow-hidden ${activeTab === 'product' ? 'bg-stone-700 border-amber-600 ring-1 ring-amber-600' : 'border-stone-600 hover:bg-stone-700'}`}
               >
-                <div>
-                  <div className={`font-bold transition ${activeTab === 'product' ? 'text-amber-400' : 'text-stone-300 group-hover:text-amber-400'}`}>2. Product</div>
-                  <div className="text-xs text-stone-500 mt-1">Bottle to Can Conversion</div>
+                {/* Persistent Shimmer Effect */}
+                <div className="absolute inset-0 pointer-events-none z-0">
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-500/5 to-transparent -translate-x-full animate-shimmer" />
                 </div>
-                <Package className={`w-6 h-6 ${activeTab === 'product' ? 'text-amber-400' : 'text-stone-500 group-hover:text-amber-400'}`} />
+                <div className="relative z-10">
+                  <div className={`font-bold transition ${activeTab === 'product' ? 'text-amber-400' : 'text-stone-300 group-hover:text-amber-400'}`}>2. Product</div>
+                  <div className="text-xs text-stone-500 mt-1 uppercase tracking-tighter">Bottle to Can Conversion</div>
+                </div>
+                <div className="relative z-10 flex items-center gap-4">
+                  <Package className={`w-6 h-6 ${activeTab === 'product' ? 'text-amber-400' : 'text-stone-500 group-hover:text-amber-400'}`} />
+                  <div className="flex flex-col items-center border-l border-stone-600 pl-4">
+                    <Zap className={`w-4 h-4 mb-0.5 animate-pulse ${activeTab === 'product' ? 'text-amber-400' : 'text-stone-500'}`} />
+                    <span className="text-[8px] font-black text-amber-500/60 tracking-tight">ANALYSIS</span>
+                  </div>
+                </div>
               </button>
 
               <button
                 onClick={() => { setActiveTab('promotion'); setShowMobileDetail(true); }}
-                className={`text-left p-5 rounded-xl border transition flex items-center justify-between group ${activeTab === 'promotion' ? 'bg-stone-700 border-amber-600 ring-1 ring-amber-600' : 'border-stone-600 hover:bg-stone-700'}`}
+                className={`text-left p-5 rounded-xl border transition flex items-center justify-between group relative overflow-hidden ${activeTab === 'promotion' ? 'bg-stone-700 border-amber-600 ring-1 ring-amber-600' : 'border-stone-600 hover:bg-stone-700'}`}
               >
-                <div>
-                  <div className={`font-bold transition ${activeTab === 'promotion' ? 'text-amber-400' : 'text-stone-300 group-hover:text-amber-400'}`}>3. Promotion</div>
-                  <div className="text-xs text-stone-500 mt-1">Media Blocking & Sports</div>
+                {/* Persistent Shimmer Effect */}
+                <div className="absolute inset-0 pointer-events-none z-0">
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-500/5 to-transparent -translate-x-full animate-shimmer" />
                 </div>
-                <Megaphone className={`w-6 h-6 ${activeTab === 'promotion' ? 'text-amber-400' : 'text-stone-500 group-hover:text-amber-400'}`} />
+                <div className="relative z-10">
+                  <div className={`font-bold transition ${activeTab === 'promotion' ? 'text-amber-400' : 'text-stone-300 group-hover:text-amber-400'}`}>3. Promotion</div>
+                  <div className="text-xs text-stone-500 mt-1 uppercase tracking-tighter">Media Blocking & Sports</div>
+                </div>
+                <div className="relative z-10 flex items-center gap-4">
+                  <Megaphone className={`w-6 h-6 ${activeTab === 'promotion' ? 'text-amber-400' : 'text-stone-500 group-hover:text-amber-400'}`} />
+                  <div className="flex flex-col items-center border-l border-stone-600 pl-4">
+                    <Zap className={`w-4 h-4 mb-0.5 animate-pulse ${activeTab === 'promotion' ? 'text-amber-400' : 'text-stone-500'}`} />
+                    <span className="text-[8px] font-black text-amber-500/60 tracking-tight">ANALYSIS</span>
+                  </div>
+                </div>
               </button>
 
               <button
                 onClick={() => { setActiveTab('place'); setShowMobileDetail(true); }}
-                className={`text-left p-5 rounded-xl border transition flex items-center justify-between group ${activeTab === 'place' ? 'bg-stone-700 border-amber-600 ring-1 ring-amber-600' : 'border-stone-600 hover:bg-stone-700'}`}
+                className={`text-left p-5 rounded-xl border transition flex items-center justify-between group relative overflow-hidden ${activeTab === 'place' ? 'bg-stone-700 border-amber-600 ring-1 ring-amber-600' : 'border-stone-600 hover:bg-stone-700'}`}
               >
-                <div>
-                  <div className={`font-bold transition ${activeTab === 'place' ? 'text-amber-400' : 'text-stone-300 group-hover:text-amber-400'}`}>4. Place</div>
-                  <div className="text-xs text-stone-500 mt-1">Dual Track System</div>
+                {/* Persistent Shimmer Effect */}
+                <div className="absolute inset-0 pointer-events-none z-0">
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-500/5 to-transparent -translate-x-full animate-shimmer" />
                 </div>
-                <Truck className={`w-6 h-6 ${activeTab === 'place' ? 'text-amber-400' : 'text-stone-500 group-hover:text-amber-400'}`} />
+                <div className="relative z-10">
+                  <div className={`font-bold transition ${activeTab === 'place' ? 'text-amber-400' : 'text-stone-300 group-hover:text-amber-400'}`}>4. Place</div>
+                  <div className="text-xs text-stone-500 mt-1 uppercase tracking-tighter">Dual Track System</div>
+                </div>
+                <div className="relative z-10 flex items-center gap-4">
+                  <Truck className={`w-6 h-6 ${activeTab === 'place' ? 'text-amber-400' : 'text-stone-500 group-hover:text-amber-400'}`} />
+                  <div className="flex flex-col items-center border-l border-stone-600 pl-4">
+                    <Zap className={`w-4 h-4 mb-0.5 animate-pulse ${activeTab === 'place' ? 'text-amber-400' : 'text-stone-500'}`} />
+                    <span className="text-[8px] font-black text-amber-500/60 tracking-tight">ANALYSIS</span>
+                  </div>
+                </div>
               </button>
             </div>
 

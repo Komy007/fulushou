@@ -13,8 +13,8 @@ const Philosophy: React.FC<PhilosophyProps> = ({ lang }) => {
   React.useEffect(() => {
     const observerOptions = {
       root: null,
-      rootMargin: '-20% 0px -20% 0px', // Trigger when card is near center
-      threshold: 0.6
+      rootMargin: '-30% 0px -30% 0px', // Tighter center trigger for PC/Mobile
+      threshold: 0.1 // lower threshold for more reliable trigger
     };
 
     const observerCallback = (entries: IntersectionObserverEntry[]) => {
@@ -22,10 +22,13 @@ const Philosophy: React.FC<PhilosophyProps> = ({ lang }) => {
         const cardId = entry.target.getAttribute('data-card-id');
         if (entry.isIntersecting) {
           setActiveCard(cardId);
-          // Auto-shrink after 2 seconds to create a "Pulse" effect
-          setTimeout(() => {
+          // Pulse duration: Grow, then shrink back after 1.8s
+          const timer = setTimeout(() => {
             setActiveCard(prev => prev === cardId ? null : prev);
-          }, 2000);
+          }, 1800);
+          return () => clearTimeout(timer);
+        } else if (!entry.isIntersecting && activeCard === cardId) {
+          setActiveCard(null); // Ensure shrink if user scrolls away fast
         }
       });
     };
@@ -118,10 +121,10 @@ const Philosophy: React.FC<PhilosophyProps> = ({ lang }) => {
 
               {/* Deity Image - Floating Background (Auto-pops on scroll or click) */}
               <div
-                className={`absolute -bottom-10 -right-10 w-80 h-80 lg:w-[32rem] lg:h-[32rem] transition-all duration-1000 ease-out pointer-events-none mix-blend-screen
+                className={`absolute -bottom-10 -right-10 w-80 h-80 lg:w-[24rem] lg:h-[24rem] transition-all duration-1000 ease-out pointer-events-none mix-blend-screen will-change-transform
                   ${activeCard === item.id
-                    ? 'z-40 scale-125 -translate-x-4 -translate-y-8 opacity-100 brightness-150 filter drop-shadow-[0_0_50px_rgba(255,255,255,0.4)]'
-                    : 'z-0 opacity-80 group-hover:opacity-100 scale-100'
+                    ? 'z-40 scale-125 -translate-x-4 -translate-y-8 opacity-100 brightness-125 filter drop-shadow-[0_0_30px_rgba(255,255,255,0.3)]'
+                    : 'z-0 opacity-70 group-hover:opacity-90 scale-100'
                   }`}
               >
                 <img
