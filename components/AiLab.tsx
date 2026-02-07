@@ -75,17 +75,20 @@ const AiLab: React.FC<AiLabProps> = ({ lang }) => {
   // Persist count
   useEffect(() => {
     localStorage.setItem('ai_usage_count', usageCount.toString());
-    if (usageCount >= 10 && usageCount < 20) {
+
+    // Soft warning at 3 uses (since limit is 5)
+    if (usageCount >= 3 && usageCount < 5) {
       setShowSoftWarning(true);
     } else {
       setShowSoftWarning(false);
     }
 
-    if (usageCount >= 20 && !isHardBlocked) {
-      const fourHoursLater = Date.now() + (4 * 60 * 60 * 1000);
-      setBlockedUntil(fourHoursLater);
+    // Hard block at 5 uses
+    if (usageCount >= 5 && !isHardBlocked) {
+      const twentyFourHoursLater = Date.now() + (24 * 60 * 60 * 1000); // 24 hours
+      setBlockedUntil(twentyFourHoursLater);
       setIsHardBlocked(true);
-      localStorage.setItem('ai_blocked_until', fourHoursLater.toString());
+      localStorage.setItem('ai_blocked_until', twentyFourHoursLater.toString());
     }
   }, [usageCount, isHardBlocked]);
 
@@ -310,8 +313,8 @@ const AiLab: React.FC<AiLabProps> = ({ lang }) => {
               <AlertCircle className="text-amber-600 w-6 h-6 shrink-0" />
               <p className="text-sm text-amber-800 font-medium text-left">
                 {lang === Language.KO
-                  ? "Mr. Bae가 열심히 답변하고 있습니다. AI 자원을 아껴주시면 더 많은 분들이 도움을 받을 수 있습니다. (10회 이상 이용 중)"
-                  : "Mr. Bae is working hard! Please use AI resources mindfully so others can also benefit. (10+ requests in this session)"}
+                  ? "일일 무료 사용량이 얼마 남지 않았습니다. (3/5회 사용 중)"
+                  : "Daily free usage is running low. (3/5 requests used)"}
               </p>
             </div>
           )}
@@ -322,17 +325,17 @@ const AiLab: React.FC<AiLabProps> = ({ lang }) => {
               <div className="flex items-center gap-3">
                 <Clock className="text-red-600 w-8 h-8" />
                 <h4 className="text-lg font-black text-red-900">
-                  {lang === Language.KO ? "시스템 보호 모드 가동" : "System Protection Active"}
+                  {lang === Language.KO ? "일일 사용 한도 초과" : "Daily Limit Reached"}
                 </h4>
               </div>
               <p className="text-sm text-red-800 font-medium text-center">
                 {lang === Language.KO
-                  ? "과도한 요청이 감지되어 시스템 보호를 위해 잠시 상담을 중단합니다. 약 4시간 후에 다시 이용해 주시기 바랍니다."
-                  : "Excessive requests detected. Consulting is temporarily suspended to protect the system. Please try again in about 4 hours."}
+                  ? "무료 사용 한도(5회)를 모두 소진했습니다. 내일 다시 이용해주세요."
+                  : "You have used all free requests (5/5). Please come back tomorrow."}
               </p>
               {blockedUntil && (
                 <div className="text-xs font-bold text-red-600 px-3 py-1 bg-white border border-red-100 rounded-full">
-                  UNTIL: {new Date(blockedUntil).toLocaleTimeString()}
+                  RESET AT: {new Date(blockedUntil).toLocaleTimeString()}
                 </div>
               )}
             </div>

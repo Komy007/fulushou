@@ -24,14 +24,14 @@ const PORT = process.env.PORT || 8080;
 app.use(cors());
 app.use(express.json());
 
-// AI API Rate Limiter: 20 requests per 4 hours per IP
+// AI API Rate Limiter: 10 requests per 24 hours per IP (Safety Net)
 const aiRateLimiter = rateLimit({
-    windowMs: 4 * 60 * 60 * 1000, // 4 hours
-    limit: 20, // Limit each IP to 20 requests per window
+    windowMs: 24 * 60 * 60 * 1000, // 24 hours
+    limit: 10, // Limit each IP to 10 requests per window (allowing some margin over frontend limit of 5)
     standardHeaders: 'draft-7', // draft-6: `RateLimit-*` headers; draft-7: combined `RateLimit` header
     legacyHeaders: false, // Disable the `X-RateLimit-*` headers.
     message: {
-        error: 'Too many requests from this IP, please try again after 4 hours.'
+        error: 'Too many requests from this IP, please try again after 24 hours.'
     }
 });
 
