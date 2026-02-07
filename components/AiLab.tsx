@@ -146,6 +146,18 @@ const AiLab: React.FC<AiLabProps> = ({ lang }) => {
     }
   };
 
+  const handleResetData = () => {
+    if (confirm(lang === Language.KO ? '모든 사용 데이터(사용량 제한 등)를 초기화하시겠습니까?' : 'Reset all usage data (limits, etc)?')) {
+      localStorage.removeItem('ai_usage_count');
+      localStorage.removeItem('ai_blocked_until');
+      setUsageCount(0);
+      setBlockedUntil(null);
+      setIsHardBlocked(false);
+      setShowSoftWarning(false);
+      alert(lang === Language.KO ? '초기화되었습니다.' : 'Reset complete.');
+    }
+  };
+
   const handleSendMessage = async () => {
     if (!chatInput.trim() || isHardBlocked || isChatLoading) return;
 
@@ -280,6 +292,9 @@ const AiLab: React.FC<AiLabProps> = ({ lang }) => {
           <span className="inline-flex items-center px-4 py-1.5 rounded-full bg-amber-100 text-amber-800 text-xs font-bold mb-4 shadow-sm border border-amber-200">
             <Zap className="w-3.1 h-3 mr-1.5 fill-amber-500" /> POWERED BY Mr.BAE
           </span>
+          <button onClick={handleResetData} className="ml-2 text-[10px] text-stone-400 hover:text-amber-600 underline">
+            {lang === Language.KO ? '[데이터 초기화]' : '[Reset Data]'}
+          </button>
           <h2 className="text-4xl lg:text-5xl font-black text-stone-900 mb-6 font-serif italic">
             {lang === Language.KO ? 'AI Business Insight Lab' : 'AI Business Insight Lab'}
           </h2>
