@@ -6,7 +6,6 @@ import CeoMessage from './components/CeoMessage';
 import Philosophy from './components/Philosophy';
 import History from './components/History';
 import StrategyDashboard from './components/StrategyDashboard';
-import AiLab from './components/AiLab';
 import MediaCenter from './components/MediaCenter';
 import ProductScroller from './components/ProductScroller';
 import Footer from './components/Footer';
@@ -62,7 +61,6 @@ function App() {
         <Philosophy lang={lang} />
         <History lang={lang} />
         <CeoMessage lang={lang} />
-        <AiLab lang={lang} />
         <StrategyDashboard lang={lang} />
         <MediaCenter lang={lang} />
       </main>

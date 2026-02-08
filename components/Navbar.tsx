@@ -1,6 +1,6 @@
 import React from 'react';
 import { Language, NavItem } from '../types';
-import { Globe, Sparkles, Menu, X } from 'lucide-react';
+import { Globe, Menu, X } from 'lucide-react';
 
 interface NavbarProps {
   lang: Language;
@@ -60,13 +60,7 @@ const Navbar: React.FC<NavbarProps> = ({ lang, toggleLang, scrollToSection }) =>
               </button>
             ))}
 
-            <button
-              onClick={() => scrollToSection('ai-lab')}
-              className="px-5 py-2 rounded-full border border-amber-500/50 text-xs font-black text-amber-500 hover:bg-amber-500 hover:text-stone-950 transition-all flex items-center uppercase tracking-widest shadow-lg shadow-amber-500/10"
-            >
-              <Sparkles className="w-3.5 h-3.5 mr-2" />
-              AI Lab
-            </button>
+
 
             <div className="h-4 w-px bg-stone-800 mx-2" />
 
@@ -115,13 +109,7 @@ const Navbar: React.FC<NavbarProps> = ({ lang, toggleLang, scrollToSection }) =>
               {item.label[lang]}
             </button>
           ))}
-          <button
-            onClick={() => handleMobileNavClick('ai-lab')}
-            className="text-2xl font-black text-amber-500 hover:text-white transition-all uppercase tracking-tighter flex items-center"
-          >
-            <Sparkles className="w-6 h-6 mr-3" />
-            AI Lab
-          </button>
+
 
           <div className="pt-8 flex flex-col items-center gap-4">
             <div className="w-12 h-px bg-stone-800" />
