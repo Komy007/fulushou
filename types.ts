@@ -1,11 +1,15 @@
 export enum Language {
   KO = 'ko',
   EN = 'en',
+  ZH = 'zh',  // Chinese (中文)
+  KH = 'kh',  // Khmer (ភាសាខ្មែរ)
 }
 
 export interface LocalizedContent {
   ko: string;
   en: string;
+  zh: string;
+  kh: string;
 }
 
 export interface NavItem {

@@ -32,48 +32,76 @@ const History: React.FC<HistoryProps> = ({ lang }) => {
 
   const CONTENT = {
     start: {
-      title: { ko: "1년차: 신화의 서막, 불가능에 도전하다", en: "Year 1: The Dawn of a Legend" },
+      title: {
+        ko: "1년차: 신화의 서막, 불가능에 도전하다",
+        en: "Year 1: The Dawn of a Legend",
+        zh: "第1年：传奇的序幕，挑战不可能",
+        kh: "ឆ្នាំទី១៖ ព្រឹកនៃរឿងព្រេង"
+      },
       desc: {
-        ko: "2000년대 후반, 캄보디아 시장은 글로벌 거대 브랜드들이 장악하고 있었습니다. 하지만 Fu Lu Shou는 캄보디아의 폭발적인 성장 잠재력과 한국의 7080 개발 연대 사이의 평행이론을 발견했습니다. '박카스'라는 한국의 국민 음료를 들고 CEO가 직접 24개 주 전역을 누비며, 길바닥의 흙먼지 속에서 현지 상인들과 형제애를 쌓았습니다. 이것이 오늘날 95% 커버리지 유통망의 전설적인 시작이었습니다.",
-        en: "In the late 2000s, the Cambodian market was dominated by global giants. However, Fu Lu Shou discovered a parallel between Cambodia's potential and Korea's rapid growth era. Our CEO traversed all 24 provinces with Bacchus, building brotherhood with local merchants in the dust of the streets. This was the legendary beginning of a distribution network that now covers 95% of the nation."
+        ko: "2000년대 후반, 캄보디아 시장은 글로벌 거대 브랜드들이 장악하고 있었습니다. 하지만 Fu Lu Shou는 캄보디아의 폭발적인 성장 잠재력과 한국의 7080 개발 연대 사이의 평행이론을 발견했습니다.",
+        en: "In the late 2000s, the Cambodian market was dominated by global giants. However, Fu Lu Shou discovered a parallel between Cambodia's potential and Korea's rapid growth era.",
+        zh: "2000年代后期，柬埔寨市场被全球巨头主导。然而，福禄寿发现了柬埔寨潜力与韩国快速增长时代之间的平行关系。",
+        kh: "នៅចុងទសវត្សរ៍ឆ្នាំ 2000 ទីផ្សារកម្ពុជាត្រូវបានគ្រប់គ្រងដោយក្រុមហ៊ុនសកលធំៗ។ ទោះយ៉ាងណា Fu Lu Shou បានរកឃើញភាពស្របគ្នារវាងសក្តានុពលរបស់កម្ពុជានិងយុគសម័យកំណើនរហ័សរបស់កូរ៉េ។"
       },
       image: "https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=800&q=80",
-      stats: { ko: "전국 거점망 확보 100%", en: "100% Core Hub Secured" }
+      stats: { ko: "전국 거점망 확보 100%", en: "100% Core Hub Secured", zh: "100%核心枢纽确保", kh: "មជ្ឈមណ្ឌលស្នូល 100% បានធានា" }
     },
     growth: {
-      title: { ko: "5년차: '박카스 신화'로 시장의 판도를 바꾸다", en: "Year 5: Rewriting Market Rules with Bacchus" },
+      title: {
+        ko: "5년차: '박카스 신화'로 시장의 판도를 바꾸다",
+        en: "Year 5: Rewriting Market Rules with Bacchus",
+        zh: "第5年：用百事改写市场规则",
+        kh: "ឆ្នាំទី៥៖ សរសេរច្បាប់ទីផ្សារឡើងវិញជាមួយ Bacchus"
+      },
       desc: {
-        ko: "단순한 수입 판매를 넘어 '하이퍼 로컬라이제이션'을 단행했습니다. 한국의 병 형태를 과감히 버리고 현지 기후와 물류 환경에 최적화된 '캔 박카스'를 도입했습니다. 동시에 미디어 블로킹 전략을 통해 TV 광고 시장을 선점하며 레드불과 카라바오를 제치고 에너지 음료 시장 점유율 1위를 달성했습니다. 박카스는 캄보디아인들에게 단순한 음료가 아닌, '성공을 향한 에너지'라는 새로운 문화를 심어주었습니다.",
-        en: "We moved beyond simple imports to 'Hyper-Localization'. We courageously abandoned the traditional Korean bottle for a 'Bacchus Can' optimized for the local climate. By monopolizing TV ad slots through 'Media Blocking', we overtook Red Bull and Carabao to reach No.1. Bacchus became more than a drink; it became a culture of 'Energy for Success' for Cambodians."
+        ko: "단순한 수입 판매를 넘어 '하이퍼 로컬라이제이션'을 단행했습니다. 한국의 병 형태를 과감히 버리고 현지 기후와 물류 환경에 최적화된 '캔 박카스'를 도입했습니다.",
+        en: "We moved beyond simple imports to 'Hyper-Localization'. We courageously abandoned the traditional Korean bottle for a 'Bacchus Can' optimized for the local climate.",
+        zh: "我们超越了简单的进口，实现了'超本地化'。我们勇敢地放弃了传统的韩国瓶子，推出了针对当地气候优化的'百事罐'。",
+        kh: "យើងបានឆ្លងផុតពីការនាំចូលធម្មតាទៅ 'Hyper-Localization'។ យើងបានបោះបង់ដបកូរ៉េប្រពៃណីដោយក្លាហាន សម្រាប់ 'Bacchus Can' ដែលត្រូវបានធ្វើឱ្យប្រសើរសម្រាប់អាកាសធាតុមូលដ្ឋាន។"
       },
       image: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?auto=format&fit=crop&w=800&q=80",
-      stats: { ko: "캄보디아 에너지 음료 1위", en: "No.1 Energy Drink in Cambodia" }
+      stats: { ko: "캄보디아 에너지 음료 1위", en: "No.1 Energy Drink in Cambodia", zh: "柬埔寨能量饮料第一", kh: "ភេសជ្ជៈថាមពលលេខ១ ក្នុងប្រទេសកម្ពុជា" }
     },
     expansion: {
-      title: { ko: "10년차: 한국 대표 브랜드들의 성공 지름길이 되다", en: "Year 10: The Shortcut for Top Korean Brands" },
+      title: {
+        ko: "10년차: 한국 대표 브랜드들의 성공 지름길이 되다",
+        en: "Year 10: The Shortcut for Top Korean Brands",
+        zh: "第10年：顶级韩国品牌的捷径",
+        kh: "ឆ្នាំទី១០៖ ផ្លូវកាត់សម្រាប់ម៉ាកកូរ៉េកំពូល"
+      },
       desc: {
-        ko: "박카스의 성공을 통해 입증된 Fu Lu Shou의 유통 파워는 농심 신라면, 동아오츠카 포카리스웨트, 오라떼 등 한국의 대표 식음료 브랜드들로 확장되었습니다. 우리는 단순히 물건을 배달하는 것이 아니라, 각 브랜드가 캄보디아 현지 시장에 어떻게 안착해야 하는지 그 '성공의 알고리즘'을 제공했습니다. 캄보디아 전역의 촘촘한 도소매 네트워크는 이제 어떤 제품도 24시간 내에 전국 어디든 전달할 수 있는 무적의 인프라가 되었습니다.",
-        en: "Fu Lu Shou's proven distribution power expanded to iconic Korean brands like Shin Ramyun, Pocari Sweat, and Olatte. We don't just deliver goods; we provide the 'Success Algorithm' for each brand to land perfectly in the local market. Our dense wholesale and retail network became an invincible infrastructure capable of delivering any product nationwide within 24 hours."
+        ko: "박카스의 성공을 통해 입증된 Fu Lu Shou의 유통 파워는 농심 신라면, 동아오츠카 포카리스웨트, 오라떼 등 한국의 대표 식음료 브랜드들로 확장되었습니다.",
+        en: "Fu Lu Shou's proven distribution power expanded to iconic Korean brands like Shin Ramyun, Pocari Sweat, and Olatte.",
+        zh: "福禄寿经过验证的分销实力扩展到了辛拉面、宝矿力水特、Olatte等标志性韩国品牌。",
+        kh: "អំណាចចែកចាយដែលបានបង្ហាញរបស់ Fu Lu Shou បានពង្រីកទៅកាន់ម៉ាកកូរ៉េដ៏ល្បីដូចជា Shin Ramyun, Pocari Sweat និង Olatte។"
       },
       image: "https://images.unsplash.com/photo-1612927601601-6638404737ce?auto=format&fit=crop&w=800&q=80",
-      stats: { ko: "식품/음료 유통망 장악력 1위", en: "No.1 F&B Distribution Dominance" }
+      stats: { ko: "식품/음료 유통망 장악력 1위", en: "No.1 F&B Distribution Dominance", zh: "食品饮料分销主导地位第一", kh: "ការគ្រប់គ្រងការចែកចាយអាហារនិងភេសជ្ជៈលេខ១" }
     },
     leader: {
-      title: { ko: "15년차: 독보적 1위, 성공을 보장하는 비즈니스 게이트웨이", en: "Year 15: Absolute Leader & Success Gateway" },
+      title: {
+        ko: "15년차: 독보적 1위, 성공을 보장하는 비즈니스 게이트웨이",
+        en: "Year 15: Absolute Leader & Success Gateway",
+        zh: "第15年：绝对领导者与成功之门",
+        kh: "ឆ្នាំទី១៥៖ អ្នកដឹកនាំដាច់ខាត និងច្រកទ្វារជោគជ័យ"
+      },
       desc: {
-        ko: "오늘날 Fu Lu Shou는 캄보디아 진출을 원하는 모든 한국 기업에게 '성공의 보증수표'와 같습니다. 연간 2억 캔 이상의 판매 신화는 지금도 계속되고 있으며, 우리의 유통망은 캄보디아 경제의 혈관과도 같습니다. 우리는 지난 15년간 단 한 번도 성장을 멈춘 적이 없습니다. Fu Lu Shou와 함께한다는 것은 캄보디아 시장에서 이미 절반의 성공을 거두고 시작하는 것과 같습니다. 우리가 걸어온 발자취가 바로 당신의 미래 성공 전략입니다.",
-        en: "Today, Fu Lu Shou is the 'Guarantee of Success' for any Korean company entering Cambodia. Our legend of selling 200M+ cans annually continues, and our network is the lifeblood of the economy. We haven't stopped growing for 15 years. Partnering with Fu Lu Shou means starting with 50% of the success already achieved. Our footsteps are your future success strategy."
+        ko: "오늘날 Fu Lu Shou는 캄보디아 진출을 원하는 모든 한국 기업에게 '성공의 보증수표'와 같습니다. 연간 2억 캔 이상의 판매 신화는 지금도 계속되고 있습니다.",
+        en: "Today, Fu Lu Shou is the 'Guarantee of Success' for any Korean company entering Cambodia. Our legend of selling 200M+ cans annually continues.",
+        zh: "今天，福禄寿是任何进入柬埔寨的韩国企业的'成功保证'。我们每年销售2亿罐以上的传奇还在继续。",
+        kh: "សព្វថ្ងៃ Fu Lu Shou គឺជា 'ការធានាជោគជ័យ' សម្រាប់ក្រុមហ៊ុនកូរ៉េណាមួយដែលចូលកម្ពុជា។ រឿងព្រេងនៃការលក់ 200M+ កំប៉ុងក្នុងមួយឆ្នាំនៅតែបន្ត។"
       },
       image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
-      stats: { ko: "전국 유통망 마켓 셰어 1위", en: "No.1 National Distribution Share" }
+      stats: { ko: "전국 유통망 마켓 셰어 1위", en: "No.1 National Distribution Share", zh: "全国分销市场份额第一", kh: "ចំណែកទីផ្សារចែកចាយជាតិលេខ១" }
     }
   };
 
-  const milestones: { id: HistoryMilestone, year: string, sub: string, icon: any, label: string }[] = [
-    { id: 'start', year: 'Year 01', label: 'THE ORIGIN', sub: lang === Language.KO ? '개척과 도전의 시작' : 'The First Step', icon: Map },
-    { id: 'growth', year: 'Year 05', label: 'MARKET NO.1', sub: lang === Language.KO ? '박카스 신화의 탄생' : 'Bacchus Legend', icon: Award },
-    { id: 'expansion', year: 'Year 10', label: 'PORTFOLIO', sub: lang === Language.KO ? '한국 대표 브랜드 수입' : 'Brand Expansion', icon: Rocket },
-    { id: 'leader', year: 'Year 15+', label: 'CHAMPION', sub: lang === Language.KO ? '압도적 유통 1위' : 'Total Leader', icon: TrendingUp },
+  const milestones: { id: HistoryMilestone, year: string, sub: { ko: string, en: string, zh: string, kh: string }, icon: any, label: string }[] = [
+    { id: 'start', year: 'Year 01', label: 'THE ORIGIN', sub: { ko: '개척과 도전의 시작', en: 'The First Step', zh: '开拓与挑战', kh: 'ការចាប់ផ្តើម' }, icon: Map },
+    { id: 'growth', year: 'Year 05', label: 'MARKET NO.1', sub: { ko: '박카스 신화의 탄생', en: 'Bacchus Legend', zh: '百事传奇', kh: 'រឿងព្រេង Bacchus' }, icon: Award },
+    { id: 'expansion', year: 'Year 10', label: 'PORTFOLIO', sub: { ko: '한국 대표 브랜드 수입', en: 'Brand Expansion', zh: '品牌扩展', kh: 'ការពង្រីកម៉ាក' }, icon: Rocket },
+    { id: 'leader', year: 'Year 15+', label: 'CHAMPION', sub: { ko: '압도적 유통 1위', en: 'Total Leader', zh: '绝对领导者', kh: 'អ្នកដឹកនាំសរុប' }, icon: TrendingUp },
   ];
 
   const current = CONTENT[activeTab];
@@ -123,7 +151,7 @@ const History: React.FC<HistoryProps> = ({ lang }) => {
         <div className="flex justify-between items-end mb-10">
           <h5 className="text-stone-900 font-black text-xl lg:text-2xl flex items-center gap-3">
             <TrendingUp size={28} className="text-amber-600" />
-            {lang === Language.KO ? '시장 영향력 지표' : 'Market Index'}
+            {lang === 'ko' ? '시장 영향력 지표' : lang === 'zh' ? '市场影响力指标' : lang === 'kh' ? 'សម្ទឫស្សន៍តើមធ្នូរ' : 'Market Index'}
           </h5>
           <span className="text-3xl lg:text-4xl font-black text-amber-600 font-serif">TOP 1</span>
         </div>
@@ -169,12 +197,16 @@ const History: React.FC<HistoryProps> = ({ lang }) => {
               <Star className="w-4 h-4 fill-amber-800" /> SUCCESS ARCHIVE
             </h2>
             <h3 className="text-5xl lg:text-8xl font-black text-stone-900 mb-8 font-serif leading-none tracking-tighter">
-              {lang === Language.KO ? '발자취' : 'History'}
+              {lang === 'ko' ? '발자취' : lang === 'zh' ? '足迹' : lang === 'kh' ? 'ប្រវត្តិសាស្ត្រ' : 'History'}
             </h3>
             <p className="text-2xl text-stone-900 leading-relaxed font-bold max-w-2xl border-l-4 border-amber-600/30 pl-8">
-              {lang === Language.KO
+              {lang === 'ko'
                 ? "단순한 유통을 넘어, 우리는 캄보디아 유통 시장의 신화를 썼습니다."
-                : "Beyond logistics, we wrote the legend of the Cambodian market."}
+                : lang === 'zh'
+                  ? "超越物流，我们书写了柬埔寨市场的传奇。"
+                  : lang === 'kh'
+                    ? "ហួសពីការដឹកជញ្ជូន យើងបានសរសេររឿងព្រេងនៃទីផ្សារកម្ពុជា។"
+                    : "Beyond logistics, we wrote the legend of the Cambodian market."}
             </p>
           </div>
           <div className="hidden lg:flex flex-col items-end gap-2 text-amber-900 font-black text-sm uppercase tracking-widest">
@@ -218,7 +250,7 @@ const History: React.FC<HistoryProps> = ({ lang }) => {
                       {m.label}
                     </div>
                     <div className={`text-lg font-black leading-tight tracking-tight ${activeTab === m.id ? 'text-white' : 'text-stone-800'}`}>
-                      {m.sub}
+                      {m.sub[lang]}
                     </div>
                   </div>
 
@@ -226,7 +258,7 @@ const History: React.FC<HistoryProps> = ({ lang }) => {
                   <div className="relative z-10 flex flex-col items-center ml-2 border-l border-stone-100 pl-4 py-1">
                     <MousePointer2 className={`w-4 h-4 mb-1 animate-pulse ${activeTab === m.id ? 'text-amber-400' : 'text-stone-300'}`} />
                     <span className={`text-[8px] font-black uppercase tracking-tighter ${activeTab === m.id ? 'text-amber-400' : 'text-stone-400'}`}>
-                      {lang === Language.KO ? '클릭' : 'READ'}
+                      {lang === 'ko' ? '클릭' : lang === 'zh' ? '点击' : lang === 'kh' ? 'ចុច' : 'READ'}
                     </span>
                   </div>
                 </button>
@@ -239,12 +271,16 @@ const History: React.FC<HistoryProps> = ({ lang }) => {
                   Verified Heritage
                 </span>
                 <h5 className="text-3xl font-black mb-6 leading-tight font-serif italic">
-                  {lang === Language.KO ? "검증된\n성공의 방정식" : "Proven\nSuccess DNA"}
+                  {lang === 'ko' ? "검증된\n성공의 방정식" : lang === 'zh' ? "验证的\n成功公式" : lang === 'kh' ? "រូបមន្តជោគជ័យ\nដែលបានបង្ហាញ" : "Proven\nSuccess DNA"}
                 </h5>
                 <p className="text-stone-400 text-sm leading-relaxed font-medium">
-                  {lang === Language.KO
+                  {lang === 'ko'
                     ? "우리의 발자취는 귀사가 걸어갈 가장 안전한 지름길입니다."
-                    : "Our footsteps are the safest shortcut for your journey."}
+                    : lang === 'zh'
+                      ? "我们的足迹是您商业旅程最安全的捷径。"
+                      : lang === 'kh'
+                        ? "ជាន់ចាដាក់របស់យើងគឺជាផ្លូវកាត់សុវត្ថិភាពបំផុតសម្រាប់ដំណើររបស់អ្នក។"
+                        : "Our footsteps are the safest shortcut for your journey."}
                 </p>
               </div>
               <div className="mt-8 flex gap-2">
@@ -282,7 +318,7 @@ const History: React.FC<HistoryProps> = ({ lang }) => {
               onClick={() => setShowMobileDetail(false)}
               className="w-full py-4 bg-stone-200 border-2 border-stone-300 text-stone-700 rounded-xl mt-8 font-black text-lg hover:bg-stone-300 transition shadow-sm"
             >
-              {lang === Language.KO ? '닫기' : 'Close'}
+              {lang === 'ko' ? '닫기' : lang === 'zh' ? '关闭' : lang === 'kh' ? 'បិទ' : 'Close'}
             </button>
           </div>
         </div>

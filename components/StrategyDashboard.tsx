@@ -16,10 +16,17 @@ const StrategyDashboard: React.FC<StrategyDashboardProps> = ({ lang }) => {
 
   const DATA = {
     market: {
-      title: { ko: "1. Market Insight: 시공간적 이식 (Time-Machine)", en: "1. Market Insight: Time-Machine Strategy" },
+      title: {
+        ko: "1. Market Insight: 시공간적 이식 (Time-Machine)",
+        en: "1. Market Insight: Time-Machine Strategy",
+        zh: "1. 市场洞察：时空移植战略",
+        kh: "1. ការវិភាគទីផ្សារ៖ យុទ្ធសាស្ត្រម៉ាស៊ីនពេលវេលា"
+      },
       desc: {
-        ko: "캄보디아의 현재는 한국의 1970~80년대와 유사합니다. 연 7% 고성장, 건설 붐, 산업화 초기 단계는 '피로 회복' 수요를 폭발시켰습니다. **인구의 70%가 30대 이하**인 젊은 층을 타겟으로 한국의 성공 방정식을 이식했습니다.",
-        en: "Cambodia today mirrors Korea in the 70s/80s. 7% growth, construction boom, and industrialization exploded the demand for 'fatigue recovery'. Targeting the **70% youth population**, we transplanted Korea's success formula."
+        ko: "캄보디아의 현재는 한국의 1970~80년대와 유사합니다. 연 7% 고성장, 건설 붐, 산업화 초기 단계는 '피로 회복' 수요를 폭발시켰습니다.",
+        en: "Cambodia today mirrors Korea in the 70s/80s. 7% growth, construction boom, and industrialization exploded the demand for 'fatigue recovery'.",
+        zh: "今天的柬埔寨与70/80年代的韩国相似。7%的增长、建筑热潮和工业化使'抗疲劳'需求爆炸式增长。",
+        kh: "កម្ពុជាសព្វថ្ងៃមានលក្ខណៈស្រដៀងគ្នាកូរ៉េនៅឆ្នាំ 70/80។ កំណើន 7% គម្រោងសំណង់ និងឧស្សាហកម្មបានផ្ទុះនូវតម្រូវការ 'ស្ដារហាត់អារម្មណ៍'។"
       },
       chartData: [
         { name: 'Youth (<30)', value: 70 },
@@ -28,10 +35,17 @@ const StrategyDashboard: React.FC<StrategyDashboardProps> = ({ lang }) => {
       colors: ['#D97706', '#44403C']
     },
     product: {
-      title: { ko: "2. Product: 과감한 현지화 (Bottle to Can)", en: "2. Product: Radical Localization (Bottle to Can)" },
+      title: {
+        ko: "2. Product: 과감한 현지화 (Bottle to Can)",
+        en: "2. Product: Radical Localization (Bottle to Can)",
+        zh: "2. 产品：彻底本地化（瓶转罐）",
+        kh: "2. ផលិតផល៖ មូលដ្ឋានីយកម្មហួសពេក (ដបទៅកំប៉ុង)"
+      },
       desc: {
-        ko: "한국의 상징인 '갈색 병'을 버리고 **'캔'**을 선택했습니다. 열악한 도로 사정으로 인한 파손을 막고, 냉장고가 없는 소매점의 아이스박스 보관 환경(물에 젖는 종이 라벨 문제)을 극복하기 위한 혁신이었습니다.",
-        en: "We ditched the iconic 'Brown Bottle' for the **'Can'**. This innovation prevented breakage on rough roads and solved the label-peeling issue in iceboxes used by local shops without fridges."
+        ko: "한국의 상징인 '갈색 병'을 버리고 '캔'을 선택했습니다. 열악한 도로 사정으로 인한 파손을 막고, 냉장고가 없는 소매점의 아이스박스 보관 환경을 극복했습니다.",
+        en: "We ditched the iconic 'Brown Bottle' for the 'Can'. This innovation prevented breakage on rough roads and solved the label-peeling issue in iceboxes.",
+        zh: "我们放弃了标志性的'棕色瓶'，选择了'罐'。这项创新防止了在崎岖道路上的破损，解决了冰箱中标签剥落的问题。",
+        kh: "យើងបានបោះបង់ 'ដបត្នោត' សម្រាប់ 'កំប៉ុង'។ ការបង្កើតថ្មីនេះបានបង្ការការបំបែកនៅលើផ្លូវមិនរាបរិន។"
       },
       chartData: [
         { name: 'Durability', value: 40 },
@@ -41,10 +55,17 @@ const StrategyDashboard: React.FC<StrategyDashboardProps> = ({ lang }) => {
       colors: ['#B45309', '#F59E0B', '#FCD34D']
     },
     promotion: {
-      title: { ko: "3. Promotion: 미디어 블로킹 (Media Blocking)", en: "3. Promotion: Media Blocking" },
+      title: {
+        ko: "3. Promotion: 미디어 블로킹 (Media Blocking)",
+        en: "3. Promotion: Media Blocking",
+        zh: "3. 促销：媒体封锁",
+        kh: "3. ការផ្សែងផ្សាយ៖ Media Blocking"
+      },
       desc: {
-        ko: "한국의 1/10 수준인 저렴한 TV 광고비를 역이용하여, 프라임 타임 광고 슬롯을 연단위로 선점(Blocking)했습니다. 경쟁사의 노출 기회를 원천 봉쇄하여 **'에너지 드링크 = 박카스'**라는 공식을 각인시켰습니다.",
-        en: "Leveraging low TV ad costs (1/10 of Korea), we blocked prime-time slots year-round. This **'Media Blocking'** shut out competitors and cemented the formula: **'Energy Drink = Bacchus'**."
+        ko: "한국의 1/10 수준인 저렴한 TV 광고비를 역이용하여, 프라임 타임 광고 슬롯을 연단위로 선점(Blocking)했습니다.",
+        en: "Leveraging low TV ad costs (1/10 of Korea), we blocked prime-time slots year-round. This shut out competitors and cemented 'Energy Drink = Bacchus'.",
+        zh: "利用低廉的电视广告费用（韩国的1/10），我们全年封锁了黄金时段。这封锁了竞争对手，并确立了'能量饮料=百事'。",
+        kh: "ប្រើប្រាស់តម្លៃខ្សុសនៃការផ្សាយTV (1/10 នៃកូរ៉េ) យើងបានបិទទ្វារពេលវេលាកំពូលពេញឆ្នាំ។"
       },
       chartData: [
         { name: 'Bacchus', value: 90 },
@@ -53,10 +74,17 @@ const StrategyDashboard: React.FC<StrategyDashboardProps> = ({ lang }) => {
       colors: ['#D97706', '#57534E']
     },
     place: {
-      title: { ko: "4. Place: 유통 이원화 (Dual Track)", en: "4. Place: Dual Track Distribution" },
+      title: {
+        ko: "4. Place: 유통 이원화 (Dual Track)",
+        en: "4. Place: Dual Track Distribution",
+        zh: "4. 渠道：双轨分销",
+        kh: "4. ទីកន្លែង៖ ការចែកចាយគូសង្ខេគ"
+      },
       desc: {
-        ko: "<strong>수도권(프놈펜)은 직영</strong>으로 정밀 타격하고, <strong>지방은 24개 총판</strong>을 통해 커버리지를 극대화했습니다. 이는 물류비 절감과 외상 리스크를 동시에 해결한 한국형 유통의 현지화 모델입니다.",
-        en: "<strong>Direct Management</strong> in Phnom Penh for precision, and <strong>24 Distributors</strong> for provincial coverage. This Dual Track system optimized logistics costs and minimized credit risks."
+        ko: "수도권(프놌펜)은 직영으로 정밀 타격하고, 지방은 24개 총판을 통해 커버리지를 극대화했습니다.",
+        en: "Direct Management in Phnom Penh for precision, and 24 Distributors for provincial coverage. This Dual Track system optimized logistics costs.",
+        zh: "金边直接管理以确保精准，24个分销商覆盖各省。这种双轨系统优化了物流成本。",
+        kh: "ការគ្រប់គ្រងផ្ទាល់នៅភ្នំពេញសម្រាប់ប្រាកដព្រៈចិត្ត និង 24 អ្នកចែកចាយសម្រាប់គ្រប់គ្រងខេត្ត។"
       },
       chartData: [
         { name: 'Phnom Penh', value: 95 },
@@ -138,12 +166,16 @@ const StrategyDashboard: React.FC<StrategyDashboardProps> = ({ lang }) => {
         <div className="mb-12">
           <span className="text-amber-500 font-bold tracking-wider text-sm">CASE STUDY: BACCHUS</span>
           <h2 className="text-3xl lg:text-5xl font-extrabold mt-2 mb-6">
-            {lang === Language.KO ? '박카스 신화: 4P 믹스의 재구성' : 'The Bacchus Legend: Reconstructing the 4P Mix'}
+            {lang === 'ko' ? '박카스 신화: 4P 믹스의 재구성' : lang === 'zh' ? '百事传奇：4P组合的重构' : lang === 'kh' ? 'រឿងព្រេង Bacchus: ការកសាង 4P ឡើងវិញ' : 'The Bacchus Legend: Reconstructing the 4P Mix'}
           </h2>
           <p className="text-stone-400 max-w-3xl text-lg">
-            {lang === Language.KO
+            {lang === 'ko'
               ? "한국의 1970년대 성공 방정식을 캄보디아에 적용한 '시공간적 이식 전략'과 철저한 '하이퍼 로컬라이제이션'의 결합."
-              : "A perfect fusion of 'Time-Machine Strategy'—applying Korea's 1970s success formula—and thorough 'Hyper-Localization'."}
+              : lang === 'zh'
+                ? "将韩国70年代成功公式应用于柬埔寨的'时空移植战略'与彻底'超本地化'的完美结合。"
+                : lang === 'kh'
+                  ? "ការរួមបញ្ចូលគ្នាហួសពេកនៃ 'យុទ្ធសាស្ត្រម៉ាស៊ីនពេលវេលា' - ការអនុវត្តន៍រូបមន្តជោគជ័យកូរ៉េឆ្នាំ 70 - និង 'Hyper-Localization' ហ្មត់ចត់។"
+                  : "A perfect fusion of 'Time-Machine Strategy'—applying Korea's 1970s success formula—and thorough 'Hyper-Localization'."}
           </p>
         </div>
 

@@ -46,33 +46,41 @@ const Philosophy: React.FC<PhilosophyProps> = ({ lang }) => {
   const CARDS = [
     {
       char: '福',
-      label: 'Fu (Harmony)',
+      label: { ko: 'Fu (조화)', en: 'Fu (Harmony)', zh: '福（和谐）', kh: 'Fu (សុភមង្គល)' },
       id: 'fu',
       icon: Heart,
       bg: 'bg-red-950/20',
       img: '/img/philosophy/fu_v5.png',
-      border: 'border-red-500/20',
-      accent: 'text-red-500',
-      footerColor: 'text-red-400',
-      ko: "비즈니스의 근본은 기술이나 자본이 아닌 '사람의 마음'에 있습니다. 우리는 파트너사의 제품이 캄보디아 가정마다 행복(福)을 전달하는 메신저가 되기를 바랍니다.",
-      en: "The foundation of business lies not in capital, but in the 'Hearts of People'. We want our partners' products to be messengers of happiness (Fu) for every Cambodian home."
+      border: 'border-amber-500/20',
+      accent: 'text-amber-500',
+      footerColor: 'text-amber-400',
+      desc: {
+        ko: "비즈니스의 근본은 기술이나 자본이 아닌 '사람의 마음'에 있습니다. 우리는 파트너사의 제품이 캄보디아 가정마다 행복(福)을 전달하는 메신저가 되기를 바랍니다.",
+        en: "The foundation of business lies not in capital, but in the 'Hearts of People'. We want our partners' products to be messengers of happiness (Fu) for every Cambodian home.",
+        zh: "商业的根本不在于资本，而在于'人心'。我们希望合作伙伴的产品成为为每个柬埔寨家庭传递幸福（福）的使者。",
+        kh: "គ្រឹះនៃអាជីវកម្មមិនស្ថិតនៅលើដើមទុនទេ ប៉ុន្តែនៅលើ 'បេះដូងមនុស្ស'។"
+      }
     },
     {
       char: '祿',
-      label: 'Lu (Status)',
+      label: { ko: 'Lu (번영)', en: 'Lu (Status)', zh: '禄（地位）', kh: 'Lu (ឋានៈ)' },
       id: 'lu',
       icon: Award,
-      bg: 'bg-indigo-950/20',
+      bg: 'bg-amber-950/20',
       img: '/img/philosophy/lu_v5.png',
-      border: 'border-indigo-500/20',
-      accent: 'text-indigo-500',
-      footerColor: 'text-indigo-400',
-      ko: "번영(祿)은 치밀한 전략과 실행력의 정직한 보상입니다. 우리는 입점 브랜드가 단순한 상품을 넘어 시장의 '기준'이자 '명예(Status)'가 되도록 격상시킵니다.",
-      en: "Prosperity (Lu) is the honest reward of strategy. We elevate your brand from a 'Product' to a 'Market Standard' and 'Status' in Cambodia."
+      border: 'border-amber-500/20',
+      accent: 'text-amber-500',
+      footerColor: 'text-amber-400',
+      desc: {
+        ko: "번영(祿)은 치밀한 전략과 실행력의 정직한 보상입니다. 우리는 입점 브랜드가 단순한 상품을 넘어 시장의 '기준'이자 '명예(Status)'가 되도록 격상시킵니다.",
+        en: "Prosperity (Lu) is the honest reward of strategy. We elevate your brand from a 'Product' to a 'Market Standard' and 'Status' in Cambodia.",
+        zh: "繁荣（禄）是战略的诚实回报。我们将您的品牌从'产品'提升为柬埔寨的'市场标准'和'地位'。",
+        kh: "សុភមង្គល (Lu) គឺជារង្វាន់ស្មោះត្រង់នៃយុទ្ធសាស្ត្រ។"
+      }
     },
     {
       char: '壽',
-      label: 'Shou (Longevity)',
+      label: { ko: 'Shou (장수)', en: 'Shou (Longevity)', zh: '寿（长寿）', kh: 'Shou (អាយុវែង)' },
       id: 'shou',
       icon: ShieldCheck,
       bg: 'bg-emerald-950/20',
@@ -80,8 +88,12 @@ const Philosophy: React.FC<PhilosophyProps> = ({ lang }) => {
       border: 'border-emerald-500/20',
       accent: 'text-emerald-500',
       footerColor: 'text-emerald-400',
-      ko: "영속성(壽)은 변하지 않는 정직함에서 탄생합니다. 귀사의 브랜드가 캄보디아에서 대를 이어 사랑받는 '롱런 레전드'가 되도록 신뢰의 동반자가 되겠습니다.",
-      en: "Longevity (Shou) is born from unchanging honesty. We will be the partner of trust that ensures your brand becomes a 'Long-run Legend' for generations."
+      desc: {
+        ko: "영속성(壽)은 변하지 않는 정직함에서 탄생합니다. 귀사의 브랜드가 캄보디아에서 대를 이어 사랑받는 '롱런 레전드'가 되도록 신뢰의 동반자가 되겠습니다.",
+        en: "Longevity (Shou) is born from unchanging honesty. We will be the partner of trust that ensures your brand becomes a 'Long-run Legend' for generations.",
+        zh: "长寿（寿）源于不变的诚实。我们将成为信任的伙伴，确保您的品牌成为代代相传的'长青传奇'。",
+        kh: "អាយុវែង (Shou) កើតចេញពីភាពស្មោះត្រង់មិនប្រែប្រួល។"
+      }
     }
   ];
 
@@ -148,13 +160,13 @@ const Philosophy: React.FC<PhilosophyProps> = ({ lang }) => {
                 </div>
 
                 <h4 className="text-4xl font-black mb-6 tracking-tight text-white group-hover:text-amber-400 transition-colors drop-shadow-md">
-                  {item.label}
+                  {item.label[lang]}
                 </h4>
 
                 <div className="h-1.5 w-20 mb-10 rounded-full bg-gradient-to-r from-amber-500 to-amber-500/10"></div>
 
                 <p className="text-xl text-left text-white font-bold leading-[1.6] mb-10 drop-shadow-2xl max-w-[95%]">
-                  {lang === Language.KO ? item.ko : item.en}
+                  {item.desc[lang]}
                 </p>
 
                 <div className={`mt-auto pt-6 w-full flex items-center gap-3 text-[11px] font-black uppercase tracking-[0.3em] ${item.footerColor}`}>

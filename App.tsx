@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import CompanyOverview from './components/CompanyOverview';
 import Identity from './components/Identity';
-import CeoMessage from './components/CeoMessage';
-import Philosophy from './components/Philosophy';
-import History from './components/History';
-import StrategyDashboard from './components/StrategyDashboard';
-import MediaCenter from './components/MediaCenter';
 import ProductScroller from './components/ProductScroller';
+import Philosophy from './components/Philosophy';
+import DistributionNetwork from './components/DistributionNetwork';
+import History from './components/History';
+import MarketingPower from './components/MarketingPower';
+import CeoMessage from './components/CeoMessage';
+import StrategyDashboard from './components/StrategyDashboard';
+import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
 import { Language } from './types';
 
@@ -15,16 +18,12 @@ function App() {
   const [lang, setLang] = useState<Language>(Language.KO);
 
   React.useEffect(() => {
-    // Force scroll to top on load with a slight delay to ensure it overrides browser restoration
-    // and gives a visual "scroll to top" cue if the user was lower down.
+    // Force scroll to top on load
     if ('scrollRestoration' in history) {
       history.scrollRestoration = 'manual';
     }
-
-    // Immediate scroll
     window.scrollTo(0, 0);
 
-    // Verified scroll after layout
     const timer = setTimeout(() => {
       window.scrollTo({
         top: 0,
@@ -34,10 +33,6 @@ function App() {
 
     return () => clearTimeout(timer);
   }, []);
-
-  const toggleLang = () => {
-    setLang(prev => (prev === Language.KO ? Language.EN : Language.KO));
-  };
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -50,19 +45,43 @@ function App() {
     <div className="min-h-screen bg-stone-950">
       <Navbar
         lang={lang}
-        toggleLang={toggleLang}
+        setLang={setLang}
         scrollToSection={scrollToSection}
       />
 
       <main>
+        {/* Hero - 첫 인상, 회사 슬로건 */}
         <Hero lang={lang} scrollToSection={scrollToSection} />
-        <Identity lang={lang} />
+
+        {/* Company Overview - 회사 개요, CEO, 통계 */}
+        <CompanyOverview lang={lang} />
+
+        {/* Products - 제품 스크롤러 */}
         <ProductScroller lang={lang} />
+
+        {/* Identity - 왜 Fu Lu Shou인가? */}
+        <Identity lang={lang} />
+
+        {/* Philosophy - 福祿壽 철학 */}
         <Philosophy lang={lang} />
+
+        {/* Distribution Network - 유통망 */}
+        <DistributionNetwork lang={lang} />
+
+        {/* History - 연혁 */}
         <History lang={lang} />
-        <CeoMessage lang={lang} />
+
+        {/* Marketing Power - 마케팅 역량 */}
+        <MarketingPower lang={lang} />
+
+        {/* Strategy Dashboard - 4P 믹스 케이스 스터디 */}
         <StrategyDashboard lang={lang} />
-        <MediaCenter lang={lang} />
+
+        {/* CEO Message */}
+        <CeoMessage lang={lang} />
+
+        {/* Contact - 파트너십 문의 */}
+        <ContactSection lang={lang} />
       </main>
 
       <Footer lang={lang} />
