@@ -33,6 +33,7 @@ const Navbar: React.FC<NavbarProps> = ({ lang, setLang, scrollToSection }) => {
   const [scrollProgress, setScrollProgress] = useState(0);
   const langRef = useRef<HTMLDivElement>(null);
   const mobileLangRef = useRef<HTMLDivElement>(null);
+  const mobileDropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -50,8 +51,10 @@ const Navbar: React.FC<NavbarProps> = ({ lang, setLang, scrollToSection }) => {
     const handleClickOutside = (event: MouseEvent | TouchEvent) => {
       const target = event.target as Node;
       const isOutsideDesktop = langRef.current && !langRef.current.contains(target);
-      const isOutsideMobile = mobileLangRef.current && !mobileLangRef.current.contains(target);
-      if (isOutsideDesktop && isOutsideMobile) {
+      const isOutsideMobileBtn = mobileLangRef.current && !mobileLangRef.current.contains(target);
+      const isOutsideMobileDropdown = mobileDropdownRef.current && !mobileDropdownRef.current.contains(target);
+
+      if (isOutsideDesktop && isOutsideMobileBtn && isOutsideMobileDropdown) {
         setIsLangOpen(false);
       }
     };
@@ -170,7 +173,7 @@ const Navbar: React.FC<NavbarProps> = ({ lang, setLang, scrollToSection }) => {
 
         {/* Mobile Language Dropdown */}
         {isLangOpen && (
-          <div className="xl:hidden absolute left-4 right-4 mt-2 bg-stone-900/95 backdrop-blur-xl rounded-xl border border-stone-700 shadow-2xl overflow-hidden animate-fade-in-up z-50">
+          <div ref={mobileDropdownRef} className="xl:hidden absolute left-4 right-4 mt-2 bg-stone-900/95 backdrop-blur-xl rounded-xl border border-stone-700 shadow-2xl overflow-hidden animate-fade-in-up z-50">
             <div className="grid grid-cols-2 gap-1 p-2">
               {LANGUAGES.map((language) => (
                 <button
