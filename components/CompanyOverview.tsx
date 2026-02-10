@@ -81,24 +81,48 @@ const CompanyOverview: React.FC<CompanyOverviewProps> = ({ lang }) => {
             icon: Users,
             value: '150+',
             label: { ko: '직원', en: 'Employees', zh: '员工', kh: 'បុគ្គលិក' },
+            description: {
+                ko: '150여 명의 임직원이 전국 유통망을 완벽하게 책임지고 있습니다.',
+                en: 'Over 150 employees are perfectly guarding our nationwide distribution network.',
+                zh: '150多名员工完美守护着全国分销网络。',
+                kh: 'បុគ្គលិកជាង ១៥០ នាក់កំពុងការពារបណ្តាញចែកចាយទូទាំងប្រទេសយ៉ាងល្អឥតខ្ចោះ។'
+            },
             color: 'from-amber-500 to-yellow-500'
         },
         {
             icon: Warehouse,
             value: '5,300㎡',
             label: { ko: '창고 면적', en: 'Warehouse', zh: '仓库面积', kh: 'ឃ្លាំង' },
+            description: {
+                ko: '확장 가능한 부지 위에 5,300㎡ 규모의 물류 센터를 확보하고 있습니다.',
+                en: 'We have secured 5,300㎡ of warehouse space on expandable land.',
+                zh: '在可扩展的土地上拥有5,300平方米的仓库面积。',
+                kh: 'យើងមានឃ្លាំងទំហំ ៥,៣០០ ម៉ែត្រការ៉េនៅលើដីដែលអាចពង្រីកបាន។'
+            },
             color: 'from-amber-500 to-yellow-500'
         },
         {
             icon: MapPin,
             value: '24',
             label: { ko: '전국 총판', en: 'Sub-Distributors', zh: '分销商', kh: 'អ្នកចែកចាយ' },
+            description: {
+                ko: '전국 24개 지역에 강력한 총판 네트워크를 구축했습니다.',
+                en: 'We have established a strong network of exclusive distributors in 24 regions nationwide.',
+                zh: '我们在全国24个地区建立了强大的总经销商网络。',
+                kh: 'យើងបានបង្កើតបណ្តាញចែកចាយផ្តាច់មុខដ៏រឹងមាំនៅ ២៤ តំបន់ទូទាំងប្រទេស។'
+            },
             color: 'from-yellow-600 to-amber-400'
         },
         {
             icon: Truck,
             value: '30+',
             label: { ko: '배송 트럭', en: 'Delivery Trucks', zh: '送货卡车', kh: 'រថយន្ត' },
+            description: {
+                ko: '30여 대의 자체 차량과 외주 시스템으로 원활한 물류를 수행합니다.',
+                en: 'We ensure smooth logistics with over 30 owned vehicles and an outsourced delivery system.',
+                zh: '拥有30多辆自营车辆及外包系统，确保物流顺畅。',
+                kh: 'យើងធានានូវការដឹកជញ្ជូនដោយរលូនជាមួយយានយន្តផ្ទាល់ខ្លួនជាង ៣០ គ្រឿង និងប្រព័ន្ធដឹកជញ្ជូនក្រៅ។'
+            },
             color: 'from-orange-500 to-amber-400'
         }
     ];
@@ -153,7 +177,7 @@ const CompanyOverview: React.FC<CompanyOverviewProps> = ({ lang }) => {
                 </div>
 
                 {/* Stats Grid - Mobile Optimized */}
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 lg:gap-6 mb-12 md:mb-16 lg:mb-20">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-12 md:mb-16 lg:mb-20">
                     {stats.map((stat, index) => (
                         <div
                             key={index}
@@ -163,10 +187,13 @@ const CompanyOverview: React.FC<CompanyOverviewProps> = ({ lang }) => {
                             <div className={`w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-gradient-to-br ${stat.color} flex items-center justify-center mb-3 md:mb-4 shadow-lg`}>
                                 <stat.icon className="w-5 h-5 md:w-6 md:h-6 text-white" />
                             </div>
-                            <div className="text-2xl sm:text-3xl md:text-4xl font-black text-white mb-1 md:mb-2">
+                            <div className="text-2xl sm:text-3xl md:text-4xl font-black text-white mb-2 md:mb-3">
                                 {index === 0 ? `${employeeCount}+` : index === 1 ? `${warehouseCount.toLocaleString()}㎡` : index === 2 ? distributorCount : `${truckCount}+`}
                             </div>
-                            <div className="text-[10px] md:text-xs text-stone-500 uppercase tracking-wider font-bold">{stat.label[lang]}</div>
+                            <div className="text-[10px] md:text-xs text-amber-500 uppercase tracking-wider font-bold mb-3">{stat.label[lang]}</div>
+                            <p className="text-[11px] md:text-xs text-stone-400 leading-relaxed font-light break-keep">
+                                {stat.description[lang]}
+                            </p>
                         </div>
                     ))}
                 </div>
