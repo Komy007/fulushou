@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Language } from '../types';
 import { Tv, Target, Users, Megaphone, Share2, Calendar, ChevronRight, Play } from 'lucide-react';
+import MarketingModal from './MarketingModal';
 
 interface MarketingPowerProps {
     lang: Language;
@@ -8,6 +9,7 @@ interface MarketingPowerProps {
 
 const MarketingPower: React.FC<MarketingPowerProps> = ({ lang }) => {
     const [activeTab, setActiveTab] = useState<'atl' | 'btl' | 'digital'>('atl');
+    const [showModal, setShowModal] = useState(false);
 
     const content = {
         sectionLabel: {
@@ -106,7 +108,7 @@ const MarketingPower: React.FC<MarketingPowerProps> = ({ lang }) => {
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 {/* Section Header */}
-                <div className="text-center mb-12 md:mb-16">
+                <div className="text-center mb-12 md:mb-16 scroll-reveal">
                     <span className="inline-flex items-center px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-[10px] md:text-xs font-bold tracking-widest uppercase mb-4 md:mb-6">
                         <Megaphone className="w-3 h-3 md:w-4 md:h-4 mr-2" />
                         {content.sectionLabel[lang]}
@@ -201,14 +203,18 @@ const MarketingPower: React.FC<MarketingPowerProps> = ({ lang }) => {
                 </div>
                 {/* Bottom CTA */}
                 <div className="mt-12 md:mt-16 text-center">
-                    <div className="inline-flex items-center gap-3 px-6 py-4 bg-stone-900/50 border border-stone-800 rounded-2xl">
-                        <Play className="w-5 h-5 text-amber-500" />
-                        <span className="text-stone-400 text-sm md:text-base">
-                            {lang === 'ko' ? '마케팅 성공 사례 더 보기' : lang === 'zh' ? '查看更多营销成功案例' : lang === 'kh' ? 'មើលករណីជោគជ័យបន្ថែម' : 'View More Success Stories'}
+                    <button
+                        onClick={() => setShowModal(true)}
+                        className="inline-flex items-center gap-3 px-6 py-4 bg-stone-900/50 border border-stone-800 rounded-2xl hover:bg-stone-800 hover:border-amber-500/50 transition-all group cursor-pointer"
+                    >
+                        <Play className="w-5 h-5 text-amber-500 group-hover:scale-110 transition-transform" />
+                        <span className="text-stone-400 text-sm md:text-base group-hover:text-white transition-colors">
+                            {lang === 'ko' ? '마케팅 성공 사례' : lang === 'zh' ? '营销成功案例' : lang === 'kh' ? 'ករណីជោគជ័យទីផ្សារ' : 'Marketing Success Cases'}
                         </span>
-                    </div>
+                    </button>
                 </div>
             </div>
+            <MarketingModal isOpen={showModal} onClose={() => setShowModal(false)} lang={lang} />
         </section>
     );
 };

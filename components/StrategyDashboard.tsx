@@ -163,7 +163,7 @@ const StrategyDashboard: React.FC<StrategyDashboardProps> = ({ lang }) => {
   return (
     <section id="strategy" className="py-20 bg-stone-900 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-12">
+        <div className="mb-12 scroll-reveal">
           <span className="text-amber-500 font-bold tracking-wider text-sm">CASE STUDY: BACCHUS</span>
           <h2 className="text-3xl lg:text-5xl font-extrabold mt-2 mb-6">
             {lang === 'ko' ? '박카스 신화: 4P 믹스의 재구성' : lang === 'zh' ? '百事传奇：4P组合的重构' : lang === 'kh' ? 'រឿងព្រេង Bacchus: ការកសាង 4P ឡើងវិញ' : 'The Bacchus Legend: Reconstructing the 4P Mix'}

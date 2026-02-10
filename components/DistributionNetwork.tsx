@@ -98,7 +98,7 @@ const DistributionNetwork: React.FC<DistributionNetworkProps> = ({ lang }) => {
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 {/* Section Header */}
-                <div className="text-center mb-12 md:mb-16 lg:mb-20">
+                <div className="text-center mb-12 md:mb-16 lg:mb-20 scroll-reveal">
                     <span className="inline-flex items-center px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-[10px] md:text-xs font-bold tracking-widest uppercase mb-4 md:mb-6">
                         <Truck className="w-3 h-3 md:w-4 md:h-4 mr-2" />
                         {content.sectionLabel[lang]}

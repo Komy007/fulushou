@@ -352,22 +352,8 @@ const Hero: React.FC<HeroProps> = ({ lang, scrollToSection }) => {
             {content.desc[lang]}
           </p>
 
-          {/* CTA Buttons */}
-          <div className="mt-8 md:mt-12 flex flex-col sm:flex-row gap-3 md:gap-5 animate-fade-in-up delay-300">
-            <button
-              onClick={() => scrollToSection('strategy')}
-              className="group px-6 md:px-10 py-3 md:py-5 rounded-full bg-gradient-to-r from-amber-500 to-yellow-500 text-base md:text-lg font-bold text-stone-900 hover:from-yellow-400 hover:to-amber-400 transition-all shadow-lg shadow-amber-500/30 hover:shadow-amber-500/50 flex items-center justify-center gap-2"
-            >
-              {content.cta1[lang]}
-            </button>
 
-            <button
-              onClick={() => scrollToSection('contact')}
-              className="px-6 md:px-10 py-3 md:py-5 rounded-full border border-amber-500/50 text-base md:text-lg font-bold text-amber-400 hover:bg-amber-500/10 hover:text-amber-300 transition-all hover:border-amber-400"
-            >
-              {content.cta2[lang]}
-            </button>
-          </div>
+
         </div>
       </div>
 

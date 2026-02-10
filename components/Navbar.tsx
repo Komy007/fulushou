@@ -30,12 +30,16 @@ const Navbar: React.FC<NavbarProps> = ({ lang, setLang, scrollToSection }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isLangOpen, setIsLangOpen] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const langRef = useRef<HTMLDivElement>(null);
   const mobileLangRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = totalHeight > 0 ? (window.scrollY / totalHeight) * 100 : 0;
+      setScrollProgress(progress);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -76,6 +80,13 @@ const Navbar: React.FC<NavbarProps> = ({ lang, setLang, scrollToSection }) => {
       ? 'bg-stone-950/90 backdrop-blur-xl border-b border-amber-900/20 py-3 md:py-4'
       : 'bg-transparent py-4 md:py-6'
       }`}>
+      {/* Scroll Progress Bar */}
+      <div className="absolute bottom-0 left-0 w-full h-0.5 bg-stone-800/50">
+        <div
+          className="h-full bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-500 transition-all duration-150 ease-out"
+          style={{ width: `${scrollProgress}%` }}
+        />
+      </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           {/* Logo */}

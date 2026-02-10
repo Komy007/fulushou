@@ -8,6 +8,12 @@ interface CeoMessageProps {
 
 const CeoMessage: React.FC<CeoMessageProps> = ({ lang }) => {
   const content = {
+    sectionLabel: {
+      ko: 'CEO 인사말',
+      en: 'CEO Message',
+      zh: 'CEO致辞',
+      kh: 'សារ CEO'
+    },
     quote: {
       ko: '"글로벌 스탠다드보다 로컬 컨텍스트(Context)가 우선합니다."',
       en: '"Local Context Precedes Global Standards."',
@@ -65,13 +71,25 @@ const CeoMessage: React.FC<CeoMessageProps> = ({ lang }) => {
   };
 
   return (
-    <section id="ceo" className="py-20 bg-stone-100">
+    <section id="ceo" className="py-16 md:py-24 bg-stone-950 relative overflow-hidden">
+      {/* Background Effects */}
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-amber-500/20 to-transparent" />
+      <div className="absolute top-1/4 right-0 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-amber-500/5 rounded-full blur-[100px] translate-x-1/2" />
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="lg:flex lg:items-center lg:space-x-12">
+        {/* Section Label */}
+        <div className="text-center mb-10 md:mb-14">
+          <span className="inline-flex items-center px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-[10px] md:text-xs font-bold tracking-widest uppercase">
+            <Quote className="w-3 h-3 md:w-4 md:h-4 mr-2" />
+            {content.sectionLabel[lang]}
+          </span>
+        </div>
+
+        <div className="lg:flex lg:items-center lg:gap-12">
           {/* CEO Image */}
           <div className="lg:w-1/2 mb-10 lg:mb-0 relative group">
-            <div className="absolute top-4 left-4 w-full h-full border-2 border-amber-500 rounded-xl transform translate-x-2 translate-y-2 z-0"></div>
-            <div className="relative z-10 rounded-xl overflow-hidden shadow-2xl bg-stone-800">
+            <div className="absolute top-4 left-4 w-full h-full border-2 border-amber-500/30 rounded-2xl transform translate-x-2 translate-y-2 z-0"></div>
+            <div className="relative z-10 rounded-2xl overflow-hidden shadow-2xl bg-stone-800">
               <img
                 src="/img/CEO.png"
                 onError={(e) => {
@@ -80,7 +98,7 @@ const CeoMessage: React.FC<CeoMessageProps> = ({ lang }) => {
                 alt="CEO Sok Samnang"
                 className="w-full h-auto object-cover transition duration-500"
               />
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-stone-950/90 to-transparent p-6">
                 <h4 className="text-white text-2xl font-bold">Sok Samnang</h4>
                 <p className="text-amber-400 font-medium">CEO & Founder, Fu Lu Shou Co., Ltd.</p>
               </div>
@@ -89,16 +107,16 @@ const CeoMessage: React.FC<CeoMessageProps> = ({ lang }) => {
 
           {/* CEO Message */}
           <div className="lg:w-1/2">
-            <Quote className="text-6xl text-amber-200 fill-amber-200 mb-4" size={64} />
-            <h2 className="text-3xl font-bold text-stone-900 mb-6 font-serif italic">
+            <Quote className="text-amber-500/30 mb-4" size={64} />
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-6 font-serif italic">
               {content.quote[lang]}
             </h2>
 
-            <div className="space-y-4 text-stone-600 leading-relaxed text-justify">
+            <div className="space-y-4 text-stone-400 leading-relaxed text-justify">
               <p>{content.p1[lang]}</p>
               <p>
-                <strong>{content.p2Strong1[lang]}</strong><br />
-                {content.p2Main[lang]} <strong>{content.p2Strong2[lang]}</strong> {content.p2End[lang]} <strong>{content.p2Strong3[lang]}</strong>{content.p2Final[lang]}
+                <strong className="text-amber-400">{content.p2Strong1[lang]}</strong><br />
+                {content.p2Main[lang]} <strong className="text-amber-400">{content.p2Strong2[lang]}</strong> {content.p2End[lang]} <strong className="text-amber-400">{content.p2Strong3[lang]}</strong>{content.p2Final[lang]}
               </p>
               <p>{content.p3[lang]}</p>
             </div>

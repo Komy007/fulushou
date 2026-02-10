@@ -1,11 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Language } from '../types';
+import { useCountUp } from './PartnerLogos';
 
 interface IdentityProps {
   lang: Language;
 }
 
 const Identity: React.FC<IdentityProps> = ({ lang }) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setIsVisible(true); },
+      { threshold: 0.15 }
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  const importCount = useCountUp(58, 2000, isVisible);
+  const salesCount = useCountUp(200, 2000, isVisible);
   const content = {
     sectionLabel: {
       ko: '아이덴티티',
@@ -54,7 +69,7 @@ const Identity: React.FC<IdentityProps> = ({ lang }) => {
   ];
 
   return (
-    <section id="identity" className="py-16 md:py-24 lg:py-32 bg-stone-950 relative overflow-hidden">
+    <section id="identity" ref={sectionRef} className="py-16 md:py-24 lg:py-32 bg-stone-950 relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-stone-800 to-transparent" />
       <div className="absolute top-1/2 left-1/4 w-64 md:w-96 h-64 md:h-96 bg-amber-500/5 rounded-full blur-[100px] md:blur-[120px] pointer-events-none" />
@@ -62,7 +77,7 @@ const Identity: React.FC<IdentityProps> = ({ lang }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-center">
           {/* Text Content */}
-          <div>
+          <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <span className="inline-block text-amber-500 font-black tracking-[0.3em] md:tracking-[0.4em] uppercase text-[10px] md:text-xs mb-4 md:mb-6">
               {content.sectionLabel[lang]}
             </span>
@@ -83,12 +98,12 @@ const Identity: React.FC<IdentityProps> = ({ lang }) => {
             {stats.map((stat, index) => (
               <div
                 key={index}
-                className={`p-5 md:p-8 rounded-2xl md:rounded-[2rem] bg-stone-900/40 border border-stone-800 backdrop-blur-sm group hover:border-amber-500/30 transition-all duration-500 ${index === 2 ? 'sm:col-span-2' : ''
-                  }`}
+                className={`p-5 md:p-8 rounded-2xl md:rounded-[2rem] bg-stone-900/40 border border-stone-800 backdrop-blur-sm group hover:border-amber-500/30 transition-all duration-700 ${index === 2 ? 'sm:col-span-2' : ''} ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+                style={{ transitionDelay: `${300 + index * 200}ms` }}
               >
                 <div className="flex items-end gap-2 md:gap-3 mb-2">
                   <span className="text-3xl md:text-4xl font-black text-white group-hover:text-amber-500 transition-colors">
-                    {stat.value}
+                    {index === 0 ? '#1' : index === 1 ? `$${importCount}M+` : `${salesCount}M`}
                   </span>
                   {stat.suffix && (
                     <span className="text-lg md:text-xl font-bold text-stone-600 mb-1">

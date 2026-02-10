@@ -1,12 +1,30 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Language } from '../types';
 import { Users, Warehouse, Truck, MapPin, Target, Award, TrendingUp, Building } from 'lucide-react';
+import { useCountUp } from './PartnerLogos';
 
 interface CompanyOverviewProps {
     lang: Language;
 }
 
 const CompanyOverview: React.FC<CompanyOverviewProps> = ({ lang }) => {
+    const [isVisible, setIsVisible] = useState(false);
+    const sectionRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => { if (entry.isIntersecting) setIsVisible(true); },
+            { threshold: 0.15 }
+        );
+        if (sectionRef.current) observer.observe(sectionRef.current);
+        return () => observer.disconnect();
+    }, []);
+
+    const employeeCount = useCountUp(150, 2000, isVisible);
+    const warehouseCount = useCountUp(5300, 2000, isVisible);
+    const distributorCount = useCountUp(24, 1500, isVisible);
+    const truckCount = useCountUp(30, 1500, isVisible);
+
     const content = {
         sectionLabel: {
             ko: '회사 개요',
@@ -86,7 +104,7 @@ const CompanyOverview: React.FC<CompanyOverviewProps> = ({ lang }) => {
     ];
 
     return (
-        <section id="company" className="py-16 md:py-24 lg:py-32 bg-stone-950 relative overflow-hidden">
+        <section id="company" ref={sectionRef} className="py-16 md:py-24 lg:py-32 bg-stone-950 relative overflow-hidden">
             {/* Background Effects */}
             <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-amber-500/30 to-transparent" />
             <div className="absolute top-1/3 right-0 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-amber-500/5 rounded-full blur-[100px] translate-x-1/2" />
@@ -94,7 +112,7 @@ const CompanyOverview: React.FC<CompanyOverviewProps> = ({ lang }) => {
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 {/* Section Header */}
-                <div className="text-center mb-12 md:mb-16 lg:mb-20">
+                <div className={`text-center mb-12 md:mb-16 lg:mb-20 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
                     <span className="inline-flex items-center px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-[10px] md:text-xs font-bold tracking-widest uppercase mb-4 md:mb-6">
                         <Building className="w-3 h-3 md:w-4 md:h-4 mr-2" />
                         {content.sectionLabel[lang]}
@@ -105,6 +123,33 @@ const CompanyOverview: React.FC<CompanyOverviewProps> = ({ lang }) => {
                     <p className="text-base md:text-lg lg:text-xl text-stone-400 max-w-3xl mx-auto leading-relaxed">
                         {content.subtitle[lang]}
                     </p>
+                </div>
+
+                {/* CEO Card - Right after subtitle */}
+                <div className="max-w-2xl mx-auto mb-12 md:mb-16 lg:mb-20">
+                    <div className="relative p-6 md:p-8 rounded-2xl md:rounded-3xl bg-gradient-to-br from-stone-900 to-stone-900/50 border border-stone-800 overflow-hidden group hover:border-amber-500/30 transition-all">
+                        <div className="absolute top-0 right-0 w-32 md:w-48 h-32 md:h-48 bg-gradient-to-bl from-amber-500/10 to-transparent rounded-full blur-2xl" />
+                        <div className="relative z-10 text-center">
+                            <div className="text-[10px] md:text-xs text-amber-400 uppercase tracking-widest font-bold mb-1 md:mb-2">{content.ceo[lang]}</div>
+                            <div className="text-xl md:text-2xl lg:text-3xl font-black text-white mb-2 md:mb-3">Mr. Sok Samnang</div>
+                            <p className="text-sm md:text-base text-stone-400 leading-relaxed">
+                                {lang === 'ko' ? 'F&B 수입 및 유통을 통해 캄보디아 전역에 고품질 제품을 공급하는 비전을 실현합니다.' :
+                                    lang === 'zh' ? '通过F&B进口和分销，实现向柬埔寨全境供应高品质产品的愿景。' :
+                                        lang === 'kh' ? 'សម្រេចចក្ខុវិស័យនៃការផ្គត់ផ្គង់ផលិតផលគុណភាពខ្ពស់ទូទាំងកម្ពុជា។' :
+                                            'Realizing the vision of supplying high-quality products nationwide through F&B import and distribution.'}
+                            </p>
+                        </div>
+                    </div>
+                    <button
+                        onClick={() => {
+                            const el = document.getElementById('ceo');
+                            if (el) el.scrollIntoView({ behavior: 'smooth' });
+                        }}
+                        className="w-full mt-3 py-3 md:py-4 px-6 rounded-xl md:rounded-2xl bg-gradient-to-r from-amber-600 to-amber-500 hover:from-yellow-500 hover:to-amber-500 text-white font-bold text-sm md:text-base tracking-wide transition-all shadow-lg shadow-amber-500/20 hover:shadow-amber-500/40 flex items-center justify-center gap-2"
+                    >
+                        <span>💬</span>
+                        {lang === 'ko' ? 'CEO 인사말 보기' : lang === 'zh' ? '查看CEO致辞' : lang === 'kh' ? 'មើលសារ CEO' : 'View CEO Message'}
+                    </button>
                 </div>
 
                 {/* Stats Grid - Mobile Optimized */}
@@ -118,74 +163,40 @@ const CompanyOverview: React.FC<CompanyOverviewProps> = ({ lang }) => {
                             <div className={`w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-gradient-to-br ${stat.color} flex items-center justify-center mb-3 md:mb-4 shadow-lg`}>
                                 <stat.icon className="w-5 h-5 md:w-6 md:h-6 text-white" />
                             </div>
-                            <div className="text-2xl sm:text-3xl md:text-4xl font-black text-white mb-1 md:mb-2">{stat.value}</div>
+                            <div className="text-2xl sm:text-3xl md:text-4xl font-black text-white mb-1 md:mb-2">
+                                {index === 0 ? `${employeeCount}+` : index === 1 ? `${warehouseCount.toLocaleString()}㎡` : index === 2 ? distributorCount : `${truckCount}+`}
+                            </div>
                             <div className="text-[10px] md:text-xs text-stone-500 uppercase tracking-wider font-bold">{stat.label[lang]}</div>
                         </div>
                     ))}
                 </div>
 
-                {/* CEO & Vision/Mission */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
-                    {/* CEO Card */}
-                    <div className="relative p-6 md:p-8 lg:p-10 rounded-2xl md:rounded-3xl bg-gradient-to-br from-stone-900 to-stone-900/50 border border-stone-800 overflow-hidden group hover:border-amber-500/30 transition-all">
-                        <div className="absolute top-0 right-0 w-32 md:w-48 h-32 md:h-48 bg-gradient-to-bl from-amber-500/10 to-transparent rounded-full blur-2xl" />
-
-                        <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 md:gap-6 relative z-10">
-                            <div className="w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-gradient-to-br from-amber-500 to-yellow-500 flex items-center justify-center shadow-xl flex-shrink-0">
-                                <span className="text-2xl md:text-3xl font-black text-white">SS</span>
+                {/* Vision & Mission */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                    {/* Vision */}
+                    <div className="p-5 md:p-6 lg:p-8 rounded-2xl md:rounded-3xl bg-stone-900/50 border border-stone-800 hover:border-amber-500/30 transition-all group">
+                        <div className="flex items-center gap-3 md:gap-4 mb-3 md:mb-4">
+                            <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-amber-500/20 flex items-center justify-center">
+                                <Target className="w-5 h-5 md:w-6 md:h-6 text-amber-400" />
                             </div>
-                            <div className="text-center sm:text-left">
-                                <div className="text-[10px] md:text-xs text-amber-400 uppercase tracking-widest font-bold mb-1 md:mb-2">{content.ceo[lang]}</div>
-                                <div className="text-xl md:text-2xl lg:text-3xl font-black text-white mb-2 md:mb-3">Mr. Sok Samnang</div>
-                                <p className="text-sm md:text-base text-stone-400 leading-relaxed">
-                                    {lang === 'ko' ? 'F&B 수입 및 유통을 통해 캄보디아 전역에 고품질 제품을 공급하는 비전을 실현합니다.' :
-                                        lang === 'zh' ? '通过F&B进口和分销，实现向柬埔寨全境供应高品质产品的愿景。' :
-                                            lang === 'kh' ? 'សម្រេចចក្ខុវិស័យនៃការផ្គត់ផ្គង់ផលិតផលគុណភាពខ្ពស់ទូទាំងកម្ពុជា។' :
-                                                'Realizing the vision of supplying high-quality products nationwide through F&B import and distribution.'}
-                                </p>
-                            </div>
+                            <h3 className="text-lg md:text-xl font-black text-white">{content.vision[lang]}</h3>
                         </div>
+                        <p className="text-sm md:text-base text-stone-400 leading-relaxed">{content.visionText[lang]}</p>
                     </div>
 
-                    {/* Vision & Mission */}
-                    <div className="space-y-4 md:space-y-6">
-                        {/* Vision */}
-                        <div className="p-5 md:p-6 lg:p-8 rounded-2xl md:rounded-3xl bg-stone-900/50 border border-stone-800 hover:border-amber-500/30 transition-all group">
-                            <div className="flex items-center gap-3 md:gap-4 mb-3 md:mb-4">
-                                <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-amber-500/20 flex items-center justify-center">
-                                    <Target className="w-5 h-5 md:w-6 md:h-6 text-amber-400" />
-                                </div>
-                                <h3 className="text-lg md:text-xl font-black text-white">{content.vision[lang]}</h3>
+                    {/* Mission */}
+                    <div className="p-5 md:p-6 lg:p-8 rounded-2xl md:rounded-3xl bg-stone-900/50 border border-stone-800 hover:border-yellow-500/30 transition-all group">
+                        <div className="flex items-center gap-3 md:gap-4 mb-3 md:mb-4">
+                            <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-yellow-500/20 flex items-center justify-center">
+                                <TrendingUp className="w-5 h-5 md:w-6 md:h-6 text-yellow-400" />
                             </div>
-                            <p className="text-sm md:text-base text-stone-400 leading-relaxed">{content.visionText[lang]}</p>
+                            <h3 className="text-lg md:text-xl font-black text-white">{content.mission[lang]}</h3>
                         </div>
-
-                        {/* Mission */}
-                        <div className="p-5 md:p-6 lg:p-8 rounded-2xl md:rounded-3xl bg-stone-900/50 border border-stone-800 hover:border-yellow-500/30 transition-all group">
-                            <div className="flex items-center gap-3 md:gap-4 mb-3 md:mb-4">
-                                <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-yellow-500/20 flex items-center justify-center">
-                                    <TrendingUp className="w-5 h-5 md:w-6 md:h-6 text-yellow-400" />
-                                </div>
-                                <h3 className="text-lg md:text-xl font-black text-white">{content.mission[lang]}</h3>
-                            </div>
-                            <p className="text-sm md:text-base text-stone-400 leading-relaxed">{content.missionText[lang]}</p>
-                        </div>
+                        <p className="text-sm md:text-base text-stone-400 leading-relaxed">{content.missionText[lang]}</p>
                     </div>
                 </div>
 
-                {/* Brand Logos */}
-                <div className="mt-12 md:mt-16 lg:mt-20 text-center">
-                    <div className="text-[10px] md:text-xs text-stone-600 uppercase tracking-widest font-bold mb-6 md:mb-8">
-                        {lang === 'ko' ? '주요 유통 브랜드' : lang === 'zh' ? '主要分销品牌' : lang === 'kh' ? 'ម៉ាកសំខាន់ៗ' : 'Major Distribution Brands'}
-                    </div>
-                    <div className="flex flex-wrap justify-center items-center gap-4 md:gap-8">
-                        {['BACCHUS', 'POCARI SWEAT', 'SHIN RAMYUN', 'OLATTE'].map((brand) => (
-                            <span key={brand} className="px-4 md:px-6 py-2 md:py-3 bg-stone-900/50 border border-stone-800 rounded-full text-stone-400 text-xs md:text-sm font-bold tracking-wider hover:border-amber-500/30 hover:text-white transition-all cursor-default">
-                                {brand}
-                            </span>
-                        ))}
-                    </div>
-                </div>
+
             </div>
         </section>
     );
