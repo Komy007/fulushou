@@ -31,6 +31,7 @@ const Navbar: React.FC<NavbarProps> = ({ lang, setLang, scrollToSection }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isLangOpen, setIsLangOpen] = useState(false);
   const langRef = useRef<HTMLDivElement>(null);
+  const mobileLangRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -40,15 +41,22 @@ const Navbar: React.FC<NavbarProps> = ({ lang, setLang, scrollToSection }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close language dropdown when clicking outside
+  // Close language dropdown when clicking/touching outside
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (langRef.current && !langRef.current.contains(event.target as Node)) {
+    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
+      const target = event.target as Node;
+      const isOutsideDesktop = langRef.current && !langRef.current.contains(target);
+      const isOutsideMobile = mobileLangRef.current && !mobileLangRef.current.contains(target);
+      if (isOutsideDesktop && isOutsideMobile) {
         setIsLangOpen(false);
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener('touchstart', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('touchstart', handleClickOutside);
+    };
   }, []);
 
   const handleMobileNavClick = (id: string) => {
@@ -126,7 +134,7 @@ const Navbar: React.FC<NavbarProps> = ({ lang, setLang, scrollToSection }) => {
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="flex items-center xl:hidden space-x-4">
+          <div className="flex items-center xl:hidden space-x-4" ref={mobileLangRef}>
             {/* Mobile Language Selector */}
             <button
               onClick={() => setIsLangOpen(!isLangOpen)}
@@ -158,7 +166,7 @@ const Navbar: React.FC<NavbarProps> = ({ lang, setLang, scrollToSection }) => {
                   key={language.code}
                   onClick={() => handleLangSelect(language.code)}
                   className={`px-4 py-3 text-center text-sm font-medium flex items-center justify-center gap-2 rounded-lg transition-all ${lang === language.code
-                    ? 'bg-red-500/20 text-red-400'
+                    ? 'bg-amber-500/20 text-amber-400'
                     : 'text-stone-300 hover:bg-stone-800 hover:text-white'
                     }`}
                 >
