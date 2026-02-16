@@ -110,22 +110,22 @@ const StrategyDashboard: React.FC<StrategyDashboardProps> = ({ lang }) => {
   const renderDetailContent = () => (
     <>
       <div className="mb-6 animate-fade-in-up">
-        <span className="inline-block px-3 py-1 bg-amber-900/50 text-amber-500 text-xs font-bold rounded mb-4 border border-amber-700/50">STRATEGIC ANALYSIS</span>
-        <h3 className="text-2xl font-bold text-white mb-4">{currentData.title[lang]}</h3>
-        <div className="text-stone-300 mb-6 leading-relaxed text-sm lg:text-base">
+        <span className="inline-block px-3 py-1 bg-amber-50 text-amber-700 text-xs font-bold rounded mb-4 border border-amber-200">STRATEGIC ANALYSIS</span>
+        <h3 className="text-2xl font-bold text-stone-900 mb-4">{currentData.title[lang]}</h3>
+        <div className="text-stone-700 mb-6 leading-relaxed text-sm lg:text-base">
           {renderDescription(currentData.desc[lang])}
         </div>
       </div>
 
-      <div className="w-full h-[320px] bg-stone-800 rounded-lg p-4 relative" style={{ minWidth: 0 }}>
+      <div className="w-full h-[320px] bg-stone-100 rounded-lg p-4 relative" style={{ minWidth: 0 }}>
         <ResponsiveContainer width="100%" height="100%" minHeight={320}>
           {(activeTab === 'market' || activeTab === 'place') ? (
             <BarChart data={currentData.chartData} key={`bar-${activeTab}`}>
               <XAxis dataKey="name" stroke="#A8A29E" fontSize={12} tickLine={false} axisLine={false} />
               <YAxis stroke="#A8A29E" fontSize={12} tickLine={false} axisLine={false} />
               <RechartsTooltip
-                contentStyle={{ backgroundColor: '#292524', borderColor: '#44403C', color: '#fff' }}
-                itemStyle={{ color: '#FCD34D' }}
+                contentStyle={{ backgroundColor: '#F5F5F4', borderColor: '#D6D3D1', color: '#1C1917' }}
+                itemStyle={{ color: '#B45309' }}
               />
               <Bar dataKey="value" radius={[4, 4, 0, 0]}>
                 {currentData.chartData.map((entry, index) => (
@@ -136,8 +136,8 @@ const StrategyDashboard: React.FC<StrategyDashboardProps> = ({ lang }) => {
           ) : (
             <PieChart key={`pie-${activeTab}`}>
               <RechartsTooltip
-                contentStyle={{ backgroundColor: '#292524', borderColor: '#44403C', color: '#fff' }}
-                itemStyle={{ color: '#FCD34D' }}
+                contentStyle={{ backgroundColor: '#F5F5F4', borderColor: '#D6D3D1', color: '#1C1917' }}
+                itemStyle={{ color: '#B45309' }}
               />
               <Pie
                 data={currentData.chartData}
@@ -161,14 +161,14 @@ const StrategyDashboard: React.FC<StrategyDashboardProps> = ({ lang }) => {
   );
 
   return (
-    <section id="strategy" className="py-20 bg-stone-900 text-white">
+    <section id="strategy" className="py-20 bg-stone-50 text-stone-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-12 scroll-reveal">
-          <span className="text-amber-500 font-bold tracking-wider text-sm">CASE STUDY: BACCHUS</span>
-          <h2 className="text-3xl lg:text-5xl font-extrabold mt-2 mb-6">
+          <span className="text-amber-700 font-bold tracking-wider text-sm">CASE STUDY: BACCHUS</span>
+          <h2 className="text-3xl lg:text-5xl font-extrabold mt-2 mb-6 text-stone-900">
             {lang === 'ko' ? '박카스 신화: 4P 믹스의 재구성' : lang === 'zh' ? '百事传奇：4P组合的重构' : lang === 'kh' ? 'រឿងព្រេង Bacchus: ការកសាង 4P ឡើងវិញ' : 'The Bacchus Legend: Reconstructing the 4P Mix'}
           </h2>
-          <p className="text-stone-400 max-w-3xl text-lg">
+          <p className="text-stone-600 max-w-3xl text-lg">
             {lang === 'ko'
               ? "한국의 1970년대 성공 방정식을 캄보디아에 적용한 '시공간적 이식 전략'과 철저한 '하이퍼 로컬라이제이션'의 결합."
               : lang === 'zh'
@@ -179,26 +179,26 @@ const StrategyDashboard: React.FC<StrategyDashboardProps> = ({ lang }) => {
           </p>
         </div>
 
-        <div className="bg-stone-800 rounded-2xl p-6 lg:p-10 border border-stone-700 shadow-2xl">
+        <div className="bg-white rounded-2xl p-6 lg:p-10 border border-stone-200 shadow-xl">
           <div className="flex flex-col lg:flex-row gap-8">
             {/* List Column: Always visible */}
             <div className="w-full lg:w-1/3 flex flex-col gap-3">
               <button
                 onClick={() => { setActiveTab('market'); if (window.innerWidth < 1024) setShowMobileDetail(true); }}
-                className={`text-left p-5 rounded-xl border transition flex items-center justify-between group relative overflow-hidden ${activeTab === 'market' ? 'bg-stone-700 border-amber-600 ring-1 ring-amber-600' : 'border-stone-600 hover:bg-stone-700'}`}
+                className={`text-left p-5 rounded-xl border transition flex items-center justify-between group relative overflow-hidden ${activeTab === 'market' ? 'bg-amber-50 border-amber-500 ring-1 ring-amber-500' : 'border-stone-200 hover:bg-stone-50'}`}
               >
                 {/* Persistent Shimmer Effect */}
                 <div className="absolute inset-0 pointer-events-none z-0">
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-500/5 to-transparent -translate-x-full animate-shimmer" />
                 </div>
                 <div className="relative z-10">
-                  <div className={`font-bold transition ${activeTab === 'market' ? 'text-amber-400' : 'text-stone-300 group-hover:text-amber-400'}`}>1. Market Insight</div>
+                  <div className={`font-bold transition ${activeTab === 'market' ? 'text-amber-600' : 'text-stone-700 group-hover:text-amber-600'}`}>1. Market Insight</div>
                   <div className="text-xs text-stone-500 mt-1 uppercase tracking-tighter">Time-Machine Strategy</div>
                 </div>
                 <div className="relative z-10 flex items-center gap-4">
-                  <Clock className={`w-6 h-6 ${activeTab === 'market' ? 'text-amber-400' : 'text-stone-500 group-hover:text-amber-400'}`} />
-                  <div className="flex flex-col items-center border-l border-stone-600 pl-4">
-                    <Zap className={`w-4 h-4 mb-0.5 animate-pulse ${activeTab === 'market' ? 'text-amber-400' : 'text-stone-500'}`} />
+                  <Clock className={`w-6 h-6 ${activeTab === 'market' ? 'text-amber-600' : 'text-stone-400 group-hover:text-amber-600'}`} />
+                  <div className="flex flex-col items-center border-l border-stone-200 pl-4">
+                    <Zap className={`w-4 h-4 mb-0.5 animate-pulse ${activeTab === 'market' ? 'text-amber-600' : 'text-stone-400'}`} />
                     <span className="text-[8px] font-black text-amber-500/60 tracking-tight">ANALYSIS</span>
                   </div>
                 </div>
@@ -206,20 +206,20 @@ const StrategyDashboard: React.FC<StrategyDashboardProps> = ({ lang }) => {
 
               <button
                 onClick={() => { setActiveTab('product'); if (window.innerWidth < 1024) setShowMobileDetail(true); }}
-                className={`text-left p-5 rounded-xl border transition flex items-center justify-between group relative overflow-hidden ${activeTab === 'product' ? 'bg-stone-700 border-amber-600 ring-1 ring-amber-600' : 'border-stone-600 hover:bg-stone-700'}`}
+                className={`text-left p-5 rounded-xl border transition flex items-center justify-between group relative overflow-hidden ${activeTab === 'product' ? 'bg-amber-50 border-amber-500 ring-1 ring-amber-500' : 'border-stone-200 hover:bg-stone-50'}`}
               >
                 {/* Persistent Shimmer Effect */}
                 <div className="absolute inset-0 pointer-events-none z-0">
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-500/5 to-transparent -translate-x-full animate-shimmer" />
                 </div>
                 <div className="relative z-10">
-                  <div className={`font-bold transition ${activeTab === 'product' ? 'text-amber-400' : 'text-stone-300 group-hover:text-amber-400'}`}>2. Product</div>
+                  <div className={`font-bold transition ${activeTab === 'product' ? 'text-amber-600' : 'text-stone-700 group-hover:text-amber-600'}`}>2. Product</div>
                   <div className="text-xs text-stone-500 mt-1 uppercase tracking-tighter">Bottle to Can Conversion</div>
                 </div>
                 <div className="relative z-10 flex items-center gap-4">
-                  <Package className={`w-6 h-6 ${activeTab === 'product' ? 'text-amber-400' : 'text-stone-500 group-hover:text-amber-400'}`} />
-                  <div className="flex flex-col items-center border-l border-stone-600 pl-4">
-                    <Zap className={`w-4 h-4 mb-0.5 animate-pulse ${activeTab === 'product' ? 'text-amber-400' : 'text-stone-500'}`} />
+                  <Package className={`w-6 h-6 ${activeTab === 'product' ? 'text-amber-600' : 'text-stone-400 group-hover:text-amber-600'}`} />
+                  <div className="flex flex-col items-center border-l border-stone-200 pl-4">
+                    <Zap className={`w-4 h-4 mb-0.5 animate-pulse ${activeTab === 'product' ? 'text-amber-600' : 'text-stone-400'}`} />
                     <span className="text-[8px] font-black text-amber-500/60 tracking-tight">ANALYSIS</span>
                   </div>
                 </div>
@@ -227,20 +227,20 @@ const StrategyDashboard: React.FC<StrategyDashboardProps> = ({ lang }) => {
 
               <button
                 onClick={() => { setActiveTab('promotion'); if (window.innerWidth < 1024) setShowMobileDetail(true); }}
-                className={`text-left p-5 rounded-xl border transition flex items-center justify-between group relative overflow-hidden ${activeTab === 'promotion' ? 'bg-stone-700 border-amber-600 ring-1 ring-amber-600' : 'border-stone-600 hover:bg-stone-700'}`}
+                className={`text-left p-5 rounded-xl border transition flex items-center justify-between group relative overflow-hidden ${activeTab === 'promotion' ? 'bg-amber-50 border-amber-500 ring-1 ring-amber-500' : 'border-stone-200 hover:bg-stone-50'}`}
               >
                 {/* Persistent Shimmer Effect */}
                 <div className="absolute inset-0 pointer-events-none z-0">
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-500/5 to-transparent -translate-x-full animate-shimmer" />
                 </div>
                 <div className="relative z-10">
-                  <div className={`font-bold transition ${activeTab === 'promotion' ? 'text-amber-400' : 'text-stone-300 group-hover:text-amber-400'}`}>3. Promotion</div>
+                  <div className={`font-bold transition ${activeTab === 'promotion' ? 'text-amber-600' : 'text-stone-700 group-hover:text-amber-600'}`}>3. Promotion</div>
                   <div className="text-xs text-stone-500 mt-1 uppercase tracking-tighter">Media Blocking & Sports</div>
                 </div>
                 <div className="relative z-10 flex items-center gap-4">
-                  <Megaphone className={`w-6 h-6 ${activeTab === 'promotion' ? 'text-amber-400' : 'text-stone-500 group-hover:text-amber-400'}`} />
-                  <div className="flex flex-col items-center border-l border-stone-600 pl-4">
-                    <Zap className={`w-4 h-4 mb-0.5 animate-pulse ${activeTab === 'promotion' ? 'text-amber-400' : 'text-stone-500'}`} />
+                  <Megaphone className={`w-6 h-6 ${activeTab === 'promotion' ? 'text-amber-600' : 'text-stone-400 group-hover:text-amber-600'}`} />
+                  <div className="flex flex-col items-center border-l border-stone-200 pl-4">
+                    <Zap className={`w-4 h-4 mb-0.5 animate-pulse ${activeTab === 'promotion' ? 'text-amber-600' : 'text-stone-400'}`} />
                     <span className="text-[8px] font-black text-amber-500/60 tracking-tight">ANALYSIS</span>
                   </div>
                 </div>
@@ -248,20 +248,20 @@ const StrategyDashboard: React.FC<StrategyDashboardProps> = ({ lang }) => {
 
               <button
                 onClick={() => { setActiveTab('place'); if (window.innerWidth < 1024) setShowMobileDetail(true); }}
-                className={`text-left p-5 rounded-xl border transition flex items-center justify-between group relative overflow-hidden ${activeTab === 'place' ? 'bg-stone-700 border-amber-600 ring-1 ring-amber-600' : 'border-stone-600 hover:bg-stone-700'}`}
+                className={`text-left p-5 rounded-xl border transition flex items-center justify-between group relative overflow-hidden ${activeTab === 'place' ? 'bg-amber-50 border-amber-500 ring-1 ring-amber-500' : 'border-stone-200 hover:bg-stone-50'}`}
               >
                 {/* Persistent Shimmer Effect */}
                 <div className="absolute inset-0 pointer-events-none z-0">
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-500/5 to-transparent -translate-x-full animate-shimmer" />
                 </div>
                 <div className="relative z-10">
-                  <div className={`font-bold transition ${activeTab === 'place' ? 'text-amber-400' : 'text-stone-300 group-hover:text-amber-400'}`}>4. Place</div>
+                  <div className={`font-bold transition ${activeTab === 'place' ? 'text-amber-600' : 'text-stone-700 group-hover:text-amber-600'}`}>4. Place</div>
                   <div className="text-xs text-stone-500 mt-1 uppercase tracking-tighter">Dual Track System</div>
                 </div>
                 <div className="relative z-10 flex items-center gap-4">
-                  <Truck className={`w-6 h-6 ${activeTab === 'place' ? 'text-amber-400' : 'text-stone-500 group-hover:text-amber-400'}`} />
-                  <div className="flex flex-col items-center border-l border-stone-600 pl-4">
-                    <Zap className={`w-4 h-4 mb-0.5 animate-pulse ${activeTab === 'place' ? 'text-amber-400' : 'text-stone-500'}`} />
+                  <Truck className={`w-6 h-6 ${activeTab === 'place' ? 'text-amber-600' : 'text-stone-400 group-hover:text-amber-600'}`} />
+                  <div className="flex flex-col items-center border-l border-stone-200 pl-4">
+                    <Zap className={`w-4 h-4 mb-0.5 animate-pulse ${activeTab === 'place' ? 'text-amber-600' : 'text-stone-400'}`} />
                     <span className="text-[8px] font-black text-amber-500/60 tracking-tight">ANALYSIS</span>
                   </div>
                 </div>
@@ -269,34 +269,24 @@ const StrategyDashboard: React.FC<StrategyDashboardProps> = ({ lang }) => {
             </div>
 
             {/* Desktop Detail Content: Hidden on mobile */}
-            <div className="hidden lg:flex w-full lg:w-2/3 bg-stone-900 rounded-xl p-6 border border-stone-700 relative flex-col">
+            <div className="hidden lg:flex w-full lg:w-2/3 bg-stone-50 rounded-xl p-6 border border-stone-200 relative flex-col">
               {renderDetailContent()}
             </div>
           </div>
         </div>
       </div>
 
-      {/* MOBILE MODAL */}
+      {/* MOBILE INLINE DETAIL */}
       {showMobileDetail && (
-        <div className="fixed inset-0 z-50 lg:hidden flex items-end sm:items-center justify-center bg-black/80 backdrop-blur-sm p-0 sm:p-4 animate-fade-in">
-          <div className="bg-stone-900 w-full h-[85vh] sm:h-auto sm:max-h-[90vh] rounded-t-2xl sm:rounded-2xl p-6 overflow-y-auto relative border border-stone-700 animate-slide-up">
+        <div className="lg:hidden mt-6 max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="bg-white rounded-2xl p-6 border border-stone-200 shadow-xl">
+            {renderDetailContent()}
             <button
               onClick={() => setShowMobileDetail(false)}
-              className="absolute top-4 right-4 p-2 bg-stone-800 rounded-full text-stone-400 hover:text-white transition"
+              className="w-full py-3 bg-stone-100 border border-stone-200 text-stone-700 rounded-xl mt-6 font-bold text-base hover:bg-stone-200 transition"
             >
-              <ArrowLeft className="w-6 h-6" /> {/* Using ArrowLeft as 'Back' semantics, or X */}
+              {lang === Language.KO ? '닫기' : 'Close'}
             </button>
-            <div className="mt-8">
-              {renderDetailContent()}
-
-              {/* Bottom Close Button */}
-              <button
-                onClick={() => setShowMobileDetail(false)}
-                className="w-full py-4 bg-stone-700 border border-stone-600 text-white rounded-xl mt-8 font-black text-lg hover:bg-stone-600 transition shadow-lg"
-              >
-                {lang === Language.KO ? '닫기' : 'Close'}
-              </button>
-            </div>
           </div>
         </div>
       )}
