@@ -91,7 +91,7 @@ const CeoMessage: React.FC<CeoMessageProps> = ({ lang }) => {
             <div className="absolute top-4 left-4 w-full h-full border-2 border-amber-500/30 rounded-2xl transform translate-x-2 translate-y-2 z-0"></div>
             <div className="relative z-10 rounded-2xl overflow-hidden shadow-2xl bg-stone-800">
               <img
-                src="/img/CEO.png"
+                src="/img/CEO.jpg"
                 onError={(e) => {
                   e.currentTarget.src = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80";
                 }}

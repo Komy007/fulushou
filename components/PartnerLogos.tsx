@@ -75,7 +75,7 @@ const PartnerLogos: React.FC<PartnerLogosProps> = ({ lang }) => {
             nameKo: '동아오츠카',
             product: 'Bacchus',
             country: '🇰🇷',
-            logo: '/img/DONG-A.png',
+            logo: '/img/DONG-A.jpg',
             productImg: '/img/bacchus.jpg',
             desc: { ko: '에너지 드링크 독점 유통', en: 'Exclusive energy drink distribution', zh: '独家能量饮料分销', kh: 'ការចែកចាយភេសជ្ជៈថាមពលផ្តាច់មុខ' }
         },
@@ -84,7 +84,7 @@ const PartnerLogos: React.FC<PartnerLogosProps> = ({ lang }) => {
             nameKo: '동아오츠카',
             product: 'Pocari Sweat',
             country: '🇰🇷',
-            logo: '/img/DONG-A.png',
+            logo: '/img/DONG-A.jpg',
             productImg: '/img/pocari.jpg',
             desc: { ko: 'ION 음료 독점 유통', en: 'Exclusive ION drink distribution', zh: '独家ION饮料分销', kh: 'ការចែកចាយភេសជ្ជៈ ION ផ្តាច់មុខ' }
         },
@@ -93,8 +93,8 @@ const PartnerLogos: React.FC<PartnerLogosProps> = ({ lang }) => {
             nameKo: '농심',
             product: 'Shin Ramyun',
             country: '🇰🇷',
-            logo: '/img/NONGSHIM.png',
-            productImg: '/img/shinramyun.png',
+            logo: '/img/NONGSHIM.jpg',
+            productImg: '/img/shinramyun.jpg',
             desc: { ko: '한국 라면 독점 유통', en: 'Exclusive Korean noodle distribution', zh: '独家韩国拉面分销', kh: 'ការចែកចាយមីកូរ៉េផ្តាច់មុខ' }
         },
         {
@@ -102,8 +102,8 @@ const PartnerLogos: React.FC<PartnerLogosProps> = ({ lang }) => {
             nameKo: '동아오츠카',
             product: 'Olatte',
             country: '🇰🇷',
-            logo: '/img/DONG-A.png',
-            productImg: '/img/olatte.png',
+            logo: '/img/DONG-A.jpg',
+            productImg: '/img/olatte.jpg',
             desc: { ko: '유제품 음료 독점 유통', en: 'Exclusive dairy beverage distribution', zh: '独家乳制品饮料分销', kh: 'ការចែកចាយភេសជ្ជៈទឹកដោះគោផ្តាច់មុខ' }
         }
     ];

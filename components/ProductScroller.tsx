@@ -16,8 +16,8 @@ const ProductScroller: React.FC<ProductScrollerProps> = ({ lang }) => {
     };
 
     const brands = [
-        { name: 'Dong-A Otsuka', logo: '/img/DONG-A.png' },
-        { name: 'Nongshim', logo: '/img/NONGSHIM.png' },
+        { name: 'Dong-A Otsuka', logo: '/img/DONG-A.jpg' },
+        { name: 'Nongshim', logo: '/img/NONGSHIM.jpg' },
     ];
 
     return (
