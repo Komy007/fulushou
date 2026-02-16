@@ -329,7 +329,7 @@ const Hero: React.FC<HeroProps> = ({ lang, scrollToSection }) => {
       />
 
       {/* Gradient overlay for text readability */}
-      <div className="absolute inset-0 bg-gradient-to-r from-stone-950/90 via-stone-950/40 to-transparent z-5" />
+      <div className="absolute inset-0 bg-gradient-to-r from-stone-950/90 via-stone-950/50 to-amber-950/10 z-5" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 w-full py-12 md:py-0">
         <div className="lg:w-4/5 xl:w-3/5">
@@ -352,8 +352,46 @@ const Hero: React.FC<HeroProps> = ({ lang, scrollToSection }) => {
             {content.desc[lang]}
           </p>
 
+          {/* Key Stats Ticker */}
+          <div className="flex flex-wrap gap-4 md:gap-8 mt-8 md:mt-10 animate-fade-in-up delay-300">
+            {[
+              { value: '15+', label: { ko: '년 경험', en: 'Years', zh: '年经验', kh: 'ឆ្នាំ' } },
+              { value: '200M+', label: { ko: '캔 판매', en: 'Cans Sold', zh: '罐销量', kh: 'កំប៉ុង' } },
+              { value: '#1', label: { ko: '시장 점유율', en: 'Market Share', zh: '市场份额', kh: 'ចំណែកទីផ្សារ' } },
+            ].map((stat, i) => (
+              <div key={i} className="flex items-center gap-2">
+                <span className="text-xl md:text-2xl font-black text-amber-400">{stat.value}</span>
+                <span className="text-xs md:text-sm text-stone-400 uppercase tracking-wider font-bold">{stat.label[lang]}</span>
+                {i < 2 && <span className="hidden md:inline text-stone-700 ml-4">|</span>}
+              </div>
+            ))}
+          </div>
 
+          {/* CTA Buttons */}
+          <div className="flex flex-wrap gap-3 md:gap-4 mt-6 md:mt-8 animate-fade-in-up delay-300">
+            <button
+              onClick={() => scrollToSection('strategy')}
+              className="px-6 md:px-8 py-3 md:py-4 bg-gradient-to-r from-amber-500 to-yellow-500 text-stone-950 font-bold rounded-full text-sm md:text-base shadow-lg shadow-amber-500/25 hover:shadow-amber-500/40 hover:scale-105 transition-all"
+            >
+              {content.cta1[lang]}
+            </button>
+            <button
+              onClick={() => scrollToSection('contact')}
+              className="px-6 md:px-8 py-3 md:py-4 bg-white/10 backdrop-blur-sm border border-white/20 text-white font-bold rounded-full text-sm md:text-base hover:bg-white/20 transition-all"
+            >
+              {content.cta2[lang]}
+            </button>
+          </div>
 
+        </div>
+      </div>
+
+      {/* Floating Product Images */}
+      <div className="absolute right-4 bottom-20 md:right-16 md:bottom-24 lg:right-24 z-10 opacity-25 md:opacity-35 pointer-events-none">
+        <div className="relative w-40 h-40 md:w-64 md:h-64 lg:w-80 lg:h-80">
+          <img src="/img/bacchus.jpg" alt="" className="absolute top-0 right-0 w-20 md:w-32 lg:w-40 h-auto rounded-2xl shadow-2xl transform rotate-6 animate-hero-float" />
+          <img src="/img/pocari.jpg" alt="" className="absolute bottom-0 left-0 w-16 md:w-24 lg:w-32 h-auto rounded-2xl shadow-2xl transform -rotate-3 animate-hero-float-delayed" />
+          <img src="/img/shinramyun.jpg" alt="" className="absolute top-1/2 left-1/3 w-14 md:w-20 lg:w-28 h-auto rounded-2xl shadow-2xl animate-hero-float-slow" />
         </div>
       </div>
 
@@ -385,6 +423,21 @@ const Hero: React.FC<HeroProps> = ({ lang, scrollToSection }) => {
         .delay-100 { animation-delay: 100ms; }
         .delay-200 { animation-delay: 200ms; }
         .delay-300 { animation-delay: 300ms; }
+        @keyframes hero-float {
+          0%, 100% { transform: translateY(0px) rotate(6deg); }
+          50% { transform: translateY(-12px) rotate(6deg); }
+        }
+        @keyframes hero-float-delayed {
+          0%, 100% { transform: translateY(0px) rotate(-3deg); }
+          50% { transform: translateY(-10px) rotate(-3deg); }
+        }
+        @keyframes hero-float-slow {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-8px); }
+        }
+        .animate-hero-float { animation: hero-float 4s ease-in-out infinite; }
+        .animate-hero-float-delayed { animation: hero-float-delayed 5s ease-in-out infinite; }
+        .animate-hero-float-slow { animation: hero-float-slow 6s ease-in-out infinite; }
       `}</style>
     </section>
   );

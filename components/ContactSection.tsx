@@ -83,24 +83,24 @@ const ContactSection: React.FC<ContactSectionProps> = ({ lang }) => {
     ];
 
     return (
-        <section id="contact" className="py-16 md:py-24 lg:py-32 bg-gradient-to-b from-stone-950 to-stone-900 relative overflow-hidden">
+        <section id="contact" className="py-16 md:py-24 lg:py-32 bg-gradient-to-b from-white to-stone-50 relative overflow-hidden">
             {/* Background Effects */}
             <div className="absolute inset-0">
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[400px] md:w-[800px] h-[400px] md:h-[600px] bg-gradient-to-b from-amber-500/10 to-transparent rounded-full blur-[100px]" />
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[400px] md:w-[800px] h-[400px] md:h-[600px] bg-gradient-to-b from-amber-100/30 to-transparent rounded-full blur-[100px]" />
             </div>
-            <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-amber-500/30 to-transparent" />
+            <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-amber-300/50 to-transparent" />
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 {/* Header */}
                 <div className="text-center mb-12 md:mb-16 lg:mb-20 scroll-reveal">
-                    <span className="inline-flex items-center px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-[10px] md:text-xs font-bold tracking-widest uppercase mb-4 md:mb-6">
+                    <span className="inline-flex items-center px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-amber-50 border border-amber-300 text-amber-700 text-[10px] md:text-xs font-bold tracking-widest uppercase mb-4 md:mb-6">
                         <Building2 className="w-3 h-3 md:w-4 md:h-4 mr-2" />
                         {content.sectionLabel[lang]}
                     </span>
-                    <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 md:mb-6 tracking-tight">
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-stone-900 mb-4 md:mb-6 tracking-tight">
                         {content.title[lang]}
                     </h2>
-                    <p className="text-base md:text-lg lg:text-xl text-stone-400 max-w-3xl mx-auto">
+                    <p className="text-base md:text-lg lg:text-xl text-stone-600 max-w-3xl mx-auto">
                         {content.subtitle[lang]}
                     </p>
                 </div>
@@ -111,19 +111,19 @@ const ContactSection: React.FC<ContactSectionProps> = ({ lang }) => {
                         <a
                             key={index}
                             href={info.href}
-                            className="group p-5 md:p-6 rounded-2xl md:rounded-3xl bg-stone-900/50 border border-stone-800 hover:border-amber-500/30 transition-all hover:-translate-y-1 block"
+                            className="group p-5 md:p-6 rounded-2xl md:rounded-3xl bg-white shadow-lg border border-stone-200 hover:border-amber-400/50 transition-all hover:-translate-y-1 block"
                         >
                             <div className={`w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-gradient-to-br ${info.color} flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform`}>
                                 <info.icon className="w-5 h-5 md:w-6 md:h-6 text-white" />
                             </div>
                             <div className="text-[10px] md:text-xs text-stone-500 uppercase tracking-widest font-bold mb-1 md:mb-2">{info.label[lang]}</div>
-                            <div className="text-sm md:text-base text-white font-bold group-hover:text-amber-400 transition-colors">{info.value}</div>
+                            <div className="text-sm md:text-base text-stone-900 font-bold group-hover:text-amber-600 transition-colors">{info.value}</div>
                         </a>
                     ))}
                 </div>
 
                 {/* CTA Section */}
-                <div className="relative p-6 md:p-10 lg:p-12 rounded-2xl md:rounded-3xl bg-gradient-to-r from-amber-600/20 via-amber-500/10 to-yellow-500/20 border border-amber-500/30 overflow-hidden">
+                <div className="relative p-6 md:p-10 lg:p-12 rounded-2xl md:rounded-3xl bg-gradient-to-r from-amber-50 via-amber-100/50 to-yellow-50 border border-amber-300 overflow-hidden">
                     {/* Background Pattern */}
                     <div className="absolute inset-0 opacity-10">
                         <div className="absolute top-0 right-0 w-48 h-48 md:w-80 md:h-80 bg-amber-500 rounded-full blur-[80px]" />
@@ -132,13 +132,13 @@ const ContactSection: React.FC<ContactSectionProps> = ({ lang }) => {
 
                     <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-6 md:gap-8">
                         <div className="text-center lg:text-left">
-                            <h3 className="text-xl md:text-2xl lg:text-3xl font-black text-white mb-2 md:mb-3">
+                            <h3 className="text-xl md:text-2xl lg:text-3xl font-black text-stone-900 mb-2 md:mb-3">
                                 {lang === 'ko' ? '새로운 비즈니스 기회를 함께 만들어갑니다' :
                                     lang === 'zh' ? '让我们一起创造新的商业机会' :
                                         lang === 'kh' ? 'តោះបង្កើតឱកាសអាជីវកម្មថ្មីជាមួយគ្នា' :
                                             "Let's Create New Business Opportunities Together"}
                             </h3>
-                            <p className="text-stone-400 text-sm md:text-base max-w-xl">
+                            <p className="text-stone-600 text-sm md:text-base max-w-xl">
                                 {lang === 'ko' ? '캄보디아 F&B 시장 진출에 관심이 있으시다면 지금 바로 연락주세요.' :
                                     lang === 'zh' ? '如果您对进入柬埔寨F&B市场感兴趣，请立即联系我们。' :
                                         lang === 'kh' ? 'ប្រសិនបើអ្នកចាប់អារម្មណ៍ក្នុងការចូលទីផ្សារ F&B កម្ពុជា សូមទាក់ទងមកយើងឥឡូវនេះ។' :
@@ -159,13 +159,13 @@ const ContactSection: React.FC<ContactSectionProps> = ({ lang }) => {
                         {lang === 'ko' ? '소셜 미디어' : lang === 'zh' ? '社交媒体' : lang === 'kh' ? 'បណ្តាញសង្គម' : 'Follow Us'}
                     </span>
                     <div className="flex items-center gap-4">
-                        <a href="https://www.facebook.com/BacchusEnergyDrinkCambodia/" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-stone-800 hover:bg-blue-600 flex items-center justify-center transition-all hover:scale-110">
+                        <a href="https://www.facebook.com/BacchusEnergyDrinkCambodia/" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-stone-200 hover:bg-blue-600 flex items-center justify-center transition-all hover:scale-110">
                             <Facebook className="w-6 h-6 text-white" />
                         </a>
-                        <a href="https://www.instagram.com/bacchuscambodia/" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-stone-800 hover:bg-gradient-to-br hover:from-purple-500 hover:to-pink-500 flex items-center justify-center transition-all hover:scale-110">
+                        <a href="https://www.instagram.com/bacchuscambodia/" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-stone-200 hover:bg-gradient-to-br hover:from-purple-500 hover:to-pink-500 flex items-center justify-center transition-all hover:scale-110">
                             <Instagram className="w-6 h-6 text-white" />
                         </a>
-                        <a href="https://www.tiktok.com/@bacchuscambodia" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-stone-800 hover:bg-black flex items-center justify-center transition-all hover:scale-110">
+                        <a href="https://www.tiktok.com/@bacchuscambodia" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-stone-200 hover:bg-black flex items-center justify-center transition-all hover:scale-110">
                             <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" />
                             </svg>
@@ -178,7 +178,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ lang }) => {
                     <div className="inline-flex items-center gap-2 md:gap-3 text-stone-500 text-xs md:text-sm">
                         <Globe className="w-4 h-4" />
                         <span>{lang === 'ko' ? '지원 언어:' : lang === 'zh' ? '支持语言:' : lang === 'kh' ? 'ភាសាដែលគាំទ្រ:' : 'Supported Languages:'}</span>
-                        <span className="text-stone-300">🇰🇷 한국어 | 🇺🇸 English | 🇨🇳 中文 | 🇰🇭 ភាសាខ្មែរ</span>
+                        <span className="text-stone-700">🇰🇷 한국어 | 🇺🇸 English | 🇨🇳 中文 | 🇰🇭 ភាសាខ្មែរ</span>
                     </div>
                 </div>
             </div>

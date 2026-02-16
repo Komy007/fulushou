@@ -3,7 +3,6 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import CompanyOverview from './components/CompanyOverview';
 import Identity from './components/Identity';
-import ProductScroller from './components/ProductScroller';
 import PartnerLogos from './components/PartnerLogos';
 import Philosophy from './components/Philosophy';
 import DistributionNetwork from './components/DistributionNetwork';
@@ -43,7 +42,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-stone-950">
+    <div className="min-h-screen bg-white">
       <Navbar
         lang={lang}
         setLang={setLang}
@@ -57,9 +56,7 @@ function App() {
         {/* Company Overview - 회사 개요, CEO, 통계 */}
         <CompanyOverview lang={lang} />
 
-        {/* Products - 주요 유통 브랜드 */}
-        <ProductScroller lang={lang} />
-
+        {/* Products - 주요 유통 브랜드 & 파트너사 */}
         <PartnerLogos lang={lang} />
 
         {/* Identity - 왜 Fu Lu Shou인가? */}

@@ -150,6 +150,18 @@ const PartnerLogos: React.FC<PartnerLogosProps> = ({ lang }) => {
                     </div>
                 </div>
 
+                {/* Brand Company Logos */}
+                <div className={`flex flex-wrap justify-center gap-8 md:gap-16 mb-12 md:mb-16 transition-all duration-1000 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+                  {[
+                    { name: 'Dong-A Otsuka', logo: '/img/DONG-A.jpg' },
+                    { name: 'Nongshim', logo: '/img/NONGSHIM.jpg' },
+                  ].map((brand, index) => (
+                    <div key={index} className="w-48 h-32 md:w-64 md:h-40 bg-white rounded-2xl p-6 flex items-center justify-center shadow-lg border border-stone-700 hover:border-amber-500/30 hover:shadow-amber-500/10 transition-all">
+                      <img src={brand.logo} alt={brand.name} className="max-w-full max-h-full object-contain" />
+                    </div>
+                  ))}
+                </div>
+
                 {/* Partner Cards */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
                     {partners.map((partner, index) => (

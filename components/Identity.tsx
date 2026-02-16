@@ -69,26 +69,26 @@ const Identity: React.FC<IdentityProps> = ({ lang }) => {
   ];
 
   return (
-    <section id="identity" ref={sectionRef} className="py-16 md:py-24 lg:py-32 bg-stone-950 relative overflow-hidden">
+    <section id="identity" ref={sectionRef} className="py-16 md:py-24 lg:py-32 bg-stone-50 relative overflow-hidden">
       {/* Background Elements */}
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-stone-800 to-transparent" />
-      <div className="absolute top-1/2 left-1/4 w-64 md:w-96 h-64 md:h-96 bg-amber-500/5 rounded-full blur-[100px] md:blur-[120px] pointer-events-none" />
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-stone-300 to-transparent" />
+      <div className="absolute top-1/2 left-1/4 w-64 md:w-96 h-64 md:h-96 bg-amber-100/40 rounded-full blur-[100px] md:blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-center">
           {/* Text Content */}
           <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <span className="inline-block text-amber-500 font-black tracking-[0.3em] md:tracking-[0.4em] uppercase text-[10px] md:text-xs mb-4 md:mb-6">
+            <span className="inline-block text-amber-700 font-black tracking-[0.3em] md:tracking-[0.4em] uppercase text-[10px] md:text-xs mb-4 md:mb-6">
               {content.sectionLabel[lang]}
             </span>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6 md:mb-8 tracking-tighter leading-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-stone-900 mb-6 md:mb-8 tracking-tighter leading-tight">
               {content.title[lang]}<br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-yellow-500">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-yellow-500">
                 {content.brandName}
               </span>{' '}
               {content.titleEnd[lang]}
             </h2>
-            <p className="text-base md:text-lg lg:text-xl text-stone-400 leading-relaxed font-light">
+            <p className="text-base md:text-lg lg:text-xl text-stone-600 leading-relaxed font-light">
               {content.description[lang]}
             </p>
           </div>
@@ -98,15 +98,15 @@ const Identity: React.FC<IdentityProps> = ({ lang }) => {
             {stats.map((stat, index) => (
               <div
                 key={index}
-                className={`p-5 md:p-8 rounded-2xl md:rounded-[2rem] bg-stone-900/40 border border-stone-800 backdrop-blur-sm group hover:border-amber-500/30 transition-all duration-700 ${index === 2 ? 'sm:col-span-2' : ''} ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+                className={`p-5 md:p-8 rounded-2xl md:rounded-[2rem] bg-white shadow-lg border border-stone-200 group hover:border-amber-400/50 transition-all duration-700 ${index === 2 ? 'sm:col-span-2' : ''} ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
                 style={{ transitionDelay: `${300 + index * 200}ms` }}
               >
                 <div className="flex items-end gap-2 md:gap-3 mb-2">
-                  <span className="text-3xl md:text-4xl font-black text-white group-hover:text-amber-500 transition-colors">
+                  <span className="text-4xl md:text-5xl font-black text-stone-900 group-hover:text-amber-600 transition-colors">
                     {index === 0 ? '#1' : index === 1 ? `$${importCount}M+` : `${salesCount}M`}
                   </span>
                   {stat.suffix && (
-                    <span className="text-lg md:text-xl font-bold text-stone-600 mb-1">
+                    <span className="text-lg md:text-xl font-bold text-stone-400 mb-1">
                       {stat.suffix[lang]}
                     </span>
                   )}
@@ -114,9 +114,26 @@ const Identity: React.FC<IdentityProps> = ({ lang }) => {
                 <div className="text-[9px] md:text-[10px] font-black text-stone-500 uppercase tracking-widest mb-3 md:mb-4">
                   {stat.label[lang]}
                 </div>
-                <p className="text-xs md:text-sm text-stone-400 leading-snug">
+                <p className="text-xs md:text-sm text-stone-500 leading-snug">
                   {stat.description[lang]}
                 </p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Why Fu Lu Shou? Value Proposition */}
+        <div className={`mt-12 md:mt-16 p-6 md:p-8 rounded-2xl bg-gradient-to-r from-amber-50 to-yellow-50 border border-amber-200 transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+            {[
+              { icon: '🕰️', title: { ko: '검증된 성공 공식', en: 'Proven Formula', zh: '经验证的公式', kh: 'រូបមន្តដែលបានបញ្ជាក់' }, desc: { ko: '15년 현장 노하우', en: '15 Years Field Expertise', zh: '15年实地经验', kh: 'បទពិសោធន៍ 15 ឆ្នាំ' } },
+              { icon: '🤝', title: { ko: '독점 유통 파트너', en: 'Exclusive Partner', zh: '独家合作伙伴', kh: 'ដៃគូផ្តាច់មុខ' }, desc: { ko: '한국 대표 브랜드 공식 총판', en: 'Official Distributor of Top Korean Brands', zh: '韩国顶级品牌官方经销商', kh: 'អ្នកចែកចាយផ្លូវការម៉ាកកូរ៉េ' } },
+              { icon: '📈', title: { ko: '시장 1위 실적', en: '#1 Market Position', zh: '市场第一', kh: 'ទីផ្សារលេខ 1' }, desc: { ko: '에너지 드링크 카테고리 압도적 1위', en: 'Dominant #1 in Energy Drinks', zh: '能量饮料绝对领先', kh: 'ឈានមុខគេក្នុងភេសជ្ជៈថាមពល' } },
+            ].map((item, i) => (
+              <div key={i} className="flex flex-col items-center gap-2">
+                <span className="text-3xl">{item.icon}</span>
+                <h4 className="text-sm md:text-base font-black text-stone-900">{item.title[lang]}</h4>
+                <p className="text-xs text-stone-500">{item.desc[lang]}</p>
               </div>
             ))}
           </div>

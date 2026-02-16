@@ -128,35 +128,35 @@ const CompanyOverview: React.FC<CompanyOverviewProps> = ({ lang }) => {
     ];
 
     return (
-        <section id="company" ref={sectionRef} className="py-16 md:py-24 lg:py-32 bg-stone-950 relative overflow-hidden">
+        <section id="company" ref={sectionRef} className="py-16 md:py-24 lg:py-32 bg-white relative overflow-hidden">
             {/* Background Effects */}
-            <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-amber-500/30 to-transparent" />
-            <div className="absolute top-1/3 right-0 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-amber-500/5 rounded-full blur-[100px] translate-x-1/2" />
-            <div className="absolute bottom-1/4 left-0 w-[200px] md:w-[400px] h-[200px] md:h-[400px] bg-amber-500/5 rounded-full blur-[80px] -translate-x-1/2" />
+            <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-amber-300/50 to-transparent" />
+            <div className="absolute top-1/3 right-0 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-amber-100/40 rounded-full blur-[100px] translate-x-1/2" />
+            <div className="absolute bottom-1/4 left-0 w-[200px] md:w-[400px] h-[200px] md:h-[400px] bg-amber-100/30 rounded-full blur-[80px] -translate-x-1/2" />
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 {/* Section Header */}
                 <div className={`text-center mb-12 md:mb-16 lg:mb-20 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-                    <span className="inline-flex items-center px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-[10px] md:text-xs font-bold tracking-widest uppercase mb-4 md:mb-6">
+                    <span className="inline-flex items-center px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-amber-50 border border-amber-300 text-amber-700 text-[10px] md:text-xs font-bold tracking-widest uppercase mb-4 md:mb-6">
                         <Building className="w-3 h-3 md:w-4 md:h-4 mr-2" />
                         {content.sectionLabel[lang]}
                     </span>
-                    <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 md:mb-6 tracking-tight">
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-stone-900 mb-4 md:mb-6 tracking-tight">
                         {content.title[lang]}
                     </h2>
-                    <p className="text-base md:text-lg lg:text-xl text-stone-400 max-w-3xl mx-auto leading-relaxed">
+                    <p className="text-base md:text-lg lg:text-xl text-stone-600 max-w-3xl mx-auto leading-relaxed">
                         {content.subtitle[lang]}
                     </p>
                 </div>
 
-                {/* CEO Card - Right after subtitle */}
+                {/* CEO Card */}
                 <div className="max-w-2xl mx-auto mb-12 md:mb-16 lg:mb-20">
-                    <div className="relative p-6 md:p-8 rounded-2xl md:rounded-3xl bg-gradient-to-br from-stone-900 to-stone-900/50 border border-stone-800 overflow-hidden group hover:border-amber-500/30 transition-all">
-                        <div className="absolute top-0 right-0 w-32 md:w-48 h-32 md:h-48 bg-gradient-to-bl from-amber-500/10 to-transparent rounded-full blur-2xl" />
+                    <div className="relative p-6 md:p-8 rounded-2xl md:rounded-3xl bg-white shadow-xl border border-stone-200 overflow-hidden group hover:border-amber-400/50 transition-all">
+                        <div className="absolute top-0 right-0 w-32 md:w-48 h-32 md:h-48 bg-gradient-to-bl from-amber-100/50 to-transparent rounded-full blur-2xl" />
                         <div className="relative z-10 text-center">
-                            <div className="text-[10px] md:text-xs text-amber-400 uppercase tracking-widest font-bold mb-1 md:mb-2">{content.ceo[lang]}</div>
-                            <div className="text-xl md:text-2xl lg:text-3xl font-black text-white mb-2 md:mb-3">Mr. Sok Samnang</div>
-                            <p className="text-sm md:text-base text-stone-400 leading-relaxed">
+                            <div className="text-[10px] md:text-xs text-amber-600 uppercase tracking-widest font-bold mb-1 md:mb-2">{content.ceo[lang]}</div>
+                            <div className="text-xl md:text-2xl lg:text-3xl font-black text-stone-900 mb-2 md:mb-3">Mr. Sok Samnang</div>
+                            <p className="text-sm md:text-base text-stone-600 leading-relaxed">
                                 {lang === 'ko' ? 'F&B 수입 및 유통을 통해 캄보디아 전역에 고품질 제품을 공급하는 비전을 실현합니다.' :
                                     lang === 'zh' ? '通过F&B进口和分销，实现向柬埔寨全境供应高品质产品的愿景。' :
                                         lang === 'kh' ? 'សម្រេចចក្ខុវិស័យនៃការផ្គត់ផ្គង់ផលិតផលគុណភាពខ្ពស់ទូទាំងកម្ពុជា។' :
@@ -176,22 +176,21 @@ const CompanyOverview: React.FC<CompanyOverviewProps> = ({ lang }) => {
                     </button>
                 </div>
 
-                {/* Stats Grid - Mobile Optimized */}
+                {/* Stats Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-12 md:mb-16 lg:mb-20">
                     {stats.map((stat, index) => (
                         <div
                             key={index}
-                            className="group relative p-4 md:p-6 lg:p-8 rounded-2xl md:rounded-3xl bg-stone-900/50 border border-stone-800 backdrop-blur-sm hover:border-amber-500/30 transition-all duration-500 hover:-translate-y-1"
+                            className="group relative p-4 md:p-6 lg:p-8 rounded-2xl md:rounded-3xl bg-white shadow-lg border border-stone-200 hover:border-amber-400/50 transition-all duration-500 hover:-translate-y-1 hover:shadow-xl"
                         >
-                            <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity bg-gradient-to-br ${stat.color} rounded-2xl md:rounded-3xl blur-xl -z-10`} style={{ opacity: 0.1 }} />
-                            <div className={`w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-gradient-to-br ${stat.color} flex items-center justify-center mb-3 md:mb-4 shadow-lg`}>
+                            <div className={`w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-gradient-to-br ${stat.color} flex items-center justify-center mb-3 md:mb-4 shadow-lg`}>
                                 <stat.icon className="w-5 h-5 md:w-6 md:h-6 text-white" />
                             </div>
-                            <div className="text-2xl sm:text-3xl md:text-4xl font-black text-white mb-2 md:mb-3">
+                            <div className="text-3xl sm:text-4xl md:text-5xl font-black text-stone-900 mb-2 md:mb-3">
                                 {index === 0 ? `${employeeCount}+` : index === 1 ? `${warehouseCount.toLocaleString()}㎡` : index === 2 ? distributorCount : `${truckCount}+`}
                             </div>
-                            <div className="text-[10px] md:text-xs text-amber-500 uppercase tracking-wider font-bold mb-3">{stat.label[lang]}</div>
-                            <p className="text-[11px] md:text-xs text-stone-400 leading-relaxed font-light break-keep">
+                            <div className="text-[10px] md:text-xs text-amber-600 uppercase tracking-wider font-bold mb-3">{stat.label[lang]}</div>
+                            <p className="text-[11px] md:text-xs text-stone-500 leading-relaxed font-light break-keep">
                                 {stat.description[lang]}
                             </p>
                         </div>
@@ -200,30 +199,26 @@ const CompanyOverview: React.FC<CompanyOverviewProps> = ({ lang }) => {
 
                 {/* Vision & Mission */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-                    {/* Vision */}
-                    <div className="p-5 md:p-6 lg:p-8 rounded-2xl md:rounded-3xl bg-stone-900/50 border border-stone-800 hover:border-amber-500/30 transition-all group">
+                    <div className="p-5 md:p-6 lg:p-8 rounded-2xl md:rounded-3xl bg-stone-50 shadow-md border border-stone-200 hover:border-amber-400/50 transition-all group">
                         <div className="flex items-center gap-3 md:gap-4 mb-3 md:mb-4">
-                            <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-amber-500/20 flex items-center justify-center">
-                                <Target className="w-5 h-5 md:w-6 md:h-6 text-amber-400" />
+                            <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-amber-100 flex items-center justify-center">
+                                <Target className="w-5 h-5 md:w-6 md:h-6 text-amber-600" />
                             </div>
-                            <h3 className="text-lg md:text-xl font-black text-white">{content.vision[lang]}</h3>
+                            <h3 className="text-lg md:text-xl font-black text-stone-900">{content.vision[lang]}</h3>
                         </div>
-                        <p className="text-sm md:text-base text-stone-400 leading-relaxed">{content.visionText[lang]}</p>
+                        <p className="text-sm md:text-base text-stone-600 leading-relaxed">{content.visionText[lang]}</p>
                     </div>
 
-                    {/* Mission */}
-                    <div className="p-5 md:p-6 lg:p-8 rounded-2xl md:rounded-3xl bg-stone-900/50 border border-stone-800 hover:border-yellow-500/30 transition-all group">
+                    <div className="p-5 md:p-6 lg:p-8 rounded-2xl md:rounded-3xl bg-stone-50 shadow-md border border-stone-200 hover:border-yellow-400/50 transition-all group">
                         <div className="flex items-center gap-3 md:gap-4 mb-3 md:mb-4">
-                            <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-yellow-500/20 flex items-center justify-center">
-                                <TrendingUp className="w-5 h-5 md:w-6 md:h-6 text-yellow-400" />
+                            <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-yellow-100 flex items-center justify-center">
+                                <TrendingUp className="w-5 h-5 md:w-6 md:h-6 text-yellow-600" />
                             </div>
-                            <h3 className="text-lg md:text-xl font-black text-white">{content.mission[lang]}</h3>
+                            <h3 className="text-lg md:text-xl font-black text-stone-900">{content.mission[lang]}</h3>
                         </div>
-                        <p className="text-sm md:text-base text-stone-400 leading-relaxed">{content.missionText[lang]}</p>
+                        <p className="text-sm md:text-base text-stone-600 leading-relaxed">{content.missionText[lang]}</p>
                     </div>
                 </div>
-
-
             </div>
         </section>
     );
