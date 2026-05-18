@@ -43,6 +43,14 @@ const Hero: React.FC<HeroProps> = ({ lang, scrollToSection }) => {
       canvas.height = window.innerHeight;
     };
 
+    const isMobile = window.innerWidth < 768;
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) return;
+
+    const CORE_COUNT = isMobile ? 80 : 300;
+    const FLARE_COUNT = isMobile ? 40 : 150;
+    const DUST_COUNT = isMobile ? 100 : 400;
+
     // Create particles with different behaviors
     const createParticles = () => {
       particles = [];
@@ -50,7 +58,7 @@ const Hero: React.FC<HeroProps> = ({ lang, scrollToSection }) => {
       const centerY = canvas.height * 0.5;
 
       // Core particles - dense center
-      for (let i = 0; i < 300; i++) {
+      for (let i = 0; i < CORE_COUNT; i++) {
         const angle = Math.random() * Math.PI * 2;
         const distance = Math.random() * 80; // Close to center
         particles.push({
@@ -72,7 +80,7 @@ const Hero: React.FC<HeroProps> = ({ lang, scrollToSection }) => {
       }
 
       // Flare particles - erupting outward irregularly
-      for (let i = 0; i < 150; i++) {
+      for (let i = 0; i < FLARE_COUNT; i++) {
         const angle = Math.random() * Math.PI * 2;
         const distance = 50 + Math.random() * 200;
         const speed = 0.5 + Math.random() * 2;
@@ -95,7 +103,7 @@ const Hero: React.FC<HeroProps> = ({ lang, scrollToSection }) => {
       }
 
       // Dust particles - scattered widely with drift
-      for (let i = 0; i < 400; i++) {
+      for (let i = 0; i < DUST_COUNT; i++) {
         const x = Math.random() * canvas.width;
         const y = Math.random() * canvas.height;
         particles.push({

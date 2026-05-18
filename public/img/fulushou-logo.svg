@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- Outer octagon frame -->
+  <path d="M62,8 L138,8 L192,62 L192,138 L138,192 L62,192 L8,138 L8,62 Z"
+    stroke="#1C72BE" stroke-width="12" fill="none" stroke-linejoin="miter"/>
+  <!-- Inner circle ring -->
+  <circle cx="100" cy="100" r="61" stroke="#1C72BE" stroke-width="10" fill="none"/>
+  <!-- Inner cross mark: 4 arms with rounded outer ends -->
+  <!-- Top arm -->
+  <path d="M87,87 L87,52 A13,13 0 0,0 113,52 L113,87 Z" fill="#1C72BE"/>
+  <!-- Bottom arm -->
+  <path d="M87,113 L87,148 A13,13 0 0,1 113,148 L113,113 Z" fill="#1C72BE"/>
+  <!-- Left arm -->
+  <path d="M87,87 L52,87 A13,13 0 0,0 52,113 L87,113 Z" fill="#1C72BE"/>
+  <!-- Right arm -->
+  <path d="M113,87 L148,87 A13,13 0 0,1 148,113 L113,113 Z" fill="#1C72BE"/>
+</svg>

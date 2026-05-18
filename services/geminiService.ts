@@ -33,7 +33,7 @@ const callGeminiAPI = async (prompt: string, config?: any): Promise<string> => {
 
 const COMPANY_CONTEXT = `
   IMPORTANT COMPANY HISTORY & IDENTITY:
-  - **Company Name**: Fu Lu Shou Co., Ltd.
+  - **Company Name**: Fu Lu Shou F&B Co., Ltd.
   - **Founder/CEO**: Sok Samnang (The legendary figure who created the "Bacchus Myth" in Cambodia).
   - **Origins**: The company started as "CAM GOLD" before rebranding to Fu Lu Shou.
   - **Core Identity**: Based on the concept of Fu (Fortune), Lu (Prosperity), and Shou (Longevity).

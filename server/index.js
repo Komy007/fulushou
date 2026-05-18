@@ -8,21 +8,34 @@ import { rateLimit } from 'express-rate-limit';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Explicit startup log for Cloud Run diagnostics
-console.log('[DIAGNOSTIC] Server initialization started');
-console.log('[DIAGNOSTIC] Node version:', process.version);
-console.log('[DIAGNOSTIC] Current directory:', process.cwd());
-console.log('[DIAGNOSTIC] Environment:', process.env.NODE_ENV);
+const isProd = process.env.NODE_ENV === 'production';
+
+if (!isProd) {
+  console.log('[DEV] Server initialization started');
+  console.log('[DEV] Node version:', process.version);
+}
 
 dotenv.config({ path: '.env.local' });
-console.log('[DIAGNOSTIC] Dotenv config called');
-// Synchronization for domain deployment: 2026-01-07
 
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-app.use(cors());
-app.use(express.json());
+const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN || 'https://fulushou.net';
+
+app.use(cors({
+  origin: isProd ? ALLOWED_ORIGIN : true,
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type'],
+}));
+app.use(express.json({ limit: '16kb' }));
+
+// Security headers
+app.use((req, res, next) => {
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-Frame-Options', 'SAMEORIGIN');
+  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+  next();
+});
 
 // AI API Rate Limiter: 10 requests per 24 hours per IP (Safety Net)
 const aiRateLimiter = rateLimit({
@@ -80,15 +93,18 @@ const callGemini = async (prompt) => {
 app.post('/api/proxy', aiRateLimiter, async (req, res) => {
     try {
         const { prompt } = req.body;
-        if (!prompt) {
+        if (!prompt || typeof prompt !== 'string') {
             return res.status(400).json({ error: 'Prompt is required' });
+        }
+        if (prompt.length > 3000) {
+            return res.status(400).json({ error: 'Prompt too long' });
         }
 
         const text = await callGemini(prompt);
         res.json({ text });
     } catch (error) {
-        console.error('Bae-kend Error:', error);
-        res.status(500).json({ error: error.message || 'Internal Server Error' });
+        console.error('API Error:', error.message);
+        res.status(500).json({ error: 'Internal Server Error' });
     }
 });
 
@@ -107,9 +123,6 @@ process.on('unhandledRejection', (reason, promise) => {
     console.error('UNHANDLED REJECTION:', reason);
 });
 
-// Explicit binding to '0.0.0.0' for Cloud Run
 app.listen(PORT, '0.0.0.0', () => {
-    console.log(`--- Server successfully started ---`);
-    console.log(`Port: ${PORT}`);
-    console.log(`Host: 0.0.0.0`);
+    console.log(`Server started on port ${PORT}`);
 });
