@@ -4,13 +4,20 @@
     stroke="#1C72BE" stroke-width="12" fill="none" stroke-linejoin="miter"/>
   <!-- Inner circle ring -->
   <circle cx="100" cy="100" r="61" stroke="#1C72BE" stroke-width="10" fill="none"/>
-  <!-- Inner cross mark: 4 arms with rounded outer ends -->
+  <!--
+    Inner mark: 4 symmetric C-shaped arms, each opening toward the center.
+    Each arm tip reaches r=56 (circle inner edge). Center opening: 30x30 square.
+    Top arm (∩): shoulders at (85,59)-(115,59), arc up to (100,44)
+    Bottom arm (∪): shoulders at (85,141)-(115,141), arc down to (100,156)
+    Left arm: shoulders at (59,85)-(59,115), arc left to (44,100)
+    Right arm: shoulders at (141,85)-(141,115), arc right to (156,100)
+  -->
   <!-- Top arm -->
-  <path d="M87,87 L87,52 A13,13 0 0,0 113,52 L113,87 Z" fill="#1C72BE"/>
+  <path d="M85,85 L85,59 A15,15 0 0,0 115,59 L115,85 Z" fill="#1C72BE"/>
   <!-- Bottom arm -->
-  <path d="M87,113 L87,148 A13,13 0 0,1 113,148 L113,113 Z" fill="#1C72BE"/>
+  <path d="M85,115 L85,141 A15,15 0 0,1 115,141 L115,115 Z" fill="#1C72BE"/>
   <!-- Left arm -->
-  <path d="M87,87 L52,87 A13,13 0 0,0 52,113 L87,113 Z" fill="#1C72BE"/>
+  <path d="M85,85 L59,85 A15,15 0 0,0 59,115 L85,115 Z" fill="#1C72BE"/>
   <!-- Right arm -->
-  <path d="M113,87 L148,87 A13,13 0 0,1 148,113 L113,113 Z" fill="#1C72BE"/>
+  <path d="M115,85 L141,85 A15,15 0 0,1 141,115 L115,115 Z" fill="#1C72BE"/>
 </svg>

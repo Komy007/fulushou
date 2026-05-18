@@ -151,30 +151,30 @@ const PartnerLogos: React.FC<PartnerLogosProps> = ({ lang }) => {
                 </div>
 
                 {/* Partner Cards */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
                     {partners.map((partner, index) => (
                         <div
                             key={index}
-                            className={`group rounded-2xl md:rounded-3xl bg-stone-900/50 border border-stone-800 hover:border-amber-500/30 transition-all duration-700 hover:-translate-y-2 overflow-hidden ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+                            className={`group flex flex-col rounded-2xl md:rounded-3xl bg-stone-900/50 border border-stone-800 hover:border-amber-500/30 transition-all duration-700 hover:-translate-y-2 overflow-hidden ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
                             style={{ transitionDelay: `${300 + index * 150}ms` }}
                         >
-                            {/* Product Image */}
-                            <div className="relative h-40 md:h-48 bg-gradient-to-br from-stone-800 to-stone-900 overflow-hidden">
+                            {/* Product Image — enlarged */}
+                            <div className="relative h-44 sm:h-52 md:h-64 bg-gradient-to-br from-stone-800 to-stone-900 flex-shrink-0 overflow-hidden">
                                 <img
                                     src={partner.productImg}
                                     alt={partner.product}
-                                    className="w-full h-full object-contain p-4 group-hover:scale-110 transition-transform duration-500"
+                                    className="w-full h-full object-contain p-3 md:p-5 group-hover:scale-110 transition-transform duration-500"
                                 />
-                                <div className="absolute top-3 right-3 px-2.5 py-1 bg-stone-950/80 backdrop-blur-sm border border-amber-500/20 rounded-full text-amber-400 text-[10px] md:text-xs font-bold tracking-wider">
+                                <div className="absolute top-2 right-2 md:top-3 md:right-3 px-2 py-0.5 md:px-2.5 md:py-1 bg-stone-950/80 backdrop-blur-sm border border-amber-500/20 rounded-full text-amber-400 text-[9px] md:text-xs font-bold tracking-wider">
                                     {partner.product}
                                 </div>
                             </div>
 
                             {/* Card Body */}
-                            <div className="p-4 md:p-5">
+                            <div className="p-3 md:p-5 flex flex-col flex-1">
                                 {/* Company Logo + Name */}
-                                <div className="flex items-center gap-3 mb-3">
-                                    <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-white/90 p-1.5 flex-shrink-0 flex items-center justify-center">
+                                <div className="flex items-center gap-2 md:gap-3 mb-2 md:mb-3">
+                                    <div className="w-8 h-8 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-white/90 p-1 md:p-1.5 flex-shrink-0 flex items-center justify-center">
                                         <img
                                             src={partner.logo}
                                             alt={partner.name}
@@ -182,20 +182,20 @@ const PartnerLogos: React.FC<PartnerLogosProps> = ({ lang }) => {
                                         />
                                     </div>
                                     <div>
-                                        <h3 className="text-sm md:text-base font-bold text-white group-hover:text-amber-400 transition-colors leading-tight">
+                                        <h3 className="text-xs md:text-base font-bold text-white group-hover:text-amber-400 transition-colors leading-tight">
                                             {partner.name}
                                         </h3>
-                                        <div className="text-[10px] md:text-xs text-stone-500">{partner.nameKo}</div>
+                                        <div className="text-[9px] md:text-xs text-stone-500">{partner.nameKo}</div>
                                     </div>
                                 </div>
 
                                 {/* Description */}
-                                <p className="text-xs md:text-sm text-stone-400">
+                                <p className="text-[11px] md:text-sm text-stone-400 leading-relaxed flex-1">
                                     {partner.desc[lang]}
                                 </p>
 
                                 {/* Bottom Accent */}
-                                <div className="mt-3 h-1 w-full bg-stone-800 rounded-full overflow-hidden">
+                                <div className="mt-3 h-0.5 md:h-1 w-full bg-stone-800 rounded-full overflow-hidden">
                                     <div className="h-full bg-gradient-to-r from-amber-500 to-yellow-500 rounded-full w-0 group-hover:w-full transition-all duration-700" />
                                 </div>
                             </div>
