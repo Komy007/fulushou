@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Language } from '../types';
-import { Handshake } from 'lucide-react';
+import { Handshake, Star } from 'lucide-react';
 
 interface PartnerLogosProps {
     lang: Language;
@@ -20,7 +20,6 @@ const useCountUp = (end: number, duration: number = 2000, startCounting: boolean
         const animate = (timestamp: number) => {
             if (!startTimeRef.current) startTimeRef.current = timestamp;
             const progress = Math.min((timestamp - startTimeRef.current) / duration, 1);
-            // Ease out cubic
             const eased = 1 - Math.pow(1 - progress, 3);
             countRef.current = Math.floor(eased * end);
             setCount(countRef.current);
@@ -39,7 +38,7 @@ const PartnerLogos: React.FC<PartnerLogosProps> = ({ lang }) => {
     useEffect(() => {
         const observer = new IntersectionObserver(
             ([entry]) => { if (entry.isIntersecting) setIsVisible(true); },
-            { threshold: 0.2 }
+            { threshold: 0.1 }
         );
         if (sectionRef.current) observer.observe(sectionRef.current);
         return () => observer.disconnect();
@@ -56,16 +55,22 @@ const PartnerLogos: React.FC<PartnerLogosProps> = ({ lang }) => {
             kh: 'ដៃគូសកល'
         },
         title: {
-            ko: '함께 성장하는 파트너사',
-            en: 'Partners Growing Together',
-            zh: '共同成长的合作伙伴',
-            kh: 'ដៃគូដែលរីកចម្រើនជាមួយគ្នា'
+            ko: '함께 성장하는 파트너 브랜드',
+            en: 'Partner Brands Growing Together',
+            zh: '共同成长的合作品牌',
+            kh: 'ម៉ាកដៃគូដែលរីកចម្រើនជាមួយគ្នា'
         },
         subtitle: {
             ko: '글로벌 브랜드와의 독점 유통 계약을 통해 캄보디아 시장을 선도합니다.',
             en: 'Leading the Cambodian market through exclusive distribution agreements with global brands.',
             zh: '通过与全球品牌的独家分销协议引领柬埔寨市场。',
             kh: 'នាំមុខទីផ្សារកម្ពុជាតាមរយៈកិច្ចព្រមព្រៀងចែកចាយផ្តាច់មុខជាមួយម៉ាកសកល។'
+        },
+        exclusive: {
+            ko: '독점 유통',
+            en: 'Exclusive',
+            zh: '独家',
+            kh: 'ផ្តាច់មុខ'
         }
     };
 
@@ -77,7 +82,15 @@ const PartnerLogos: React.FC<PartnerLogosProps> = ({ lang }) => {
             country: '🇰🇷',
             logo: '/img/DONG-A.png',
             productImg: '/img/bacchus.jpg',
-            desc: { ko: '에너지 드링크 독점 유통', en: 'Exclusive energy drink distribution', zh: '独家能量饮料分销', kh: 'ការចែកចាយភេសជ្ជៈថាមពលផ្តាច់មុខ' }
+            bgGradient: 'from-amber-950/40 via-stone-900 to-stone-950',
+            accentColor: 'border-amber-500/40',
+            tagColor: 'bg-amber-500/20 text-amber-300 border-amber-500/30',
+            desc: {
+                ko: '캄보디아 #1 에너지 드링크 · 독점 유통',
+                en: 'Cambodia #1 Energy Drink · Exclusive Distribution',
+                zh: '柬埔寨第一能量饮料 · 独家分销',
+                kh: 'ភេសជ្ជៈថាមពល #1 · ចែកចាយផ្តាច់មុខ'
+            }
         },
         {
             name: 'Dong-A Otsuka',
@@ -86,7 +99,15 @@ const PartnerLogos: React.FC<PartnerLogosProps> = ({ lang }) => {
             country: '🇰🇷',
             logo: '/img/DONG-A.png',
             productImg: '/img/pocari.jpg',
-            desc: { ko: 'ION 음료 독점 유통', en: 'Exclusive ION drink distribution', zh: '独家ION饮料分销', kh: 'ការចែកចាយភេសជ្ជៈ ION ផ្តាច់មុខ' }
+            bgGradient: 'from-sky-950/40 via-stone-900 to-stone-950',
+            accentColor: 'border-sky-500/40',
+            tagColor: 'bg-sky-500/20 text-sky-300 border-sky-500/30',
+            desc: {
+                ko: '이온 스포츠 음료 · 독점 유통',
+                en: 'ION Sport Drink · Exclusive Distribution',
+                zh: '电解质运动饮料 · 独家分销',
+                kh: 'ភេសជ្ជៈកីឡា ION · ចែកចាយផ្តាច់មុខ'
+            }
         },
         {
             name: 'Nongshim',
@@ -95,7 +116,15 @@ const PartnerLogos: React.FC<PartnerLogosProps> = ({ lang }) => {
             country: '🇰🇷',
             logo: '/img/NONGSHIM.png',
             productImg: '/img/shinramyun.png',
-            desc: { ko: '한국 라면 독점 유통', en: 'Exclusive Korean noodle distribution', zh: '独家韩国拉面分销', kh: 'ការចែកចាយមីកូរ៉េផ្តាច់មុខ' }
+            bgGradient: 'from-red-950/40 via-stone-900 to-stone-950',
+            accentColor: 'border-red-500/40',
+            tagColor: 'bg-red-500/20 text-red-300 border-red-500/30',
+            desc: {
+                ko: '세계 1위 한국 라면 · 독점 유통',
+                en: "World's #1 Korean Noodle · Exclusive Distribution",
+                zh: '全球第一韩国拉面 · 独家分销',
+                kh: 'មីកូរ៉េ #1 ពិភពលោក · ចែកចាយផ្តាច់មុខ'
+            }
         },
         {
             name: 'Dong-A Otsuka',
@@ -104,7 +133,15 @@ const PartnerLogos: React.FC<PartnerLogosProps> = ({ lang }) => {
             country: '🇰🇷',
             logo: '/img/DONG-A.png',
             productImg: '/img/olatte.png',
-            desc: { ko: '유제품 음료 독점 유통', en: 'Exclusive dairy beverage distribution', zh: '独家乳制品饮料分销', kh: 'ការចែកចាយភេសជ្ជៈទឹកដោះគោផ្តាច់មុខ' }
+            bgGradient: 'from-orange-950/40 via-stone-900 to-stone-950',
+            accentColor: 'border-orange-500/40',
+            tagColor: 'bg-orange-500/20 text-orange-300 border-orange-500/30',
+            desc: {
+                ko: '프리미엄 유음료 · 독점 유통',
+                en: 'Premium Dairy Drink · Exclusive Distribution',
+                zh: '优质乳制品饮料 · 独家分销',
+                kh: 'ភេសជ្ជៈទឹកដោះគោ · ចែកចាយផ្តាច់មុខ'
+            }
         }
     ];
 
@@ -115,7 +152,7 @@ const PartnerLogos: React.FC<PartnerLogosProps> = ({ lang }) => {
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 {/* Header */}
-                <div className={`text-center mb-12 md:mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+                <div className={`text-center mb-10 md:mb-14 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
                     <span className="inline-flex items-center px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-[10px] md:text-xs font-bold tracking-widest uppercase mb-4 md:mb-6">
                         <Handshake className="w-3 h-3 md:w-4 md:h-4 mr-2" />
                         {content.sectionLabel[lang]}
@@ -123,13 +160,13 @@ const PartnerLogos: React.FC<PartnerLogosProps> = ({ lang }) => {
                     <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 md:mb-6 tracking-tight">
                         {content.title[lang]}
                     </h2>
-                    <p className="text-base md:text-lg lg:text-xl text-stone-400 max-w-3xl mx-auto leading-relaxed">
+                    <p className="text-base md:text-lg text-stone-400 max-w-2xl mx-auto leading-relaxed">
                         {content.subtitle[lang]}
                     </p>
                 </div>
 
-                {/* Stats Summary */}
-                <div className={`flex flex-wrap justify-center gap-8 md:gap-16 mb-12 md:mb-16 transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+                {/* Stats */}
+                <div className={`flex flex-wrap justify-center gap-8 md:gap-16 mb-10 md:mb-14 transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
                     <div className="text-center">
                         <div className="text-4xl md:text-5xl font-black text-amber-400">{yearsCount}+</div>
                         <div className="text-xs md:text-sm text-stone-500 uppercase tracking-wider font-bold mt-1">
@@ -150,33 +187,39 @@ const PartnerLogos: React.FC<PartnerLogosProps> = ({ lang }) => {
                     </div>
                 </div>
 
-                {/* Partner Cards */}
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+                {/* Product Cards — 1 col mobile, 2 col tablet, 4 col desktop */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 md:gap-6">
                     {partners.map((partner, index) => (
                         <div
                             key={index}
-                            className={`group flex flex-col rounded-2xl md:rounded-3xl bg-stone-900/50 border border-stone-800 hover:border-amber-500/30 transition-all duration-700 hover:-translate-y-2 overflow-hidden ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-                            style={{ transitionDelay: `${300 + index * 150}ms` }}
+                            className={`group flex flex-col rounded-3xl bg-gradient-to-b ${partner.bgGradient} border ${partner.accentColor} hover:border-amber-500/50 transition-all duration-700 hover:-translate-y-2 overflow-hidden shadow-xl ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+                            style={{ transitionDelay: `${300 + index * 100}ms` }}
                         >
-                            {/* Product Image — enlarged */}
-                            <div className="relative h-44 sm:h-52 md:h-64 bg-gradient-to-br from-stone-800 to-stone-900 flex-shrink-0 overflow-hidden">
+                            {/* Product Image — very tall */}
+                            <div className="relative h-64 sm:h-72 md:h-80 xl:h-72 bg-gradient-to-b from-stone-800/50 to-stone-900/80 flex-shrink-0 overflow-hidden flex items-center justify-center">
                                 <img
                                     src={partner.productImg}
                                     alt={partner.product}
                                     loading="lazy"
                                     decoding="async"
-                                    className="w-full h-full object-contain p-3 md:p-5 group-hover:scale-110 transition-transform duration-500"
+                                    className="w-full h-full object-contain p-4 md:p-6 group-hover:scale-110 transition-transform duration-700"
                                 />
-                                <div className="absolute top-2 right-2 md:top-3 md:right-3 px-2 py-0.5 md:px-2.5 md:py-1 bg-stone-950/80 backdrop-blur-sm border border-amber-500/20 rounded-full text-amber-400 text-[9px] md:text-xs font-bold tracking-wider">
+                                {/* Exclusive tag */}
+                                <div className={`absolute top-3 left-3 px-2.5 py-1 rounded-full border text-[9px] md:text-[10px] font-black tracking-widest uppercase flex items-center gap-1 ${partner.tagColor} backdrop-blur-sm`}>
+                                    <Star className="w-2.5 h-2.5" />
+                                    {content.exclusive[lang]}
+                                </div>
+                                {/* Product name badge */}
+                                <div className="absolute bottom-3 right-3 px-3 py-1 bg-stone-950/85 backdrop-blur-sm border border-white/10 rounded-full text-white text-[10px] md:text-xs font-bold tracking-wider">
                                     {partner.product}
                                 </div>
                             </div>
 
                             {/* Card Body */}
-                            <div className="p-3 md:p-5 flex flex-col flex-1">
+                            <div className="p-4 md:p-5 flex flex-col flex-1">
                                 {/* Company Logo + Name */}
-                                <div className="flex items-center gap-2 md:gap-3 mb-2 md:mb-3">
-                                    <div className="w-8 h-8 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-white/90 p-1 md:p-1.5 flex-shrink-0 flex items-center justify-center">
+                                <div className="flex items-center gap-3 mb-3">
+                                    <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-white/95 p-1.5 flex-shrink-0 flex items-center justify-center shadow-md">
                                         <img
                                             src={partner.logo}
                                             alt={partner.name}
@@ -186,21 +229,21 @@ const PartnerLogos: React.FC<PartnerLogosProps> = ({ lang }) => {
                                         />
                                     </div>
                                     <div>
-                                        <h3 className="text-xs md:text-base font-bold text-white group-hover:text-amber-400 transition-colors leading-tight">
+                                        <h3 className="text-sm md:text-base font-bold text-white group-hover:text-amber-400 transition-colors leading-tight">
                                             {partner.name}
                                         </h3>
-                                        <div className="text-[9px] md:text-xs text-stone-500">{partner.nameKo}</div>
+                                        <div className="text-[10px] md:text-xs text-stone-500">{partner.nameKo} {partner.country}</div>
                                     </div>
                                 </div>
 
                                 {/* Description */}
-                                <p className="text-[11px] md:text-sm text-stone-400 leading-relaxed flex-1">
+                                <p className="text-xs md:text-sm text-stone-400 leading-relaxed flex-1">
                                     {partner.desc[lang]}
                                 </p>
 
-                                {/* Bottom Accent */}
-                                <div className="mt-3 h-0.5 md:h-1 w-full bg-stone-800 rounded-full overflow-hidden">
-                                    <div className="h-full bg-gradient-to-r from-amber-500 to-yellow-500 rounded-full w-0 group-hover:w-full transition-all duration-700" />
+                                {/* Bottom accent */}
+                                <div className="mt-4 h-0.5 w-full bg-stone-800 rounded-full overflow-hidden">
+                                    <div className="h-full bg-gradient-to-r from-amber-500 to-yellow-400 rounded-full w-0 group-hover:w-full transition-all duration-700" />
                                 </div>
                             </div>
                         </div>
