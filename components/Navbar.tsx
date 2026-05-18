@@ -93,16 +93,12 @@ const Navbar: React.FC<NavbarProps> = ({ lang, setLang, scrollToSection }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           {/* Logo */}
-          <div className="flex items-center gap-2 md:gap-3 cursor-pointer group" onClick={() => scrollToSection('home')}>
+          <div className="cursor-pointer group" onClick={() => scrollToSection('home')}>
             <img
               src="/img/fulushou-logo.svg"
               alt="Fu Lu Shou F&B Co., Ltd."
-              className="h-9 md:h-11 w-auto flex-shrink-0"
+              className="h-14 md:h-16 w-auto flex-shrink-0 group-hover:opacity-80 transition-opacity duration-300"
             />
-            <div className="flex flex-col">
-              <span className="text-xl md:text-2xl font-black text-white tracking-widest group-hover:text-amber-400 transition-colors">FU LU SHOU</span>
-              <span className="text-[8px] md:text-[10px] text-amber-500/80 tracking-[0.3em] md:tracking-[0.4em] uppercase font-bold">The Golden Legacy</span>
-            </div>
           </div>
 
           {/* Desktop Menu */}
