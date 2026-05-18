@@ -340,26 +340,31 @@ const Hero: React.FC<HeroProps> = ({ lang, scrollToSection }) => {
       <div className="absolute inset-0 bg-gradient-to-r from-stone-950/90 via-stone-950/40 to-transparent z-5" />
 
       {/* Company Logo — right side, desktop */}
-      <div className="hidden lg:flex absolute right-8 xl:right-16 2xl:right-24 top-1/2 -translate-y-1/2 z-20 items-center justify-center">
+      <div className="hidden lg:flex absolute right-6 xl:right-12 2xl:right-20 top-1/2 -translate-y-1/2 z-20 flex-col items-center gap-4">
         <div className="relative">
           <div className="absolute inset-0 rounded-full bg-blue-500/10 blur-[80px] scale-125 pointer-events-none" />
           <img
             src="/img/fulushou-logo.svg"
             alt="Fu Lu Shou F&B Co., Ltd."
-            className="w-56 xl:w-72 2xl:w-80 h-auto drop-shadow-[0_0_50px_rgba(32,127,195,0.35)] animate-fade-in"
+            className="w-52 xl:w-64 2xl:w-72 h-auto drop-shadow-[0_0_50px_rgba(32,127,195,0.35)] animate-fade-in"
             style={{ animationDelay: '0.4s', animationFillMode: 'both' }}
           />
+        </div>
+        <div className="text-center">
+          <p className="text-white font-black tracking-widest text-sm xl:text-base leading-tight">FU LU SHOU F&amp;B CO., LTD.</p>
+          <p className="text-stone-400 text-[10px] xl:text-xs tracking-wider mt-1">Cambodia's F&amp;B Distribution Leader</p>
         </div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 w-full py-12 md:py-0">
-        {/* Mobile logo — above title */}
-        <div className="flex lg:hidden justify-center mb-8">
+        {/* Mobile logo + name — above title */}
+        <div className="flex lg:hidden flex-col items-center gap-3 mb-8">
           <img
             src="/img/fulushou-logo.svg"
             alt="Fu Lu Shou F&B Co., Ltd."
-            className="h-32 w-auto drop-shadow-[0_0_30px_rgba(32,127,195,0.4)]"
+            className="h-28 w-auto drop-shadow-[0_0_30px_rgba(32,127,195,0.4)]"
           />
+          <p className="text-white font-black tracking-widest text-sm text-center">FU LU SHOU F&amp;B CO., LTD.</p>
         </div>
         <div className="lg:w-4/5 xl:w-3/5">
           {/* Badge */}

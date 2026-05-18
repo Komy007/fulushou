@@ -57,12 +57,17 @@ const Footer: React.FC<FooterProps> = ({ lang }) => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {/* Brand */}
           <div className="lg:col-span-2">
-            <div className="mb-6">
+            <div className="flex items-center gap-4 mb-6">
               <img
                 src="/img/fulushou-logo.svg"
                 alt="Fu Lu Shou F&B Co., Ltd."
-                className="h-28 md:h-32 w-auto"
+                className="h-24 md:h-28 w-auto flex-shrink-0"
               />
+              <div className="flex flex-col justify-center">
+                <span className="text-lg md:text-xl font-black text-white tracking-widest leading-tight">FU LU SHOU</span>
+                <span className="text-xs md:text-sm text-stone-400 font-semibold tracking-wider leading-tight mt-0.5">F&amp;B CO., LTD.</span>
+                <span className="text-[10px] text-amber-500/60 tracking-wider mt-1 uppercase">Cambodia</span>
+              </div>
             </div>
             <p className="text-stone-400 text-sm leading-relaxed mb-6 max-w-md">
               {content.tagline[lang]}
