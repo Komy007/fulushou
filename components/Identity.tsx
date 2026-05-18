@@ -157,6 +157,15 @@ const Identity: React.FC<IdentityProps> = ({ lang }) => {
 
         {/* Section Header */}
         <div className={`text-center mb-12 md:mb-16 lg:mb-20 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div className="flex justify-center mb-6 md:mb-8">
+            <img
+              src="/img/fulushou-logo.svg"
+              alt="Fu Lu Shou F&B Co., Ltd."
+              className="h-20 md:h-24 w-auto drop-shadow-[0_0_25px_rgba(32,127,195,0.3)]"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
           <span className="inline-block px-4 py-2 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-black tracking-[0.3em] uppercase mb-6">
             {content.sectionLabel[lang]}
           </span>

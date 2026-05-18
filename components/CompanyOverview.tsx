@@ -137,6 +137,15 @@ const CompanyOverview: React.FC<CompanyOverviewProps> = ({ lang }) => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 {/* Section Header */}
                 <div className={`text-center mb-12 md:mb-16 lg:mb-20 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+                    <div className="flex justify-center mb-6 md:mb-8">
+                        <img
+                            src="/img/fulushou-logo.svg"
+                            alt="Fu Lu Shou F&B Co., Ltd."
+                            className="h-24 md:h-28 lg:h-32 w-auto drop-shadow-[0_0_30px_rgba(32,127,195,0.3)]"
+                            loading="lazy"
+                            decoding="async"
+                        />
+                    </div>
                     <span className="inline-flex items-center px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-[10px] md:text-xs font-bold tracking-widest uppercase mb-4 md:mb-6">
                         <Building className="w-3 h-3 md:w-4 md:h-4 mr-2" />
                         {content.sectionLabel[lang]}

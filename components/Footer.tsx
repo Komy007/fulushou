@@ -125,6 +125,32 @@ const Footer: React.FC<FooterProps> = ({ lang }) => {
         </div>
       </div>
 
+      {/* Grand Finale — centered logo */}
+      <div className="border-t border-stone-800/60 py-16 md:py-24 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-950/10 to-stone-950 pointer-events-none" />
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] md:w-[600px] h-[400px] md:h-[600px] bg-blue-500/5 rounded-full blur-[100px]" />
+        </div>
+        <div className="relative flex flex-col items-center gap-6 md:gap-8">
+          <img
+            src="/img/fulushou-logo.svg"
+            alt="Fu Lu Shou F&B Co., Ltd."
+            className="h-48 sm:h-56 md:h-64 lg:h-72 w-auto drop-shadow-[0_0_60px_rgba(32,127,195,0.4)]"
+            loading="lazy"
+            decoding="async"
+          />
+          <p className="text-stone-500 text-xs md:text-sm text-center max-w-md px-4 leading-relaxed">
+            {lang === 'ko'
+              ? '복과 번영과 장수 — 캄보디아에서 귀사의 성공을 함께 만들어갑니다.'
+              : lang === 'zh'
+                ? '福禄寿 — 与您共创柬埔寨的成功。'
+                : lang === 'kh'
+                  ? 'ហ្វូ លូ សៅ — រួមគ្នាកសាងភាពជោគជ័យរបស់អ្នកនៅកម្ពុជា។'
+                  : 'Fortune · Prosperity · Longevity — Building your success in Cambodia together.'}
+          </p>
+        </div>
+      </div>
+
       {/* Bottom Bar */}
       <div className="border-t border-stone-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
