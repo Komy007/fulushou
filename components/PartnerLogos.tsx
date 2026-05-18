@@ -163,6 +163,8 @@ const PartnerLogos: React.FC<PartnerLogosProps> = ({ lang }) => {
                                 <img
                                     src={partner.productImg}
                                     alt={partner.product}
+                                    loading="lazy"
+                                    decoding="async"
                                     className="w-full h-full object-contain p-3 md:p-5 group-hover:scale-110 transition-transform duration-500"
                                 />
                                 <div className="absolute top-2 right-2 md:top-3 md:right-3 px-2 py-0.5 md:px-2.5 md:py-1 bg-stone-950/80 backdrop-blur-sm border border-amber-500/20 rounded-full text-amber-400 text-[9px] md:text-xs font-bold tracking-wider">
@@ -178,6 +180,8 @@ const PartnerLogos: React.FC<PartnerLogosProps> = ({ lang }) => {
                                         <img
                                             src={partner.logo}
                                             alt={partner.name}
+                                            loading="lazy"
+                                            decoding="async"
                                             className="w-full h-full object-contain"
                                         />
                                     </div>

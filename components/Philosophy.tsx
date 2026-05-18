@@ -146,6 +146,8 @@ const Philosophy: React.FC<PhilosophyProps> = ({ lang }) => {
                 <img
                   src={item.img}
                   alt={String(item.label[lang])}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-contain"
                 />
               </div>

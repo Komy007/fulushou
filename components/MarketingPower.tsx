@@ -188,15 +188,15 @@ const MarketingPower: React.FC<MarketingPowerProps> = ({ lang }) => {
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
                         <div className="relative group rounded-2xl overflow-hidden">
-                            <img src="/img/events/concert1.jpg" alt="Bacchus Concert 1" className="w-full h-64 md:h-72 object-cover transition-transform duration-500 group-hover:scale-110" />
+                            <img src="/img/events/concert1.jpg" alt="Bacchus Concert 1" loading="lazy" decoding="async" className="w-full h-64 md:h-72 object-cover transition-transform duration-500 group-hover:scale-110" />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                         </div>
                         <div className="relative group rounded-2xl overflow-hidden">
-                            <img src="/img/events/concert2.jpg" alt="Bacchus Concert 2" className="w-full h-64 md:h-72 object-cover transition-transform duration-500 group-hover:scale-110" />
+                            <img src="/img/events/concert2.jpg" alt="Bacchus Concert 2" loading="lazy" decoding="async" className="w-full h-64 md:h-72 object-cover transition-transform duration-500 group-hover:scale-110" />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                         </div>
                         <div className="relative group rounded-2xl overflow-hidden">
-                            <img src="/img/events/concert3.jpg" alt="Bacchus Concert 3" className="w-full h-64 md:h-72 object-cover transition-transform duration-500 group-hover:scale-110" />
+                            <img src="/img/events/concert3.jpg" alt="Bacchus Concert 3" loading="lazy" decoding="async" className="w-full h-64 md:h-72 object-cover transition-transform duration-500 group-hover:scale-110" />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                         </div>
                     </div>

@@ -96,11 +96,13 @@ const CeoMessage: React.FC<CeoMessageProps> = ({ lang }) => {
                   e.currentTarget.src = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80";
                 }}
                 alt="CEO Sok Samnang"
+                loading="lazy"
+                decoding="async"
                 className="w-full h-auto object-cover transition duration-500"
               />
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-stone-950/90 to-transparent p-6">
                 <h4 className="text-white text-2xl font-bold">Sok Samnang</h4>
-                <p className="text-amber-400 font-medium">CEO & Founder, Fu Lu Shou Co., Ltd.</p>
+                <p className="text-amber-400 font-medium">CEO &amp; Founder, Fu Lu Shou F&amp;B Co., Ltd.</p>
               </div>
             </div>
           </div>
