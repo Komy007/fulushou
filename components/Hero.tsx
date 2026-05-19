@@ -346,7 +346,7 @@ const Hero: React.FC<HeroProps> = ({ lang, scrollToSection }) => {
           <img
             src="/img/fulushou-logo.svg"
             alt="Fu Lu Shou F&B Co., Ltd."
-            className="w-52 xl:w-64 2xl:w-72 h-auto drop-shadow-[0_0_50px_rgba(32,127,195,0.35)] animate-fade-in"
+            className="w-52 xl:w-64 2xl:w-72 h-auto drop-shadow-[0_0_50px_rgba(57,133,198,0.4)] animate-fade-in"
             style={{ animationDelay: '0.4s', animationFillMode: 'both' }}
           />
         </div>
@@ -358,13 +358,17 @@ const Hero: React.FC<HeroProps> = ({ lang, scrollToSection }) => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 w-full py-12 md:py-0">
         {/* Mobile logo + name — above title */}
-        <div className="flex lg:hidden flex-col items-center gap-3 mb-8">
+        <div className="flex lg:hidden items-center gap-4 mb-8">
           <img
             src="/img/fulushou-logo.svg"
             alt="Fu Lu Shou F&B Co., Ltd."
-            className="h-28 w-auto drop-shadow-[0_0_30px_rgba(32,127,195,0.4)]"
+            className="h-24 sm:h-28 w-auto flex-shrink-0 drop-shadow-[0_0_30px_rgba(57,133,198,0.5)]"
           />
-          <p className="text-white font-black tracking-widest text-sm text-center">FU LU SHOU F&amp;B CO., LTD.</p>
+          <div className="flex flex-col justify-center">
+            <p className="text-white font-black tracking-widest text-base sm:text-lg leading-tight">FU LU SHOU</p>
+            <p className="text-amber-400 font-bold tracking-wider text-[11px] sm:text-xs mt-0.5">F&amp;B CO., LTD.</p>
+            <p className="text-stone-400 text-[10px] sm:text-xs mt-1 leading-snug">Cambodia's F&amp;B<br/>Distribution Leader</p>
+          </div>
         </div>
         <div className="lg:w-4/5 xl:w-3/5">
           {/* Badge */}

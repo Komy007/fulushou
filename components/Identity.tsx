@@ -161,7 +161,7 @@ const Identity: React.FC<IdentityProps> = ({ lang }) => {
             <img
               src="/img/fulushou-logo.svg"
               alt="Fu Lu Shou F&B Co., Ltd."
-              className="h-20 md:h-24 w-auto drop-shadow-[0_0_25px_rgba(32,127,195,0.3)]"
+              className="h-20 md:h-24 w-auto drop-shadow-[0_0_25px_rgba(57,133,198,0.35)]"
               loading="lazy"
               decoding="async"
             />

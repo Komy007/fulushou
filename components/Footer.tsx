@@ -134,13 +134,13 @@ const Footer: React.FC<FooterProps> = ({ lang }) => {
       <div className="border-t border-stone-800/60 py-16 md:py-24 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-950/10 to-stone-950 pointer-events-none" />
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] md:w-[600px] h-[400px] md:h-[600px] bg-blue-500/5 rounded-full blur-[100px]" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] md:w-[600px] h-[400px] md:h-[600px] bg-blue-600/8 rounded-full blur-[100px]" />
         </div>
         <div className="relative flex flex-col items-center gap-6 md:gap-8">
           <img
             src="/img/fulushou-logo.svg"
             alt="Fu Lu Shou F&B Co., Ltd."
-            className="h-48 sm:h-56 md:h-64 lg:h-72 w-auto drop-shadow-[0_0_60px_rgba(32,127,195,0.4)]"
+            className="h-48 sm:h-56 md:h-64 lg:h-72 w-auto drop-shadow-[0_0_60px_rgba(57,133,198,0.45)]"
             loading="lazy"
             decoding="async"
           />
