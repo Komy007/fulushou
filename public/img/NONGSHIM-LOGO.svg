@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 110">
+  <!-- Red circle -->
+  <circle cx="58" cy="55" r="52" fill="#E31937"/>
+  <!-- White oval cutout (upper area) -->
+  <ellipse cx="58" cy="38" rx="22" ry="28" fill="white"/>
+  <!-- Company Text -->
+  <text x="125" y="68" font-family="Arial Rounded MT Bold,Arial Black,Arial,sans-serif" font-size="46" font-weight="900" fill="#1a1a1a">NONGSHIM</text>
+</svg>

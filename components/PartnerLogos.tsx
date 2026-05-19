@@ -45,7 +45,7 @@ const PartnerLogos: React.FC<PartnerLogosProps> = ({ lang }) => {
     }, []);
 
     const yearsCount = useCountUp(15, 2000, isVisible);
-    const companiesCount = useCountUp(2, 1500, isVisible);
+    const companiesCount = useCountUp(3, 1500, isVisible);
 
     const content = {
         sectionLabel: {
@@ -76,11 +76,11 @@ const PartnerLogos: React.FC<PartnerLogosProps> = ({ lang }) => {
 
     const partners = [
         {
-            name: 'Dong-A Otsuka',
-            nameKo: '동아오츠카',
+            name: 'Dong-A ST',
+            nameKo: '동아 ST',
             product: 'Bacchus',
             country: '🇰🇷',
-            logo: '/img/DONG-A.png',
+            logo: '/img/DONG-A-ST.svg',
             productImg: '/img/bacchus.jpg',
             bgGradient: 'from-amber-950/40 via-stone-900 to-stone-950',
             accentColor: 'border-amber-500/40',
@@ -114,7 +114,7 @@ const PartnerLogos: React.FC<PartnerLogosProps> = ({ lang }) => {
             nameKo: '농심',
             product: 'Shin Ramyun',
             country: '🇰🇷',
-            logo: '/img/NONGSHIM.png',
+            logo: '/img/NONGSHIM-LOGO.svg',
             productImg: '/img/shinramyun.png',
             bgGradient: 'from-red-950/40 via-stone-900 to-stone-950',
             accentColor: 'border-red-500/40',
@@ -127,11 +127,11 @@ const PartnerLogos: React.FC<PartnerLogosProps> = ({ lang }) => {
             }
         },
         {
-            name: 'Dong-A Otsuka',
-            nameKo: '동아오츠카',
+            name: 'Dong-A ST',
+            nameKo: '동아 ST',
             product: 'Olatte',
             country: '🇰🇷',
-            logo: '/img/DONG-A.png',
+            logo: '/img/DONG-A-ST.svg',
             productImg: '/img/olatte.png',
             bgGradient: 'from-orange-950/40 via-stone-900 to-stone-950',
             accentColor: 'border-orange-500/40',

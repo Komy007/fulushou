@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 110">
+  <!-- Teal rounded badge -->
+  <rect x="4" y="4" width="100" height="100" rx="20" fill="#00A3C4"/>
+  <!-- White emblem: two leaf/wing shapes -->
+  <path d="M54 82 C54 82 28 68 30 42 C32 22 46 16 54 16 L54 82Z" fill="white"/>
+  <path d="M54 82 C54 82 80 68 78 42 C76 22 62 16 54 16 L54 82Z" fill="white"/>
+  <rect x="51.5" y="16" width="5" height="66" fill="#00A3C4"/>
+  <!-- Divider line -->
+  <!-- Company Text -->
+  <text x="120" y="50" font-family="Arial Black,Arial,sans-serif" font-size="34" font-weight="900" fill="#1a1a1a">DONG-A ST</text>
+  <text x="120" y="85" font-family="Arial,sans-serif" font-size="16" font-weight="400" fill="#555555" letter-spacing="2">CORPORATION</text>
+</svg>
