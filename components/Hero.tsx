@@ -1,429 +1,235 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Language } from '../types';
-import { Sparkles, ArrowDown } from 'lucide-react';
+import { ArrowDown, ArrowRight } from 'lucide-react';
 
 interface HeroProps {
   lang: Language;
   scrollToSection: (id: string) => void;
 }
 
-interface Particle {
-  x: number;
-  y: number;
-  baseX: number;
-  baseY: number;
-  size: number;
-  opacity: number;
-  speedX: number;
-  speedY: number;
-  life: number;
-  maxLife: number;
-  acceleration: number;
-  angle: number;
-  angularVelocity: number;
-  type: 'core' | 'flare' | 'dust';
+function useCountUp(target: number, duration: number, active: boolean) {
+  const [val, setVal] = useState(0);
+  useEffect(() => {
+    if (!active) return;
+    let start: number | null = null;
+    const step = (ts: number) => {
+      if (!start) start = ts;
+      const progress = Math.min((ts - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setVal(Math.floor(eased * target));
+      if (progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }, [active, target, duration]);
+  return val;
 }
 
+const BRAND_LOGOS = [
+  { src: '/img/DONG-A-ST.svg',       alt: 'Dong-A ST',       bg: 'bg-white' },
+  { src: '/img/DONG-A.png',          alt: 'Dong-A Otsuka',   bg: 'bg-white' },
+  { src: '/img/NONGSHIM-LOGO.svg',   alt: 'Nongshim',        bg: 'bg-white' },
+  { src: '/img/fulushou-logo.svg',   alt: 'Fu Lu Shou',      bg: 'bg-white' },
+];
+
 const Hero: React.FC<HeroProps> = ({ lang, scrollToSection }) => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [counted, setCounted] = useState(false);
+  const statsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    let animationFrameId: number;
-    let particles: Particle[] = [];
-    let time = 0;
-
-    const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
-
-    const isMobile = window.innerWidth < 768;
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReduced) return;
-
-    const CORE_COUNT = isMobile ? 80 : 300;
-    const FLARE_COUNT = isMobile ? 40 : 150;
-    const DUST_COUNT = isMobile ? 100 : 400;
-
-    // Create particles with different behaviors
-    const createParticles = () => {
-      particles = [];
-      const centerX = canvas.width * 0.6;
-      const centerY = canvas.height * 0.5;
-
-      // Core particles - dense center
-      for (let i = 0; i < CORE_COUNT; i++) {
-        const angle = Math.random() * Math.PI * 2;
-        const distance = Math.random() * 80; // Close to center
-        particles.push({
-          x: centerX + Math.cos(angle) * distance,
-          y: centerY + Math.sin(angle) * distance,
-          baseX: centerX,
-          baseY: centerY,
-          size: Math.random() * 2 + 1,
-          opacity: Math.random() * 0.6 + 0.4,
-          speedX: (Math.random() - 0.5) * 0.3,
-          speedY: (Math.random() - 0.5) * 0.3,
-          life: Math.random() * 100,
-          maxLife: 100 + Math.random() * 100,
-          acceleration: 0.01,
-          angle: angle,
-          angularVelocity: (Math.random() - 0.5) * 0.02,
-          type: 'core'
-        });
-      }
-
-      // Flare particles - erupting outward irregularly
-      for (let i = 0; i < FLARE_COUNT; i++) {
-        const angle = Math.random() * Math.PI * 2;
-        const distance = 50 + Math.random() * 200;
-        const speed = 0.5 + Math.random() * 2;
-        particles.push({
-          x: centerX + Math.cos(angle) * distance,
-          y: centerY + Math.sin(angle) * distance,
-          baseX: centerX,
-          baseY: centerY,
-          size: Math.random() * 1.5 + 0.5,
-          opacity: Math.random() * 0.5 + 0.2,
-          speedX: Math.cos(angle) * speed * 0.1,
-          speedY: Math.sin(angle) * speed * 0.1,
-          life: Math.random() * 200,
-          maxLife: 200 + Math.random() * 200,
-          acceleration: 0.005 + Math.random() * 0.01,
-          angle: angle,
-          angularVelocity: (Math.random() - 0.5) * 0.01,
-          type: 'flare'
-        });
-      }
-
-      // Dust particles - scattered widely with drift
-      for (let i = 0; i < DUST_COUNT; i++) {
-        const x = Math.random() * canvas.width;
-        const y = Math.random() * canvas.height;
-        particles.push({
-          x: x,
-          y: y,
-          baseX: x,
-          baseY: y,
-          size: Math.random() * 1.5 + 0.3,
-          opacity: Math.random() * 0.4 + 0.1,
-          speedX: (Math.random() - 0.5) * 0.2,
-          speedY: (Math.random() - 0.5) * 0.2,
-          life: Math.random() * 300,
-          maxLife: 300 + Math.random() * 300,
-          acceleration: 0,
-          angle: Math.random() * Math.PI * 2,
-          angularVelocity: (Math.random() - 0.5) * 0.005,
-          type: 'dust'
-        });
-      }
-    };
-
-    // Noise function for organic movement
-    const noise = (x: number, y: number, t: number) => {
-      return Math.sin(x * 0.01 + t) * Math.cos(y * 0.01 + t * 0.7) * 0.5;
-    };
-
-    const animate = () => {
-      time += 0.01;
-
-      // Create gradient background
-      ctx.fillStyle = 'rgba(12, 10, 9, 0.1)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      const centerX = canvas.width * 0.6;
-      const centerY = canvas.height * 0.5;
-
-      // Draw central glow
-      const gradient = ctx.createRadialGradient(
-        centerX, centerY, 0,
-        centerX, centerY, canvas.height * 0.6
-      );
-      gradient.addColorStop(0, 'rgba(255, 200, 100, 0.15)');
-      gradient.addColorStop(0.2, 'rgba(255, 150, 50, 0.08)');
-      gradient.addColorStop(0.5, 'rgba(200, 100, 50, 0.03)');
-      gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
-      ctx.fillStyle = gradient;
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      // Update and draw particles
-      particles.forEach((p, index) => {
-        // Organic noise-based movement
-        const noiseValue = noise(p.x, p.y, time);
-
-        if (p.type === 'core') {
-          // Core particles swirl and pulse
-          p.angle += p.angularVelocity;
-          const pulseDistance = 60 + Math.sin(time * 2 + index * 0.1) * 20;
-          const targetX = centerX + Math.cos(p.angle) * pulseDistance * (0.5 + noiseValue);
-          const targetY = centerY + Math.sin(p.angle) * pulseDistance * (0.5 + noiseValue);
-          p.x += (targetX - p.x) * 0.02;
-          p.y += (targetY - p.y) * 0.02;
-          p.opacity = 0.4 + Math.sin(time * 3 + index) * 0.3;
-
-        } else if (p.type === 'flare') {
-          // Flare particles erupt outward irregularly
-          const dx = p.x - centerX;
-          const dy = p.y - centerY;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-
-          // Irregular eruption patterns
-          const eruptionForce = Math.sin(time * 0.5 + p.angle * 3) * 0.5 + 0.5;
-          p.speedX += (dx / dist) * p.acceleration * eruptionForce;
-          p.speedY += (dy / dist) * p.acceleration * eruptionForce;
-
-          // Add turbulence
-          p.speedX += noiseValue * 0.1;
-          p.speedY += noise(p.y, p.x, time) * 0.1;
-
-          // Apply velocity with damping
-          p.x += p.speedX;
-          p.y += p.speedY;
-          p.speedX *= 0.98;
-          p.speedY *= 0.98;
-
-          // Fade based on distance
-          p.opacity = Math.max(0, 0.6 - dist / 400);
-
-          // Reset if too far
-          if (dist > 500 || p.opacity < 0.05) {
-            const angle = Math.random() * Math.PI * 2;
-            const startDist = 30 + Math.random() * 50;
-            p.x = centerX + Math.cos(angle) * startDist;
-            p.y = centerY + Math.sin(angle) * startDist;
-            p.speedX = Math.cos(angle) * 0.5;
-            p.speedY = Math.sin(angle) * 0.5;
-            p.angle = angle;
-            p.opacity = 0.5;
-          }
-
-        } else {
-          // Dust particles drift gently
-          p.x += p.speedX + noiseValue * 0.3;
-          p.y += p.speedY + noise(p.y, p.x, time) * 0.3;
-
-          // Wrap around screen
-          if (p.x < 0) p.x = canvas.width;
-          if (p.x > canvas.width) p.x = 0;
-          if (p.y < 0) p.y = canvas.height;
-          if (p.y > canvas.height) p.y = 0;
-
-          // Subtle pulsing
-          p.opacity = p.opacity * 0.99 + 0.15 * Math.sin(time + index * 0.01) * 0.01 + 0.1;
-        }
-
-        // Draw particle with glow
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-
-        if (p.type === 'core') {
-          // Warm orange-white glow for core
-          ctx.fillStyle = `rgba(255, ${200 + Math.random() * 55}, ${150 + Math.random() * 50}, ${p.opacity})`;
-          ctx.shadowColor = 'rgba(255, 180, 100, 0.5)';
-          ctx.shadowBlur = 8;
-        } else if (p.type === 'flare') {
-          // Golden flare particles
-          ctx.fillStyle = `rgba(255, ${180 + Math.random() * 40}, ${80 + Math.random() * 40}, ${p.opacity})`;
-          ctx.shadowColor = 'rgba(255, 150, 50, 0.3)';
-          ctx.shadowBlur = 4;
-        } else {
-          // White-ish dust
-          ctx.fillStyle = `rgba(255, 255, ${230 + Math.random() * 25}, ${p.opacity})`;
-          ctx.shadowBlur = 0;
-        }
-
-        ctx.fill();
-        ctx.shadowBlur = 0;
-      });
-
-      // Draw subtle connection lines for nearby flare particles
-      ctx.save();
-      ctx.globalAlpha = 0.1;
-      particles.filter(p => p.type === 'flare').forEach((p1, i, arr) => {
-        arr.slice(i + 1, i + 4).forEach(p2 => {
-          const dx = p1.x - p2.x;
-          const dy = p1.y - p2.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 50) {
-            ctx.beginPath();
-            ctx.moveTo(p1.x, p1.y);
-            ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = `rgba(255, 180, 100, ${0.2 * (1 - dist / 50)})`;
-            ctx.lineWidth = 0.5;
-            ctx.stroke();
-          }
-        });
-      });
-      ctx.restore();
-
-      animationFrameId = requestAnimationFrame(animate);
-    };
-
-    resizeCanvas();
-    createParticles();
-
-    // Clear canvas completely first
-    ctx.fillStyle = '#0c0a09';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    animate();
-
-    const handleResize = () => {
-      resizeCanvas();
-      createParticles();
-      ctx.fillStyle = '#0c0a09';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      cancelAnimationFrame(animationFrameId);
-      window.removeEventListener('resize', handleResize);
-    };
+    const observer = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) setCounted(true); },
+      { threshold: 0.3 }
+    );
+    if (statsRef.current) observer.observe(statsRef.current);
+    return () => observer.disconnect();
   }, []);
 
-  const content = {
+  const years = useCountUp(15, 1800, counted);
+  const distributors = useCountUp(24, 1600, counted);
+  const cans = useCountUp(200, 2000, counted);
+
+  const t = {
     badge: {
-      ko: '캄보디아 시장의 마켓 아키텍트',
-      en: "Cambodia's Market Architect",
-      zh: '柬埔寨市场架构师',
-      kh: 'ស្ថាបត្យករទីផ្សារកម្ពុជា'
+      ko: '캄보디아 F&B 유통의 절대 강자',
+      en: "Cambodia's #1 F&B Distributor",
+      zh: '柬埔寨F&B分销领导者',
+      kh: 'អ្នកចែកចាយ F&B លេខ ១ កម្ពុជា',
     },
-    title1: {
-      ko: '불가능을 가능으로,',
-      en: 'Turning the',
-      zh: '化不可能',
-      kh: 'បំប្លែងអសាធ្យ'
+    line1: {
+      ko: 'Cambodia\'s',
+      en: 'Cambodia\'s',
+      zh: '柬埔寨',
+      kh: 'ឈ្នះ',
     },
-    title2: {
-      ko: '신화를 현실로.',
-      en: 'Impossible into Legend.',
-      zh: '为传奇。',
-      kh: 'ទៅជារឿងព្រេង។'
+    line2: {
+      ko: '#1 F&B',
+      en: '#1 F&B',
+      zh: '#1 F&B',
+      kh: '#1 F&B',
+    },
+    line3: {
+      ko: 'Distribution.',
+      en: 'Distribution.',
+      zh: 'Distribution.',
+      kh: 'Distribution.',
     },
     desc: {
-      ko: 'Fu Lu Shou는 단순한 유통을 넘어, 현지화 전략과 강력한 네트워크로 귀사의 브랜드를 캄보디아의 \'국민 브랜드\'로 설계합니다.',
-      en: "Beyond simple logistics, we architect your brand into a 'National Brand' through hyper-localization strategies and an unrivaled network.",
-      zh: '福禄寿超越简单物流，通过超本地化战略和强大网络，将您的品牌打造成柬埔寨的"国民品牌"。',
-      kh: 'ហួសពីការដឹកជញ្ជូន យើងរចនាម៉ាកយីហោរបស់អ្នកទៅជា \'ម៉ាកយីហោជាតិ\' តាមរយៈយុទ្ធសាស្រ្តមូលដ្ឋាន។'
+      ko: '15년 이상의 성공 노하우로 귀사 브랜드를 캄보디아의 국민 브랜드로 만들어 드립니다.',
+      en: 'With 15+ years of proven success, we architect your brand into a national icon in Cambodia.',
+      zh: '凭借15年以上的成功经验，我们将您的品牌打造成柬埔寨国民品牌。',
+      kh: 'ជាមួយបទពិសោធន៍ 15+ ឆ្នាំ យើងនឹងក្លាយជាដៃគូបង្កើតម៉ាករបស់អ្នកនៅកម្ពុជា។',
     },
     cta1: {
-      ko: '성공 사례 분석',
-      en: 'Case Study',
-      zh: '案例研究',
-      kh: 'ករណីសិក្សា'
-    },
-    cta2: {
       ko: '파트너십 문의',
       en: 'Partnership Inquiry',
-      zh: '合作咨询',
-      kh: 'ការសាកសួរភាពជាដៃគូ'
-    }
+      zh: '咨询合作',
+      kh: 'ការសាកសួរភាពជាដៃគូ',
+    },
+    cta2: {
+      ko: '회사 소개 보기',
+      en: 'Learn More',
+      zh: '了解更多',
+      kh: 'ស្វែងយល់បន្ថែម',
+    },
+    stat1Label: { ko: '년 이상', en: '+ Years', zh: '年以上', kh: '+ ឆ្នាំ' },
+    stat1Sub:   { ko: '성공적인 현지화', en: 'Hyper-Localization', zh: '超本地化', kh: 'ការបំប្លែងមូលដ្ឋាន' },
+    stat2Label: { ko: '개 총판', en: 'Sub-Distributors', zh: '个分销商', kh: 'អ្នកចែកចាយ' },
+    stat2Sub:   { ko: '전국 네트워크', en: 'Nationwide Network', zh: '全国网络', kh: 'បណ្តាញជាតិ' },
+    stat3Label: { ko: 'M 캔 판매', en: 'M Cans/Year', zh: 'M罐/年', kh: 'M កំប៉ុង/ឆ្នាំ' },
+    stat3Sub:   { ko: '연간 판매량', en: 'Annual Volume', zh: '年销售量', kh: 'បរិមាណប្រចាំឆ្នាំ' },
+    scroll: { ko: '스크롤', en: 'Scroll', zh: '滚动', kh: 'រំកិល' },
+    partner: {
+      ko: '독점 유통 파트너',
+      en: 'Exclusive Distribution Partners',
+      zh: '独家分销合作伙伴',
+      kh: 'ដៃគូចែកចាយផ្តាច់មុខ',
+    },
   };
 
+  const logos = [...BRAND_LOGOS, ...BRAND_LOGOS, ...BRAND_LOGOS, ...BRAND_LOGOS];
+
   return (
-    <section id="home" className="relative bg-stone-950 min-h-screen flex items-center overflow-hidden pt-16 md:pt-20">
-      {/* Solar Magma Canvas */}
-      <canvas
-        ref={canvasRef}
-        className="absolute inset-0 z-0"
-      />
+    <section id="home" className="relative bg-cream min-h-screen flex flex-col overflow-hidden pt-20 md:pt-24">
+      {/* Subtle background texture */}
+      <div className="absolute inset-0 pointer-events-none" aria-hidden>
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-mist opacity-60 blur-[120px] -translate-y-1/3 translate-x-1/3" />
+        <div className="absolute bottom-1/4 left-0 w-[400px] h-[400px] rounded-full bg-forest/5 blur-[100px] -translate-x-1/3" />
+      </div>
 
-      {/* Gradient overlay for text readability */}
-      <div className="absolute inset-0 bg-gradient-to-r from-stone-950/90 via-stone-950/40 to-transparent z-5" />
+      {/* Main content */}
+      <div className="flex-1 flex items-center relative z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-12 lg:py-0">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
 
-      {/* Company Logo — right side, desktop */}
-      <div className="hidden lg:flex absolute right-6 xl:right-12 2xl:right-20 top-1/2 -translate-y-1/2 z-20 flex-col items-center gap-4">
-        <div className="relative">
-          <div className="absolute inset-0 rounded-full bg-blue-500/10 blur-[80px] scale-125 pointer-events-none" />
-          <img
-            src="/img/fulushou-logo.svg"
-            alt="Fu Lu Shou F&B Co., Ltd."
-            className="w-52 xl:w-64 2xl:w-72 h-auto drop-shadow-[0_0_50px_rgba(57,133,198,0.4)] animate-fade-in"
-            style={{ animationDelay: '0.4s', animationFillMode: 'both' }}
-          />
-        </div>
-        <div className="text-center">
-          <p className="text-white font-black tracking-widest text-sm xl:text-base leading-tight">FU LU SHOU F&amp;B CO., LTD.</p>
-          <p className="text-stone-400 text-[10px] xl:text-xs tracking-wider mt-1">Cambodia's F&amp;B Distribution Leader</p>
+            {/* Left — editorial typography */}
+            <div>
+              {/* Badge */}
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-forest/10 border border-forest/20 text-forest text-xs font-bold tracking-widest uppercase mb-8 animate-fade-in">
+                <span className="w-2 h-2 rounded-full bg-citrus animate-pulse" />
+                {t.badge[lang]}
+              </div>
+
+              {/* Giant headline */}
+              <h1
+                className="font-display font-black tracking-tighter leading-[0.9] mb-8 animate-fade-in-up"
+                style={{ animationDelay: '100ms', animationFillMode: 'both' }}
+              >
+                <span className="block text-ink whitespace-nowrap" style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)' }}>{t.line1[lang]}</span>
+                <span className="block text-citrus whitespace-nowrap" style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)' }}>{t.line2[lang]}</span>
+                <span className="block text-forest whitespace-nowrap" style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)' }}>{t.line3[lang]}</span>
+              </h1>
+
+              <p
+                className="text-ink/60 text-lg md:text-xl max-w-lg leading-relaxed mb-10 animate-fade-in-up"
+                style={{ animationDelay: '200ms', animationFillMode: 'both' }}
+              >
+                {t.desc[lang]}
+              </p>
+
+              {/* CTAs */}
+              <div
+                className="flex flex-wrap gap-4 animate-fade-in-up"
+                style={{ animationDelay: '300ms', animationFillMode: 'both' }}
+              >
+                <button
+                  onClick={() => scrollToSection('contact')}
+                  className="flex items-center gap-2 px-7 py-4 rounded-2xl bg-citrus text-white font-bold text-sm tracking-wide hover:bg-citrus/90 transition-all shadow-lg shadow-citrus/30 hover:shadow-citrus/50 hover:-translate-y-0.5"
+                >
+                  {t.cta1[lang]}
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={() => scrollToSection('company')}
+                  className="flex items-center gap-2 px-7 py-4 rounded-2xl border-2 border-forest text-forest font-bold text-sm tracking-wide hover:bg-forest hover:text-white transition-all"
+                >
+                  {t.cta2[lang]}
+                </button>
+              </div>
+            </div>
+
+            {/* Right — logo + stats bento */}
+            <div className="flex flex-col gap-5 animate-fade-in" style={{ animationDelay: '150ms', animationFillMode: 'both' }}>
+              {/* Logo card */}
+              <div className="rounded-3xl bg-white shadow-xl shadow-ink/5 p-8 flex items-center justify-center border border-mist">
+                <img
+                  src="/img/fulushou-logo.svg"
+                  alt="Fu Lu Shou F&B Co., Ltd."
+                  className="h-36 md:h-44 w-auto"
+                />
+              </div>
+
+              {/* Stats row */}
+              <div ref={statsRef} className="grid grid-cols-3 gap-3">
+                {[
+                  { num: years,        suffix: '+',  label: t.stat1Label[lang], sub: t.stat1Sub[lang],   color: 'text-forest' },
+                  { num: distributors, suffix: '',   label: t.stat2Label[lang], sub: t.stat2Sub[lang],   color: 'text-citrus' },
+                  { num: cans,         suffix: 'M',  label: t.stat3Label[lang], sub: t.stat3Sub[lang],   color: 'text-gold'   },
+                ].map((s, i) => (
+                  <div key={i} className="rounded-2xl bg-white shadow-md shadow-ink/5 border border-mist p-4 text-center bento-card">
+                    <div className={`font-display font-black text-3xl md:text-4xl leading-none ${s.color}`}>
+                      {s.num}{s.suffix}
+                    </div>
+                    <div className="text-[10px] font-bold text-ink/50 uppercase tracking-wider mt-1.5 leading-tight">
+                      {s.label}
+                    </div>
+                    <div className="text-[9px] text-ink/40 mt-0.5">{s.sub}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 w-full py-12 md:py-0">
-        {/* Mobile logo + name — above title */}
-        <div className="flex lg:hidden items-center gap-4 mb-8">
-          <img
-            src="/img/fulushou-logo.svg"
-            alt="Fu Lu Shou F&B Co., Ltd."
-            className="h-24 sm:h-28 w-auto flex-shrink-0 drop-shadow-[0_0_30px_rgba(57,133,198,0.5)]"
-          />
-          <div className="flex flex-col justify-center">
-            <p className="text-white font-black tracking-widest text-base sm:text-lg leading-tight">FU LU SHOU</p>
-            <p className="text-amber-400 font-bold tracking-wider text-[11px] sm:text-xs mt-0.5">F&amp;B CO., LTD.</p>
-            <p className="text-stone-400 text-[10px] sm:text-xs mt-1 leading-snug">Cambodia's F&amp;B<br/>Distribution Leader</p>
-          </div>
+      {/* Marquee strip */}
+      <div className="relative z-10 border-t border-b border-mist bg-white/60 backdrop-blur-sm py-5 overflow-hidden marquee-container">
+        <div className="text-[10px] font-black text-ink/30 uppercase tracking-widest text-center mb-3">
+          {t.partner[lang]}
         </div>
-        <div className="lg:w-4/5 xl:w-3/5">
-          {/* Badge */}
-          <div className="inline-flex items-center px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-amber-500/15 border border-amber-500/40 text-amber-400 text-[10px] md:text-xs font-bold tracking-widest uppercase mb-6 md:mb-8 animate-fade-in-up backdrop-blur-sm shadow-[0_0_20px_rgba(245,158,11,0.2)]">
-            <Sparkles className="w-3 h-3 md:w-3.5 md:h-3.5 mr-2" />
-            {content.badge[lang]}
-          </div>
-
-          {/* Title */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-white tracking-tighter mb-6 md:mb-8 animate-fade-in-up delay-100 leading-[0.95]">
-            {content.title1[lang]}<br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-amber-400 to-yellow-500 animate-gradient-x drop-shadow-[0_0_30px_rgba(255,215,0,0.5)]">
-              {content.title2[lang]}
-            </span>
-          </h1>
-
-          {/* Description */}
-          <p className="mt-4 md:mt-6 text-base sm:text-lg md:text-xl lg:text-2xl text-stone-400 max-w-2xl animate-fade-in-up delay-200 leading-relaxed font-light">
-            {content.desc[lang]}
-          </p>
-
-
-
+        <div className="marquee-track animate-marquee">
+          {logos.map((logo, i) => (
+            <div
+              key={i}
+              className="flex-shrink-0 mx-8 flex items-center justify-center"
+            >
+              <img
+                src={logo.src}
+                alt={logo.alt}
+                className="h-10 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity grayscale hover:grayscale-0"
+                loading="eager"
+              />
+            </div>
+          ))}
         </div>
       </div>
 
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 animate-bounce opacity-70">
-        <span className="text-[8px] md:text-[10px] uppercase tracking-[0.2em] md:tracking-[0.3em] font-bold text-amber-400">
-          {lang === 'ko' ? '스크롤' : lang === 'zh' ? '滚动' : lang === 'kh' ? 'រំកិល' : 'Scroll'}
+      {/* Scroll indicator */}
+      <div className="absolute bottom-28 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 opacity-50 hover:opacity-80 transition-opacity cursor-pointer" onClick={() => scrollToSection('company')}>
+        <span className="text-[9px] uppercase tracking-[0.3em] font-bold text-ink">
+          {t.scroll[lang]}
         </span>
-        <ArrowDown className="w-5 h-5 md:w-6 md:h-6 text-amber-400" />
+        <ArrowDown className="w-4 h-4 text-ink animate-bounce" />
       </div>
-
-      {/* CSS Animations */}
-      <style>{`
-        @keyframes gradient-x {
-          0%, 100% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-        }
-        .animate-gradient-x {
-          background-size: 200% 200%;
-          animation: gradient-x 3s ease infinite;
-        }
-        @keyframes fade-in-up {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-in-up {
-          animation: fade-in-up 0.6s ease-out forwards;
-        }
-        .delay-100 { animation-delay: 100ms; }
-        .delay-200 { animation-delay: 200ms; }
-        .delay-300 { animation-delay: 300ms; }
-      `}</style>
     </section>
   );
 };

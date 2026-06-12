@@ -43,10 +43,10 @@ const MarketingModal: React.FC<MarketingModalProps> = ({ isOpen, onClose, lang }
             kh: '[របាយការណ៍ស៊ីជម្រៅ] ទេវកថាជោគជ័យរបស់ Bacchus'
         },
         mainTitle: {
-            ko: <>캄보디아의 국민 에너지 드링크,<br /><span className="text-amber-500">박카스 성공 신화 분석</span></>,
-            en: <>Cambodia's National Energy Drink,<br /><span className="text-amber-500">Analysis of Bacchus Success Myth</span></>,
-            zh: <>柬埔寨的国民能量饮料，<br /><span className="text-amber-500">Bacchus 成功神话分析</span></>,
-            kh: <>ភេសជ្ជៈថាមពលជាតិរបស់កម្ពុជា<br /><span className="text-amber-500">ការវិភាគទេវកថាជោគជ័យរបស់ Bacchus</span></>
+            ko: <>캄보디아의 국민 에너지 드링크,<br /><span className="text-gold">박카스 성공 신화 분석</span></>,
+            en: <>Cambodia's National Energy Drink,<br /><span className="text-gold">Analysis of Bacchus Success Myth</span></>,
+            zh: <>柬埔寨的国民能量饮料，<br /><span className="text-gold">Bacchus 成功神话分析</span></>,
+            kh: <>ភេសជ្ជៈថាមពលជាតិរបស់កម្ពុជា<br /><span className="text-gold">ការវិភាគទេវកថាជោគជ័យរបស់ Bacchus</span></>
         },
         intro: {
             ko: <>이 성공 사례의 핵심은 캄보디아의 현재를 <span className="text-white font-bold">"대한민국의 1970~80년대 고도 성장기"</span>로 정의하고, 그 시절 한국에서 통했던 성공 방정식을 2010년대 캄보디아에 그대로 이식한 <span className="text-white font-bold">'시차 경영'</span>에 있습니다.</>,
@@ -147,10 +147,10 @@ const MarketingModal: React.FC<MarketingModalProps> = ({ isOpen, onClose, lang }
                 capitalDesc: { ko: "본사가 직접 240여 개 도매상 관리 (루트 세일즈)", en: "Headquarters manages 240+ wholesalers directly (Route Sales)", zh: "总公司直接管理240多个批发商 (路线销售)", kh: "ទីស្នាក់ការកណ្តាលគ្រប់គ្រងអ្នកលក់ដុំជាង ២៤០ ដោយផ្ទាល់ (Route Sales)" },
                 provincial: { ko: "지방 (Provincial)", en: "Provincial", zh: "地方 (Provincial)", kh: "ខេត្ត (Provincial)" },
                 provincialDesc: {
-                    ko: <>24개 주요 지방 유력자에게 <strong className="text-amber-500">'총판권(Master Franchise)'</strong> 부여.</>,
-                    en: <>Granted <strong className="text-amber-500">'Master Franchise'</strong> rights to influential figures in 24 major provinces.</>,
-                    zh: <>赋予24个主要地方有力人士<strong className="text-amber-500">'总经销权(Master Franchise)'</strong>。</>,
-                    kh: <>ផ្តល់សិទ្ធិ <strong className="text-amber-500">'Master Franchise'</strong> ដល់បុគ្គលដែលមានឥទ្ធិពលនៅក្នុង ២៤ ខេត្តសំខាន់ៗ។</>
+                    ko: <>24개 주요 지방 유력자에게 <strong className="text-gold">'총판권(Master Franchise)'</strong> 부여.</>,
+                    en: <>Granted <strong className="text-gold">'Master Franchise'</strong> rights to influential figures in 24 major provinces.</>,
+                    zh: <>赋予24个主要地方有力人士<strong className="text-gold">'总经销权(Master Franchise)'</strong>。</>,
+                    kh: <>ផ្តល់សិទ្ធិ <strong className="text-gold">'Master Franchise'</strong> ដល់បុគ្គលដែលមានឥទ្ធិពលនៅក្នុង ២៤ ខេត្តសំខាន់ៗ។</>
                 }
             },
             box2: {
@@ -201,10 +201,10 @@ const MarketingModal: React.FC<MarketingModalProps> = ({ isOpen, onClose, lang }
         conclusion: {
             title: { ko: "결론 및 시사점", en: "Conclusion & Implications", zh: "结论及启示", kh: "សេចក្តីសន្និដ្ឋាន និងអត្ថន័យ" },
             desc: {
-                ko: <>이 사례는 단순히 물건을 많이 판 이야기가 아닙니다.<br /><span className="text-amber-400 text-lg md:text-xl font-black block mt-2">"현지 파트너가 가진 잠재력을 한국의 자본과 기획력이 어떻게 폭발시켰는가"</span><span className="block mt-1 text-sm text-stone-400">에 대한 이야기입니다.</span></>,
-                en: <>This is not just a story of selling many products.<br /><span className="text-amber-400 text-lg md:text-xl font-black block mt-2">"How Korean capital and planning unleashed the potential of local partners"</span><span className="block mt-1 text-sm text-stone-400">That is what this story is truly about.</span></>,
-                zh: <>这不仅仅是一个卖了很多产品的故事。<br /><span className="text-amber-400 text-lg md:text-xl font-black block mt-2">"韩国的资本和企划力如何引爆当地合作伙伴的潜力"</span><span className="block mt-1 text-sm text-stone-400">这才是这个故事真正要讲述的。</span></>,
-                kh: <>នេះមិនមែនគ្រាន់តែជារឿងនៃការលក់ផលិតផលបានច្រើននោះទេ។<br /><span className="text-amber-400 text-lg md:text-xl font-black block mt-2">"របៀបដែលដើមទុន និងការរៀបចំផែនការរបស់កូរ៉េបានធ្វើឱ្យសក្តានុពលរបស់ដៃគូក្នុងស្រុកផ្ទុះឡើង"</span><span className="block mt-1 text-sm text-stone-400">នោះហើយជាអ្វីដែលរឿងនេះពិតជានិយាយអំពី។</span></>
+                ko: <>이 사례는 단순히 물건을 많이 판 이야기가 아닙니다.<br /><span className="text-gold text-lg md:text-xl font-black block mt-2">"현지 파트너가 가진 잠재력을 한국의 자본과 기획력이 어떻게 폭발시켰는가"</span><span className="block mt-1 text-sm text-white/50">에 대한 이야기입니다.</span></>,
+                en: <>This is not just a story of selling many products.<br /><span className="text-gold text-lg md:text-xl font-black block mt-2">"How Korean capital and planning unleashed the potential of local partners"</span><span className="block mt-1 text-sm text-white/50">That is what this story is truly about.</span></>,
+                zh: <>这不仅仅是一个卖了很多产品的故事。<br /><span className="text-gold text-lg md:text-xl font-black block mt-2">"韩国的资本和企划力如何引爆当地合作伙伴的潜力"</span><span className="block mt-1 text-sm text-white/50">这才是这个故事真正要讲述的。</span></>,
+                kh: <>នេះមិនមែនគ្រាន់តែជារឿងនៃការលក់ផលិតផលបានច្រើននោះទេ។<br /><span className="text-gold text-lg md:text-xl font-black block mt-2">"របៀបដែលដើមទុន និងការរៀបចំផែនការរបស់កូរ៉េបានធ្វើឱ្យសក្តានុពលរបស់ដៃគូក្នុងស្រុកផ្ទុះឡើង"</span><span className="block mt-1 text-sm text-white/50">នោះហើយជាអ្វីដែលរឿងនេះពិតជានិយាយអំពី។</span></>
             }
         },
         close: { ko: "닫기 (Close)", en: "Close", zh: "关闭", kh: "បិទ" }
@@ -222,31 +222,31 @@ const MarketingModal: React.FC<MarketingModalProps> = ({ isOpen, onClose, lang }
 
             {/* Modal Container */}
             <div
-                className={`relative w-full max-w-4xl max-h-[95vh] md:max-h-[90vh] bg-stone-900 border border-stone-800 rounded-xl md:rounded-2xl lg:rounded-3xl shadow-2xl overflow-hidden flex flex-col transition-all duration-300 transform ${isOpen ? 'scale-100 translate-y-0' : 'scale-95 translate-y-8'}`}
+                className={`relative w-full max-w-4xl max-h-[95vh] md:max-h-[90vh] bg-ink/90 border border-white/10 rounded-xl md:rounded-2xl lg:rounded-3xl shadow-2xl overflow-hidden flex flex-col transition-all duration-300 transform ${isOpen ? 'scale-100 translate-y-0' : 'scale-95 translate-y-8'}`}
             >
                 {/* Header */}
-                <div className="flex items-center justify-between p-4 md:p-6 border-b border-stone-800 bg-stone-900/95 sticky top-0 z-10 backdrop-blur-md">
+                <div className="flex items-center justify-between p-4 md:p-6 border-b border-white/10 bg-ink/90/95 sticky top-0 z-10 backdrop-blur-md">
                     <h2 className="text-base md:text-xl lg:text-2xl font-bold text-white flex items-center gap-2 min-w-0">
-                        <Trophy className="w-5 h-5 md:w-6 md:h-6 text-amber-500 flex-shrink-0" />
+                        <Trophy className="w-5 h-5 md:w-6 md:h-6 text-gold flex-shrink-0" />
                         <span className="truncate">{content.headerTitle[lang]}</span>
                     </h2>
                     <button
                         onClick={onClose}
-                        className="p-2 hover:bg-stone-800 rounded-full transition-colors text-stone-400 hover:text-white"
+                        className="p-2 hover:bg-white/10 rounded-full transition-colors text-white/50 hover:text-white"
                     >
                         <X className="w-6 h-6" />
                     </button>
                 </div>
 
                 {/* Content - Scrollable */}
-                <div className="flex-1 overflow-y-auto p-4 md:p-6 lg:p-8 space-y-8 md:space-y-12 text-stone-300 leading-relaxed scrollbar-hide">
+                <div className="flex-1 overflow-y-auto p-4 md:p-6 lg:p-8 space-y-8 md:space-y-12 text-white/70 leading-relaxed scrollbar-hide">
 
                     {/* Intro */}
                     <div className="space-y-4">
                         <h3 className="text-xl md:text-2xl lg:text-3xl font-black text-white leading-tight">
                             {content.mainTitle[lang]}
                         </h3>
-                        <div className="p-3 md:p-4 bg-amber-900/20 border border-amber-500/20 rounded-xl">
+                        <div className="p-3 md:p-4 bg-amber-900/20 border border-gold/20 rounded-xl">
                             <p className="font-medium text-amber-100 text-sm md:text-base">
                                 {content.intro[lang]}
                             </p>
@@ -261,16 +261,16 @@ const MarketingModal: React.FC<MarketingModalProps> = ({ isOpen, onClose, lang }
                                 <h4 className="text-lg md:text-xl font-bold text-white">{content.section1.title[lang]}</h4>
 
                                 <div className="grid md:grid-cols-2 gap-6">
-                                    <div className="bg-stone-800/50 p-5 rounded-xl border border-stone-700">
-                                        <div className="flex items-center gap-2 mb-2 text-stone-200 font-bold">
+                                    <div className="bg-white/10/50 p-5 rounded-xl border border-white/10">
+                                        <div className="flex items-center gap-2 mb-2 text-white/90 font-bold">
                                             <TrendingUp className="w-4 h-4 text-green-500" /> {content.section1.box1.title[lang]}
                                         </div>
                                         <p className="text-sm">
                                             {content.section1.box1.desc[lang]}
                                         </p>
                                     </div>
-                                    <div className="bg-stone-800/50 p-5 rounded-xl border border-stone-700">
-                                        <div className="flex items-center gap-2 mb-2 text-stone-200 font-bold">
+                                    <div className="bg-white/10/50 p-5 rounded-xl border border-white/10">
+                                        <div className="flex items-center gap-2 mb-2 text-white/90 font-bold">
                                             <Users className="w-4 h-4 text-orange-500" /> {content.section1.box2.title[lang]}
                                         </div>
                                         <p className="text-sm">
@@ -290,8 +290,8 @@ const MarketingModal: React.FC<MarketingModalProps> = ({ isOpen, onClose, lang }
                                 <h4 className="text-lg md:text-xl font-bold text-white">{content.section2.title[lang]}</h4>
 
                                 <div className="space-y-6">
-                                    <div className="bg-stone-800/30 p-5 rounded-xl border border-stone-700">
-                                        <h5 className="font-bold text-amber-500 mb-3 flex items-center gap-2">
+                                    <div className="bg-white/10/30 p-5 rounded-xl border border-white/10">
+                                        <h5 className="font-bold text-gold mb-3 flex items-center gap-2">
                                             <Package className="w-4 h-4" />
                                             {content.section2.box1.title[lang]}
                                         </h5>
@@ -300,25 +300,25 @@ const MarketingModal: React.FC<MarketingModalProps> = ({ isOpen, onClose, lang }
                                                 <p>{content.section2.box1.desc[lang]}</p>
                                                 <ul className="space-y-2 text-sm">
                                                     <li className="flex gap-2">
-                                                        <span className="text-stone-500">•</span>
+                                                        <span className="text-white/30">•</span>
                                                         <span>{content.section2.box1.reason1[lang]}</span>
                                                     </li>
                                                     <li className="flex gap-2">
-                                                        <span className="text-stone-500">•</span>
+                                                        <span className="text-white/30">•</span>
                                                         <span>{content.section2.box1.reason2[lang]}</span>
                                                     </li>
                                                 </ul>
                                             </div>
-                                            <div className="w-full md:w-48 h-32 rounded-lg bg-stone-950 overflow-hidden flex items-center justify-center border border-stone-700">
+                                            <div className="w-full md:w-48 h-32 rounded-lg bg-ink overflow-hidden flex items-center justify-center border border-white/10">
                                                 <img src="/img/bacchus.jpg" alt="Bacchus Can" className="h-full object-contain" />
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div className="bg-stone-800/30 p-5 rounded-xl border border-stone-700">
-                                        <h5 className="font-bold text-amber-500 mb-2">{content.section2.box2.title[lang]}</h5>
+                                    <div className="bg-white/10/30 p-5 rounded-xl border border-white/10">
+                                        <h5 className="font-bold text-gold mb-2">{content.section2.box2.title[lang]}</h5>
                                         <p className="mb-2">{content.section2.box2.desc1[lang]}</p>
-                                        <p className="text-sm border-l-2 border-stone-600 pl-3 italic text-stone-400">
+                                        <p className="text-sm border-l-2 border-stone-600 pl-3 italic text-white/50">
                                             {content.section2.box2.desc2[lang]}
                                         </p>
                                     </div>
@@ -335,27 +335,27 @@ const MarketingModal: React.FC<MarketingModalProps> = ({ isOpen, onClose, lang }
                                 <h4 className="text-lg md:text-xl font-bold text-white">{content.section3.title[lang]}</h4>
 
                                 <div className="grid md:grid-cols-2 gap-4">
-                                    <div className="bg-gradient-to-br from-stone-800 to-stone-900 p-5 rounded-xl border border-stone-700">
+                                    <div className="bg-gradient-to-br from-stone-800 to-stone-900 p-5 rounded-xl border border-white/10">
                                         <h5 className="font-bold text-white mb-2 flex items-center gap-2">
                                             <MapPin className="w-4 h-4 text-red-500" /> {content.section3.box1.title[lang]}
                                         </h5>
                                         <ul className="space-y-3 text-sm">
                                             <li>
-                                                <div className="font-bold text-stone-300">{content.section3.box1.capital[lang]}</div>
-                                                <div className="text-stone-500">{content.section3.box1.capitalDesc[lang]}</div>
+                                                <div className="font-bold text-white/70">{content.section3.box1.capital[lang]}</div>
+                                                <div className="text-white/30">{content.section3.box1.capitalDesc[lang]}</div>
                                             </li>
                                             <li>
-                                                <div className="font-bold text-stone-300">{content.section3.box1.provincial[lang]}</div>
-                                                <div className="text-stone-500">{content.section3.box1.provincialDesc[lang]}</div>
+                                                <div className="font-bold text-white/70">{content.section3.box1.provincial[lang]}</div>
+                                                <div className="text-white/30">{content.section3.box1.provincialDesc[lang]}</div>
                                             </li>
                                         </ul>
                                     </div>
-                                    <div className="bg-gradient-to-br from-stone-800 to-stone-900 p-5 rounded-xl border border-stone-700">
+                                    <div className="bg-gradient-to-br from-stone-800 to-stone-900 p-5 rounded-xl border border-white/10">
                                         <h5 className="font-bold text-white mb-2 flex items-center gap-2">
                                             <Users className="w-4 h-4 text-blue-500" /> {content.section3.box2.title[lang]}
                                         </h5>
                                         <p className="text-sm mb-2">"Localization is Respect"</p>
-                                        <p className="text-xs text-stone-400 leading-relaxed">
+                                        <p className="text-xs text-white/50 leading-relaxed">
                                             {content.section3.box2.desc[lang]}
                                         </p>
                                     </div>
@@ -373,30 +373,30 @@ const MarketingModal: React.FC<MarketingModalProps> = ({ isOpen, onClose, lang }
 
                                 <div className="space-y-4">
                                     {/* Strategy 1 */}
-                                    <div className="bg-stone-900 p-5 rounded-xl border border-stone-800">
+                                    <div className="bg-ink/90 p-5 rounded-xl border border-white/10">
                                         <h5 className="font-bold text-white mb-2">{content.section4.strat1.title[lang]}</h5>
-                                        <p className="text-sm text-stone-400">
+                                        <p className="text-sm text-white/50">
                                             {content.section4.strat1.desc[lang]}
                                         </p>
                                     </div>
 
                                     {/* Strategy 2 */}
-                                    <div className="bg-stone-900 p-5 rounded-xl border border-stone-800 relative overflow-hidden group">
-                                        <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500/10 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-110" />
+                                    <div className="bg-ink/90 p-5 rounded-xl border border-white/10 relative overflow-hidden group">
+                                        <div className="absolute top-0 right-0 w-32 h-32 bg-gold/10 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-110" />
                                         <h5 className="font-bold text-white mb-2 flex items-center gap-2 relative z-10">
-                                            <Music className="w-4 h-4 text-amber-500" /> {content.section4.strat2.title[lang]}
+                                            <Music className="w-4 h-4 text-gold" /> {content.section4.strat2.title[lang]}
                                         </h5>
-                                        <p className="text-sm text-stone-400 relative z-10">
+                                        <p className="text-sm text-white/50 relative z-10">
                                             {content.section4.strat2.desc[lang]}
                                         </p>
                                     </div>
 
                                     {/* Strategy 3 */}
-                                    <div className="bg-stone-900 p-5 rounded-xl border border-stone-800">
+                                    <div className="bg-ink/90 p-5 rounded-xl border border-white/10">
                                         <h5 className="font-bold text-white mb-2 flex items-center gap-2">
                                             <Award className="w-4 h-4 text-yellow-500" /> {content.section4.strat3.title[lang]}
                                         </h5>
-                                        <p className="text-sm text-stone-400">
+                                        <p className="text-sm text-white/50">
                                             {content.section4.strat3.desc[lang]}
                                         </p>
                                     </div>
@@ -406,9 +406,9 @@ const MarketingModal: React.FC<MarketingModalProps> = ({ isOpen, onClose, lang }
                     </section>
 
                     {/* Conclusion */}
-                    <section className="bg-gradient-to-r from-amber-900/40 to-stone-900 p-4 md:p-6 rounded-xl md:rounded-2xl border border-amber-500/30 text-center">
+                    <section className="bg-gradient-to-r from-amber-900/40 to-stone-900 p-4 md:p-6 rounded-xl md:rounded-2xl border border-gold/30 text-center">
                         <h4 className="text-base md:text-lg font-bold text-white mb-3">{content.conclusion.title[lang]}</h4>
-                        <p className="text-stone-300 font-medium text-sm md:text-base">
+                        <p className="text-white/70 font-medium text-sm md:text-base">
                             {content.conclusion.desc[lang]}
                         </p>
                     </section>
@@ -416,10 +416,10 @@ const MarketingModal: React.FC<MarketingModalProps> = ({ isOpen, onClose, lang }
                 </div>
 
                 {/* Footer */}
-                <div className="p-4 border-t border-stone-800 bg-stone-900/95 backdrop-blur-md flex justify-end">
+                <div className="p-4 border-t border-white/10 bg-ink/90/95 backdrop-blur-md flex justify-end">
                     <button
                         onClick={onClose}
-                        className="px-6 py-2 bg-stone-800 hover:bg-stone-700 text-white rounded-lg transition-colors font-medium text-sm"
+                        className="px-6 py-2 bg-white/10 hover:bg-stone-700 text-white rounded-lg transition-colors font-medium text-sm"
                     >
                         {content.close[lang]}
                     </button>

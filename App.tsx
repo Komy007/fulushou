@@ -43,7 +43,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-stone-950">
+    <div className="min-h-screen bg-cream">
       <Navbar
         lang={lang}
         setLang={setLang}

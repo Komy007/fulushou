@@ -98,7 +98,7 @@ const MarketingPower: React.FC<MarketingPowerProps> = ({ lang }) => {
     const activeTabData = tabs.find(t => t.id === activeTab);
 
     return (
-        <section id="marketing" className="py-16 md:py-24 lg:py-32 bg-stone-950 relative overflow-hidden">
+        <section id="marketing" className="py-16 md:py-24 lg:py-32 bg-cream relative overflow-hidden">
             {/* Background */}
             <div className="absolute inset-0">
                 <div className="absolute top-1/3 left-1/4 w-[200px] md:w-[400px] h-[200px] md:h-[400px] bg-amber-500/5 rounded-full blur-[100px]" />
@@ -109,14 +109,14 @@ const MarketingPower: React.FC<MarketingPowerProps> = ({ lang }) => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 {/* Section Header */}
                 <div className="text-center mb-12 md:mb-16 scroll-reveal">
-                    <span className="inline-flex items-center px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-[10px] md:text-xs font-bold tracking-widest uppercase mb-4 md:mb-6">
+                    <span className="inline-flex items-center px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-forest/10 border border-forest/20 text-forest text-[10px] md:text-xs font-bold tracking-widest uppercase mb-4 md:mb-6">
                         <Megaphone className="w-3 h-3 md:w-4 md:h-4 mr-2" />
                         {content.sectionLabel[lang]}
                     </span>
-                    <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 md:mb-6 tracking-tight">
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-ink mb-4 md:mb-6 tracking-tight">
                         {content.title[lang]}
                     </h2>
-                    <p className="text-base md:text-lg lg:text-xl text-stone-400 max-w-3xl mx-auto">
+                    <p className="text-base md:text-lg lg:text-xl text-ink/60 max-w-3xl mx-auto">
                         {content.subtitle[lang]}
                     </p>
                 </div>
@@ -129,7 +129,7 @@ const MarketingPower: React.FC<MarketingPowerProps> = ({ lang }) => {
                             onClick={() => setActiveTab(tab.id as 'atl' | 'btl' | 'digital')}
                             className={`px-4 md:px-6 py-3 md:py-4 rounded-xl md:rounded-2xl font-bold transition-all flex items-center gap-2 ${activeTab === tab.id
                                 ? `bg-gradient-to-r ${tab.color} text-white shadow-lg`
-                                : 'bg-stone-900 border border-stone-800 text-stone-400 hover:text-white hover:border-stone-600'
+                                : 'bg-mist border border-mist text-ink/50 hover:text-ink hover:border-forest/30'
                                 }`}
                         >
                             <tab.icon className="w-4 h-4 md:w-5 md:h-5" />
@@ -154,8 +154,8 @@ const MarketingPower: React.FC<MarketingPowerProps> = ({ lang }) => {
                         {/* Stats */}
                         <div className="grid grid-cols-3 gap-3 md:gap-6 mb-6 md:mb-8">
                             {activeTabData.stats.map((stat, index) => (
-                                <div key={index} className="text-center p-3 md:p-4 bg-stone-900/50 rounded-xl">
-                                    <div className="text-xl sm:text-2xl md:text-3xl font-black text-white">{stat.value}</div>
+                                <div key={index} className="text-center p-3 md:p-4 bg-mist rounded-xl">
+                                    <div className="text-xl sm:text-2xl md:text-3xl font-black text-ink">{stat.value}</div>
                                     <div className="text-[9px] md:text-xs text-stone-500 uppercase tracking-wide">{stat.label[lang]}</div>
                                 </div>
                             ))}
@@ -166,10 +166,10 @@ const MarketingPower: React.FC<MarketingPowerProps> = ({ lang }) => {
                             {activeTabData.items.map((item, index) => (
                                 <div
                                     key={index}
-                                    className="flex items-center gap-3 p-3 md:p-4 bg-stone-900/30 rounded-xl border border-stone-800/50 hover:border-stone-600 transition-all"
+                                    className="flex items-center gap-3 p-3 md:p-4 bg-white rounded-xl border border-mist hover:border-forest/30 transition-all"
                                 >
                                     <ChevronRight className="w-4 h-4 text-stone-600 flex-shrink-0" />
-                                    <span className="text-sm md:text-base text-stone-300">{item[lang]}</span>
+                                    <span className="text-sm md:text-base text-ink/70">{item[lang]}</span>
                                 </div>
                             ))}
                         </div>
@@ -179,10 +179,10 @@ const MarketingPower: React.FC<MarketingPowerProps> = ({ lang }) => {
                 {/* Event Gallery */}
                 <div className="mt-12 md:mt-16">
                     <div className="text-center mb-8">
-                        <h3 className="text-2xl md:text-3xl font-black text-white mb-2">
+                        <h3 className="text-2xl md:text-3xl font-black text-ink mb-2">
                             {lang === 'ko' ? 'Bacchus Tour Concert: The Legacy of Power' : lang === 'zh' ? 'Bacchus巡回演唱会：力量的传承' : lang === 'kh' ? 'Bacchus Tour Concert: ដាក់ថាមពល' : 'Bacchus Tour Concert: The Legacy of Power'}
                         </h3>
-                        <p className="text-stone-500 text-sm md:text-base">
+                        <p className="text-ink/50 text-sm md:text-base">
                             {lang === 'ko' ? '캄보디아 전역을 대상으로 한 대규모 콘서트 및 이벤트 스폰서십' : lang === 'zh' ? '覆盖柬埔寨全国的大型演唱会和活动赞助' : lang === 'kh' ? 'ការឧបត្ថម្ភគម្រោងពេញប្រទេសកម្ពុជា' : 'Major concert and event sponsorship across Cambodia'}
                         </p>
                     </div>
@@ -205,10 +205,10 @@ const MarketingPower: React.FC<MarketingPowerProps> = ({ lang }) => {
                 <div className="mt-12 md:mt-16 text-center">
                     <button
                         onClick={() => setShowModal(true)}
-                        className="inline-flex items-center gap-3 px-6 py-4 bg-stone-900/50 border border-stone-800 rounded-2xl hover:bg-stone-800 hover:border-amber-500/50 transition-all group cursor-pointer"
+                        className="inline-flex items-center gap-3 px-6 py-4 bg-mist border border-mist rounded-2xl hover:bg-forest/10 hover:border-forest/30 transition-all group cursor-pointer"
                     >
-                        <Play className="w-5 h-5 text-amber-500 group-hover:scale-110 transition-transform" />
-                        <span className="text-stone-400 text-sm md:text-base group-hover:text-white transition-colors">
+                        <Play className="w-5 h-5 text-citrus group-hover:scale-110 transition-transform" />
+                        <span className="text-ink/60 text-sm md:text-base group-hover:text-ink transition-colors">
                             {lang === 'ko' ? '마케팅 성공 사례' : lang === 'zh' ? '营销成功案例' : lang === 'kh' ? 'ករណីជោគជ័យទីផ្សារ' : 'Marketing Success Cases'}
                         </span>
                     </button>

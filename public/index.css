@@ -9,6 +9,7 @@ html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
   font-size: 16px;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -19,6 +20,8 @@ body {
   padding-right: env(safe-area-inset-right);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #FAF6EF;
+  color: #15201B;
 }
 
 /* Minimum tap target size */
@@ -37,12 +40,30 @@ img {
   height: auto;
 }
 
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #E8EFE9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #0E5F3F, #0a4a2f);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #FF5C28, #e04a1a);
+}
+
 /* Global Scroll Reveal Animations */
 .scroll-reveal {
   opacity: 0;
   transform: translateY(30px);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .scroll-reveal.revealed {
@@ -63,35 +84,44 @@ img {
   transform: translateY(0);
 }
 
-/* Smooth scrollbar */
-html {
-  scroll-behavior: smooth;
+/* Marquee — pause on hover */
+.marquee-track {
+  display: flex;
+  width: max-content;
 }
 
-/* Custom scrollbar for webkit browsers */
-::-webkit-scrollbar {
-  width: 8px;
+.marquee-container:hover .marquee-track {
+  animation-play-state: paused;
 }
 
-::-webkit-scrollbar-track {
-  background: #1c1917;
-}
-
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #d97706, #f59e0b);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #f59e0b, #fbbf24);
-}
-
-/* Remove focus outline for non-keyboard users */
+/* Focus styles */
 :focus:not(:focus-visible) {
   outline: none;
 }
 
 :focus-visible {
-  outline: 2px solid #f59e0b;
+  outline: 2px solid #FF5C28;
   outline-offset: 2px;
+}
+
+/* Section transition dividers */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, #0E5F3F33, transparent);
+}
+
+/* Bento card hover lift */
+.bento-card {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bento-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(14, 95, 63, 0.12);
+}
+
+/* Archivo display font helper */
+.font-display {
+  font-family: 'Archivo', 'Noto Sans KR', sans-serif;
 }

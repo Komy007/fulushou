@@ -8,38 +8,41 @@ interface PhilosophyProps {
 
 const Philosophy: React.FC<PhilosophyProps> = ({ lang }) => {
   const [activeCard, setActiveCard] = React.useState<string | null>(null);
+  const [isVisible, setIsVisible] = React.useState(false);
   const containerRef = React.useRef<HTMLDivElement>(null);
+  const sectionRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    const sectionObs = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) setIsVisible(true); },
+      { threshold: 0.1 }
+    );
+    if (sectionRef.current) sectionObs.observe(sectionRef.current);
+    return () => sectionObs.disconnect();
+  }, []);
 
   React.useEffect(() => {
     const observerOptions = {
       root: null,
-      rootMargin: '-30% 0px -30% 0px', // Tighter center trigger for PC/Mobile
-      threshold: 0.1 // lower threshold for more reliable trigger
+      rootMargin: '-30% 0px -30% 0px',
+      threshold: 0.1,
     };
-
-    const observerCallback = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach((entry) => {
+    const cb = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach(entry => {
         const cardId = entry.target.getAttribute('data-card-id');
         if (entry.isIntersecting) {
           setActiveCard(cardId);
-          // Pulse duration: Grow, then shrink back after 1.8s
-          const timer = setTimeout(() => {
-            setActiveCard(prev => prev === cardId ? null : prev);
-          }, 1800);
-          return () => clearTimeout(timer);
+          const t = setTimeout(() => setActiveCard(prev => prev === cardId ? null : prev), 1800);
+          return () => clearTimeout(t);
         } else if (!entry.isIntersecting && activeCard === cardId) {
-          setActiveCard(null); // Ensure shrink if user scrolls away fast
+          setActiveCard(null);
         }
       });
     };
-
-    const observer = new IntersectionObserver(observerCallback, observerOptions);
-
+    const observer = new IntersectionObserver(cb, observerOptions);
     if (containerRef.current) {
-      const cards = containerRef.current.querySelectorAll('[data-card-id]');
-      cards.forEach(card => observer.observe(card));
+      containerRef.current.querySelectorAll('[data-card-id]').forEach(c => observer.observe(c));
     }
-
     return () => observer.disconnect();
   }, []);
 
@@ -49,144 +52,128 @@ const Philosophy: React.FC<PhilosophyProps> = ({ lang }) => {
       label: { ko: 'Fu (조화)', en: 'Fu (Harmony)', zh: '福（和谐）', kh: 'Fu (សុភមង្គល)' },
       id: 'fu',
       icon: Heart,
-      bg: 'bg-red-950/20',
       img: '/img/philosophy/fu_v5.png',
-      border: 'border-amber-500/20',
-      accent: 'text-amber-500',
-      footerColor: 'text-amber-400',
       desc: {
         ko: "비즈니스의 근본은 기술이나 자본이 아닌 '사람의 마음'에 있습니다. 우리는 파트너사의 제품이 캄보디아 가정마다 행복(福)을 전달하는 메신저가 되기를 바랍니다.",
-        en: "The foundation of business lies not in capital, but in the 'Hearts of People'. We want our partners' products to be messengers of happiness (Fu) for every Cambodian home.",
-        zh: "商业的根本不在于资本，而在于'人心'。我们希望合作伙伴的产品成为为每个柬埔寨家庭传递幸福（福）的使者。",
-        kh: "គ្រឹះនៃអាជីវកម្មមិនស្ថិតនៅលើដើមទុនទេ ប៉ុន្តែនៅលើ 'បេះដូងមនុស្ស'។"
-      }
+        en: "The foundation of business lies not in capital, but in the 'Hearts of People'. We want our partners' products to be messengers of happiness for every Cambodian home.",
+        zh: "商业的根本不在于资本，而在于'人心'。我们希望合作伙伴的产品成为为每个柬埔寨家庭传递幸福的使者。",
+        kh: "គ្រឹះនៃអាជីវកម្មមិនស្ថិតនៅលើដើមទុនទេ ប៉ុន្តែនៅលើ 'បេះដូងមនុស្ស'។",
+      },
     },
     {
       char: '祿',
-      label: { ko: 'Lu (번영)', en: 'Lu (Status)', zh: '禄（地位）', kh: 'Lu (ឋានៈ)' },
+      label: { ko: 'Lu (번영)', en: 'Lu (Prosperity)', zh: '禄（地位）', kh: 'Lu (ឋានៈ)' },
       id: 'lu',
       icon: Award,
-      bg: 'bg-amber-950/20',
       img: '/img/philosophy/lu_v5.png',
-      border: 'border-amber-500/20',
-      accent: 'text-amber-500',
-      footerColor: 'text-amber-400',
       desc: {
-        ko: "번영(祿)은 치밀한 전략과 실행력의 정직한 보상입니다. 우리는 입점 브랜드가 단순한 상품을 넘어 시장의 '기준'이자 '명예(Status)'가 되도록 격상시킵니다.",
-        en: "Prosperity (Lu) is the honest reward of strategy. We elevate your brand from a 'Product' to a 'Market Standard' and 'Status' in Cambodia.",
-        zh: "繁荣（禄）是战略的诚实回报。我们将您的品牌从'产品'提升为柬埔寨的'市场标准'和'地位'。",
-        kh: "សុភមង្គល (Lu) គឺជារង្វាន់ស្មោះត្រង់នៃយុទ្ធសាស្ត្រ។"
-      }
+        ko: "번영(祿)은 치밀한 전략과 실행력의 정직한 보상입니다. 우리는 입점 브랜드가 단순한 상품을 넘어 시장의 '기준'이자 '명예'가 되도록 격상시킵니다.",
+        en: "Prosperity (Lu) is the honest reward of strategy. We elevate your brand from a 'Product' to a 'Market Standard' in Cambodia.",
+        zh: "繁荣（禄）是战略的诚实回报。我们将您的品牌从'产品'提升为柬埔寨的'市场标准'。",
+        kh: "សុភមង្គល (Lu) គឺជារង្វាន់ស្មោះត្រង់នៃយុទ្ធសាស្ត្រ។",
+      },
     },
     {
       char: '壽',
       label: { ko: 'Shou (장수)', en: 'Shou (Longevity)', zh: '寿（长寿）', kh: 'Shou (អាយុវែង)' },
       id: 'shou',
       icon: ShieldCheck,
-      bg: 'bg-emerald-950/20',
       img: '/img/philosophy/shou_v5.png',
-      border: 'border-emerald-500/20',
-      accent: 'text-emerald-500',
-      footerColor: 'text-emerald-400',
       desc: {
         ko: "영속성(壽)은 변하지 않는 정직함에서 탄생합니다. 귀사의 브랜드가 캄보디아에서 대를 이어 사랑받는 '롱런 레전드'가 되도록 신뢰의 동반자가 되겠습니다.",
         en: "Longevity (Shou) is born from unchanging honesty. We will be the partner of trust that ensures your brand becomes a 'Long-run Legend' for generations.",
         zh: "长寿（寿）源于不变的诚实。我们将成为信任的伙伴，确保您的品牌成为代代相传的'长青传奇'。",
-        kh: "អាយុវែង (Shou) កើតចេញពីភាពស្មោះត្រង់មិនប្រែប្រួល។"
-      }
-    }
+        kh: "អាយុវែង (Shou) កើតចេញពីភាពស្មោះត្រង់មិនប្រែប្រួល។",
+      },
+    },
   ];
 
   return (
-    <section id="about" className="py-16 md:py-24 lg:py-32 bg-stone-950 overflow-hidden relative">
-      {/* Background Decor */}
-      <div className="absolute top-0 right-0 w-[400px] md:w-[600px] h-[400px] md:h-[600px] bg-amber-500/5 rounded-full blur-[120px] -mr-24 md:-mr-48 -mt-24 md:-mt-48 pointer-events-none"></div>
+    <section id="about" ref={sectionRef} className="py-20 md:py-28 lg:py-36 bg-ink overflow-hidden relative">
+      {/* Gold shimmer accents */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
+      <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-gold/3 rounded-full blur-[140px] translate-x-1/2 pointer-events-none" />
+      <div className="absolute bottom-1/4 left-0 w-[400px] h-[400px] bg-forest/5 rounded-full blur-[120px] -translate-x-1/3 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-12 md:mb-20 lg:mb-28">
-          <div className="inline-flex items-center px-3 md:px-4 py-1.5 rounded-full bg-stone-900 border border-stone-800 text-amber-500 text-[10px] font-black tracking-[0.3em] uppercase mb-5 md:mb-8 shadow-lg">
+        {/* Header */}
+        <div className={`text-center mb-16 md:mb-24 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold/10 border border-gold/30 text-gold text-xs font-black tracking-[0.3em] uppercase mb-6">
             CORPORATE CORE ESSENCE
           </div>
-          <h2 className="text-amber-600 font-extrabold tracking-[0.2em] uppercase text-xs mb-3 md:mb-4">Philosophy &amp; DNA</h2>
-          <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black text-white mb-4 md:mb-8 leading-tight tracking-tighter">
-            {lang === Language.KO ? '번영을 향한 세 가지 지혜' : lang === Language.ZH ? '迈向繁荣的三大智慧' : lang === Language.KH ? 'ប្រាជ្ញាបីប្រការ' : 'Three Wisdoms for Prosperity'}
-          </h3>
-          <p className="text-base md:text-lg lg:text-xl text-stone-400 max-w-3xl mx-auto leading-relaxed font-light px-2">
+          <h2 className="font-display font-black tracking-tighter leading-none text-white mb-6"
+            style={{ fontSize: 'clamp(2.5rem, 6vw, 5.5rem)' }}>
+            {lang === Language.KO ? '번영을 향한' : lang === Language.ZH ? '迈向繁荣的' : lang === Language.KH ? 'ប្រាជ្ញាបីប្រការ' : 'Three Wisdoms'}<br />
+            <span className="text-gold">
+              {lang === Language.KO ? '세 가지 지혜' : lang === Language.ZH ? '三大智慧' : lang === Language.KH ? '' : 'for Prosperity.'}
+            </span>
+          </h2>
+          <p className="text-white/40 text-lg max-w-2xl mx-auto leading-relaxed">
             {lang === Language.KO
               ? "우리의 이름 '복록수(福祿壽)'는 비즈니스가 도달해야 할 가장 숭고한 경지를 의미합니다."
               : lang === Language.ZH
-                ? "我们的名字'福禄寿'象征着商业所能达到的最崇高境界。"
-                : lang === Language.KH
-                  ? "ឈ្មោះ 'Fu Lu Shou' តំណាងឱ្យកម្រិតខ្ពស់បំផុតដែលអាជីវកម្មអាចឈានដល់។"
-                  : "Our name 'Fu Lu Shou' signifies the most noble heights a business can reach."}
+              ? "我们的名字'福禄寿'象征着商业所能达到的最崇高境界。"
+              : lang === Language.KH
+              ? "ឈ្មោះ 'Fu Lu Shou' តំណាងឱ្យកម្រិតខ្ពស់បំផុតដែលអាជីវកម្មអាចឈានដល់។"
+              : "Our name 'Fu Lu Shou' signifies the most noble heights a business can reach."}
           </p>
         </div>
 
-        <div ref={containerRef} className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6 lg:gap-8">
+        {/* Cards */}
+        <div ref={containerRef} className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
           {CARDS.map((item, idx) => (
             <div
               key={idx}
               data-card-id={item.id}
               onClick={() => setActiveCard(activeCard === item.id ? null : item.id)}
-              className={`relative group overflow-hidden rounded-3xl md:rounded-[3rem] transition-all duration-700 hover:-translate-y-2 border ${item.border} bg-stone-900 shadow-2xl flex flex-col min-h-[380px] md:min-h-[480px] lg:min-h-[540px] cursor-pointer`}
+              className={`relative group overflow-hidden rounded-3xl transition-all duration-700 border border-gold/10 hover:border-gold/30 bg-white/5 backdrop-blur-sm shadow-2xl flex flex-col min-h-[400px] md:min-h-[500px] cursor-pointer hover:-translate-y-2 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+              style={{ transitionDelay: `${200 + idx * 150}ms` }}
             >
-              {/* Shimmer Effect */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 pointer-events-none z-20">
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-[shimmer_2s_infinite] skew-x-12" />
-              </div>
+              {/* Gold top accent */}
+              <div className="h-1 w-full bg-gradient-to-r from-gold/60 via-gold to-gold/60" />
 
-              {/* Deity Image */}
-              <div
-                className={`absolute -bottom-6 -right-6 md:-bottom-10 md:-right-10 w-56 h-56 md:w-72 md:h-72 lg:w-[22rem] lg:h-[22rem] transition-all duration-1000 ease-out pointer-events-none mix-blend-screen will-change-transform
-                  ${activeCard === item.id
-                    ? 'z-40 scale-125 -translate-x-4 -translate-y-8 opacity-100 brightness-125 filter drop-shadow-[0_0_30px_rgba(255,255,255,0.3)]'
-                    : 'z-0 opacity-60 group-hover:opacity-85 scale-100'
-                  }`}
+              {/* Deity image */}
+              <div className={`absolute -bottom-6 -right-6 w-52 h-52 md:w-64 md:h-64 transition-all duration-1000 pointer-events-none mix-blend-screen
+                ${activeCard === item.id
+                  ? 'scale-125 -translate-x-4 -translate-y-8 opacity-100 brightness-125'
+                  : 'opacity-50 group-hover:opacity-75 scale-100'}`}
               >
-                <img
-                  src={item.img}
-                  alt={String(item.label[lang])}
-                  loading="lazy"
-                  decoding="async"
-                  className="w-full h-full object-contain"
-                />
+                <img src={item.img} alt={String(item.label[lang])} loading="lazy" decoding="async" className="w-full h-full object-contain" />
               </div>
 
-              {/* Card Color Tint */}
-              <div className={`absolute inset-0 ${item.bg} opacity-10 pointer-events-none z-1`}></div>
-
-              <div className="relative p-6 sm:p-8 md:p-10 lg:p-14 h-full flex flex-col items-start z-10 w-full">
-                <div className="flex justify-between items-start w-full mb-6 md:mb-10 lg:mb-12">
-                  <span className="text-6xl md:text-7xl lg:text-8xl font-serif font-black text-amber-500/25 group-hover:text-amber-400/70 transition-all duration-500 drop-shadow-[0_0_20px_rgba(245,158,11,0.4)]">
+              <div className="relative p-8 md:p-10 h-full flex flex-col z-10">
+                <div className="flex justify-between items-start mb-8">
+                  <span className="text-6xl md:text-7xl font-black font-serif text-gold/20 group-hover:text-gold/50 transition-all duration-500">
                     {item.char}
                   </span>
-                  <div className="w-12 h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 rounded-xl md:rounded-2xl flex items-center justify-center bg-white/5 border border-white/10 backdrop-blur-md shadow-2xl group-hover:scale-110 transition-transform duration-500">
-                    <item.icon className={`w-6 h-6 md:w-7 md:h-7 lg:w-8 lg:h-8 ${item.accent}`} />
+                  <div className="w-12 h-12 rounded-2xl flex items-center justify-center bg-gold/10 border border-gold/20 group-hover:bg-gold/20 transition-all duration-300">
+                    <item.icon className="w-6 h-6 text-gold" />
                   </div>
                 </div>
 
-                <h4 className="text-2xl md:text-3xl lg:text-4xl font-black mb-3 md:mb-5 lg:mb-6 tracking-tight text-white group-hover:text-amber-400 transition-colors drop-shadow-md">
+                <h4 className="text-2xl md:text-3xl font-black text-white mb-3 group-hover:text-gold transition-colors duration-300">
                   {item.label[lang]}
                 </h4>
 
-                <div className="h-1 md:h-1.5 w-16 md:w-20 mb-5 md:mb-8 lg:mb-10 rounded-full bg-gradient-to-r from-amber-500 to-amber-500/10"></div>
+                <div className="h-0.5 w-16 mb-6 rounded-full bg-gradient-to-r from-gold to-gold/20" />
 
-                <p className="text-base md:text-lg lg:text-xl text-left text-white font-bold leading-[1.6] mb-6 md:mb-8 lg:mb-10 drop-shadow-2xl max-w-[95%]">
+                <p className="text-white/50 group-hover:text-white/70 text-base leading-relaxed transition-colors duration-300 flex-1">
                   {item.desc[lang]}
                 </p>
 
-                <div className={`mt-auto pt-4 md:pt-6 w-full flex items-center gap-3 text-[10px] md:text-[11px] font-black uppercase tracking-[0.3em] ${item.footerColor}`}>
-                  <div className="w-8 h-px bg-current opacity-30" />
-                  <Sparkles className="w-3 h-3 md:w-4 md:h-4" /> Core Value {idx + 1}
+                <div className="mt-auto pt-6 flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.3em] text-gold/50">
+                  <div className="w-8 h-px bg-gold/30" />
+                  <Sparkles className="w-3 h-3" />
+                  Core Value {idx + 1}
                 </div>
               </div>
             </div>
           ))}
         </div>
       </div>
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
     </section>
   );
 };
-
 
 export default Philosophy;

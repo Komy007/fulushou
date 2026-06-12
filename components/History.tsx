@@ -111,11 +111,11 @@ const History: React.FC<HistoryProps> = ({ lang }) => {
     <div key={activeTab} className="relative z-10 animate-fade-in-up h-full flex flex-col">
       <div className="flex justify-between items-end mb-8 lg:mb-12">
         <div className="max-w-xl">
-          <div className="flex items-center gap-3 mb-4 text-amber-700">
-            <div className="w-12 h-[2px] bg-amber-600"></div>
+          <div className="flex items-center gap-3 mb-4 text-gold">
+            <div className="w-12 h-[2px] bg-gold"></div>
             <span className="text-[11px] font-black uppercase tracking-[0.3em]">Milestone Details</span>
           </div>
-          <h4 className="text-3xl lg:text-5xl font-black text-stone-900 font-serif leading-tight">
+          <h4 className="text-3xl lg:text-5xl font-black text-ink font-serif leading-tight">
             {current.title[lang]}
           </h4>
         </div>
@@ -133,13 +133,13 @@ const History: React.FC<HistoryProps> = ({ lang }) => {
           <img src={current.image} alt="History" className="w-full h-full object-cover" />
         </div>
         <div className="bg-white p-8 lg:p-10 rounded-[2.5rem] shadow-xl border border-stone-100 flex flex-col justify-center">
-          <div className="text-amber-700/60 text-[10px] font-black uppercase tracking-[0.3em] mb-4">Achievement</div>
-          <div className="text-stone-900 text-3xl lg:text-4xl font-black mb-6">
+          <div className="text-gold/60 text-[10px] font-black uppercase tracking-[0.3em] mb-4">Achievement</div>
+          <div className="text-ink text-3xl lg:text-4xl font-black mb-6">
             {current.stats[lang]}
           </div>
           <div className="flex flex-wrap gap-2">
             {['BACCHUS', 'SHIN RAMYUN', 'POCARI', 'OLATTE'].map(brand => (
-              <span key={brand} className="px-4 py-1.5 bg-stone-900 text-white text-[9px] font-black rounded-full border border-amber-500/20">
+              <span key={brand} className="px-4 py-1.5 bg-ink text-white text-[9px] font-black rounded-full border border-amber-500/20">
                 {brand}
               </span>
             ))}
@@ -149,26 +149,26 @@ const History: React.FC<HistoryProps> = ({ lang }) => {
 
       <div className="bg-white rounded-[3rem] p-8 lg:p-10 shadow-xl border border-stone-100 mt-auto">
         <div className="flex justify-between items-end mb-10">
-          <h5 className="text-stone-900 font-black text-xl lg:text-2xl flex items-center gap-3">
-            <TrendingUp size={28} className="text-amber-600" />
+          <h5 className="text-ink font-black text-xl lg:text-2xl flex items-center gap-3">
+            <TrendingUp size={28} className="text-gold" />
             {lang === 'ko' ? '시장 영향력 지표' : lang === 'zh' ? '市场影响力指标' : lang === 'kh' ? 'សម្ទឫស្សន៍តើមធ្នូរ' : 'Market Index'}
           </h5>
-          <span className="text-3xl lg:text-4xl font-black text-amber-600 font-serif">TOP 1</span>
+          <span className="text-3xl lg:text-4xl font-black text-gold font-serif">TOP 1</span>
         </div>
         <div className="h-[200px] lg:h-[240px] w-full" style={{ minWidth: 0 }}>
           <ResponsiveContainer width="100%" height="100%" minHeight={200}>
             <AreaChart data={GROWTH_DATA}>
               <defs>
                 <linearGradient id="colorGold" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#B45309" stopOpacity={0.4} />
-                  <stop offset="95%" stopColor="#B45309" stopOpacity={0} />
+                  <stop offset="5%" stopColor="#C9A227" stopOpacity={0.4} />
+                  <stop offset="95%" stopColor="#C9A227" stopOpacity={0} />
                 </linearGradient>
               </defs>
               <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#F1F0EC" />
               <XAxis dataKey="year" axisLine={false} tickLine={false} tick={{ fill: '#A8A29E', fontSize: 13, fontWeight: '900' }} />
               <YAxis hide />
               <Tooltip contentStyle={{ borderRadius: '20px', border: 'none', boxShadow: '0 20px 40px rgba(0,0,0,0.1)', backgroundColor: '#1C1917', color: '#fff' }} />
-              <Area type="monotone" dataKey="value" stroke="#B45309" strokeWidth={5} fill="url(#colorGold)" animationDuration={2000} />
+              <Area type="monotone" dataKey="value" stroke="#C9A227" strokeWidth={5} fill="url(#colorGold)" animationDuration={2000} />
             </AreaChart>
           </ResponsiveContainer>
         </div>
@@ -177,7 +177,7 @@ const History: React.FC<HistoryProps> = ({ lang }) => {
   );
 
   return (
-    <section id="history" className="py-24 bg-[#F9F6F0] relative overflow-hidden">
+    <section id="history" className="py-24 bg-cream relative overflow-hidden">
       {/* Turtle Background Integration - Low Opacity */}
       <div
         className="absolute inset-0 pointer-events-none opacity-[0.45] mix-blend-multiply"
@@ -193,13 +193,13 @@ const History: React.FC<HistoryProps> = ({ lang }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="mb-20 text-center lg:text-left flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
           <div className="max-w-4xl">
-            <h2 className="text-amber-800 font-black tracking-[0.3em] uppercase text-xs mb-4 flex items-center justify-center lg:justify-start gap-2">
+            <h2 className="text-gold font-black tracking-[0.3em] uppercase text-xs mb-4 flex items-center justify-center lg:justify-start gap-2">
               <Star className="w-4 h-4 fill-amber-800" /> SUCCESS ARCHIVE
             </h2>
-            <h3 className="text-5xl lg:text-8xl font-black text-stone-900 mb-8 font-serif leading-none tracking-tighter">
+            <h3 className="text-5xl lg:text-8xl font-black text-ink mb-8 font-serif leading-none tracking-tighter">
               {lang === 'ko' ? '발자취' : lang === 'zh' ? '足迹' : lang === 'kh' ? 'ប្រវត្តិសាស្ត្រ' : 'History'}
             </h3>
-            <p className="text-2xl text-stone-900 leading-relaxed font-bold max-w-2xl border-l-4 border-amber-600/30 pl-8">
+            <p className="text-2xl text-ink leading-relaxed font-bold max-w-2xl border-l-4 border-gold/30 pl-8">
               {lang === 'ko'
                 ? "단순한 유통을 넘어, 우리는 캄보디아 유통 시장의 신화를 썼습니다."
                 : lang === 'zh'
@@ -214,14 +214,14 @@ const History: React.FC<HistoryProps> = ({ lang }) => {
               <MousePointer2 className="w-5 h-5" />
               <span>Select Milestone</span>
             </div>
-            <div className="w-32 h-1 bg-amber-600/20 rounded-full"></div>
+            <div className="w-32 h-1 bg-gold/20 rounded-full"></div>
           </div>
         </div>
 
         <div className="flex flex-col lg:flex-row gap-12 items-stretch">
           {/* List/Menu Column: ALWAYS Visible */}
           <div className="lg:w-[400px] w-full flex flex-col gap-6">
-            <div className="bg-[#EAE4D9] p-5 rounded-[2.5rem] border border-stone-200 shadow-xl space-y-4">
+            <div className="bg-mist p-5 rounded-[2.5rem] border border-stone-200 shadow-xl space-y-4">
               {milestones.map((m) => (
                 <button
                   key={m.id}
@@ -232,7 +232,7 @@ const History: React.FC<HistoryProps> = ({ lang }) => {
                     }
                   }}
                   className={`w-full group relative flex items-center p-6 rounded-[1.8rem] transition-all duration-500 transform overflow-hidden ${activeTab === m.id
-                    ? 'bg-stone-900 shadow-[0_20px_40px_rgba(0,0,0,0.3)] ring-2 ring-amber-500 -translate-y-2 scale-[1.03]'
+                    ? 'bg-ink shadow-[0_20px_40px_rgba(0,0,0,0.3)] ring-2 ring-gold -translate-y-2 scale-[1.03]'
                     : 'bg-white border border-stone-100 hover:border-amber-400 hover:shadow-lg hover:-translate-y-1'
                     }`}
                 >
@@ -241,12 +241,12 @@ const History: React.FC<HistoryProps> = ({ lang }) => {
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-500/5 to-transparent -translate-x-full animate-shimmer" />
                   </div>
 
-                  <div className={`relative z-10 w-14 h-14 rounded-2xl flex items-center justify-center mr-5 shrink-0 transition-all duration-500 ${activeTab === m.id ? 'bg-amber-600 text-white rotate-3' : 'bg-stone-100 text-stone-400'
+                  <div className={`relative z-10 w-14 h-14 rounded-2xl flex items-center justify-center mr-5 shrink-0 transition-all duration-500 ${activeTab === m.id ? 'bg-gold text-white rotate-3' : 'bg-stone-100 text-stone-400'
                     }`}>
                     <m.icon size={28} />
                   </div>
                   <div className="relative z-10 flex-1 text-left">
-                    <div className={`text-[9px] font-black uppercase tracking-widest mb-1.5 ${activeTab === m.id ? 'text-amber-400' : 'text-stone-400'}`}>
+                    <div className={`text-[9px] font-black uppercase tracking-widest mb-1.5 ${activeTab === m.id ? 'text-gold' : 'text-stone-400'}`}>
                       {m.label}
                     </div>
                     <div className={`text-lg font-black leading-tight tracking-tight ${activeTab === m.id ? 'text-white' : 'text-stone-800'}`}>
@@ -256,8 +256,8 @@ const History: React.FC<HistoryProps> = ({ lang }) => {
 
                   {/* Click/Tap Icon Cue */}
                   <div className="relative z-10 flex flex-col items-center ml-2 border-l border-stone-100 pl-4 py-1">
-                    <MousePointer2 className={`w-4 h-4 mb-1 animate-pulse ${activeTab === m.id ? 'text-amber-400' : 'text-stone-300'}`} />
-                    <span className={`text-[8px] font-black uppercase tracking-tighter ${activeTab === m.id ? 'text-amber-400' : 'text-stone-400'}`}>
+                    <MousePointer2 className={`w-4 h-4 mb-1 animate-pulse ${activeTab === m.id ? 'text-gold' : 'text-stone-300'}`} />
+                    <span className={`text-[8px] font-black uppercase tracking-tighter ${activeTab === m.id ? 'text-gold' : 'text-stone-400'}`}>
                       {lang === 'ko' ? '클릭' : lang === 'zh' ? '点击' : lang === 'kh' ? 'ចុច' : 'READ'}
                     </span>
                   </div>
@@ -267,7 +267,7 @@ const History: React.FC<HistoryProps> = ({ lang }) => {
             {/* Left Column Decor - Desktop Only */}
             <div className="hidden lg:flex p-10 bg-gradient-to-br from-stone-900 to-[#1A1816] rounded-[2.5rem] text-white shadow-2xl relative overflow-hidden flex-col justify-between h-full min-h-[300px]">
               <div className="relative z-10">
-                <span className="inline-block px-4 py-1.5 bg-amber-600 rounded-full text-[10px] font-black tracking-widest uppercase mb-6">
+                <span className="inline-block px-4 py-1.5 bg-gold rounded-full text-[10px] font-black tracking-widest uppercase mb-6">
                   Verified Heritage
                 </span>
                 <h5 className="text-3xl font-black mb-6 leading-tight font-serif italic">
@@ -285,7 +285,7 @@ const History: React.FC<HistoryProps> = ({ lang }) => {
               </div>
               <div className="mt-8 flex gap-2">
                 {milestones.map(m => (
-                  <div key={m.id} className={`h-1.5 rounded-full transition-all duration-500 ${activeTab === m.id ? 'w-10 bg-amber-500' : 'w-4 bg-stone-700'}`}></div>
+                  <div key={m.id} className={`h-1.5 rounded-full transition-all duration-500 ${activeTab === m.id ? 'w-10 bg-gold' : 'w-4 bg-stone-700'}`}></div>
                 ))}
               </div>
             </div>
@@ -293,7 +293,7 @@ const History: React.FC<HistoryProps> = ({ lang }) => {
 
           {/* Desktop Detail Content: Hidden on mobile */}
           <div className="hidden lg:block lg:flex-1 w-full">
-            <div className="bg-[#FAF8F3] rounded-[3.5rem] p-16 border border-stone-200 shadow-2xl min-h-[850px] flex flex-col relative overflow-hidden">
+            <div className="bg-cream rounded-[3.5rem] p-16 border border-stone-200 shadow-2xl min-h-[850px] flex flex-col relative overflow-hidden">
               <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-bl from-amber-100/20 to-transparent rounded-full blur-[120px] -mr-48 -mt-48"></div>
               <DetailContent />
             </div>
@@ -304,10 +304,10 @@ const History: React.FC<HistoryProps> = ({ lang }) => {
       {/* MOBILE MODAL POPUP */}
       {showMobileDetail && (
         <div className="fixed inset-0 z-50 lg:hidden flex items-end sm:items-center justify-center bg-black/60 backdrop-blur-sm p-0 sm:p-4 animate-fade-in">
-          <div className="bg-[#FAF8F3] w-full h-[90vh] sm:h-auto sm:max-h-[90vh] rounded-t-[2.5rem] sm:rounded-[2.5rem] p-6 sm:p-8 overflow-y-auto relative shadow-2xl animate-slide-up">
+          <div className="bg-cream w-full h-[90vh] sm:h-auto sm:max-h-[90vh] rounded-t-[2.5rem] sm:rounded-[2.5rem] p-6 sm:p-8 overflow-y-auto relative shadow-2xl animate-slide-up">
             <button
               onClick={() => setShowMobileDetail(false)}
-              className="absolute top-6 right-6 p-2 bg-stone-900 rounded-full text-white shadow-lg hover:bg-stone-700 transition z-50"
+              className="absolute top-6 right-6 p-2 bg-ink rounded-full text-white shadow-lg hover:bg-stone-700 transition z-50"
             >
               <X size={24} />
             </button>

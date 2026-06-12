@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/img/fulushou-logo.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Fu Lu Shou F&amp;B Co., Ltd. | Cambodia's Leading F&amp;B Distribution Company</title>
+  <title>Fu Lu Shou F&amp;B Co., Ltd. | Cambodia's #1 F&amp;B Distribution Company</title>
   <meta name="description"
     content="Fu Lu Shou F&amp;B Co., Ltd. is Cambodia's #1 F&amp;B import and distribution company. 15+ years of experience distributing Bacchus, Pocari Sweat, Shin Ramyun, and Olatte nationwide." />
   <meta name="keywords"
@@ -33,9 +33,9 @@
   <meta name="twitter:description" content="Cambodia's #1 F&amp;B Distribution Company" />
 
   <!-- Mobile browser chrome color -->
-  <meta name="theme-color" content="#1c1917" />
+  <meta name="theme-color" content="#FAF6EF" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 
   <!-- DNS prefetch / preconnect for external resources -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -49,22 +49,34 @@
     tailwind.config = {
       theme: {
         extend: {
+          colors: {
+            cream:  '#FAF6EF',
+            ink:    '#15201B',
+            forest: '#0E5F3F',
+            citrus: '#FF5C28',
+            gold:   '#C9A227',
+            mist:   '#E8EFE9',
+          },
           fontFamily: {
+            display: ['"Archivo"', '"Noto Sans KR"', 'sans-serif'],
             sans: ['"Noto Sans KR"', '"Noto Sans Khmer"', '"Noto Sans SC"', 'sans-serif'],
             serif: ['"Noto Serif KR"', 'serif'],
           },
           animation: {
-            'fade-in-up': 'fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards',
-            'fade-in': 'fadeIn 1s ease-out forwards',
+            'fade-in-up': 'fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+            'fade-in': 'fadeIn 0.8s ease-out forwards',
             'spin-slow': 'spin 8s linear infinite',
             'gradient-x': 'gradientX 15s ease infinite',
             'bounce-gentle': 'bounceGentle 2s ease-in-out infinite',
             'shimmer': 'shimmer 2.5s infinite linear',
+            'marquee': 'marquee 30s linear infinite',
+            'marquee-reverse': 'marqueeReverse 32s linear infinite',
+            'count-up': 'fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards',
           },
           keyframes: {
             fadeInUp: {
-              '0%': { opacity: '0', transform: 'translateY(40px) scale(0.98)' },
-              '100%': { opacity: '1', transform: 'translateY(0) scale(1)' },
+              '0%': { opacity: '0', transform: 'translateY(30px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
             },
             fadeIn: {
               '0%': { opacity: '0' },
@@ -81,7 +93,15 @@
             shimmer: {
               '0%': { transform: 'translateX(-100%)' },
               '100%': { transform: 'translateX(100%)' },
-            }
+            },
+            marquee: {
+              '0%': { transform: 'translateX(0%)' },
+              '100%': { transform: 'translateX(-50%)' },
+            },
+            marqueeReverse: {
+              '0%': { transform: 'translateX(-50%)' },
+              '100%': { transform: 'translateX(0%)' },
+            },
           }
         },
       },
@@ -89,7 +109,7 @@
   </script>
   <!-- Fonts: Korean, Khmer, Chinese -->
   <link
-    href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Noto+Serif+KR:wght@400;700&family=Noto+Sans+Khmer:wght@300;400;500;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Noto+Sans+KR:wght@300;400;500;700;900&family=Noto+Serif+KR:wght@400;700&family=Noto+Sans+Khmer:wght@300;400;500;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap"
     rel="stylesheet">
   <script type="importmap">
 {
@@ -105,7 +125,7 @@
   <link rel="stylesheet" href="/index.css">
 </head>
 
-<body class="bg-stone-950 text-stone-200 antialiased">
+<body class="bg-cream text-ink antialiased">
   <div id="root"></div>
   <script type="module" src="/index.tsx"></script>
 </body>
