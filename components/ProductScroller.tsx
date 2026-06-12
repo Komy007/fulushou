@@ -153,7 +153,7 @@ const ProductScroller: React.FC<ProductScrollerProps> = ({ lang }) => {
         <div
           className="flex gap-5 marquee-track"
           style={{
-            animation: 'marquee 18s linear infinite',
+            animation: 'marquee 30s linear infinite',
             width: 'max-content',
           }}
         >
