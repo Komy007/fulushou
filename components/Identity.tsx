@@ -117,8 +117,8 @@ const Identity: React.FC<IdentityProps> = ({ lang }) => {
           <span className="inline-block px-4 py-2 rounded-full bg-gold/10 border border-gold/30 text-gold text-xs font-black tracking-[0.3em] uppercase mb-6">
             {content.sectionLabel[lang]}
           </span>
-          <h2 className="font-serif font-black text-ink tracking-widest mb-6"
-            style={{ fontSize: 'clamp(3rem, 8vw, 7rem)' }}>
+          <h2 className="font-display font-black text-ink tracking-widest mb-6"
+            style={{ fontSize: 'clamp(3rem, 8vw, 7rem)', WebkitTextStroke: '1.5px currentColor' }}>
             {content.title[lang]}
           </h2>
           <p className="text-ink/50 text-lg max-w-2xl mx-auto leading-relaxed">{content.subtitle[lang]}</p>
@@ -135,7 +135,8 @@ const Identity: React.FC<IdentityProps> = ({ lang }) => {
               <div className={`h-1 w-full bg-gradient-to-r ${item.bar}`} />
               <div className="p-7 md:p-8 relative">
                 <div className="flex items-end gap-3 mb-5">
-                  <span className={`font-serif font-black text-7xl md:text-8xl leading-none ${item.color}`}>
+                  <span className={`font-display font-black text-7xl md:text-8xl leading-none ${item.color}`}
+                    style={{ WebkitTextStroke: '1px currentColor' }}>
                     {item.char}
                   </span>
                   <div className="mb-1">
@@ -152,7 +153,7 @@ const Identity: React.FC<IdentityProps> = ({ lang }) => {
                 <p className="text-sm text-ink/60 leading-relaxed">{item.desc[lang]}</p>
 
                 {/* Watermark */}
-                <div className={`absolute -bottom-4 -right-4 text-[10rem] font-black leading-none pointer-events-none select-none opacity-[0.04] font-serif ${item.color}`}>
+                <div className={`absolute -bottom-4 -right-4 text-[10rem] font-black leading-none pointer-events-none select-none opacity-[0.04] font-display ${item.color}`}>
                   {item.char}
                 </div>
               </div>
