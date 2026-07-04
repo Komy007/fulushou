@@ -13,7 +13,6 @@ function App() {
       </h1>
       <p className="max-w-md text-ink/60 text-base md:text-lg animate-fade-in-up">
         Fu Lu Shou F&amp;B Co., Ltd. is currently redesigning our website.
-        Please check back soon.
       </p>
     </div>
   );
