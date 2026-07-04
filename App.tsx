@@ -1,93 +1,20 @@
-import React, { useState } from 'react';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import CompanyOverview from './components/CompanyOverview';
-import Identity from './components/Identity';
-import ProductScroller from './components/ProductScroller';
-import PartnerLogos from './components/PartnerLogos';
-import Philosophy from './components/Philosophy';
-import DistributionNetwork from './components/DistributionNetwork';
-import History from './components/History';
-import MarketingPower from './components/MarketingPower';
-import CeoMessage from './components/CeoMessage';
-import StrategyDashboard from './components/StrategyDashboard';
-import ContactSection from './components/ContactSection';
-import Footer from './components/Footer';
-import { Language } from './types';
+import React from 'react';
 
 function App() {
-  const [lang, setLang] = useState<Language>(Language.KO);
-
-  React.useEffect(() => {
-    // Force scroll to top on load
-    if ('scrollRestoration' in history) {
-      history.scrollRestoration = 'manual';
-    }
-    window.scrollTo(0, 0);
-
-    const timer = setTimeout(() => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    }, 100);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
-    <div className="min-h-screen bg-cream">
-      <Navbar
-        lang={lang}
-        setLang={setLang}
-        scrollToSection={scrollToSection}
+    <div className="min-h-screen bg-cream flex flex-col items-center justify-center px-6 text-center">
+      <img
+        src="/img/fulushou-logo.svg"
+        alt="Fu Lu Shou F&B Co., Ltd."
+        className="w-24 h-24 md:w-32 md:h-32 mb-8 animate-fade-in"
       />
-
-      <main>
-        {/* Hero - 첫 인상, 회사 슬로건 */}
-        <Hero lang={lang} scrollToSection={scrollToSection} />
-
-        {/* Company Overview - 회사 개요, CEO, 통계 */}
-        <CompanyOverview lang={lang} />
-
-        {/* Products - 주요 유통 브랜드 */}
-        <ProductScroller lang={lang} />
-
-        <PartnerLogos lang={lang} />
-
-        {/* Identity - 왜 Fu Lu Shou인가? */}
-        <Identity lang={lang} />
-
-        {/* Philosophy - 福祿壽 철학 */}
-        <Philosophy lang={lang} />
-
-        {/* Distribution Network - 유통망 */}
-        <DistributionNetwork lang={lang} />
-
-        {/* History - 연혁 */}
-        <History lang={lang} />
-
-        {/* Marketing Power - 마케팅 역량 */}
-        <MarketingPower lang={lang} />
-
-        {/* Strategy Dashboard - 4P 믹스 케이스 스터디 */}
-        <StrategyDashboard lang={lang} />
-
-        {/* CEO Message */}
-        <CeoMessage lang={lang} />
-
-        {/* Contact - 파트너십 문의 */}
-        <ContactSection lang={lang} />
-      </main>
-
-      <Footer lang={lang} />
+      <h1 className="font-display font-800 text-2xl md:text-4xl text-ink tracking-tight mb-4 animate-fade-in-up">
+        We're crafting a new homepage
+      </h1>
+      <p className="max-w-md text-ink/60 text-base md:text-lg animate-fade-in-up">
+        Fu Lu Shou F&amp;B Co., Ltd. is currently redesigning our website.
+        Please check back soon.
+      </p>
     </div>
   );
 }
